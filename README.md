@@ -6,25 +6,25 @@ This project is at a very early stage and all documents are (a) incomplete and (
 
 ![pic](https://user-images.githubusercontent.com/5106495/232745514-905844bb-702e-4c81-95af-978678c6ff50.png)
 
-This project consists of a developing set of notes towards a curriculum of modern maths for curious adults. The goal is to produce a set of interlinked resources that are suitable for self-study or as the basis of courses. They come out of my long-standing educational practice in universities, art schools, adult education colleges and elsewhere.
+This project consists of a developing set of notes towards a curriculum of modern maths for curious adults. The goal is to produce a set of interlinked resources that are suitable for self-study or as the basis of courses. They come out of my long-standing educational practice in universities, art schools, adult education colleges and elsewhere. The needs of adults who have no mathematical background are, effectively, not being met anywhere anyway so this project should not be understood as a criticism of what anyone is already doing. In particular, I literally have no opinion on how best to educate future mathematicians, physicists, engineers and so on. Also note that this is a programme of courses (or self-study modules) for determined, sophisticated adults who lack any formal training in maths; although I think school maths curricula are in dire need of reform, that's not what this project is about.
 
-The organization of this project is likely to undergo many changes but the topics I currently intend to cover fall into two three main groups, each of which has its own folder in this project.
+The organization of this project is likely to undergo many changes but the topics I currently intend to cover fall into two three main groups, each of which has its own folder in this repo.
 
 ## Continuity
 
-The backbone of this projects is an "alternative calculus sequence" that I expect to look something like this:
+The backbone of this project is an "alternative calculus sequence" that I expect to look something like this:
 
 * Point-free topology as an account of continua in the spirit of Aristotle;
-* Algebraic topology with the main focus on homology;
+* Algebraic topology with the main focus on (co)homology;
 * Differential geometry with the "locally ringed space" approach;
-* Differential topology with an emphasis on Morse theory;
-* Riemannian geometry developed in a harmonious way with the rest.
+* Differential topology as a first application of the above;
+* Riemannian geometry as a second and much "heavier" application.
 
-I hope demostrate practically that advanced mathematics can be taught with the following philosophical guidelines:
+I hope demonstrate practically that advanced mathematics can be taught with the following philosophical guidelines:
 
-* The idea of a continuum does not depend on any prior idea of a "point";
+* The continua needed by geometry can be presented without any prior idea of a "point";
 * Most mathematical objects of interest to us are constructive;
-* There should be a consistent theory of continua that works in all finite dimensions.
+* You can teach a consistent version of the calculus that works in all finite dimensions from the beginning.
 
 However, in all of the above I will not insist on logical rigour; where necessary I will make use of choice functions, the excluded middle and so on. My primary interest is in pedagogy rather than philosophy.
 
@@ -43,6 +43,12 @@ I will also probably develop a very minimal survey course in abstract algebra fo
 
 ## Measure
 
-These are lower-priority topics I have an interest in, and have taught to various degrees, that don't fit into the main story. They include probability, statistics and financial maths, which are all one way or another underpinned by measure theory. Because of this common root, these topics may organise themselves into something more substantial in time, but for now this is a place to park things I don't want to be distracted by for now.
+These are lower-priority topics I have an interest in, and have taught to various degrees, that don't fit into the main story. They include 
+
+* Probability
+* Statistics 
+* Financial maths
+
+which are all underpinned by measure theory. Because of this common root, these topics may organise themselves into something more substantial in time. They might also end up being cut from the project as the first two sections grow horribly out of control.
 
 License: [CC-BY-NC-SA-4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
