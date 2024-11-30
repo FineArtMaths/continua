@@ -24,9 +24,9 @@ I hope demostrate practically that advanced mathematics can be taught with the f
 
 However, in all of the above I will not insist on logical rigour; where necessary I will make use of choice functions, the excluded middle and so on. My primary interest is in pedagogy rather than philosophy.
 
-## Algebra
+## Structure
 
-This is the study of structures that arise naturally while trying to work with other mathematical objects as well as in a wide variety of practical situations. While I want to keep my focus on the previous theme, these subjects have enough intrinsic interest to be worth developing in a bit more detail than strictly necessary. They include:
+This is where abstract algebra goes, which we take to be the study of structures that arise naturally while trying to work with other mathematical objects as well as in a wide variety of practical situations. While I want to keep my focus on the previous theme, these subjects have enough intrinsic interest to be worth developing in a bit more detail than strictly necessary. They include:
 
 * Group theory, especially its connection with symmetry and therefore geometry;
 * Linear algebra, which I like to teach in a rather abstract manner, emphasising tensor products;
@@ -37,7 +37,7 @@ This is the study of structures that arise naturally while trying to work with o
 
 I will also probably develop a very minimal survey course in abstract algebra for folks who don't want ot fuss with all these topics but need some of the language of groups, rings, vector spaces and so on to understand the material about continuity.
 
-## Other Topics
+## Measure
 
 These are lower-priority topics I have an interest in, and have taught to various degrees, that don't fit into the main story. They include probability, statistics and financial maths, which are all one way or another underpinned by measure theory. Because of this common root, these topics may organise themselves into something more substantial in time, but for now this is a place to park things I don't want to be distracted by for now.
 
