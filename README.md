@@ -1,6 +1,7 @@
 # continua
 
 :warning: **WARNING** :warning:
+
 This project is at a very early stage and all documents are (a) incomplete and (b) unchecked for errors. There's probably nothing useful here yet beyond this README.
 
 ![pic](https://user-images.githubusercontent.com/5106495/232745514-905844bb-702e-4c81-95af-978678c6ff50.png)
