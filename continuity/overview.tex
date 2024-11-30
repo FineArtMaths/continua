@@ -20,39 +20,61 @@ Key references:
 \end{itemize}
 
 
-Projected sequence of topics:
+This is the part I already have the most complete set of notes for, although they need finishing and there's a lot of pedagogical finesse missing. I can imagine a sequence like the following, but it probably needs 2 courses worth of material to allow for sensible pacing and one difficulty is finding a satisfying place to break them up:
 \begin{itemize}
 	\item{Philosophical position: the Aristotelian continuum is the right one to use for observable phenomena}
-	\item{Enough lattice theory (and category theory) to define frames and locales}
+	\item{Enough lattice theory (and category theory) to define frames and locales -- perhaps introduce through small projective geometries, e.g. the Fano plane}
 	\item{Connection between logic and topology}
 	\item{Construction of rational and real numbers}
 	\item{Spectrum of a locale and the notion of a sober space}
 	\item{Stone duality}
 	\item{The Zariski and Peirce spectra of a ring}
 \end{itemize}
-
+The sequence might end up being different, this is just a rough map of the territory.
 
 \section{Algebraic Topology}
 
 Key references:
 \begin{itemize}
 	\item{Munkres, \textit{Algebraic Topology}}
-	\item{Lee, \textit{Introduction to Topological Manifolds}}
 	\item{Wallce, \textit{Algebraic Topology} (later chapters)}
+	\item{Lee, \textit{Introduction to Topological Manifolds}}
+	\item{Hu, \textit{Homotopy Theory}}
 \end{itemize}
 
-\section{Differential Geometry}
+This is a game of two halves and they're probably both pretty substantial.
+
+I guess the (co)homology contains three "courses" worth of material -- one just focusing on graphs and cohomology mod 2; one applying the idea to manifolds and developing some tools; a final one covering \v{C}ech cohomology and Poincar\'e duality. 
+
+I'm less clear on what would be needed for homotopy, but I like that Hu (a) casts the whole thing in terms of extension problems and (b) puts fibre bundles centre stage. I've included Lee because he introduces the elementary stuff that Hu breezes through at speed. But this is one part of the project that I only have a clouded view of right now and I could imagine cutting it entirely.
+
+\section{Smooth Manifolds}
 
 Key references:
 \begin{itemize}
 	\item{Wedhorn, \textit{Manifolds, Sheaves and Cohomology}}
-	\item{Weintraub, \textit{Differential Forms} (very concrete calculation-based exposition)}
 	\item{Ramanan, \textit{Global Calculus}}
-	\item{Efstathios, \textit{Geometry of Principal Sheaves}}
-	\item{Federer, \textit{Geometric Measure Theory} (parts of Ch 1-4)}
+	\item{Weintraub, \textit{Differential Forms} (very concrete calculation-based exposition)}
 	\item{Vaisman, \textit{Cohomology and Differential Forms} (may be helpful to supplement Wedhorn)}
-	\item{Tennison, \textit{Sheaf Theory} (Ch 4-5)}
+	\item{Federer, \textit{Geometric Measure Theory} (parts of Ch 1-4)}
+	\item{Wraner, \textit{Foundations of Differentiable Manifolds and Lie Groups}}
 \end{itemize}
+
+This section is primarily about developing the Cartan calculus on manifolds from scratch using the "locally ringed space" approach. I can't help but think of this as "partially rigid geometry" even though that's not quite right (we don't get to measure much).
+
+The reading here has a lot of overlaps. I'm intending to get most of what I want from Wedhorn Ch 4, 5, and then 8-10, which has the right emphasis but is probably missing rather a lot. I've included Ramanan for his rigorous approach and may jump to the first 100 pages or so of his book instead as the main guide through the material.
+
+I want to include lots of very elementary, very concrete calculations, which might benefit from translating Weintraub into Vaisman's language. At the moment I'm considering that to be the heart of this section.
+
+The early parts of Federer provide a detailed, unified, structural overview of all the machinery -- I expect that might be useful as the subject can seem a bit chaotic. Similarly, I've included Warner as a potentially helpful supplement -- he proves the de Rham theorem using sheaves and his final chapter is on the Hodge theorem, which I'd also like to get to.
+
+\section{Lie Groups}
+Key references:
+\begin{itemize}
+	\item{Hilgert and Neeb, \textit{Structure and Geometry of Lie Groups}}
+\end{itemize}
+
+Think of this as an optional application of Smooth Manifolds, but it's an important one and maybe we fold them together. I'm assuming I'll hive off the algebra to another course but perhaps it will belong very naturally here. There's an application of this to Lie groups that are (matrix) symmetries arising from nonclassical geometries, which is relevant to where we might go later, but I'm not familiar with this area yet and I've temporarily lost the nice reference I found for it.
 
 \section{Differential Topology}
 
@@ -64,13 +86,25 @@ Key references:
 	\item{Husemoller, \textit{Fibre Bundles}}
 \end{itemize}
 
+I'm seeing this primarily as an application of the Cartan calculus and I'm hoping there's enough rigidity there to do some interesting topology. If not this might need a re-think or to be scaled down.
+
+Guillemin and Pollack give a very elementary introduction; some of this will already have been covered. It might need to be supplemented with other texts that contain more topics. It's possible that the GTM volumne Hirsch, \textit{Differential Topology} would be useful here, although I believe it completely overlaps with the others.
+
+As an application of Morse theory, Nicolaescu includes a discussion of hamiltonian flows on a manifold. This may be good preparation for the (much more difficult) results we would like to be able to get close to in the Riemannian space involving the Ricci flow. It may be that this whole section has the secret agenda of being a preparation for the same ideas reappearing in a "more rigid" setting where proper geometry is finally possible.
+
+Husemoller is a bit less forgiving than Hatcher, probably has fewer good examples but goes deeper; I'm not sure which, if either, will be the most useful yet or what exactly I'm looking for in this area.
+
 \section{Riemannian Geometry}
 
 Key references:
 \begin{itemize}
 	\item{Berger, \textit{A Panoramic View of Riemannian Geometry}}
 	\item{Sharpe, \textit{Differential Geometry: Cartan’s Generalization of Klein’s Erlangen Programme}}
+	\item{Efstathios, \textit{Geometry of Principal Sheaves}}
+	\item{Sontz, \textit{Principal Bundles: The Quantum Case}}
 	\item{Thurston, \textit{Geometry and Topology of 3-Manifolds} (aspirational)}
 \end{itemize}
+
+The slogan here is "geometry is the study of a connection on a principal bundle" -- the goal is to understand that statement and believe it because one has seen it in action. Getting to noncommutative geometry (Sontz) would be great and I think it should be possible to find a through-line that gets us there given all the preparation of the previous sections. I'm less convinced we can build enough machinery to scale the mountain of Thurston's geometrization theorem but it would certainly be worth a try.
 
 \end{document}
