@@ -2,6 +2,8 @@
 
 :warning: **WARNING** :warning:: Until this warning is removed, this project is at an early stage and all documents are (a) incoomplete and (b) unchecked for errors. There is probably nothing useful here yet!
 
+![pic](https://user-images.githubusercontent.com/5106495/232745514-905844bb-702e-4c81-95af-978678c6ff50.png)
+
 This project consists of a developing set of notes towards a curriculum of modern maths for curious adults. The goal is to produce a set of interlinked resources that are suitable for self-study or as the basis of courses. They come out of my long-standing educational practice in universities, art schools, adult education colleges and elsewhere.
 
 The organization of this project is likely to undergo many changes but the topics I currently intend to cover fall into two three main groups, each of which has its own folder in this project.
