@@ -15,10 +15,10 @@ The organization of this project is likely to undergo many changes but the topic
 The backbone of this project is an "alternative calculus sequence" that I expect to look something like this:
 
 * Point-free topology as an account of continua in the spirit of Aristotle;
-* Algebraic topology with the main focus on (co)homology;
-* Differential geometry with the "locally ringed space" approach;
-* Differential topology as a first application of the above;
-* Riemannian geometry as a second and much "heavier" application.
+* Algebraic topology with the main focus on (co)homology as a technique for measuring "the gap between ought and is";
+* Differential geometry with the "locally ringed space" approach, making much use of sheaves as ways to "turn local data into global information";
+* Differential topology as a first application of the above, probably with an emphasis on Morse theory (I'm also interested in Hodge theory here but don't know enough about it yet);
+* Riemannian geometry as a second and much "heavier" and more classical application, with a view to trying to show off all the usual machinery.
 
 I hope demonstrate practically that advanced mathematics can be taught with the following philosophical guidelines:
 
@@ -33,9 +33,9 @@ However, in all of the above I will not insist on logical rigour; where necessar
 This is where abstract algebra goes, which we take to be the study of structures that arise naturally while trying to work with other mathematical objects as well as in a wide variety of practical situations. While I want to keep my focus on the previous theme, these subjects have enough intrinsic interest to be worth developing in a bit more detail than strictly necessary. They include:
 
 * Group theory, especially its connection with symmetry and therefore geometry;
-* Linear algebra, which I like to teach in a rather abstract manner, emphasising tensor products;
-* Homological algebra, which is an indispensible toolkit in the study of continuous space;
-* Galois theory, which I'm inclined to treat in the context of noncommutative algebra;
+* Linear algebra, which for a long time I've had good luck teaching in a rather abstract manner, emphasising tensor products;
+* Homological algebra, which is an indispensible toolkit in the study of continuous space (and elsewhere);
+* Galois theory, which I'm inclined to treat in the context of noncommutative algebra; the key theme is extension problems and the obstructions to solving them;
 * Lie groups, representation theory and group cohomology, which can be seen as both an application of our understanding of continua and a means to extend it;
 * Hopf algebras, examples of which appear at the core of the theory of continuous phenomena.
 
