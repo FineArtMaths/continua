@@ -17,7 +17,7 @@ The backbone of this project is an "alternative calculus sequence" that I expect
 * Point-free topology as an account of continua in the spirit of Aristotle;
 * Algebraic topology with the main focus on (co)homology as a technique for measuring "the gap between ought and is";
 * Differential geometry with the "locally ringed space" approach, making much use of sheaves as ways to "turn local data into global information";
-* Differential topology as a first application of the above, probably with an emphasis on Morse theory (I'm also interested in Hodge theory here but don't know enough about it yet);
+* Differential topology as a first application of the above, probably with an emphasis on Morse theory;
 * Riemannian geometry as a second and much "heavier" and more classical application, with a view to trying to show off all the usual machinery.
 
 I hope demonstrate practically that advanced mathematics can be taught with the following philosophical guidelines:
