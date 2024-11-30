@@ -1,0 +1,1001 @@
+\documentclass[oneside,english]{amsbook} 
+\usepackage[T1]{fontenc} 
+\usepackage[latin9]{inputenc} 
+\usepackage{amsmath} 
+\usepackage{amstext} 
+\usepackage{amsthm} 
+\usepackage{amssymb}
+\usepackage{mathrsfs} 
+
+\makeatletter 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands. 
+\numberwithin{section}{chapter} 
+\theoremstyle{plain} 
+\newtheorem{thm}{\protect\theoremname}   
+\theoremstyle{definition}   
+\newtheorem{defn}[thm]{\protect\definitionname}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\newcommand{\cat}[1]{\boldsymbol{\mathsf{#1}}}
+
+\makeatother
+
+\usepackage{babel}   
+\providecommand{\definitionname}{Definition} 
+\providecommand{\theoremname}{Theorem}
+
+
+\begin{document}
+
+\title{Summer 2018 Reading Notes}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Young, \emph{Introduction to Hilbert Space}}
+
+I gave this a sketchy reading as I didn't brush up any complex analysis first, so wasn't in a position to follow the detailed arguments. I read ch 1-8 and understood most of the material but didn't really follow Ch 5 on Fourier series very closely. The remainder of the book is more focussed on applications but would be a good place to go if I wanted to get a better practical grasp of this stuff in the future.
+
+\section{Dimension Problems and Basic Definitions}
+
+One takeaway from an encounter with this material is a reminder that vector spaces are much more various than the finite-dimensional cases we're familiar with. Of course, a vector space's dimension is only defined when a basis exists -- the basis theorem says that \emph{if} $B_1$ and $B_2$ are bases of $V$ then they share the same cardinality. In a sense a vector spaces doesn't `come with' a dimension; it's something we define if and only if we can find a basis.
+
+We tend to think every vector space has a basis, and thus a well-defined dimension, but this is only true with the Axiom of Choice. For example, it is easy to check that $\mathbb{R}$ is a vector space over $\mathbb{Q}$, but the existence of a basis (which would be uncountable) can only be established using AoC and of course no such basis can actually be constructed. When we say a vector space is `infinite-dimensional' a constructive interpretation may be to say that this means it has `no finite basis' -- a negative claim. Whether or not it has a basis of infinite cardinality remains to be decided by construction.
+
+Thus the idea that vector spaces are most naturally characterised by their bases needs to be adjusted. In fact it seems that vector spaces are a good setting in which to talk about orthogonality, and this is the fundamental idea that allows for something like a basis to exist in infinite-dimensional cases. But to define orthogonality we need to enrich the vector space structure with information about linear independence (which is really what an inner product is).
+
+If you define an inner product on a metric space you get an induced norm for free, and whichever you start with you also get an induced metric. 
+\begin{defn}
+	Let $V$ be a vector space over $\mathbb{C}$. An \textbf{inner product} on $V$ is a map $V\times V\to \mathbb{C}$, written $(v, w)$, that obeys a few rules:
+	\begin{itemize}
+		\item $(v, w) = \overline{(w, v)}$
+		\item $(\lambda v, w) = \lambda(v, w)$
+		\item $(v + x, w) = (v, w) + (x, w)$
+		\item $(x, x) > 0$ whenever $x\ne 0_V$
+	\end{itemize}
+\end{defn}
+
+Note the asymmetry in the definition -- the inner product is only required to be linear in the first term, not the second, although familiar examples are linear in both.
+
+\begin{defn}
+	Let $V$ be a vector space over $\mathbb{C}$. A \textbf{norm} on $V$ is a map $V\to \mathbb{C}$, written $\norm{v}$, that obeys a few rules:
+	\begin{itemize}
+		\item $\norm{\lambda v} = |\lambda|\norm{v}$
+		\item $\norm{v + x} \le \norm{v} + \norm{x}$
+		\item $\norm{x} > 0$ whenever $x\ne 0_V$
+	\end{itemize}
+\end{defn}
+
+\begin{defn}Let $V$ be an inner product space. Then it has an \textbf{induced norm} $\norm{v} = \sqrt{(v, v)}$.
+\end{defn}
+
+The two structures are not equivalent, however: one can find norms that do not arise in this way from any inner product. This leads to two definitions and a theorem:
+
+\begin{defn} A \textbf{Hilbert space} is an inner product space over $\mathbb{C}$ that is complete with respect to its induced metric.
+\end{defn}
+
+\begin{defn} A \textbf{Banach space} is a normed space over $\mathbb{C}$ that is complete with respect to its induced metric.
+\end{defn}
+
+Note that the field is assumed -- assumptions about $\mathbb{C}$ are built into many theorems about Hilbert spaces.
+
+\begin{thm}
+	Every Hilbert space is a Banach space but not \emph{vice versa}.
+\end{thm}
+
+Hilbert spaces are much nicer than Banach spaces; Young makes this point explicitly in a few places.
+
+Here is an important fact about Hilbert spaces (in a Banach space the closest point might not be unique, so this is not true):
+
+\begin{thm}
+	Let $H$ be a Hilbert space and $V$ a (vector) subspace of it. Let $x$ be a point not in $V$. Then there is a unique point $p\in V$ such that $\norm{x - p}$ is minimized, called the \textbf{closest point} to $x$ in $V$.
+\end{thm}
+
+\section{Orthogonal Sets}
+
+The key idea about Hilbert spaces is that we get to define orthogonality (because we have an inner product) and we can make sense of infinite bases (because the space is complete, so we can use limits). So in a sense Hilbert spaces are the most general context in which we can speak confidently about `infinite-dimensional space' without this merely meaning something negative (because a basis might not `exist', at least constructively).
+
+Here is why inner products are worth bothering with:
+
+\begin{defn}
+	Two vectors $v$ and $w$ are \textbf{orthogonal} if $(v, w) = 0$, in which case we write $v\bot w$.
+\end{defn}
+
+\begin{defn}
+	A set of non-zero vectors $\{e_0, e_2, ...\}$ is called an \textbf{orthogonal system} if $e_i\bot e_j$ whenere $i\ne j$. If $\norm{e_i} = 1$ for every $e_i$, it is called an \textbf{orthonormal system}.
+\end{defn}
+
+Of course, the norm here is the one derived from the inner product. Note that such a system might only span a subspace of our vector space.
+
+\begin{defn}
+	If an orthonormal system can be indexed by $\mathbb{N}$, it is called an \textbf{orthonormal sequence}.
+\end{defn}
+
+\begin{defn}
+	An orthonormal sequence is \textbf{complete} if the only vector in $H$ that is orthogonal to every element of the sequence is the zero vector.
+\end{defn}
+
+We would like to treat orthonormal sequences as bases, writing
+\[
+	x = \sum_{i=0}^\infty (x, e_i)e_i
+\]
+But although this is straightforward in finite dimensions it does not always work here because the limit of the sum might not be $x$. There are orthonormal sequences for which this is true, however:
+
+\begin{defn}
+	An orthonormal sequence is \textbf{complete} if the only vector in $H$ that is orthogonal to every element of the sequence is the zero vector.
+\end{defn}
+
+If $(e_i)$ is a complete orthonormal sequence then we can use it to write vectors in $H$ `in coordinates'.
+
+\begin{defn}
+	If a Hilbert space contains a complete orthonormal sequence it is said to be \textbf{separable}.
+\end{defn}
+
+Unfortunately the only separable Hilbert spaces are the finite-dimensional complex spaces $\mathbb{C}^n$ and the space $\ell^2$ whose points are square-summable sequences of complex numbers. So separability is an extremely strong requirement that `most' Hilbert spaces do not have.
+
+We can, however, use orthogonality to split up a Hilbert space in a fruitful way.
+
+\begin{defn}
+	Let $E$ be any subset of a Hilbert space $H$. Then the set $\{x | \forall e\in E x\bot e\}$ is a closed linear subspace of $H$ called the \textbf{orthogonal complement} of $E$ in $H$, written $H\ominus E$.
+\end{defn}
+
+If $E$ is itself a linear subspace we can think of the elements of $H\ominus E$ are `closer to the origin than to any point in $E$'. Intuitively, think of $H = \mathbb{R}^3$ and $E$ as a plane through the origin. Then $H\ominus E$ is the line through the origin perpendicular to $E$.
+
+\begin{thm}
+	If $E$ is a closed linear subspace of $H$ then $H\ominus (H\ominus E) = E$ -- that is, the complement of the complement is the original space.
+\end{thm}
+
+Of course, we write $H = E\oplus F$ when $F = H\ominus E$, and the above theorem tells us that everything will work out OK algebraically. I think this is probably the correct, most geometric way to introduce the direct sum of vector spaces.
+
+Finally, the `representation theorem' we want:
+
+\begin{thm}
+	Let $H = E\oplus F$. Then for any $h\in H$ there are $e\in E$ and $f\in F$ such that $h = e + f$.
+\end{thm}
+
+If we can split $H$ into a direct sum of one-dimensional vector spaces then it must be separable, but this is evidently not possible for `most' infinite-dimensional examples.
+
+Note that there is some discussion in the literature of how orthogonality as a concept works here and its interaction with the concept of a matroid, which is supposed to capture the structure of `linear independence'. There might be something of unifying value there.
+
+\section{Linear Functionals and Duality}
+
+General linear functionals are too unruly in infinite dimensions to be useful. Instead we concentrate on those that are bounded on the closed ball $\norm{x}\le 1$. We will work over general Banach spaces at first, because the norm (not the inner product) is the important notion.
+
+\begin{defn}
+	Let $B$ be a Banach space. A linear functional $F:B\to \mathbb{C}$ is called \textbf{continuous} if $F$ is bounded on the unit ball, i.e.
+	\[
+		\sup\{|F(x)| : \norm{x}\le 1\} < \infty
+	\]
+\end{defn}
+
+Note that a linear functional can't be expected to be bounded on all of $B$ -- this is not even true in finite dimensions, where they are very well-behaved. But 
+
+To define a space of all such functions we need either an inner product or a norm. In fact there is a natural norm (for the reason why it's natural, see below), which is the upper bound of the linear functional on the unit ball:
+
+\begin{defn}
+	$F:B\to \mathbb{C}$ be a linear functional. Then its norm is defined to be:
+	\[
+	\norm{F} = \sup\{|F(x)| : \norm{x}\le 1\}
+	\]
+\end{defn}
+
+\begin{thm}
+	Let $B$ be a Banach space. Then the space $B^\star$ of continuous linear functionals on $B$ with norm as defined above is a Banach space.
+\end{thm}
+
+It seems that duals of Hilbert spaces are not guaranteed to be Hilbert spaces, since the norm in $H^\star$ might not imply an inner product. However, this never happens and in fact what goes for finite-dimensional vector spaces also goes for general Hilbert spaces:
+
+\begin{thm}[Riesz-Frechet]
+	$H^\star\cong H$, and in particular for any $F\in H^\star$ there is an $f\in H$ such that $F(x) = (x, f)$ for all $x\in H$. Furthermore, $\norm{f} = \norm{F}$.
+\end{thm}
+
+This explains why you would choose the norm above as the `natural' one for linear functionals.
+
+\section{Operators on Hilbert Spaces}
+
+\subsection{Basic Definitions}
+The set of all linear operators $G\to H$ is too large and unruly to be very useful. 
+
+There is a similar notion of norm for an operator, defined only using the values it takes in the unit ball:
+\begin{defn}
+	If $T: E\to F$ is a linear operator between normed spaces, 
+	\[
+		\norm{T} = \sup\{\norm{T(x)}_F : x\in E, \norm{x}_E\le 1\}
+	\]
+	is the \textbf{norm} of $T$, if it exists. Note the two different norms in the above definition.
+\end{defn}
+
+An intuitive image of this is that $\norm{T}$ represents the biggest factor by which $T$ scales any vector in $E$ -- thus it is something like a determinant in ordinary linear algebra, although this notion does not extend well into infinite dimensions. 
+
+This norm only exists if the operator is \textbf{bounded}, i.e. if
+\[
+	\sup\{\norm{T(x)}_F : x\in E, \norm{x}_E\le 1\} < \infty
+\]
+Note that `bounded' and `continuous' may be used interchangeably in this context.
+
+This might not appear to be a problem but there are important examples of linear operators -- in particular, the differential operators we now define.
+
+\begin{defn}
+	Consider the set of Lebesgue-measurable functions $f:(a, b)\to \mathbb{C}$ where $(a, b)$ is an open interval of $\mathbb{R}$. We further require these to be `square integrable', i.e.
+	\[
+		\int_a^b |f(t)|^2 dt < \infty
+	\]
+	Clearly this is a vector space over $\mathbb{C}$. We define the following inner product:
+	\[
+		(a, b) = \int_a^b f(t)\overline{g(t)} dt
+	\]
+	We write $L^2(a, b)$ for this Hilbert space.
+\end{defn}
+
+The requirement of Lebesgue measurability is not very strong, and certainly nowhere near as strong as continuity. Indeed, $f$ can be in $L^2(a, b)$ even if there are points in $(a, b)$ on which it is not even defined!
+
+One of the main reasons to study Hilbert spaces is to understand differential operators; the following result tells us this will not be straightforward: 
+
+\begin{defn}
+	Consider the set $\mathscr{D}$ of differentiable complex-valued functions on all of $\mathbb{R}$, i.e. $L^2(-\infty, \infty)$ such that $f^\prime\in L^2(-\infty, \infty)$, where $f^\prime$ is just the usual derivative of single-variable calculus. We can equip $\mathscr{D}$ with the inner product inherited from  $L^2(-\infty, \infty)$, turning it into a Hilbert space.
+	
+	Then the obvious map \[
+		\frac{d}{dt}: \mathscr{D}\to L^2(-\infty, \infty)
+	\]
+	Is a linear operator but is not bounded with respect to the norm on $\mathscr{D}$.
+\end{defn}
+
+We can, however, develop a theory of bounded operators that is useful for solving problems related to differential operators. In particular we will focus on compact operators, which satisfy an even stronger boundedness condition.
+
+\begin{defn}
+	Let $E$ and $F$ be normed spaces. Then the set of all bounded linear operators $E\to F$ is a normed space, written $\mathscr{L}(E, F)$. If $F$ is Banach, so is $\mathscr{L}(E, F)$.
+\end{defn}
+
+Note that a bounded linear operator $A$ might or might not have an inverse $B$ such that $AB = I_F$ and $BA = I_E$. If the inverse exists, it is the set-theoretical inverse but not necessarily \emph{vice versa} because a set-theoretical inverse might fail to be bounded, and so might not exist in $\mathscr{L}(E, F)$.
+
+\subsection{Adjoints}
+
+Consider that a complex number $z = a + ib$ can be represented by the matrix
+\[
+	z \equiv A = \begin{pmatrix} a & -b \\ b & a \end{pmatrix}
+\]
+The action of this matrix on $\mathbb{R}^2$ is exactly the same as the action of multiplication by $z$ on $\mathbb{C}$. It is obvious that
+\[
+\overline{z} \equiv A^T = \begin{pmatrix} a & b \\ -b & a \end{pmatrix}
+\]
+That is, transposing the matrix is the same as taking the conjugate of the complex number.
+
+When we consider a matrix of complex numbers, it is common to consider the conjugate transpose, i.e. transpose and then conjugate everything. With real entries of course this is just the normal transpose; presumably with complex entries it gives the right algebraic result. 
+
+A complex matrix that is its own conjugate transpose is nice and symmetrical and has a strong diagonalization property -- these are called \textbf{adjoint} or \textbf{Hermitian} matrices. This is the idea we want to extend to Hilbert spaces in this section. There doesn't seem to be a lot of geometry to be had here -- this is a matter of classifying a subset of linear operators that admit diagonalization, and are therefore especially tractable.
+
+Another motivation for concentrating on self-adjoint operators is the following. Suppose we have a classical physical system and consider its phase space, which is a manifold. An observation of this system can be expressed as a function on this manifold, and such functions have commutative operations of pointwise addition and multiplication. Now suppose instead we are observing a quantum system. Its possible states can be thought of as points in a Hilbert space $H$ and an observation as a self-adjoint linear operator $H\to H$. `Multiplication' in this case is composition, which is always defined but not in general commutative; hence the `non-commutativity' of quantum mechanics.
+
+\begin{defn}
+	Let $A\in \mathscr{L}(E, F)$, where $E$ and $F$ are now Hilbert spaces. Then there is a unique operator $A^\star\in \mathscr{L}(F, E)$ such that
+	\[
+	(Ax, y)_F = (x, A^\star y)_E
+	\]
+	We say that $A^\star$ is the \textbf{adjoint} of $A$.
+\end{defn}
+
+\begin{defn}
+	If $A\in \mathscr{L}(H)$ (which is short for $\mathscr{L}(H, H)$) then it is quite possible to have $A = A^\star$, in which case we say $A$ is \textbf{self-adjoint} or sometimes \textbf{Hermitian}.
+\end{defn}
+
+Adjoints are quite well-behaved -- the following are all basic properties of conjugate transpose matrices in ordinary linear algebra:
+
+\begin{thm}
+	\begin{itemize}
+		\item $A^{\star \star} = A$ 
+		\item $\norm{A^\star} = \norm{A}$
+			\item $(\lambda A + \mu B)^\star = \overline{\lambda}A^\star + \overline{\mu}B^\star$
+		\end{itemize}
+		Also, suppose that $A\in \mathscr{L}(E, F)$ and $B\in \mathscr{L}(F, G)$, so that their composition makes sense. Then:
+		\[
+		(BA)^\star = A^\star B^\star
+		\]
+\end{thm}
+
+We now get a glimpse of the spectrum of an operator, but without any details.
+
+\begin{defn}
+	Let $V$ be a finite-dimensional complex vector space. The \textbf{spectrum} of a linear operator $A: V\to V$ is the set of all its eigenvalues. 
+\end{defn}
+
+It turns out that, in finite dimensions, $\lambda I - A$ is invertible if and only if $\ker(\lambda I - A) = \{0\}$, and this fails if and only if $\lambda$ is an eigenvalue. This explains the following definition:
+
+\begin{defn}
+	Let $A\in \mathscr{E}$ where $E$ is a Banach space. The spectrum $\sigma(A)$ is the set of all $\lambda\in \mathbb{C}$ such that $\lambda I - A$ is not invertible.
+\end{defn}
+
+\subsection{Compact Operators}
+
+We would like to have the following theorem:
+
+\begin{thm}
+	Let $K\in\mathscr{L}(H)$ where $H$ is a Hilbert space and $K$ satisfies some as-yet-unknown conditions. Then there is an orthonormal sequence $(e_i)$ of eigenvectors of $K$, with corresponding real eigenvalues $()\lambda_i)$ such that, for all $x\in H$,
+	\[
+		Kx = \sum \lambda_i(x, e_i)e_i
+	\]
+\end{thm}
+
+This theorem says that when I apply the operator $K$, I can predict precisely what will happen to any vector simply by knowing its eigenvalues and eigenvectors.
+
+Unfortunately we cannot hope this is true in general, but the as-yet-unknown conditions are not too stringent. They are that $K$ is Hermitian and compact in the following sense:
+
+\begin{defn}
+	Let $E$, $F$ be normed spaces and $A\in \mathscr{L}(E, F)$. We say $A$ is compact if the image of every bounded sequence $(e_i)$ in $E$ contains a convergent subsequence in $F$.
+\end{defn}
+
+This mirrors the Heine-Borel definition of compactness: `every bounded sequence contains a convergent subsequence'. But this time the bounding is happening over there in the domain, and the convergent subsequence appears over here in the codomain.
+
+A corollary of this theorem is:
+
+\begin{thm}
+	Let $H$ be a separable Hilbert space and $K\in\mathscr{L}(H)$ compact Hermitian. We can choose an orthonormal basis of $H$ in which the (perhaps infinite) matrix representation of $K$ is diagonal, and the diagonal entries are all real and tend to zero.
+\end{thm}
+
+This is very nice but also very limited; recall that there are not very many separable Hilbert spaces.
+
+\chapter{Baker, \emph{Matrix Groups}}
+
+For motivation for this stuff, think of de Silva and Weinstein, \emph{Geometric Models of Noncommutative Algebras}, which starts from the classical theory of Lie groups but uses it creatively to construct new geometries. They reference physics (e.g. Marsden and Ratiu, \emph{Introduction to Mechanics and Symmetry}) and of course QM was a major impetus to this kind of approach. So Baker's book may be a bit dry but Lie groups do go in interesting directions.
+
+The idea is as follows. 
+
+We know that $M_n(\mathbb{k})$ is the set of all automorphisms of $\mathbb{k}^n$, but most of these are not candidates to be symmetries because they aren't invertible.
+
+The set of all possible symmetries of $\mathbb{k}^n$ is $GL_n(\mathbb{k})$, but again this is a bit too big; if this is your symmetry group, your geometry can't study much because it has very few invariants -- it's too big even for projective geometry.
+
+So when we want to think about symmetry groups, we are thinking about subgroups $G\subseteq GL_n(\mathbb{k})$. 
+
+Now, since we are interested in geometry we will want an inner product. This induces a norm and a metric, which then give us a topology. Incidentally, the norm we get is the `operator norm' which tells you the maximum amount by which unit vectors in $\mathbb{k}^n$ get scaled by each matrix.
+
+To do \emph{interesting} geometry we will need continuous transformations, not just discrete ones. So we want our symmetry group $G$ to be closed with respect to the metric topology -- that is, we want it to include limits of all its Cauchy sequences so we can talk about rates of range of transformations.
+
+We therefore define a \emph{matrix group} as a (topologically) closed subgroup of a general linear group.
+
+Note that as a topological space, a matrix group is weird because it contains a distinguished point, the identity element. This is important because we're not just studying topological spaces here but continuous symmetry groups.
+
+Every matrix group is a Lie group, i.e. can have a smooth structure defined on it. The smooth structure allows us to think about smooth mappings between different symmetry groups. It turns out we can define the derivative of such a mapping, and that's a linear map between Lie algebras.
+
+\section{Matrix Spaces}
+
+\subsection{Basic Structure}
+
+These have a lot of structure. The full $M_n(\mathbb{k})$ is a vector space over $\mathbb{k}$. We define a norm on it -- any will do, but we use the operator norm
+\[
+	\norm{A}_M = \sup{\{\norm{Ax} : \norm{x} = 1 \}}
+\]
+Note that we are using the norm on $\mathbb{k}^n$ here, but this can be assumed to be the Euclidean norm. The operator norm is the largest amount by which $A$ scales all the unit vectors it acts on.
+
+Of course, this norm induces a metric and thus the metric topology. As long as $n$ is finite (in this book I think it always is) the topology always comes out the same regardless of the choice of norm. 
+
+Since we have a topology and a metric, we get a notion of convergence and therefore we can do differential calculus. 
+
+Now when we look at a subgroup $G\subset M_n(\mathbb{k})$ we care very much whether it is a closed set, since if so then it contains all its limit points and we can take limits safely. It turns out that the full $GL_n(\mathbb{k})$ is an open set but its subgroup $SL_n(\mathbb{k})$ is closed.
+
+A \textbf{matrix group} is a subgroup of $GL_n(\mathbb{k})$ that is a closed subspace of $M_n(\mathbb{k})$. 
+
+
+
+\subsection{Different Viewpoints}
+
+Note that a matrix in $M_n(\mathbb{R})$ can be seen as a vector in $\mathbb{R}^{^2}$, and that a matrix in $M_n(\mathbb{C})$ can be seen as a matrix in $M_n(\mathbb{R}^{2n})$. Explicitly, the latter works by writing
+\[
+	a + ib = \begin{pmatrix} a & b \\ -b & a \end{pmatrix}
+\]
+The following was already mentioned in Young -- complex conjugation is just transposing the (now-real) matrix:
+\[
+\overline{z} \equiv A^T = \begin{pmatrix} a & b \\ -b & a \end{pmatrix}
+\]
+
+\section{Lie Algebras}
+
+Any matrix space $G$ has a metric topology, so we should be able to do differential calculus in it. The idea is to define a curve as a continuous map $(-a, a)\to G$ and define the derivative using simple matrix algebra:
+\[
+	\gamma^\prime(t) = \lim_{s\to t} \frac{\gamma(s) - \gamma(t)}{s-t}
+\]
+Note that $\gamma^\prime(t)$, like $\gamma(t)$, is a matrix in $G$.
+
+Without loss of generality, we usually focus on curves of the form
+\[
+\gamma: (-a, a)\to G ; \gamma(0) = A
+\]
+where $A$ is some element of $G$ and $a$ can be $\infty$. 
+
+\begin{defn}
+	Let $f:G\to H$ be a continuous map between matrix spaces. We say $f$ is a \textbf{differentiable map} if it satisfies:
+	\begin{itemize}
+		\item $f$ maps differentiable curves to differentiable curves
+		\item If $\alpha$ and $\beta$ are curves in $G$ such that $\alpha(0) = \beta(0)$ and $\alpha^\prime(0) = \beta^\prime(0)$ then $f(\alpha)^\prime(0) = f(\beta)^\prime(0)$
+	\end{itemize}
+\end{defn}
+
+So $f$ is a differentiable map, but we haven't said what its derviative is. First we construct the tangent space, then write down the derivative as a linear map of tangent spaces just like in normal diff geom.
+
+\begin{defn}
+	Let $G$ be a matrix group, i.e. $G\subseteq GL_n(\mathbb{k})$. The \textbf{tangent space} to $G$ at $U$ is
+	\[
+		T_U G = \{\gamma^\prime (0)\in M_n(\mathbb{k}) : \gamma(0) = U\}
+	\]
+	(Assuming of course the curve is differentiable at $U$).
+\end{defn}
+
+Note that if two curves have the same derivative at $U$, they will produce only one corresponding element of the tangent space, so there's no need to fuss with equivalence classes.
+
+\begin{defn}
+	In particular, $T_I G$ is the tangent space to the identity element of $G$, called the \textbf{Lie algebra} of $G$ and usually written $\mathfrak{g}$.
+\end{defn}
+
+\begin{defn}
+	Let $f:G\to H$ be a differentiable map between matrix spaces as defined above. Note that, as explained above, whenever $\gamma$ is a differentiable curve in $G$, $f(\gamma)$ is a differentiable curve in $H$. 
+	
+	So we can define $df_A:T_A G\to T_{f(A)} H$ by mapping derivatives of curves to their images, i.e. by the rule
+	\[
+		df(\gamma^\prime(0)) = f(\gamma)^\prime(0)
+	\]
+\end{defn}
+
+Note that for any morphism of matrix algebras, $f(I_G) = I_H$, which makes the following work:
+
+\begin{defn}
+	The \textbf{derivative} of $f:G\to H$ is $df_I: \mathfrak{g}\to \mathfrak{h}$.
+\end{defn}
+
+It seems as if this definition involves a loss of generality, since it suggests that the derivative is only defines at one point of the domain. Purely geometrically, this is true. But algebraically, the identity is a special point and some constructions will only make sense there. 
+
+\section{Lie Groups}
+
+$G$ is a Lie group when it has a smooth manifold structure. All matrix groups can be turned into Lie groups. However, not every Lie group can be represented as a matrix group, i.e. a closed subgroup of $GL_n(\mathbb{k})$. Examples are the Heisenberg groups. Of course, in this book our interest is in the Lie groups that can be so represented.
+
+\begin{defn}
+	Let $G$ be a Lie group. For every $g\in G$ we have the automorphisms:
+	\begin{itemize}
+		\item $R_g:x\mapsto xg$
+		\item $L_g:x\mapsto gx$
+		\item $\chi_g:x\mapsto gxg^{-1}$
+	\end{itemize}
+\end{defn}
+
+These maps have very interesting derivatives. The left- and right-actions tell us that we can `translate' the Lie algebra to any other point in the Lie group, using the fact that as a manifold it is `locally homogeneous':
+
+\begin{thm}
+	For any $g\in G$, we have $dL_g(1): T_I G\to T_g G$ which is an isomorphism of vector spaces. Therefore every $T_g G$ is isomorphic to the Lie algebra $\mathfrak{g}$. The same is true for $R_g$.
+\end{thm}
+
+Be careful with the following; $\chi_g$ is an automorphism of the Lie group, whereas $Ad_g$ is the corresponding automorphism of its Lie algebra, they just happen to have the same rule:
+
+\begin{defn}
+	The derivative of $\chi_g x\mapsto gxg^{-1}$ is the \textbf{adjoint action} of $g$ on $\mathfrak{g}$,
+	\[
+		Ad_g:\mathfrak{g}\to \mathfrak{g} ; x\mapsto gxg^{-1}
+	\]
+\end{defn}
+
+
+
+\subsection{One-Parameter Groups}
+
+The book is not very clear about why we care about these.
+
+\begin{defn}
+	A \textbf{one-parameter group} in $G$ is a curve $\gamma: \mathbb{R}\to G$ that is differentiable at 0 and also satisfies an `exponential-like' property
+	\[
+	\gamma(s)\gamma(t) = \gamma(s + t)
+	\]
+	Every one-parameter group is of the form:
+	\[
+	\gamma(t) = \exp(tA)
+	\]
+	for some $A\in G$.
+	If the domain is smaller -- i.e. is $(-a, a)\to G$ -- then it is a mere semigroup because it is not closed under multiplication.
+\end{defn}
+
+\section{Homogeneous Spaces}
+
+This chapter is about a fundamental connection between matrix groups and Klein's view of geometry -- i.e. the idea that you can `quotient out' the symmetry group from the total population of transformations. The result is the group of transformations that make a difference, i.e. the morphisms of your geometry (including \emph{one} isomorphism, the coset of the identity).
+
+For example (this is from Marsden and Ratiu), consider the action of $SO_3(\mathbb{R})$ on $\mathbb{R}^3$. The orbits of this action are the 2-spheres centred on the origin. Thus the set of orbits of this action is the set of all 2-spheres.
+
+First the obvious definition of the quotient:
+\begin{defn}
+	Let $G$ be a Lie group and $H$ a closed subgroup of $G$. Then 
+	\[
+		G/H = \{gH : g\in G\}
+	\]
+	is the set of left cosets of $H$. It is equipped with the usual group operation and the quotient topology. This is done by considering $\pi:g\mapsto gH$ declaring that $S\subseteq G/H$ is open if the fibre $\pi^{-1}(S)$ is open in $G$.
+\end{defn}
+
+Let us trace the construction for  $G = GL_3(\mathbb{R})$ and $H = SO_3(\mathbb{R})$. The definition of the quotient given above ensures us that $GL_3(\mathbb{R})/SO_3(\mathbb{R})$ is a topological matrix group
+
+Since it can also be proved that $G/H$ is always Hausdorff, it looks as if it ought to be a topological manifold. We would like to go even further give it a smooth structure, and intuitively we would expect this to make $\pi:G\to G/H$ smooth. In our example,
+\begin{align}
+	\pi: & GL_3(\mathbb{R}) \to GL_3(\mathbb{R})/SO_3(\mathbb{R}) \\
+	& N \mapsto NM
+\end{align}
+where $M$ is a rotation or reflection matrix and $N$ is any matrix.
+
+Not only that, we also want, at each point $g\in G$,
+\[
+	\ker(d\pi_g) = dL_g\mathfrak{h}
+\] 
+Of course, $d\pi_g: T_gG\to T_{gH}G/H$ -- it maps the tangent space at $g\in G$ into the tangent space at $\pi(g)\in G/H$. Now if $g = e$ the identity then the domain of $d\pi_g$ is $\mathfrak{g}$ and its kernel is $\mathfrak{h}$, the Lie algebra of $H$ which must get mapped to the identity in $G/H$. 
+
+So what the equation above says is that at every point, the kernel will be the one we expect: after all, we've already noted that $dL_g:T_1G\to T_gG$.
+
+This is (I think) what makes the space `homogeneous'. In SDG terms, you can translate from the origin to any other point (using $L_g$) and the `microlocal neighbourhood' always just looks like $\mathfrak{h}$, the microlocal neighbourhood of the origin.
+
+In very small steps:
+\begin{itemize}
+	\item The map $\pi$ sends every group element to its coset.
+	\item The map $d\pi_g$ is a linear map from the tangent space at $g$ to the tangent space at the corresponding coset.
+	\item $\mathfrak{g}$ is the whole tangent space at the identity; 
+	\item $\mathfrak{h}$ is the Lie subalgebra tangent to the subgroup $H$, which `intersects' $G$ at the identity.
+	\item If $g$ is the identity, $d\pi_g$ maps $\mathfrak{h}$ to the identity.
+	\item The zeroes of $d\pi_g$ are the subset of $T_gG$ given by translating $\mathfrak{h}$ from the identity over to $g$ using the left action $L_g$.
+\end{itemize} 
+
+The homogeneity part is a bit confusing but the key result is that it means every point in $G/H$ has a neighbourhood diffeomorphic to a neighbourhood of $1H$, so in a sense every point `looks alike'. I am not sure why this is a great discovery since it's true of all manifolds without special features (boundaries, corners etc).
+
+The concrete outcome of this is:
+
+\begin{defn}
+	Let $G$ be a Lie group acting smoothly on a manifold $M$. For example, we could have $G\subseteq GL_n(\mathbb{C})$ and $M = \mathbb{C}^n$, with $G$ acting by normal multiplication. Then for each point $x\in M$ we have
+	\[
+		\text{Stab}_G(x) = \{g\in G : gx = x\}
+	\]
+	and
+	\[
+		\text{Orb}_G(x) = \{y\in M | gx = y \ \text{for some}\ g\in G\}
+	\]
+	If $\text{Orb}_G(x)$ is a closed submanifold then there is a diffeomorphism
+	
+		\begin{align}
+			f: & G/\text{Stab}_G(x)\to \text{Orb}_G(x) \\
+			   & g\text{Stab}_G(x)\mapsto gx
+		\end{align}
+	
+	In a slogan: `If the orbit is closed, it's the quotient of the group by the stabilizer'.
+\end{defn}
+
+In our example of nested spheres in $\mathbb{R}^3$, $G = SO_3(\mathbb{R})$ and $M = \mathbb{R}^3$. We can see that $\text{Orb}_G(x) = \norm{x}\mathbb{S}^2$, i.e. the 2-sphere of radius $\norm{x}$. This is a closed submanifold of $M$ and is something we understand. Note that any pair of 2-spheres are diffeomorphic for $\norm{x} > 0$, so as a smooth manifold we can simply write $\text{Orb}_G(x) \cong \mathbb{S}^2$.
+
+Now, $\text{Stab}_{SO_3(\mathbb{R})}(x)$ consists of:
+\begin{itemize}
+	\item The identity
+	\item All reflections in planes through $x$ and the origin (these can be parameterized by a single angle, indicating the rotation of the plane about the unique line through $x$ and the origin)
+	\item All rotations about the unique line through $x$ and the origin, which again can be parameterized by a single angle.
+\end{itemize}
+This appears to be the infinite dihedral group $D_\infty$. Hence $\text{Stab}_{SO_3(\mathbb{R})}(x)\cong D_\infty$. 
+
+The above theorem allows us to conclude that the algebraic object $SO_3(\mathbb{R})/D_\infty$ is in fact a manifold, and is diffeomorphic to the sphere $\mathbb{S}^2$. This is not obvious at a glance! Since it is also a group, we can hope it will have the usual Lie group structure, although the theorem does not guarantee that.
+
+\chapter{Sheaf Notes}
+
+In developing geometry from locales, I would like to do everything with sheaves. Ramanan shows the way but is a bit dense and short on intuitive pictures. 
+
+The motivating idea is that $\mathbb{R}^n$ is equipped with a sheaf of algebras of smooth functions $\mathscr{O}$, which is a locally ringed space. A smooth manifold is then any locally ringed space that is locally isomorphic to an open subset of $(\mathbb{R}^n, \mathscr{O})$. Similarly, a scheme is locally isomorphic to the spectrum of a ring (perhaps not always the same ring over every open set).
+
+This section is mostly notes from Lovering's sheaves essay plus two sets of notes (`sheaves' and `operations') by Virk. My aim is to summarise the basic features of sheaves, the pushforward and pullback operations and the idea of sheaf cohomology, since these appear to be the most relevant to geometry.
+
+Throughout, we will only consider sheaves of sets, perhaps with structure, over a topological space $(S, T)$ that we will think of as a locale, so that we will mostly concentrate on the open sets $T$. We will, however, have an eye on sheaves of modules or algebras, which are the typical examples encountered in geometry.
+
+\subsection{Sheaves Basics}
+
+A \emph{presheaf} $\mathscr{O}$ of sets over $(S, T)$ is an assignment of a set to each open set in $T$ such that if $V\subseteq U$ we always have $\mathscr{O}(V)\supseteq \mathscr{O}(V)$. Thus there is a `restriction map' $r^U_V:\mathscr{O}(V)\to\mathscr{O}(U)$. These restriction maps are required to meet two reasonable criteria: $r^U_U$ should be the identity and compositions should work as expected.
+
+A \emph{sheaf} is a presheaf whose restriction maps obey two additional criteria designed to ensure that a covering of open sets can always be `glued on the intersections' (existence) in exactly one way (uniqueness).
+
+Note that a topology may be thought of as a poset category with morphisms the subset relations, $\cat{Sh_T}$. Thus a sheaf may be thought of as a contravariant functor from $\cat{Sh_T}$ to $\cat{Set}$. 
+
+If you have two sheaves $\mathscr{O}_1$ and $\mathscr{O}_2$, a morphism $F:\mathscr{O}_1\to\mathscr{O}_2$ exists if it maps $\mathscr{O}_1(U)$ to $\mathscr{O}_2(U)$ in a way that commutes with the restriction maps. The \emph{category of sheaves of sets over $T$} has the obvious objects and the morphisms just described.
+
+A choice of one element from $\mathscr{O}(U)$ for each open set $U$ is called a \emph{section} of the sheaf $\mathscr{O}$. Germs and stalks are defined in the ways we already know about, by `limits of open sets' in the old formulation or completely prime filters in the localic one. We can write $\mathscr{O}(x)$ for the stalk at $x$.
+
+Every morphism of sheaves $F:\mathscr{O}_1\to \mathscr{O}_2$ induces a \emph{morphism of stalks} at each point. Virk writes $F_x:\mathscr{O}_1(x)\to \mathscr{O}_2(x)$ and points out that these morphisms commute with composition, i.e. if  $G_x:\mathscr{O}_2(x)\to \mathscr{O}_3(x)$ then $(G\circ F)_x$ = $G_x\circ F_x$. A morphism of sheaves $F$ is defined to be an isomorphism if and only if $F_x$ is an isomorphism for every $x$ (note that it is not sufficient for the stalks to be isomorphic -- $F_x$ must actually be an isomorphism!).
+
+The \emph{support} of $\mathscr{O}$ is the closure of the set of all points whose stalks are non-trivial. Here `non-trivial' means not empty (if it's a sheaf of sets), not the trivial group (if it's a sheaf of groups) and so on. This definition relies on having access to the underlying point-set and so is not very satisfactory from a localic point of view.
+
+\subsection{Operations on Sheaves}
+
+\subsubsection{Pushforward, $f_\star$}
+
+Let $\mathscr{O}$ be a sheaf of sets (groups, modules etc) over $T$ and $f:T\to M$ a map of locales. For every open set $U\subseteq M$ we have $f^{-1}(U)$ open in $T$, and thus $\mathscr{O}(f^{-1}(U))$ is defined. This induces a sheaf structure on $M$, the \emph{pushforward} of $\mathscr{O}$ along $f$, written $f_\star\mathscr{O}$. With the obvious restriction maps, $f_\star\mathscr{O}$ is a sheaf over $M$. 
+
+Clearly this works for any sheaf over $T$ and $f_\star:\cat{Sh_T}\to\cat{Sh_M}$ is a functor, and for some other $g_\star$ we have $(g\circ f)_\star = g_\star\circ f_\star$.
+
+If the following sequence is exact:
+\[
+	0\to F\to G\to H
+\]
+then so is
+\[
+0\to f_\star F\to f_\star G\to f_\star H
+\]
+However, if we append a `$\to 0$' to the first sequence, making it short exact, the second may fail to be exact. However, if $f$ maps $T$ injectively to a close subspace of $M$ then we do have exactness in this case -- in the jargon this means $f_\star$ is an exact functor, whereas more generally it is only `left exact' (i.e. the zero is on the left but not on the right).
+
+\subsubsection{Pullback, $f^\star$}
+
+This time let $\mathscr{O}$ be a sheaf of sets (groups, modules etc) over $M$ and (as before) $f:T\to M$ a map of locales. We aim to define a new functor going in the opposite direction from $f$, $f^\star:\cat{Sh_M}\to\cat{Sh_T}$ that `pulls the sheaf back along $f$'. However, this is not quite so straightforward as the pushforward because when we pull back in the obvious naive way we may not get a sheaf.
+
+The naive approach is to first define the `inverse image' $f^{-1}\mathscr{O}(U) = \mathscr{O}(f(U))$ -- that is, the sheaf over $U$ is the sheaf over the image of $U$ under $f$. This fails because $f(U)$ is not guaranteed to be open (i.e., although continuous, $f$ might not be an open map). Thus the asymmetry in the definition of continuity produces an asymmetry in the definition of the pullback.
+
+Instead we approximate $f(U)$ by open sets. We set up a filter $V_i$ of open sets in $M$ such that each has $f(U)$ as a subset, and `take the limit' of $\mathscr{O}(V_i)$ -- this is the object we pull back to $U$. In particular, if $T=\{x\}$ is a single point then $f^{-1}\mathscr{O}(\{x\}) = \mathscr{O}_{f(x)}$, the stalk at the point that $\{x\}$ is mapped into. (In localic terms this will probably never come up, but it makes the point that pullbacks rely on `generalised stalks' over sets other than points).
+
+Unfortunately we cannot always write $f^{-1} = f^\star$, and this is especially a problem in the cases that interest us. When dealing with locally ringed spaces, $\mathscr{O}(U)$ is a module but $f^{-1}\mathscr{O}$ may fail to duplicate this structure as a sheaf over $T$.
+
+To fix this we make a more complicated definition involving the structure sheaves on $T$ and $M$. This is worth revisiting.
+
+\subsubsection{Other Operations}
+
+There are versions of $f_\star$ and $f^\star$ that rely on the compact supports of the sheaf in question and are designed to be unique; these are written $f_!$ and $f^!$. There are adjunctions $(f_!, f^\star)$ and $(f_\star, f^!)$. Their definitions involved derived categories.
+
+The famous `six operations' are rounded out by tensor and hom, which are also adjoint to each other. The tensor product of sheaves of modules is the obvious one: $(\mathscr{O}_1\otimes\mathscr{O}_2)(U) = \mathscr{O}_1(U)\otimes\mathscr{O}_2(U)$. 
+
+\subsection{Sheaf Cohomology}
+
+\subsubsection{The de Rham Complex}
+
+Let $(X, \mathscr{O})$ be a locally ringed space. Since $\mathscr{O}(U)$ is a ring for every open set $U$, we can form $\mathscr{O}(U)$-modules. Since we have morphisms of sheaves, it makes sense to set up complexes of them:
+\[
+	0\to F\to G\to H\to ...
+\]
+and ask whether such a complex is exact. Of course, a cohomology theory answers this question precisely.
+
+For example, if $\mathscr{O}(U)$ contains all the scalar fields on $U$, we can define the module of differential $k$-forms on $U$, which are just `vectors' whose coefficients are scalar fields (which form a module). This can be done by taking at each point $p$ a basis for $\bigwedge^k T_p^\star M$ and constructing the appropriate $\mathscr{O}_p$-module. Or we can do it in a chart, which is a bit more `localic' since it happens on an open set. In this case of course the complex's maps are given by the exterior derivative $d$.
+
+\chapter{Levandhomme, SDG Book}
+
+\subsection{Directional Derivative and Differential}
+(Note that for manifolds, we will initially only need $\mathbb{R}$, not $\mathbb{R}^n$; but to develop the calculus we will probably need something equivalent to the following.)
+
+We will also be interested in maps $f:\mathbb{R}^n\to \mathbb{R}^n$. Here we find that a vector version of the Kock-Lawvere axiom holds. Choosing a point  in the domain $\overrightarrow{a}$ and vector $\overrightarrow{u}$ to determine the direction of the derivative, we have a unique $\overrightarrow{b}$ in the codomain such that
+\[
+f(\overrightarrow{a} + d\overrightarrow{u}) = f(\overrightarrow{a}) + d\overrightarrow{b}\ \text{for all}\ d\in\Delta
+\] 
+This $\overrightarrow{b}$ is the \emph{directional derivative} of $f$ in the $\overrightarrow{u}$-direction, written $\partial_{\overrightarrow{u}}f(\overrightarrow{a})$. On manifolds, directional derivatives of scalar fields work in the same way, and are extended to vector fields using the Lie derivative.
+
+The directional derivative is linear in $\overrightarrow{u}$. This suggests defining a map $\mathbb{R}^n\to \mathbb{R}^n$ that treats the domain elements as directions of differentiation:
+\[
+f^\prime(\overrightarrow{a}) = \partial_{\overrightarrow{u}}f(\overrightarrow{a})
+\]
+This is called the \emph{differential} of $f$ at $\overrightarrow{a}$. Since this is just another map $f:\mathbb{R}^n\to \mathbb{R}^n$, there is no problem with repeating the procedure to produce higher-order differentials.
+
+\subsection{Integration}
+
+Consider first maps $f:[0, 1]\to\mathbb{R}$. It is axiomatic (Kock-Reyes) that for every such $f$ there is a $g:[0, 1]\to\mathbb{R}$ such that $g^\prime=f$ and $g(0)=0$. We interpret 
+\[
+g(x) = \int_0^x f(t) dt
+\]
+With effort this integral can be extended to arbitrary closed intervals in the domain -- for any $f:[a, b]\to\mathbb{R}$ we will obtain a $g$ with the same domain and codomain -- and then to the whole of $\mathbb{R}$.
+
+
+
+\chapter{Porteous, \emph{Clifford Algebras and the Classical Groups}}
+
+This book starts off as a rapid recap of some (sometimes fairly advanced) linear algebra. Ch 1-5 set the stage for the rest. Overall I like his approach to linear algebra.
+
+The middle section Ch 6-14, covers a few special topics. There are four chapters on anti-involutions of special spaces (6, 7, 10 and 12), two on quaternions (Ch 8-9) and one quite concrete chapter on tensor products (11). 
+
+Then Ch 15 onwards (the second half of the book) covers Clifford algebras. It looks as if Ch 15-19 are primarily algebraic while 20-24 are more geometric, covering topological spaces, manifolds and lie groups.
+
+Note that Porteous uses $X^L$ to indicate the dual space of $X$ and $\mathbb{K}(n)$ to mean the set of $n\times n$ matrices with entries in the field $\mathbb{K}$. In general it's worth noting that some of his terminology and notation is a bit quirky; for example, the term `double field' seems to have other meanings elsewhere but is only used in his sense by him. 
+
+Note also that some of the elementary parts of this book are also covered in Porteous's \emph{Topological Geometry} (which also seems as if it could be a nice coursebook) so check there for an alternative account of some of the more basic stuff.
+
+\section{General Linear Algebra}
+
+\subsection{The Double Field}
+
+For any field $\mathbb{K}$ we can form the \emph{double field} ${}^2\mathbb{K}$ as follows. First form the usual vector space $\mathbb{K}^2$, then add the product
+\[
+	(a, b)(c, d) = (ac, bd)
+\]
+Be careful with the name -- the double field is itself merely a commutative ring, not a field, since elements of the form $(a, 0)$ and $(0, b)$ are not invertible. Thus, linear spaces over the double field are modules, not vector spaces.
+
+One representation of ${}^2\mathbb{K}$ is the subalgebra of $\mathbb{K}(2)$ consisting of diagonal $2\times 2$ matrices. Thus we can generalise the idea to ${}^n\mathbb{K}$, the subalgebra of diagonal $n\times n$ matrices. Abstractly, multiplication is defined in the obvious way as
+\[
+	(a_1,...,a_n)(b_1, ..., b_n) = (a_1b_1,...,a_nb_n)
+\]
+
+There is an intimate relationship between this construction and the direct sum. Specifically, if a space $X$ is a vector space over $\mathbb{K}$ that can be written $X_0\oplus X_1$; then we can think of $X$ being a ${}^2\mathbb{K}$-module. For a `scalar' $(\lambda, \mu)\in {}^2\mathbb{K}$ and a vector $x\in X_0\oplus X_1$ we have the `scalar multiplication'
+\[
+	(\lambda, \mu)x =(\lambda, \mu)(x_0, x_1) = \lambda x_0 + \mu x_1
+\]
+which looks visually like the usual dot product, but NB $\lambda$ and $\mu$ are elements of the field whereas $x_0$ and $x_1$ are vectors from vectors spaces over that field.
+ 
+The converse is also true: if you can find a ${}^2\mathbb{K}$-module structure in a vector field $V$ over $\mathbb{K}$, you get a direct sum decomposition of $V$ for free. Every linear involution (i.e., self-inverse linear map, a.k.a. reflection) gives rise to a ${}^2\mathbb{K}$-module structure, so these are not hard to come by.
+
+\subsection{Ideals}
+
+A left-ideal of an algebra is a subset that is:
+\begin{itemize}
+	\item Closed under addition
+	\item Closed under scalar multiplication
+	\item Closed under left-multiplication by any algebra element
+\end{itemize}
+The first two criteria say it is a vector subspace. Of course a right ideal is the same but closed under right-multiplication in the third criterion.
+
+An ideal is minimal if its only proper subideal is ${0}$. The minimal left ideals of $\text{End}(X)$ are those generated by a single endomorphism of rank 1.
+
+\subsection{Dual Space, Orthogonality, Adjoints}
+
+A quadratic space is a vector space equipped with an inner product (the name comes from the fact that every inner product may be expressed by a quadratic form).
+
+Porteous writes the dual space of $X$ as $X^L$. Between $X$ and $X^L$ we can find multiple isormophisms $\xi:X\to X^L$. Any linear map at all (not necessarily bijective) $X\to X^L$ is called a \emph{linear correlation}; if it bijects it is said to be \emph{non-degenerate}. In the case of a degenerate correlation we of course have the usual notions of kernel and rank.
+
+A correlation is called \emph{symmetric} if $\xi(a)b = \xi(b)a$, where of course $a$ and $b$ are vectors and so $\xi(a)$ and $\xi(b)$ are covectors. Every symmetric correlation induces a unique inner product $(a, b) = \xi(a)b = \xi(b)a$ and \emph{vice versa} -- they are equivalent notions (not-necessarily-symmetric correlations are more general). 
+
+Note: It might be worthwhile to work through an example in coordinates. Decide on a correlation, then derive the matrix of the quadratic form of its derived inner product. Now reverse the process.
+
+Suppose $(X, \xi)$ and $(Y, \eta)$ are quadratic spaces equipped with correlations (we just write these as $X$ and $Y$ from here on). We say a map $f:X\to Y$ is \emph{orthogonal} if it respects the induced inner product, i.e. if
+\[
+	\eta(f(a))f(b) = \xi(a)b
+\]
+If $X$ is non-degenerate then orthogonality of $f$ implies it injects.
+
+For every map $f:X\to Y$ there is an induced dual map $f^L:Y^L\to X^L$ defined by
+\[
+	f^L = \xi\circ f \circ\eta^{-1}
+\]
+(NOTE: This doesn't look right -- check and make a diagram.)
+Obviously, this only works if $\eta$ injects, which might not be the case. Another way to express this without that condition is to look for an $f^L$ such that 
+\[
+	f\circ\eta\circ f^L = \xi
+\]
+which says the same thing but doesn't rely on the existence of an inverse. If the inverse is not unique (i.e. is a mere section) then I think $f^L$ is not necessarily unique either.
+
+The set of orthogonal maps $X\to Y$ is written $O(X, Y)$ and in particular the orthogonal automorphisms of $X$ are written $O(X)$ (the `orthogonal group' of $X$). The subgroup of $O(X)$ of automorphisms that preserve orientation is the `special orthogonal group', written $SO(X)$. 
+
+Now suppose the correlation $\xi$ of $X$ is non-degenerate, so that $\xi^{-1}$ is unique. Then given $f:X\to Y$ we can define
+\[
+	f^\star = \xi^{-1}f^L\eta
+\]
+the \emph{adjoint} of $f$. It turns out that $f$ is orthogonal if and only if $f^\star\circ f$ is the identity, i.e. $f^\star = f^{-1}$.
+
+Consider the endomorphisms $X\to X$. These form a real algebra, since for $f, g\in\text{End}(X)$ we can define
+\begin{align}
+	(f + g)(x) & = f(x) + g(x) \\
+	(fg)(x)& = (f\circ g)(x) \\
+	(\lambda f)(x)& = \lambda(f(x)) 
+\end{align}
+The map
+\begin{align}
+	\star: & 	\text{End}(x)\to \text{End}(x) \\
+		   & f\mapsto f^\star
+\end{align}
+is an anti-involution of the algebra $\text{End}(x)$, since it sends $fg$ to $g^\star f^\star$ due to the direction-reversing property of the adjoint.
+
+\section{Ch 5: Classification of Real Quadratic Spaces}
+
+Note that in this book Real Quadratic Spaces are finite-dimensional by definition, so the Basis Theorem is rather trivial. One geometric highlight here is the decomposition of orthogonal transformations into compositions of hyperplane reflections -- a great generalization of the Euclidean case.
+
+Any vector space may be assigned an inner product. A nice way to do this is by specifying a quadratic form, which is where the term `quadratic space' comes from. The ones we are interested in are symmetric quadratic forms, i.e. those represented by symmetric matrices. 
+
+The real vector space $\mathbb{R}^n$ admits certain special scalar products, which are of the following form where $n = p + q$:
+\[
+	(a, b) = -\sum_{i=0}^{p - 1}a_ib_i + \sum_{i=p}^{q - 1}a_ib_i
+\]
+That is, the normal scalar product but multiplying the first $p$ terms by $-1$. As a quadratic form, this is the diagonal matrix whose entries are all -1 or 1, with all -1s appearing in an earlier row than any 1. Obviously the usual scalar product on $\mathbb{R}^n$ gives the quadratic space $\mathbb{R}^{0, n}$. Its matrix is just the $n\times n$ identity matrix.
+
+The classification theorem is in two parts, but essentially says that any (finite-dimensional) non-degenerate real quadratic space is isomorphic to $\mathbb{R}^{p, q}$ and that $\mathbb{R}^{p, q}\cong \mathbb{R}^{r, s}$ if and only if $p = r$ and $q = s$. Thus this very specific-looking family of scalar products covers all the (non-degenerate) possibilities.
+
+So this means that in $\mathbb{R}^n$, there are really only $n$ inner products, up to isomorphism. Furthermore, only one of these is positive definite -- the one that gives us the quadratic space $\mathbb{R}^{0, n}$ -- and only there can we define the Euclidean norm $\norm{a} = \sqrt{(a, a)}$. Hence there really is only one real Euclidean space of each dimension. 
+
+\chapter{Nestruev, \emph{Smooth Manifolds and Observables}}
+
+\section{Introduction}
+
+Our approach to calculus is motivated by practical concerns, and in this it has much in common with the project of Jet Nestruev.
+
+In traditional treatments of classical physics one considers a physical system as a collection of $n$ variables. For example, a pendulum might have a velocity and a displacement -- a system of two variables. A possible state of the system is represented by a point in $n$-dimensional (Euclidean) space. In the case of well-behaved systems, we expect all of these points to form a manifold called the \emph{phase space} of the system.
+
+This, however, is all backwards. A pendulum does not \emph{come with} this pair of parameters -- each is the result of making an observation of a specific kind. Abstractly, we imagine our laboratory equipped with a device for measuring displacement and another that measures velocity, and each of these expresses the state of the system by a number. 
+
+In another laboratory we might imagine the same system being observed with other machines that measure kinetic energy, potential energy, momentum, relativistic mass and so on. The phase space depends crucially on the combination of machines you choose; it is really produced by them and their interaction with the mysterious noumenon they are studying, the `unobserved reality' we must posit but cannot know anything about.
+
+The Nestruev perspective attempts to fix this backwardness. We begin with the measuring device pointing at some physical system that we imagine to be otherwise unobservable. We look at the set of possible readings the device can give us; this is a fog of numbers. We expect one number for each state the actual system can be in (of course, we might get the same number for multiple states).
+
+Now suppose we were in a laboratory equipped with \emph{every possible} measuring device, all trained on the same system. Here `possible' means `logically possible', so the number of devices may be infinite. Nevertheless, each device produces its own fog of numbers, one for each state the system can be in. We can collect these up, just as we did for the velocity and displacement of the pendulum. For now, let's call this the `laboratory' (that's what Nestruev calls it).
+
+The most radical claim one can now make is that the physical system \emph{is nothing more or less than the set of all these possible observations} -- that is, of the fog of numbers for every possible observing-machine. Here `is' may be taken as an ontological claim, amounting more or less to a commitment to idealism, or much more weakly as a practical matter. To a physicist, at least, a physical system is only and entirely given by observations, so it is exhausted by the set of all possible observations across all the system's states and all the devices that could observe them.
+
+The `fog of numbers' produced by an individual measurement device can vary greatly depending on what is being observed. However, the `laboratory' always has the same structure. If the numbers being used for the measurements belong to a field $\mathbb{K}$, the laboratory is a $\mathbb{K}$-algebra $\mathscr{F}$. The states of the system being observed are produced from $\mathscr{F}$ by the following method. 
+
+Suppose the (unknowable) system is in some state. When we fire off our measuring devices, each will produce a number. Thus, a state is a map $f:\mathscr{F}\to \mathbb{K}$ that assigns to each measuring device a specific reading. Fundamental assumptions about the continuity of space, time and motion lead us to conclude that this should always be a smooth $\mathbb{K}$-algebra homomorphism. Thus, the set of all possible states of the system is the set of all maps $f:\mathscr{F}\to \mathbb{K}$ that are $\mathbb{K}$-algebra homomorphisms -- that is, all the possible combinations of readings our measurement devices can show. 
+
+In the new perspective, the manifold (i.e., the state space) is given by $\mathscr{F}$ and a point (i.e. a state) by a $\mathbb{K}$-algebra homomorphism. Does this mean that any $\mathbb{K}$-algebra $\mathscr{F}$ determines a manifold? Not if we want to recover anything like the classical theory. We have to place some additional restrictions on $\mathscr{F}$ that amount to saying it must look locally like $C^\infty(\mathbb{R}^n)$.
+
+The main machinery is built up in Nestruev pp 29-60, but Ch 6, 9 and 10 are also important for the calculus and Ch 8 makes the connection with the prime spectrum notion of a point in algebraic geometry.
+
+\section{Algebras and Points (Ch 3)}
+
+The laboratory of measuring devices gives us a $\mathbb{K}$-algebra $\mathscr{F}$ of functions -- that is, each device assigns a number to each state of the system being observed. The physicist's job is to determine the state space, which is the same as finding a manifold that can `support' $\mathscr{F}$.
+
+Note that the functions in $\mathscr{F}$ are taken to be global functions that cover the entire manifold, although of course some might be zero on parts of it.
+
+Note that mathematically speaking there could be multiple manifolds that all support $\mathscr{F}$, but from an `observables' perspective there is no meaningful difference between them, since no possible measuring device can tell the difference between them. Thus, once we have found \emph{a} manifold that supports  $\mathscr{F}$, we have actually found \emph{the} state space.
+
+From now on all $\mathbb{K}$-algebras are assumed to be commutative and associative and have a unit, and their homomorphisms map units to units. Although we call the elements of $\mathscr{F}$ `functions', they are purely abstract points at this stage. We can't define them as functions because we don't know what their domain is yet -- that's what we need to determine.
+
+Not all $\mathscr{F}$s are equally suitable for this. We will require that $\mathscr{F}$ is:
+\begin{itemize}
+	\item{\emph{Geometric}: `The intersection of the kernels is trivial'}
+	\item{\emph{Complete}: `Restrictions of functions to the manifold are in the algebra'}
+	\item{\emph{Smooth}: `Local isomorphism to $C^\infty(\mathbb{R})$'}
+\end{itemize}
+Of course, the slogans are what we need to understand. The third criterion is explained in the next chapter.
+
+\subsection{Points}
+
+Consider the set $|\mathscr{F}|$ of maps  $\mathscr{F}\to\mathbb{R}$. Since  $\mathscr{F}$ is a vector space over $\mathbb{R}$, we could call this the dual space and write it $\mathscr{F}^\star$, but this is not what Nestruev does.
+
+The elements of $|\mathscr{F}|$ will be the points of our manifold. Thus we write elements of $|\mathscr{F}|$ with the letter $x$, so $x(f)$ is the value of the map $x$ on the function $f\in\mathscr{F}$. If we think of $x$ as a point, we can think of $x(f)$ as evaluating $f$ at the point $x$.
+
+Now, if we think of the elements of $|\mathscr{F}|$ as the points on a manifold, everything above seems backwards: we really want scalar fields to be maps $|\mathscr{F}|\to\mathbb{R}$. This leads us to define 
+\[
+	\tilde{\mathscr{F}} = \{\tilde{f}:|\mathscr{F}|\to\mathbb{R}\}
+\]
+So we think of $\mathscr{F}$ as `scalar fields that can be observed' and $\tilde{\mathscr{F}}$ as `scalar fields that actually exist'. We certainly hope that
+\[
+	\mathscr{F}\cong \tilde{\mathscr{F}}\ \ \text{(?)}
+\]
+It can be easily seen that the map $\tau:f\mapsto\tilde{f}$ is an $\mathbb{R}$-algebra homomorphism (p.23), which is a good start. It is also surjective, since each $\tilde{f}$ is derived directly from an $f\in\mathscr{F}$. In physics terms, there are no `actual states' that can't be identified by the laboratory of all possible measuring devices because these would be `mere noumena' that have no phenomenal reality.
+
+We now need to see that it is injective too -- and this is where we hit a snag. With the setup as we have it so far, it can in fact happen that $\mathscr{F}$ contains `too many' elements that are collapsed together by the homomorphism. In this case we make more observations than there are actual states; and this should not be possible!
+
+This suggests that we need to place a technical restriction on $\mathscr{F}$ to ensure that $\tau:f\mapsto\tilde{f}$ injects.
+
+In abstract algebra, we typically prove injectivity by showing the the kernel of $\tau$ is trivial. Consider the element $\tilde{f_0}\in\tilde{\mathscr{F}}$ that maps every point in $\tilde{\mathscr{F}}$ to zero. This is the zero element of $\tilde{\mathscr{F}}$; intuitively it is nothing but the constant-zero function on the manifold. Now, the kernel $\text{Ker}(\tau)$ is the set of elements of $\mathscr{F}$ that $\tau$ maps to $\tilde{f_0}$. If $\tau$ is injective, the only element of $\text{Ker}(\tau)$ will be the element $f_0:|\mathscr{F}|\to\mathbb{R}$ with the rule $x\mapsto 0$. 
+
+In words, $\tau$ should not `confuse' any of the elements of $\mathscr{F}$ with the zero element when it performs its mapping. A more `local' way to say this is
+\[
+	\bigcap_{x\in|\mathscr{F}|}\text{Ker}(x) = \{\tilde{f_0}\}
+\]
+To unpack this, let $x$ be a point on the manifold, which we also think of as an evaluation of each scalar field in $\mathbb{F}$. Then  $\text{Ker}(x)$ is the set of all scalar fields that are zero at $x$. If we choose several points and look at the intersections of their kernels, the result will be all and only those scalar fields that are zero at all of those points. Since the intersection above is over all points, we are saying that the only function that is zero at every point is the constantly-zero function.
+
+Put this way, this is eminently reasonable. It extends algebraically to the following claim: if two measuring devices give the same reading for every possible state of the system, they measure the same property of the system. There can be no mysterious `unobservable difference'. Thus, we have made a mistake about these being `two possible measuring devices' -- they are actually the same one.
+
+An algebra that has this property is called \emph{geometric} and this is the only kind we will consider from now on.
+
+An aside: the intersection of the kernels above is an ideal:
+\[
+\mathscr{I}(\mathscr{F}) = \bigcap_{x\in|\mathscr{F}|}\text{Ker}(x) = \{\tilde{f_0}\}
+\]
+Supposing we have a non-geometric $\mathscr{F}$, we can `fix' it by quotienting out this ideal to form $\mathscr{F}/\mathscr{I}(\mathscr{F})$, which is geometric (proof on p.25). We can think of this as simply `rationalising the laboratory'.
+
+\subsection{Topology}
+
+To get much geometry done we will need to find a topology for $|\mathscr{F}|$ that respects the intuitions we have been trying to capture. 
+
+This is actually quite simple. Recall that $\tilde{\mathscr{F}}$ contains maps of the form $|\mathscr{F}|\to\mathbb{R}$, which we think of as scalar fields on the manifold. Thus, for each $\tilde{f}\in \tilde{\mathscr{F}}$ every open disk $(a, b)$ induces a pre-image
+\[
+	\tilde{f}^{-1}(a, b)
+\]
+that contains points in $|\mathscr{F}|$. These pre-images are the basis open sets of the topology. Thus, the topology is defined in such a way that every function is guaranteed to be continuous (since the openness of preimages of open sets is the very definition of continuity).
+
+Thus, there are no discontinuous functions -- this is in keeping with the intuitionistic view of things (though the Nestruev project is explicitly not intuitionistic).
+
+It is proved (p.25) that this topology is Hausdorff. If it wasn't, there would be states of the system that are `so similar they can't be topologically separated', and this would be no good at all. A laboratory making observations shouldn't be able to measure any such thing, and remember that those measurements are all we have to go on. So this proof is reassuring.
+
+\subsection{Restrictions and Completeness}
+
+Consider any subset $A\subseteq |\mathscr{F}|$. Then any map in $\tilde{\mathscr{F}}$ can be restricted to $A$ in the obvious way. The set of all such restricted maps can be written as $\tilde{\mathscr{F}}|_A$.
+
+Identifying $\tilde{\mathscr{F}}$ with $\mathscr{F}$ by the isomorphism established above, we can define the restriction maps
+
+	\begin{align*}
+		\rho_A: & \mathscr{F}\to\mathscr{F}|_A \\
+		. & f\mapsto f|_A
+	\end{align*}
+
+Of course this feels like the beginning of defining a sheaf, but that isn't what Nestruev does (there is no mention of sheaves in the book).
+
+When $A = \mathscr{F}$ we of course expect to have $\mathscr{F}|_A = \mathscr{F}$. That is, restricting $\mathscr{F}$ to itself ought to `do nothing'. But this is not necessarily the case. This is because of the way restrictions are defined in the text.
+
+(Personally this seems like the wrong way to go to me. Why not use the sheafy definitions? This would be worth digging into as there may be a good reason why you want to so things they way they do.)
+
+If $\mathscr{F}|_{|\mathscr{F}|} = \mathscr{F}$, then $\mathscr{F}$ is said to be \emph{complete}. 
+
+\subsection{Smooth Envelopes}
+
+I skipped this section.
+
+\section{Smooth Manifolds (Ch 4)}
+
+\section{Charts and Atlases (Ch 5)}
+(We can probably omit this one)
+
+\section{Smooth Maps (Ch 6)}
+
+\section{Spectra and Ghosts (Ch 8)}
+
+I've skipped this chapter; it was hard to understand and I don't think it's the best way to get at this approach (prime ideals as points). Nestruev is also not a fan of the `germs of curves' approach, which apparently is awkward to give a linear structure to -- what does it mean to add two germs or to multiply one by a scalar? (I think this is fairly clear in my head, but maybe there are subtle problems here).
+
+However, the main complaint is well-motivated: if the main point of tangent vectors is to act as derivatives, they ought to be defined in a way that makes that explicit. So they do it with abstract derivations instead.
+
+
+
+
+
+
+
+\section{Differential Calculus (Ch 9)}
+
+Derivatives are velocities, which are tangent vectors. But the usual definitions use charts, which is fine for calculation but can't possibly capture the `essence' of the situation.
+
+
+
+
+
+\section{Bundles (Ch 10 and 11)}
+
+
+\chapter{Morita \emph{The Geometry of Differential Forms}}
+
+This book offers a good, tight overview of the basics (Ch 1-3, 150 pages) and then gets into slightly more advanced material: Riemannian geometry (Ch 4) and characteristic classes (Ch 5-6). 
+
+The territory is very similar to Bott and Tu but the treatment seems to be a bit more elementary. The whole thing is 300 pages, about the first third of which is already quite familiar.
+
+It seems to me that starting with Ch 5 might be the most productive approach. Vector bundles are very intuitive to me and the interplay of bundles with sheaves is probably at the heart of these structures.
+
+\section{Manifolds (Ch 1)}
+
+Not much here we don't already know quite well but the material on vector fields (1.4) and some topological subjects in 1.5 may be worth revisiting.
+
+\section{Differential Forms (Ch 2)}
+
+The basic setup is in 2.1. In 2.2 we get the Cartan calculus, without much geometric motivation. This is all differential calculus, no integrals. Then 2.3 introduces and proves the Frobenius Theorem.
+
+\section{The De Rham Theorem (Ch 3)}
+
+Starts with a brief introduction to homology. Section 3.2 explains integration of top-forms on manifolds and derives the Stokes Theorem. Then de Rham is explained (3.3) and proved by way of Cech cohomology (3.4). Section 3.5 gives some applications, which might be worth looking at first for motivation.
+
+\section{Laplacian and Harmonic forms (Ch 4)}
+
+Starts with the notion of Riemannian metric and the Hodge star (4.1). Again, applications come at the end, including Poincare duality.
+
+\section{Vector Bundles and Characteristic Classes (Ch 5)}
+
+The first half deals with connections and presumably makes the stuff in the previous chapter more rigorous. Then we get characteristic classes defined (5.4, 5.5, 5.6) and used to prove the Gauss-Bonnet Theorem (5.7).
+
+\section{Fibre Bundles and Characteristic Classes (Ch 6)}
+
+This chapter generalizes the previous one to principal bundles, deriving curvature and the Weil algebra
+
+\section{A Sort of Summary}
+
+\subsection{From Sheaves of $\mathbb{R}$-Algebras to the Tangent Bundles}
+
+What is a real manifold, really? Consider any topological space $(M, \tau)$. We are concerned with maps from an open set to $\mathbb{R}$ or \emph{vice versa}.
+
+For each open set $U\in\tau$ we can consider all the maps  $f:U\to\mathbb{R}$. These form a sheaf of $\mathbb{R}$-algebras on $M$. The germs of this sheaf at a point $p$ modulo a constant factor in $\mathbb{R}$ (i.e. we consider them to be `equal to zero at $p$') are tangent covectors and the set of all such covectors is $T^\star_pM$. The disjoint union of tangent covector spaces
+\[
+	T^\star M = \coprod_{p\in M}T^\star_pM = \{(p, T^\star_pM) : p\in M\}
+\]
+is the cotangent bundle over $M$. A section of $T^\star M$ is a so-called `differential 1-form'.
+
+We now perform the dual construction. (We could simply state that $T_pM$ is the dual space to $T^\star_pM$ in the sense of linear algebra but this contains no geometric intuition, so we go by a longer route.)
+
+For each open set $U\in\tau$ we can consider all the maps  $f:\mathbb{R}\to U$. These form a sheaf of sets on $\mathbb{R}$. Again to localise this we look at a germ. We look at the germ at $0$ modulo a constant factor in $\mathbb{R}$, i.e. we consider $f(0)=p$. These germs are the tangent vectors at $p$, which taken together are $T_pM$. The disjoint union of tangent vector spaces
+\[
+	TM = \coprod_{p\in M}T_pM = \{(p, T_pM) : p\in M\}
+\]
+is the tangent bundle over $M$. A section of $TM$ is a tangent vector field.
+
+Since they are vector spaces, we can form tensor and exterior products in $T^\star_pM$ and $T_pM$ in the normal way. The exterior products are especially useful for geometry. We can define $\bigwedge T^\star M$ and $\bigwedge TM$ and their graded versions in the obvious way (as disjoint unions of the usual linear algebra object at each point).
+
+The definition of a smooth structure and partial derivatives  should follow from this.
+
+\chapter{Hausmann, \emph{Mod 2 Homology and Cohomology}}
+
+I'm only interested in Ch 2 for now but the others might be worth reading at some point.
+
+\section{Chapter 2: Simplicial (Co)Homology}
+
+\subsection{2.2 Definitions}
+
+\subsection{2.3 Kronecker Pairs}
+
+\subsection{2.4 Computations}
+
+
+\end{document}

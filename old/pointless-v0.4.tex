@@ -1,0 +1,1741 @@
+\documentclass[oneside,english]{amsbook} 
+\usepackage[T1]{fontenc} 
+\usepackage[latin9]{inputenc} 
+\usepackage{amsmath} 
+\usepackage{amstext} 
+\usepackage{amsthm} 
+\usepackage{amssymb}
+\usepackage{mathrsfs} 
+\usepackage{hyperref}
+
+\makeatletter 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands. 
+\numberwithin{section}{chapter} 
+\theoremstyle{plain} 
+\newtheorem{thm}{\protect\theoremname}   
+\theoremstyle{definition}   
+\newtheorem{defn}[thm]{\protect\definitionname}
+
+\makeatother
+
+\usepackage{babel}   
+\providecommand{\definitionname}{Definition} 
+\providecommand{\theoremname}{Theorem}
+
+
+\begin{document}
+
+\title{Notes on Topology \& Geometry}
+
+\maketitle
+
+\tableofcontents
+
+\chapter*{What Is Missing}
+
+
+\section{Motivation}
+
+There are lots of `big theorems' but the book should feel from the beginning as if it's going to arrive somewhere that's worthwhile. We do have a good structure of parts but the whole needs to feel like a journey from A to B.
+
+If the aim is broadly philosophical, there are two main strands that are (at least historically) intimately woven together:
+\begin{itemize}
+	\item{Physics and phenomenology. The universe appears to be continuous, and the nature of continua is an old philosophical mystery. Maths proposes solutions to this mystery that have been of amazing utility to the empirical sciences.}
+	\item{Conceptual structure. Philosophy is often concerned with understanding complex phenomena in an organized way. In mathematical terms this often gives rise to `spaces' that are not only non-physical but that as far as we know cannot be realised physically. Modern topology and geometry provide a mature and flexible language for approaching them.}
+\end{itemize}
+
+We could start with some guiding questions that will be answered throughout the book. For example: 
+
+What is the nature of the physical / phenomenological continuum? Answered in Part 2.
+
+A `space' need not be physical; it could for example be a space of data, the phase space of a physical system or the configuration space of a robot arm. These can be high-dimensional or otherwise impossible to model intuitively. How can we probe the connectedness of spaces that can't physically exist? Answered in Parts 3 and 4.
+
+According to general relativity, space is curved. But what does this mean? Can something be curved if there's no larger container it lives inside? What would it be like to move around in a curved space? Answered in Part 5.
+
+Describing some of these problems in an introduction would do a lot to set up the whole book.
+
+\section{Audience}
+
+Clearly this is going to be too much technical detail for anyone who isn't curious about that for its own sake. We can present it as a creative output in itself, but the reader is going to want to learn the material. It might be primarily aimed at philosophers.
+
+\section{My Understanding}
+
+The geometrical / physical meaning of Cartan calculus
+
+An understanding of connections and metrics -- this is the entire final section of the book, so it's really important!
+
+\chapter*{Very Fast Summary}
+
+\section{Summary of the Summary}
+
+Locales provide a phenomenologically reasonable model of continua that can have parts, including a notion of continuity. A point can be produced from a locale by means of a completely prime filter, which we think of as an infinitely refinable procedure of approximation. A point thus produced is thought of as an infinitesimal piece of the continuum, not as a classical point.
+
+Locales on their own are not sufficiently rigid to capture the notion of a continuous space. We add rigidity to locales by building structures on them. Most of these structures are specified locally (on open sets) but are supposed to extend globally, so they are specified using sheaves.
+
+Many such structures are possible. The one that interests us identifies local homeomorphisms between certain open sets of the locale and a model space. A locale equipped with such a structure is called a `topological manifold'. The model space is usually a Banach space but need not be. Of particular interest are the Euclidean spaces, which yield the `real manifolds'.
+
+Sheaves can be used to endow manifolds with additional structure. Very natural examples are the tangent and cotangent bundles and their symmetric and alternating algebras. These allow for a limited but very elegant calculus -- the Cartan calculus -- to be done on manifolds. We might say this constitutes `semi-rigid geometry' which, at least some of the time, might just as well be called `differential topology'. It studies flows and deformations rather than lengths or angles.
+
+One way to add further structure is to define a connection. This makes available, among other things, metric and curvature tensors that can be used to solve a wide range of geometric problems. Here the geometry is `fully rigid' and topological concerns fade into the background, although they continue to exert an influence. In flat spaces the connection is almost invisible, but in general manifolds it must be defined with some care.
+
+\section{Euclidean Calculus}
+
+\subsection{Euclidean Spaces}
+
+We begin with a specific model of continuity, which we write as $\mathbb{R}$. Unlike the traditional real line, this is constructed as follows. We assume we are given a straight line that is infinitely extended in both directions. This assumption may be considered equivalent to Euclid's Propositions 1 and 2. 
+
+We also assume we can `cut out' pieces of the line that correspond to open intervals -- this can be thought to correspond to Euclid's Proposition 3. We form the locale of these open intervals under finite intersection and countable union. We define a point to be a completely prime filter in this locale. 
+
+(Euclid's Propositions 4 and 5 are \emph{much} more complicated; we will return to them later.)
+
+Geometrically, however, we are usually concerned not with $p$ but with the infinitesimal open interval $\Delta_p$, which consists of $p$ along with points $p + d$ such that $d^2 = 0$. We require that $\Delta_p$ contain more than just 0; the other elements are `nilsquare infinitesimals' and we think of it as a `thickened point'. 
+
+This notion of continuum is too fragile to be studied by classical logic, which collapses it into a triviality. Thus we adopt an intuitionistic logic in which the Law of Double Negation is suspended: $\lnot\lnot p\nvdash p$. The thinking here is that infinitesimals around $p$ are neither `definitely equal to $p$' nor `definitely distinct'. From now on when we refer to a point we mean this infinitesimal neighbourhood $\Delta$.
+
+This enables us to order $\mathbb{R}$ in the usual way, except that for all $d\in\Delta$ we have $d\le 0$ and $0\le d$ even when $d\ne 0$. We define the closed interval $[a, b] = \mathbb{R}\setminus(-\infty, a)\cup(b, \infty)$, with complementation defined in such a way as to make $[a, b] = \{x\in\mathbb{R} : a\le x\le b\}$. Note that the closed interval includes the infinitesimal regions around its endpoints.
+
+We now consider maps $f:\mathbb{R}\to \mathbb{R}$. It is axiomatic that for each $x$ in the domain there is a fixed $b_x$ in the codomain such that $f(x + d) = f(x) + b_xd$ for every $d\in \Delta_x$. This gives a new map $f^\prime:\mathbb{R}\to \mathbb{R}$ with the rule $f^\prime (x) = b_x$. We call $f^\prime$ the \emph{derivative} of $f$ and note that, since it is of the same form as $f$, we may find its derivative and so on iteratively. 
+
+We can now build models of continua of higher dimensions by taking products of $\mathbb{R}$ with itself. The equivalent of $\Delta$ in higher dimensions is the appropriate `infinitesimal piece of continuum' -- an infinitesimal open disk in 2D, open ball in 3D and so on.
+
+A particularly important map $n:\mathbb{R}^2\to \mathbb{R}$ is given by the rule $m(x, y) = \sqrt{x^2 + y^2}$. This is called the \emph{Euclidean metric} on $\mathbb{R}^2$. We construct such a metric on $\mathbb{R}^n$ for each $n$ by analogy. The topology we began with is compatible with this metric, which gives rise to a norm, the \emph{Euclidean norm}.
+
+In traditional calculus the Euclidean metric is considered to have a singularity at $(0, 0)$ where partial derivatives do not exist. This happens because $\sqrt:[0, \infty)\to \mathbb{R}$ is defined on a half-open interval that includes the point at 0. Our intuitionistic logic does not permit us to isolate the point at 0 in this way, so we define $\sqrt:(0, \infty)\to \mathbb{R}$ instead. But now the singularity vanishes, for the $n$-dimensional Euclidean norm's domain is now $\mathbb{R}^n$ with the infinitesimal neighbourhood around the origin deleted. We define $n$ to be equal to $0$ on the closed set $[0,0]$ as a special case.
+
+The space $\mathbb{R}^n$ equipped with the Euclidean norm and metric (and the topology generated by open intervals, which was where we began) is called \emph{Euclidean $n$-space} and is our model of continua in $n$ dimensions.
+
+\section{Manifolds}
+
+\subsection{Manifolds}
+
+Let $T$ be any topological space and for each open set $U\in T$ consider the set $\mathbb{R}^U$ of real scalar fields on $U$ -- write $\mathscr{O}(U)$ for this set. Obviously $\mathscr{O}(U)$ has quite a lot of structure: in particular it is an $\mathbb{R}$-algebra. When $V\subseteq U$ we have a map $\mathscr{O}(U)\to \mathscr{O}(V)$ -- note the reversal of the arrow -- that sends each $f\in \mathscr{O}(U)$ to $f|_V\in\mathscr{O}(V)$. In general, we can expect $\mathscr{O}(V)$ to contain additional scalar fields that do not correspond to anything in $\mathscr{O}(U)$ because they are undefined there.
+
+More flexibly we call the map $r^U_V: f\to f|_V$ a \emph{restriction map} if it obeys the following rules:
+\begin{itemize}
+	\item $r^U_U$ is the identity map
+	\item $r^V_W\circ r^U_V = r^U_W$
+\end{itemize}
+Under these criteria  $\mathscr{O}$ is called a \emph{presheaf} over $T$. Upgrading presheaves to sheaves is really a matter of making sure the open sets `glue together' properly. Here we let $V$ be any open set in $T$ and let $U_i$ be any open cover of $V$.
+\begin{itemize}
+	\item Suppose we have some open set $V$ with $f, g\in \mathscr{O}(V)$. Then if $f|{U_i} = g|{U_i}$ for all $U_i$, we require that $f=g$. That is, if two scalar fields are different they must differ on some open set.
+	\item Suppose we have elements of $\mathscr{O}(U_i)$ that agree on pairwise intersections of the covering sets. Then there is an element of $\mathscr{O}(V)$ that agrees with all of them. That is, a consistent collection of scalar fields can be glued together to make a larger one. 
+\end{itemize}
+If these are also satisfied, $\mathscr{O}$ is a \emph{sheaf} over $T$, written $(T, \mathscr{O})$.
+
+Now consider the special case $(\mathbb{R}^n, \mathscr{O})$. A \emph{real $n$-manifold} is any space  $(T, \mathscr{O})$ that is locally isomorphic to $(\mathbb{R}^n, \mathscr{O})$ as locally ringed spaces.
+
+For small enough open sets in $T$, we can use sections of this sheaf to produce a system of coordinates in $\mathbb{R}^n$. The set of all systems of coordinates for $U$ will either be empty or contain many different options.
+
+\section{Cotangent and Tangent Spaces}
+
+\subsection{Cotangent Space from Germs}
+
+Let $M$ be a manifold and $U\subseteq M$ be an open set. Consider all the scalar fields $M\to \mathbb{R}$ (more generally $\mathbb{R}$ may be any Banach space). Choose a point $p\in U$. For $f, g\in \mathbb{R}^M$ write $f\cong_p g$ if and only if there is a neighbourhood of $p$ on which $f$ and $g$ are equal.
+
+An class of scalar fields at $p$ is called a \emph{germ} at $p$, and the set of all germs is called the \emph{stalk} at $p$. The stalk has a naturn $\mathbb{R}$-algebra structure induced from the usual addition, multiplication and scalar multiplication of scalar fields.
+
+The stalk as a (unique) maximal ideal, $\mathfrak{m}$, consisting of all those germs whose value at $p$ is zero. These are the only ones of interest if we are looking for `linear approximations of scalar fields at $p$'. But they are not necessarily linear, so we factor out all non-linear elements by forming the quotient ideal $\mathfrak{m}/\mathfrak{m}^2$. 
+
+If $M$ is a 2-manifold the elements of $\mathfrak{m}/\mathfrak{m}^2$ may be considered infinitesimal tilted planes passing through $p$'. Since they may be added and scalar-multiplied, so they form a vector space.
+
+This space is called the \emph{cotangent space} at $p$, written $T^\star_p M$. In the tradition of the early calculus, the construction licenses us to think of them literally as nilsquare infinitesimals -- that is, as quantities (in some sense) that square to zero.
+
+\subsection{Tangent Space from Paths Acting on Germs}
+
+Now consider maps $\pi:\mathbb{R}\to U\subseteq M$. Since these are just `scalar fields with the arrow turned around', the construction will be largely dual to the previous one. Without loss of generality, we may assume that every path we look at passes through the point $p$ on the manifold at 0, i.e. $\pi(0) = p$, if it passes through $p$ at all (any path can be reparameterised to make this true).
+
+Thus we begin with a point in $\mathbb{R}$, which may as well be 0, and consider the scalar fields $f:\mathbb{R}\to\mathbb{R}$. Again they have a maximal ideal $\mathfrak{n}$ of scalar fields $f$ such that $f(0)=0$. We linearise this by discarding square terms, producing $\mathfrak{n}/\mathfrak{n}^2$, the germs of scalar fields at $0$.
+
+Now we note that $\pi:\mathbb{R}\to U\subseteq M$ can be combined with any scalar field $f:\to M\supseteq U\to \mathbb{R}$ to produce $f\circ\pi:\mathbb{R}\to\mathbb{R}$, a scalar field on $\mathbb{R}$. We think of the path on the manifold `tracing out' a scalar field on $\mathbb{R}$ that looks like a kind of cross-section. 
+
+This leads us to define a new equivalence relation,
+\[
+	\pi\cong_p\pi^\prime \ \text{if and only if} \ f\circ\pi - f\circ\pi^\prime \in \mathfrak{n}/\mathfrak{n}^2 \ \text{for all} \ f:M\supseteq U\to \mathbb{R} 
+\] 
+In words, this says that two paths through $0$ are equivalent there when they `trace out' the same scalar field on $\mathbb{R}$, up to a first-order approximation. We want to think of these as the elements of $T_p M$, the tangent plane at $p$.
+
+For example, height above sea level is a scalar field on the Earth's surface. If I walk a path on that surface, the height I was above sea level at each instant can be represented by a graph of height vs time, which is a scalar field `traced out' on the real line (here, time) by my walk.
+
+On my walk, the slope at a given point is approximated (to first order) by a tilted plane, which is an element of $T_p^\star M$. My velocity, however, is represented by an element of $T_p M$
+
+As defined, $T_p M$ contains `infinitesimal velocities at $p$' while $T_p^\star M$ contains `infinitesimal gradients'. It is easy to picture $T_p^\star M$ as a tilted plane, but not so easy to picture the whole of $T_p M$ geometrically, except as a `space of possibilities'.
+
+So far, $T_p^\star M$ has a vector space structure but $T_p M$ does not. To remedy the situation we need to think harder about the elements of $T_p M$. (TODO)
+
+
+
+\subsection{Vector Fields}
+
+If we gather up all the $T_p M$s together using a disjoint union, we obtain the \emph{tangent bundle} over $M$, written $TM$. Concretely, we can define
+\[
+	TM = \{ \{p, T_p M\} :  p\in M\}
+\]
+Then a \emph{section} of the tangent bundle is a map $v:M\to TM$ such that $v(p)\in T_p M$. This is also called a \emph{vector field} since it attaches one tangent vector to each point.
+
+Note that for $\mathbb{R}^n$, $T_p M$ at every point is just a copy of $\mathbb{R}^n$ under the translation that moves the origin to $p$. Indeed, this positional shift is not even of much interest. Instead we may describe a path through $\mathbb{R}^n$ and at each point consider the tangent vector there to be a vector with its tail at the origin. This vector's point `moves around the origin' as we walk around $\mathbb{R}^n$ following our path.
+
+This is more useful than first appears. It means that at each point we have a vector defined by $n$ numbers since we are in $\mathbb{R}^n$ and have chosen a basis. by projecting all the vectors onto the $i^{\text{th}}$ coordinate we obtain a scalar field on $\mathbb{R}^n$. We already know how to describe a scalar field as continuous, smooth etc, so we say a vector field on $\mathbb{R}^n$ has such a property if all of its projections (considered as scalar fields) do. Since every vector field on $M$ also defines a vector field on each chart, we have a way to describe those properties on manifolds as well as just $\mathbb{R}^n$.
+
+A vector on $M$ at $p$ was originally defined as the velocity vector of a path passing through $p$. Now we reverse the idea. Suppose the vectors of a vector field $v: M\to TM$ were actually velocities: can we define a path through each point $p$ such that its velocity is $v(p)$ in a consistent way over the whole of $M$? If so then the paths are 1-manifolds and form a \emph{foliation} of $M$. We say $M$ is \emph{integrable} (this is what the Frobenius theorem is about).
+
+Suppose you have a vector field and a scalar field on $M$, and the vectors act like velocity vectors on the scalars, blowing them around like the wind. We say the vector field acts on the scalar field by `Lie dragging', producing a new scalar field.
+
+\subsection{Covector Fields, Derivations and Lie Derivative}
+
+The construction of $TM$ works exactly the same way for the cotangent spaces, yielding the cotangent bundle $T^\star M$. This assigns an `infinitesimal piece of slope' to each point. Locally, every scalar field looks like a cotangent vector, so a covector field is an `infinitesimal approximation of a scalar field at every point', at least if it's not pathological -- this is dual to the claim that a well-behaved vector field is an `infinitesimal approximation of a foliation at every point'.
+
+There is an easy algebraic way for a tangent vector at $p$ to act on a cotangent vector, producing a number. This number is plausibly interpreted as the `gradient' or `rate of change' of the cotangent vector in the direction of the tangent vector. We need some calculus, of course, to obtain the right covector field for a given scalar field. Because of this, we often think of tangent vectors as `derivations' -- things that act on scalar fields by calculating their rates of change.
+
+If we can do this with a scalar field, we should be able to do it with a vector field $w:M\to TM$: the question now is, `at $p$, how is the vector field $w$ changing as I look along some tangent vector $v(p)$?' The problem is that there is no canonical way to compare the tangent vectors at $p$ with those at nearby points -- this will be solved by the addition of a connection, but we can do something even without this extra structure. 
+
+The broad idea is to Lie-drag the integral curve of $w$ through $p$ by $v(p)$ for some finite time $t$. Now $p$ will end up at a new location, $q$, and we can directly compare $w(q)$ with the Lie-dragged copy of $w(p)$, which is now at $q$. The Lie derivative is the result of letting the time $t$ decrease and approach zero.
+
+\subsection{Diffeomorphisms, Pushforwards and Pullbacks}
+
+\subsubsection{Intuition}
+
+A \emph{diffeomorphism} is a smooth map $\psi:M\to N$ between manifolds that has a smooth inverse. Usually this is defined by factoring through charts and doing ordinary calculus. Note in particular that $\psi$ bijects.
+
+Now let us consider a more general smooth map $\phi$, which might fail to inject, surject or both. The \emph{differential} of $\psi$ at $p$ is the linear map $d\phi_p:T_pM\to T_{\psi(p)}N$ given by factoring $\phi$ through charts around $p$ and $\phi(p)$. 
+
+Thinking of a vector $v\in T_pM$ as the germ of a path $\gamma$ such that $\gamma(0)=p$ then $\phi\circ\gamma$ is a path in $N$ with $\phi\circ\gamma(0)=\phi(p)$. The germ of this path is $d\phi_p(v)$, which is called the \emph{pushforward} of $v$ by $\phi$. 
+
+The construction works because the differential is taken at a point (or, equivalently, on an infinitesimal neighbourhood). Note that if $\phi$ does not biject, the result of pushing forward a vector at \emph{every} point will not make sense as a vector field on $N$. The pushforward is a purely local construction unless $\phi$ is a diffeomorphism.
+
+By contrast, suppose that $f:N\to\mathbb{R}$ is a scalar field on $N$. We can `pull back' $f$ along $\phi$ by precomposition, producing a new scalar field $f\circ\phi:M\to\mathbb{R}$. This works regardless of whether $\phi$ injects, surjects or both and is a global construction in the sense that we get a scalar field on the whole of $M$ all at once. There is nothing that looks like `calculus' here, just a transfer of data from $N$ back to $M$. The pullback can be extended to differential forms and has nice algebraic properties.
+
+\subsubsection{The General Picture}
+
+Pushforwards and pullbacks may be defined for general sheaves over topological spaces, and this is where the systematic unification becomes apparent.
+
+
+
+\subsection{Differential Forms}
+
+A tangent vector in $T_p M$ represents an `infinitesimal linear path' passing through $p$. Taking two linearly independent elements of $T_p M$ produces an `infinitesimal parallelogram'; three such elements produces an `infinitesimal parallelepiped' and so on. In order to develop a geometry on $M$ we would like to be able to measure such objects so as to describe their relative lengths, areas, volumes and so on. Summing these up over non-infinitesimal regions should give us non-fininitesimal measurements: for example, the length of a curved path ought to be, in some sense, the sum of its infinitesimal linear approximations at every point through which it passes. This is done using differential forms.
+
+By definition, a `pure' 1-form is a covector field. At each point we can `measure' any tangent vector $v$ by having the covector there, $\gamma$ act on it as a linear functional, producing a number $\gamma v$. Hence it `measures relative length', in the sense that $\gamma (v + w) = \gamma v + \gamma w$ and $\gamma (\lambda v) = \lambda\gamma(v)$. The measurement is relative to the basis of $T_p M$ and localised to each point in the sense that we have no way to compare measurements between different locations.
+
+2-forms arise when we consider the problem of measuring relative area, rather than length. A piece of area might plausibly be represented by a pair of tangent vectors, say $v_1$ and $v_2$, which together span a parallelogram in the tangent space. We write this pair as $v_1\land v_2$, and to capture the geometry we require that $v_1\land v_2 = -v_2\land v_1$, the idea being that reversing the order reverses the orientation of the parallelogram. 
+
+The operation $\land$ is called the \emph{outer product} and $v_1\land v_2$ is called a \emph{2-vector}. The term `outer product' can be understood as meaning that $v_1\land v_2\notin T_p M$ -- it is a different order of object, a fragment of 2D space rather than 1D.
+
+The simplest way to `measure' these 2-vectors is to apply a 2-covector -- one covector for each vector. Of course, we will write a 2-covector as $w_1^\star\land w_2^\star$. Note that this is not to be thought of as a `tiny parallelogram' -- that would be a 2-vector. Rather, this is a `tiny oriented area calculation'.  
+
+\chapter*{Attempt at an Outline}
+
+\section{Manifolds}
+
+Our model continuum is $L(\mathbb{R})$, the locale of the real numbers. A completely prime filter in $L(\mathbb{R})$ is identified with a microneighbourhood -- i.e. the closest we can get conceptually to a point. We write $\text{Spec}_U$ for the spectrum of an open set in $L(\mathbb{R})$, i.e. the set of completely prime filters that are eventually in $U$. One such filter is written $[a, a]$ -- the closed set that contains only the infinitesimals around $a$ that cannot be definitely distinguished from it.
+
+The continuum $L(\mathbb{R})$ is equipped with a sheaf of differentiable functions in the following way. Over every open set $U$ in $L(\mathbb{R})$, we have a function $f:\text{Spec}_U\to \text{Spec}_L(\mathbb{R})$. Such a function is smooth iff the Kock-Lawvere axiom holds. In SDG this is true by fiat, but in other settings it might not be. This defines a sheaf.
+
+We now form $L(\mathbb{R})^n = L(\mathbb{R}^n)$ and should get its sheaf of functions for free by the direct sum construction for sheaves. By construction, such functions are smooth in the Kock-Lawvere sense -- i.e. that the basic partial derivatives all exist. 
+
+We can make a topological space $T$ into a manifold by saying it must be locally isomorphic (as a locally ringed space) to the model manifold $L(\mathbb{R}^n)$ with its sheaf of smooth functions. Of course the local homeomorphisms are the coordinate charts; an open cover of $T$ with compatible charts is an atlas. `Compatibility' here means the transition maps all exist and are smooth. Two atlases are compatible if their union is also an atlas; compatibility is an equivalence relation and an equivalence class of it is a `maximal atlas'. From a theoretical perspective it can be useful to work with maximal atlases, but computationally it isn't.
+
+\section{Overview of the Calculus}
+
+Tangent covectors are micro-linearizations of scalar fields (`tilted planes'). Tangent vectors are micro-linearizations of curves (`arrows'), which can also act as directional derivatives of scalar fields. These imaginative roles can also be reversed: we can see covectors as `arrows' that can act on vectors that now look like `tilted planes', but if we do this then everything behaves differently from our usual expectations under coordinate transformations. Covectors are covariant under coordinate changes, whereas vectors are contravariant.
+
+The fundamental tools for studying manifolds are fields on them: scalar fields, vector and covector fields and then more complex tensor fields. Note that there is no canonical way to compare vectors or covectors at different points -- for this a connection is needed. Without a connection we are doing a kind of `semi-rigid topology'; with one we are more definitely in the realm of `geometry'. 
+
+The most important class to tensors for geometry without a connection are the so-called `differential forms'. Their construction encodes several key ideas about geometry and allows us to express relative area, volume and higher-dimensional analogues with orientation. Exactly the same construction works with both vectors and covectors, and the two are brought together by integration. 
+
+The basic, guiding intuition is that a differential $k$-form (made from covectors) is a way to measure relative $k$-dimensional `size' in each $T_p M$. A $k$-chain (made from vectors) is a microscopic way to carve out $k$-dimensional `chunks of space'. Just as a tangent vector is a `microscopic piece of path, which looks like a line segment with a speed', a wedge of them is a `microscopic square', `microscopic cube' and so on. So applying a $k$-form to a $k$-chain means using the former as a yardstick to measure the latter.
+
+On $k$-chains we have a boundary operator $\partial$ that lowers the grade. On $k$-forms we have `exterior differentiation' $d$, which is the dual notion and which raises the grade. Again, there is no reason we can't make the same definitions the other way around except that these are the ones that yield something with obvious geometric meaning.
+
+If we imagine the $k$-chain acting on the $k$-form, we are doing a generalised (multidimensional) version of `directional derivatives of covector fields'. If we imagine the roles reversed, we are doing `integration'. These are just different descriptions of the same thing. The Stokes theorem brings together all four components: forms, chains, $d$ and $\partial$. 
+
+The Lie derivative offers us a trick for `applying a vector field to another vector field'. It measures the extent to which two flows commute. It can also be used to find invariants. For example, if a Lie group acts on a manifold as a symmetry, the result is a flow; we might ask which scalar fields are invariant under that flow (i.e. constant on its flow lines); the Lie derivative can answer this question too.
+
+A choice of connection (equivalently, a choice of covariant derivative or metric) allows us to do more geometry, but in a sense the additional structure makes the easier; it becomes less conceptually difficult, more a matter of carrying out calculations.
+
+
+\section{Tangent Structures}
+
+It is easiest to construct $T_p^\star M$ first from the ideal $\mathfrak{m}$ of germs of functions at $p$ that are zero there, immediately giving us $T_p^\star M = \mathfrak{m}/\mathfrak{m}^2$ the `nilsquare infinitesimals' or `tilted planes' at $p$. We can then get $T_p M$ by `turning arrows around' in the following way.
+
+We obtain a basis of $T_p^\star M$ by pulling back into a chart. Specifically, let $U$ be a neighbourhood of $p$ and $\phi_U:U\to L(mathbb{R}^n)$, and assume without loss of generality that $\phi_U(p)$ is the origin. Then the natural `coordinates' come from the scalar fields that are projections onto the coordinate axes of the chart -- for example, in three dimensions we have $dx(x, y, z) = x$, $dy(x, y, z) = y$, $dz(x, y, z) = z$. So a general covector is a linear combination of these, i.e. $\alpha dx + \beta dy + \gamma dz$.
+
+It makes equally good sense to think of covectors as both `infinitesimal tilted planes' and `infinitesimal directed quantities'. Note that the tilt of an $n$-dimensional plane can be represented by $n$ numbers (the angle of tilt), which brings the two intuitions into closer harmony.
+
+We have considered the germs of maps $M\supseteq U\to \mathbb{R}$, and from this produced infinitesimal objects at each point. We would like to `turn the arrow around' and produce similar infinitesimals from the germs of maps $\mathbb{R}\to U\subseteq M$. These would be `infinitesimal linear paths'. But to make much sense of them we need to know how to pull them into a chart, and this is not clear.
+
+The tangent space at $p$ will be an $n$-dimensional vector space. Therefore, supposing we can choose a basis, a tangent vector at $p$ will be a system of $n$ coordinates, so a tangent field on $U$ is a system of $n$ scalar fields. But at $p$ this is just a matter of having $n$ linear combinations of covectors, which (thanks to the vector space structure of $T_p^\star M$) is just another covector. So to every covector there corresponds a vector in a very natural way -- $(\alpha, \beta, \gamma)\in T_p M$ matches up with $\alpha dx + \beta dy + \gamma dz\in T_p^\star M$.
+
+It follows immediately that a tangent field on $U$ (or indeed $M$) `is' the same thing as a cotangent field. The only care that is needed is that the two objects transform in opposite ways under a change of coordinates, since the vector $X(p)$ is one geometric object while its coordinates, given by $X^\star(p)$, is a different one.
+
+Now we know how to assign a basis to the tangent space, and it is immediately obvious that this is the dual basis to that of the cotangent space. If $v$ is a tangent vector and $w^\star$ a cotangent vector, we should have $w^\star v$ a scalar; this is the derivative of $w^\star$ in the direction of $v$. For this reason we often write the basis of $T_p M$ using symbols like $\partial x, \partial y$ and so on, mirroring the basis $dx, dy$ and so on of the cotangent space.
+
+Concretely (in 2D), suppose $f:U\to\mathbb{R}$ and $p\in U$. Then the germ of $f$ is some covector $w^/star = \alpha dx + \beta dy$, which we may write as a row vector $(\alpha, \beta)$. If we are interested in the gradient of $f$ in the direction of the vector $v = a\partial x + b\partial y$ then we write it as a column vector and multiply in the usual way, obtaining $w^\star v = \alpha a + \beta b$. This is the linearized slope of $f$ in the $v$-direction at $p$.
+
+\section{The Grassmann Algebras}
+
+The following is a purely algebraic construction that works for any vector space. 
+
+Suppose we have a vector space $\Omega$ over $\mathbb{R}$ with basis $\{x_1,...,x_n\}$. We now define a product the \emph{exterior product}, so named because it produces new values that are not in $\Omega$. Specifically we let the product $x_a x_b$ simply be a new basis vector of a new space, but quotient out the ideal generated by $x_ax_a$ and $x_ax_b + x_bx_a$ for all $1\le a, b\le n$. These products form a new vector space, written $\Omega^2$ of dimension $n(n-1)/2$. The process can be repeated up to $\Omega^n$, which is of dimension 1, and in general $\dim(\Omega^x) = \dim(\Omega^{n - x})$. Of course we write $\Omega^1 = \Omega$ and $\Omega^0 = \mathbb{R}$. We will call the $n$ in $\Omega^n$ its `degree' or `grade'.
+
+We can carry out this construction at every point on $\mathbb{R}^n$ simply by taking either $T_p M$ or $T_p^\star M$ as the vector space in question. We will use $T_p^\star M$ as this is more usual (the reason for this is mostly its importance in physics applications). We will write $\Omega^\star_p M$ for the (covariant) exterior algebra at $p$ and $\Omega^\star M$ for the corresponding bundle over $M$. A section of this bundle assigns one element of  $\Omega^\star_p M$. If the element assigned to each point $p$ comes from $\Omega^k$ for a fixed $k$, it may be possible to describe the section by a system of $\dim(\Omega^k)$ scalar fields on $M$ by pulling it into charts. If so, this object is called a differential $k$-form. It attaches a $k$-covector to every point in a way fully characterised by the system of scalar fields that describe it.
+
+One thing we can do with a covector is have a vector act on it as its directional derivative -- that is, $\alpha\partial x + \beta\partial y + \gamma\partial z$ can act on $adx + bdy + cdz$ to produce the scalar $\alpha a + \beta b + \gamma c$. If we have a vector field on $M$ and a covector field, we can combine them in this way to get a scalar field. It makes sense then that if we have a $k$-form and a $k$-vector field we can perform a similar trick. This will be the basis of calculus on manifolds -- at least, the kind of calculus we can perform without a connection.
+
+\section{Integration}
+
+Integration is the reason why we care about differential forms. 
+
+Not sure whether this is possible, but try to develop this before exterior differentiation + boundary operator, then do those and use de Rham to derive the Stokes theorem.
+
+\subsection{Notes from G and P}
+
+Guillemin and Pollack, \emph{Differential Topology}, p.165-177 is good on the connection between intergration and the determinant, which explains the exact role of forms and why we use them rather than something else. The whole of this chapter is relevant to the wider picture.
+
+Suppose we are in $\mathbb{R}^n$ and are looking at a function on an open subset, i.e. $f:\mathbb{R}^n\supseteq U\to \mathbb{R}$. Now suppose we change basis by the matrix $A$, so that the points in some other open set $V$ are mapped to $U$. Then we have 
+\[
+	\int_U f = \int_V (f\circ A)|A|
+\]
+where the integral on the left is taken with respect to the original basis vectors, and on the right with respect to the new ones. The idea is that $f\circ A$ transfers $f$ to the new domain $U$, and multiplying by the determinant of $A$ corrects for distortions of area. Put another way, we have `pulled back' the scalar field $f$ along the linear transformation $A$, from its image back to its domain.
+
+Now suppose that instead of a linear transformation $A$ we just have a diffeomorphism $a:U\to V$. Then $|a|$ makes no sense -- or rather, the only sense it could make is $|J(a)|$, the determinant of the Jacobian of $a$, which as G and P put it `measures the infinitesimal change in volume'. This then extends the theorem to allow us to cope with non-linear transformations:
+\[
+	\int_U f = \int_V (f\circ a)|J(a)|
+\]
+
+Ideally we would like to remove the determinant from this formula, and for a certain class of objects this is possible. We can then just write
+\[
+\int_U f = \int_V a^\star f
+\]
+where $a^\star f$ is the pullback of $f$ along $a$. The objects $f$ that make this theorem is true are the differential forms. These include all scalar fields, but also all covector fields and those higher-dimensional analogues that share the properties of the determinant -- that they are alternating tensors.
+
+Differential forms are not the only things that can be integrated on manifolds, but they are the `nicest' things for this purpose and they can be used to model a great many interesting phenomena. In particular, we can integrate a differential form without depending on coordinates, and this is really essential when we move from $\mathbb{R}^n$ to manifolds.
+
+\subsection{Notes from Spivak}
+
+Spivak, \emph{Calculus on Manifolds}, p.95-104 (flat version) and then 122-128 (applied to manifolds) is the best reference I've found for unifying chains with forms. Work through this carefully.
+
+
+
+\subsection{Notes on Pushforwards and Pullbacks}
+
+\url{http://bose.res.in/~amitabha/lecnotes.html} includes a good brief account of pushforwards and pullbacks, and some other basic topics that are worth looking at.
+
+\chapter*{Preface}
+
+Each of the various aspects of manifold theory -- among them algebraic and differential topology, smooth manifolds, Riemannian geometry, tensor calculus -- already has a well-established pedagogy encoded in textbooks and courses, many of them decades old and with a concomitant track record of success. The approach described here is offered not as a replacement or criticism but as an alternative, with a different set of advantages and disadvantage. Anecdotally, not all students take to these standard pedagogies easily, especially those coming from non-traditional backgrounds or intending to head in non-traditional directions afterwards.
+
+Our approach draws on four 'dissident' traditions on the margins of differential geometry. All are comparatively recent and while each has its adherents none has found widespread acceptance pedagogically. All have been championed, at one time or another, in the context of meeting the needs of theoretical physicists although our focus here is not on applications.
+
+The first is the importation of elements of the scheme-theoretic approach from algebraic geometry; our key source for this is Tennison's \emph{Sheaf Theory} (1975), although the characterisation of manifolds as locally ringed spaces was certainly well-known before that. Our motivation for this is \emph{aesthetic}: the definitions involved are simple, powerful and general while their philosophical commitments are reasonably clear.
+
+The second is the approach to geometry on manifolds via Clifford algebras. Clifford algebra is often presented as a competitor to the Gibbsian formulation of vector calculus, but its advantage for us is that it opens the way to a simple, universal language for describing geometries on manifolds. Our motivation here is \emph{holistic}: we seek an account of manifolds that is unified by an overarching structure that connects directly to the geometry.
+
+The third is the synthetic differential geometry project associated with Anders Kock, which develops a version of calculus that is true to physicists' and engineers' use of infinitesimals in informal reasoning but logically clean enough to avoid the absurdities that can result from carrying this over into a more formal setting. Our motivation here is largely \emph{pedagogical}: inspired by these definitions, we do our best to provide an intuitively appealing picture of the calculus without requiring the full machinery (and power) of classical (Cauchy-Weierstrass) analysis.
+
+The fourth is locale theory, which provides a setting for topology that begins with systems of open sets rather than points. The motivation for this is \emph{philosophical}: locale theory provides a way to express the logical priority of continua over their points, a common (though not universal) philosophical position since Aristotle, and is compatible with the desire for an intuitionistic foundation for geometry. 
+
+This aims to develop the classical theory of manifolds, however, which means that none of these approaches can be pursued dogmatically. 
+
+Some desiderata of the overall approach are:
+\begin{itemize}
+	\item{The machinery should emerge as a coherent whole, not a collection of loosely-connected parts whose unification is an advanced topic;} 
+	\item{Foundational definitions should have clear geometric or topological motivations, even if these may take some initial effort to `see';} 
+	\item{Starting assumptions should be as philosophically innocent as possible, and appeals to non-constructive forms of reasoning should be minimized;}
+	\item{Algebra is preferable to analysis -- this is really a consequence of the previous point;}
+	\item{We take up only the generality we need to build reasonably normal, well-behaved geometry. We avoid very abstract constructions unless they shed light on something concrete.}
+	\item{In particular, we develop here the theory of real, finite-dimensional manifolds. There are other spaces that arise naturally in certain contexts and are completely legitimate objects of geometric study. We do not, however, believe that starting in the most general possible setting (e.g. point-set topology) is the best way to learn the material.}	
+	\item{Our account should be compatible with those of more traditional textbooks, although we will prefer modest theorems that capture almost all of the geometrically interesting cases to abstruse ones that cover a greater generality.}
+\end{itemize}
+
+We do not assume the reader has had the standard preparation in lower-level undergraduate mathematics. In fact, a major motivation for this project is the possibility of helping students who have not had this preparation, especially those coming to manifold theory from outside the mathematical world. Thus this text attempts to tell the story with no assumptions about the reader's prior learning. The ambition is that a reader with no mathematical experience should be able to puzzle out everything here using only the contents of the text itself.
+
+\chapter{Abstract Structure}
+
+Make this part fairly short and sweet. It's a survey of important ideas in all of maths that will be a toolkit for the rest of the book, \emph{not} the beginning of the book's main matter.
+
+It makes the claim that abstract structure is a key component of thought and one of the central objects of mathematics is to study it. The `Aristotelian realism' of the Sydney School is a good recent touchstone in philosophy of maths: https://web.maths.unsw.edu.au/~jim/structmath.html
+
+Throughout, make the connections with logic and foundational questions where possible -- this will be interesting to the intended readership. Set up the classical interdependency of set theory and logic, culminating with categories as a more pragmatic approach (non-foundational). The structures we build from these blocks reflect the structure of spatial order, symmetry and location as well as the seemingly less geometric ideas of arithmetic. Remember that arithmetic was at the centre of many developments in logic in the C20 too.
+
+\section{Introduction}
+
+Topology is about continuity and although discrete spaces can be topologically interesting the main motivation for the subject comes from continua and their transformations. What, exactly, a continuum \emph{is} is an ancient question. Long ago Zeno of Elea suggested that believing a line is made of an infinity of sizeless points led to absurdity, and Aristotle resolved his paradoxes by declaring that continua are given to us all at once, not as collections of their points.
+
+In the Early Modern period, mathematicians changed their minds about this and decided it was a historical misstep. Analytical geometry seemed to suggest that it is fruitful to see continua as collections of points. The rise of the calculus certainly validated this perspective from a utilitarian point of view. The reformulations of calculus by the nineteenth century analysts frequently pointed in the direction of abandoning the view that continua are made of points, but the message (if it was ever really intentional) was lost. For most of the twentieth century, at least at an elementary level, topological spaces have been built up from their points.
+
+It is now clear that it is possible to re-found topology and geometry in the way Aristotle envisaged: considering points as something to be produced out of continua, not \emph{vice versa}. This is our task in this chapter.
+
+As an initial idea, consider what it means \emph{in real life} to be presented with some solid physical object. In real life it would always be a three-dimensional object of some kind. It might be surface-like, like a piece of paper, but it will always have some thickness; it might even be line-like, like a thread of cotton, but it will always have some kind of diameter. And certainly such a thing does not come to us as an infinite collection of sizeless points.
+
+Indeed, if we wish to identify a point in such an object we find ourselves limited by the precision of the instruments available to us. Suppose I can identify parts of the object that are at least 1mm apart; then identifying `a point' really means identifying a fuzzy circular region with a 1mm radius. A better tool might enable me to identify smaller regions, but such refinements will never lead us to an \emph{infinitely} precise method that allows us to isolate individual points. There is another, more tricksy way to find smaller regions: make two overlapping regions and consider their overlap to be a new region. It may be too small to `see' with our tools, but we still know it's there and indeed we can determine precise things about it based on what we know about the larger, overlapping regions. 
+
+We should therefore think first not of points but of regions that we could, at least in principle, identify. Certainly these regions are three-dimensional, and do not include their boundaries. For historical reasons we call them `open sets'. The overlap of two open sets is called their `intersection', and is again an open set (this is not obvious!). Similarly, we can join two open sets together to make a larger one, and again this is another open set. These open sets, under a couple of other conditions, form a \emph{topology}.
+
+The first section outlines some concepts and notation from set theory and logic. The second section considers questions about order, leading to the definition of a \emph{frame}, which precisely captures the structural properties of every topology. The third section describes how to make maps between structured objects (including frames) that in some sense respect their structures, and uses these to build categories, a useful organisational principle. The fourth section brings this together into the definition of a \emph{locale}, and a demonstration that locales capture the notion of topological space from which points can be recovered when needed.
+
+We then consider more carefully what it will mean to study something called topology, which in particular will involve a family of transformations called homeomorphisms. This view of a geometric field of study being determined by its transformations (rather than its objects) was formulated by Felix Klein at the end of the nineteenth century and remains a dominant view in mathematics. It provides a good setting to develop the important notion of a \emph{group}, which will be used repeatedly in the sequel.
+
+We then do a little topology with what we have available, showing some of the flavour of the subject and producing some important definitions and results. 
+
+\section{Sets \& Logic}
+
+A set is taken to be a collection of things; if $a$ is a thing and the set $S$ contains $a$ then we write $a\in S$ and say $a$ is an \textbf{element} of $S$. Sometimes we write `let $a\in S$' , which should be read as `let $a$ identify some element of $S$'. The elements of a set can be sets, but then care is needed to avoid circularity -- for example, where set $S$ contains set $T$ and set $T$ contains set $S$. If no circularity of this kind exists we say set theory is \textbf{well-founded}; ensuring this is indeed the case is part of the business of axiomatic set theory, which we do not develop here. In logic we usually see another notation,$S(a)$ , for the claim that$a\in S$. We avoid this notation here, but note that $a\in S$ is indeed a \textbf{proposition}, that is, a string of symbols that has a \textbf{truth value} (either true or false).
+
+If $T$ contains all the elements of $S$, we write $S\subseteq T$ and say that $S$ is a \textbf{subset} of $T$. If $S$ and $T$ contain all the same elements, so that $S\subseteq T$ and $T\subseteq S$ then we write $S=T$ and say $S$ and $T$ are `the same set'. (A more sophisticated way to say this is that set theory is \textbf{extensional}.) If a set has only a few elements we can list them inside braces like this: $\{a,b,\{c,d\}\}$ (this set has three elements, one of which is another set containing two elements).
+
+If we want to emphasise that $S\subseteq T$ but $S\ne T$ then we can write $S\subset T$. Notice the similarity between the symbols `$\le'$ and\textbf{ `$\subseteq$}' and the symbols `$<$' and `$\subset$'. This is not accidental. Sadly many mathematics books use $\subset$ to mean $\subseteq$; this is just something to watch out for.
+
+We can turn these symbols around and write $T\supseteq S$ and $T\supset S$ to mean the same things as $S\subseteq T$ and $S\subset T$, respectively. In logic we often see $T\implies S$ to mean that `$T(a)$ implies $S(a)$', which is the same thing, really, as $T\supseteq S$.
+
+Now suppose $S$ and $T$ are just any sets at all. We can form the set of all things that are in either $S$ or $T$ (or both), which we call the \textbf{union }of \textbf{$S$} and $T$ and write $S\cup T$ . In logic, we write $S(a)\lor T(a)$ for the proposition that $a$ is in either $S$ \textbf{or} $T$ (or perhaps both). The set $S\cup T$ is precisely the set of things of which $S\lor T$ is true. Again, note the similarity between the symbols `$\cup$' and `$\lor$'; again, it is no accident.
+
+We can also form the set of just those things that are in both $S$ and $T$ , which we call the \textbf{intersection }of \textbf{$S$} and $T$ and write $S\cap T$ . In logic, we write $S(a)\land T(a)$ for the proposition that $a$ is in both$S$ \textbf{and} $T$. The set $S\cap T$ is precisely the set of things of which $S\land T$ is true. Again, note the similarity between the symbols `$\cap$' and `$\lor$'; again, it is no accident. The close parallel between this paragraph and the previous one is also no accident; it is an example of duality, as you will discover later.
+
+If $S$ and $T$ share no elements in common, we would still like to be able to write $S\cap T$ without committing an absurdity. We therefore define a sepcial set, the \textbf{empty set}, written $\emptyset$, to be that unique set that contains no elements at all. if $S\cap T=\emptyset$ we say that $S$ and $T$ are \textbf{disjoint}. 
+
+By default, a set has no order to its elements, so that $\{a,b\}=\{b,a\}$. We can form the \textbf{ordered pair }of $a$ and $b$, however, by forming the set $\{a,\{a,b\}\}$ or $\{b,\{a,b\}\}$. We write $(a,b)=\{a,\{a,b\}\}$ and $(b,a)=\{b,\{a,b\}\}$. Note that this is completely artificial; you can make quite different definitions, and people do. The point is to show that an ordered pair of elements from a set is just another set and doesn't require any new ideas. Note that $(a,b)=\{a,\{a,b\}\}$ is a set containing two elements: one is the object $a$ and the other is a set containing $a$ and $b$. This is OK and doesn't break the rules about well-foundedness. By a messier-looking explicit construction we can build $n$\textbf{-tuples}, which are just ordered lists of $n$ elements, where $n$ is any finite whole positive number. For example, $(a,b,c,d,e,f)$ is an ordered 6-tuple and is not the same as $(b,a,c,d,e,f)$.
+
+Now suppose again that $S$ and $T$ are just any sets at all. We may form a new set, called the \textbf{Cartesian product} of $S$ and $T$ and written $S\times T$, simply by taking all ordered pairs $(a,b)$ for elements $a\in S$ and $b\in T$. Note that $S\times T\ne T\times S$ unless $S=T$. By repeating the construction we may take multiple Cartesian products and we obtain sets of $n$-tuples. For example, $S\times S\times T$ might contain elements that look like $(a,b,c)$ where $a,b\in S$ and $c\in T$. When we take the Cartesian product of a set with itself we often write it using power notation, so that $S\times S=S^{2}$ and $S\times S\times S=S^{3}$ and so on.
+
+One more construction we will need: let $S$ be any set and consider forming the set of all subsets of $S$, including $S$ itself and $\emptyset$. This is called the \textbf{power set} of $S$, written $2^{S}$ (the rationale for this notation will become clearer later). For example, if $S=\{a,b,c\}$ then $2^{S}=\{\emptyset,\{a\},\{b\},\{c\},\{a,b\},\{a,c\},\{b,c\},\{a,b,c\}\}$. The power set has a nice structure that we will explore in the next section.
+
+A note for experts: we avoid using the Axiom of Choice, or anything equivalent to it, in these notes. If we do need to use it it will always be an auxiliary result, never part of the main strand of development.
+
+\section{Lattices} 
+
+\begin{defn} 
+	Let $S$ be any set. Then any set $R\subseteq S\times S$ maybe called a \textbf{binary relation on $S$} and we may write $aRb$ if $(a,b)\in R$. 
+\end{defn}
+
+
+\begin{defn} 
+	Let $S$ be any set. Then a binary relation $R$ on $S$ is said to be a \textbf{partial order }if the following criteria are met for all $a,b,c\in S$: 
+	\begin{eqnarray*} 
+		aRa\ \ \text{(reflexivity)}\\ 
+		aRb\land bRa\implies a=b\ \ \text{(antisymmetry)}\\ 
+		aRb\land bRc\implies aRc\ \ \text{(transitivity)} 
+	\end{eqnarray*}
+	 We say the pair $(S,R)$ is a \textbf{partially ordered set} (or \textbf{poset }for short). 
+\end{defn} 
+
+Typically we will use symbols rather than letters to denote binary relations; in particular, when $R$ is an order relation we usually write it as $\le$. Check that the three criteria above make sense when you replace $R$ with $\le$, assuming this symbol has something like its usual meaning. We write, for example, $(S,\le)$ to mean the set $S$ equipped with the partial order $\le$. 
+
+\begin{defn} 
+	Let $(S,\le)$ be a partially ordered set. Then its \textbf{opposite poset} is the poset $(S,\lhd)$ is the poset defined on $S$ such that $a\lhd b$ whenever $b\le a$. 
+\end{defn} 
+
+Clearly when we think of the `normal' meaning of $\le$ the opposite poset would be given by the `normal' meaning of $\ge$. If we think of a poset's elements arranged in space so that when $a\le b$ we arrange $a$ to be physically below $b$ then we can think of turning a poset into its opposite as `turning it upside down' or reflecting it in a horizontal mirror. Clearly the opposite of the opposite of $(S,\le)$ is just $(S,\le)$, just as the reflection of a reflection is just the image you started with. 
+
+\begin{defn} 
+	Let $(S,\le)$ be a partially ordered set. If either $a\le b$ or $b\le a$ is in $\le$for every choice of $a,b\in S$ then $\le$ is called a \textbf{total order} and $(S,\le)$ a \textbf{totally ordered set }(or \textbf{toset }for short). 
+\end{defn} 
+
+Most of the important constructions in this chapter involve posets that are not totally ordered. A poset has very little structure, and a toset a lot; what sits in between is an object called a lattice. Both the logic \emph{and }the set theory we developed in the previous section can be understood as having a lattice structure, and we exploit this by re-using some of the notation. We keep two separate examples in mind. The first we call $L$, a set of logical propositions (of any kind) ordered by implication, i.e. $a\le b$ if $a\impliedby b$ (in words, $a$ is implied by $b$). The second we call $J$, a set of sets ordered by inclusion, i.e. $a\le b$ if $a\subseteq b$. Note that in both cases, depending on which logical propositions are included in $L$ or sets included in $J$, we can very easily fail to get a total order. 
+
+\begin{defn} 
+	Let $(S,\le)$ be a partially ordered set and $a,b\in S$. Then the \textbf{meet} of $a$ and $b$, written $a\land b$, \emph{if it exists} is the element $c\in S$ such that $c\le a$ and $c\le b$ and if $d$ also satisfies these requirements then $d\le c$. 
+\end{defn}
+ 
+A more sophisticated way to say this is that $a\land b$ is the \textbf{greatest lower bound }of $a$ and $b$ in $(S,\le)$. In the case of $(L,\impliedby)$ we see that $a\land b\impliedby a$ and $a\land b\impliedby b$. Clearly no other set of propositions will achieve this unless its propositions are contained wholly by the propositions in both $a$ and $b$, and $a\land b$ (in the sense of `$a$ and $b$') is \emph{by definition} the largest set that achieves this. The case of $(J,\subseteq)$ is almost exactly the same; clearly $a\cap b\subseteq a$ and $a\cap b\subseteq b$, and by a similar argument no smaller set can satisfy both these demands at once.
+
+We now make a \emph{dual }definition, in a sense we will make clear later. Compare this carefully with the previous one, looking for the parallelism of phrases and noticing where a word changes to its opposite. 
+
+\begin{defn} 
+	Let $(S,\le)$ be a partially ordered set and $a,b\in S$. Then the \textbf{join} of $a$ and $b$, written $a\lor b$, \emph{if it exists} is the element $c\in S$ such that $a\le c$ and $b\le c$ and if $d$ also satisfies these requirements then $c\le d$. 
+\end{defn} 
+
+A more sophisticated way to say this is that $a\lor b$ is the \textbf{least upper bound }of $a$ and $b$ in $(S,\le)$. In the case of $(L,\impliedby)$ we see that $a\impliedby a\land b$ and $b\impliedby a\land b$. Clearly no other set of propositions will achieve this unless its propositions wholly contain the propositions in both $a$ and $b$, and $a\lor b$ (in the sense of `$a$ or $b$') is \emph{by definition} the smallest set that achieves this. The case of $(J,\subseteq)$ is almost exactly the same; clearly $a\cup b\subseteq a$ and $a\cup b\subseteq b$, and by a similar argument no larger set can satisfy both these demands at once.
+
+In a general poset $a\land b$ and $a\lor b$ may fail to exist for some (or even all) pairs of elements, but if the poset is `sufficiently nice' this will not happen. 
+
+\begin{thm} 
+	Any fact about posets that mentions only the partial order (and concepts derived from it) can be rewritten with dual terms exchanged and the result is also a fact. 
+\end{thm} 
+
+This is known as the principle of \textbf{duality}, and we will meet many more examples. It essentialy says there is an operation like a reflection that sends meets to joins and top to bottom, turning the whole lattice upside down, and that this is a symmetry of the lattice. We save the proof until later, when we have more of an idea of how symmetries work and we know how to tell when two lattices are `structurally the same'. 
+
+\begin{defn} 
+	Let $(S,\le)$ be a partially ordered set. Then $(S,\le)$ is a \textbf{lattice} if $a\land b\in S$ and $a\lor b\in S$ for every $a,b\in S$.
+\end{defn} 
+
+\begin{thm} 
+	For any set \emph{$X$},$(2^{X},\subseteq)$ is a lattice.
+\end{thm} 
+
+\begin{proof} 
+	Recall that $2^{X}$ is the set of all subsets of $X$. If $a$ and $b$ are subsets of $X$ then so is $a\cap b$, which is their meet. Similarly, so is $a\cup b$, which is their join.  
+\end{proof} 
+
+Note that we must have that $X\in2^{X}$, otherwise some joins will fail to exist; similarly, if we did not have $\emptyset\in2^{X}$ then some meets would fail. Fortunately, in the previous section we defined $2^{X}$ to include them. We now explore the structure of $(2^{X},\subseteq)$ a little further. 
+
+\begin{defn} 
+	Let $(S,\le)$ be a lattice. If it contains an element $a$ such that $a\le b$ for every $b\in S$ then $a$ is referred to as the \textbf{bottom element} of the lattice, sometimes written $\bot$. Similarly, if $c$ is such that $b\le c$ for every $c\in S$ then $b$ is referred to as the \textbf{top element}, sometimes written $\top$. A lattice that contains both is called a \textbf{bounded lattice}. 
+\end{defn} 
+
+Thus $\bot\land a=\bot$ and $\top\lor a=\top$ for all $a\in S$. Top and bottom elements need not necessarily exist, but if they do they are unique. In $(2^{X},\subseteq)$ we have $\top=X$ and $\bot=\emptyset$. Recall that we had to make sure the power set definition included these so we would get the lattive structure. In $(L,\impliedby)$ we also need special elements. We usually say $\top$ represents some vacuously true statement such as $1=1$ and $\bot$ represents some vacuously false statement such as $1\ne1$. 
+
+\begin{thm} 
+	Meets and joins in a lattice are \textbf{commutative}, i.e. $a\lor b=b\lor a$ and $a\land b=b\land a$; they are also \textbf{associative}, i.e. $a\lor(b\lor c)=(a\lor b)\lor c$ and $a\land(b\land c)=(a\land b)\land c$. 
+\end{thm} 
+
+The associativity of meet and join license us in writing chains of one or the other without brackets, for example $a\lor b\lor c\lor d$, since we can place the brackets in any way we please to evaluate it and will always get the same answer. If an expression contains a mixture of meets and joins we must still employ brackets, however.
+
+We can even adopt notation like this: 
+	\[ \bigvee_{i\in I}a_{i} \]
+Here $I$ is some set, called the \textbf{indexing set}, which we usually think of as a set of counting numbers, to which we assume we've already matched up some objects (the $a_{i}$). We run through the elements in the ndexing set one by one, joining together the $a_{i}$ that correspond to them. For example, 
+	\[ \bigvee_{i\in\{1,2,3,4\}}a_{i}=a_{1}\lor a_{2}\lor a_{3}\lor a_{4} \]
+ Of course, we can do the same thing with meets: 
+ 	\[ \bigwedge_{i\in I}ai \]
+
+We also make some seemingly trivial definitions that tidy things up for us so that we can write meets and joins of sets without worrying whether they have at least two elements: 
+
+\begin{defn} 
+	In a bounded lattice, we define the \textbf{empty join }to be $\bigvee\emptyset=\bot$ and similarly the \textbf{empty meet }to be $\text{\ensuremath{\bigwedge\emptyset}=\ensuremath{\top}}$. We also define the \textbf{trivial join }of a single element to be $\bigvee\{x\}=x$ and the \textbf{trivial meet }to be $\bigwedge\{x\}=x$. 
+\end{defn} 
+
+Now a definition that will be crucial to the objects we are working towards in this section: 
+
+\begin{defn} 
+	Let $(S,\le)$ be a lattice. It is said to be \textbf{distributive} if $a\lor(b\land c)=(a\lor b)\land(a\lor c)$ for all $a,b,c\in S$.
+\end{defn} 
+
+\begin{thm} 
+	If $a\lor(b\land c)=(a\lor b)\land(a\lor c)$ for all $a,b,c\in S$ then $x\land(y\lor z)=(x\land y)\lor(x\land z)$ for all $x,y,z\in S$ .
+\end{thm} 
+\begin{proof} 
+	Apply the principle of duality. 
+\end{proof} 
+
+An important caveat: in a distributive lattice we have 
+	\[ 
+		(\bigvee_{i\in I}a_{i})\land b=\bigvee_{i\in I}(a_{i}\land b)\ \ \ \text{and\ \ \  }(\bigwedge_{i\in I}a_{i})\lor b=\bigwedge_{i\in I}(a_{i}\lor b) 
+	\]
+as long as the indexing set $I$ is finite -- that is, as long as we're only meeting or joining a finite number of objects. If $I$ were, for example, the set of \emph{all }counting numbers, associativity no longer suffices. 
+
+\begin{defn} 
+	A \textbf{Heyting lattice} is a bounded distributive lattice. 
+\end{defn} 
+
+Heyting lattices will be \emph{very} important in all that follows. We can see \emph{almost }right away that $(2^{X},\subseteq$) and $(L,\impliedby)$ are both Heyting lattices. For $(2^{X},\subseteq)$, you can convince yourself of the distributive law by drawing Venn diagrams; $a\cup(b\cap c)=(a\cup b)\cap(a\cup c)$; clearly $(a\cup b)\cap(a\cup c)$ is the whole set $a$ (which is on both sides of the intersection) unioned with whatever $b$ and $c$ have in common. For $(L,\impliedby)$ simply draw up truth tables for $a\lor(b\land c)$ and $(a\lor b)\land(a\lor c)$ to show they are equivalent regardless of the truth values assigned to $a$, $b$ and $c$.
+
+We have considered distributivity between pairs of elements and seen that it extends to finite meets and joins unproblematically, but sounded a word of warning about passing to the infinite case. In fact we will be very interested in examples where infinite joins work well but infinite meets don't. This motivates the following definition, along with its dual: 
+
+\begin{defn} 
+	A \textbf{frame }is a Heyting lattice in which the following always holds, even for infinitely many $a_{i}$:
+		\[ (\bigvee_{i\in I}a_{i})\land b=\bigvee_{i\in I}(a_{i}\land b) \]
+\end{defn}
+
+\begin{defn} 
+	A \textbf{coframe }is a Heyting lattice in which the following always holds, even for infinitely many $a_{i}$: 
+		\[ (\bigwedge_{i\in I}a_{i})\lor b=\bigwedge_{i\in I}(a_{i}\lor b) \]
+\end{defn} 
+
+It is perfectly possible for a structure to simultaneously be a frame and a coframe -- for example, $(2^{X},\subseteq)$ when $X$ itself is an infinite set. Coframes that are not frames do come up in some places, although most of our focus will be on the other case: frames that fail to be coframes.
+
+Note that if $A$ is a frame with some ordering $\le$, we obtain a coframe $A^{\prime}$by reversing the direction of the ordering: if $a\le b$ in $A$, set $b\le a$ in $A^{\prime}.$ All meets become joins and \emph{vice versa, }and so the infinite joins in the frame $A$ become infinite meets in $A^{\prime}$. If we repeat this `direction-reversing' idea on $A^{\prime}$we get back to the frame $A$ again. This is another example of duality.
+
+The definition of a frame is crucial to what follows. We now make a brief further foray into the structure of $2^{X}$. 
+
+\begin{defn} 
+	Let $(S,\le)$ be a bounded lattice and let $a\in S$. If there is a $b\in S$ such that $a\lor b=\bot$ and $a\land b=\top$ we say $b$ is a \textbf{complement} of $a$ in $(S,\le)$. 
+\end{defn} 
+
+In the case of $2^{X}$, we can see that the complement of a subset $a$ is precisely the subset of $X$ that contains everything in $X$ that is \emph{not} in $a$. For example, if $X=\{v,w,x,y,z\}$ and $a=\{v,w\}$, its complement is $\{x,y,z\}$. This is the normal sense of `the complement of $a$ in $X$', which is usually written $X\setminus a$. From this it is evident that if $b$ is the complement of $a$ then $a$ must be the complement of $b$.
+
+In $(L,\impliedby)$ the complements are very similar, although the details are a bit messier. In this case complementation corresponds to the `not' operator; we write the complement of $a$ as $\lnot a$, pronounced `not $a$'. Of course, at least in classical logic, $a\lor\lnot a$ is always true ($\top$) and $a\land\lnot a$ is always false ($\bot$). We have to be careful with negation when $a$ is a compound of statements connected by ands and ors; this is a matter you learn to deal with in any basic logic class, but not one that will detain us for now.
+
+Note that in both our examples the complement of an element is uniquely determined; this is \emph{not} a requirement and it is quite possible to construct a lattice in which an element has multiple complements. 
+
+\begin{defn} 
+	A \textbf{Boolean lattice} is a Heyting lattice in which every element has a complement. 
+\end{defn} 
+
+We have just shown what complements mean in $(2^{X},\subseteq)$ and by the definitions of all the terms involved they always exist , so $(2^{X},\subseteq)$ is a Boolean lattice. It seems that $(L,\impliedby)$ should be too, for is it not true that for every proposition $a$ there ought to be a corrsponding $\lnot a$ such that $a\land\lnot a=\bot$and $a\lor\lnot a=\top$? In fact this second part of the claim is contested -- that there is always a $\lnot a$ such that $a\lor\lnot a=\top$. In classical logic it is true by virtue of something called the Law of the Excluded Middle, and this logic is called \textbf{Boolean logic }because $(L,\impliedby)$ is a boolean lattice (historically this is false, but conceptually it's true). However, some mathematicians and physicists have become uneasy about helping ourselves to the Law of the Excluded Middle. Such people use what has become known as \textbf{intuitionistic logic} and it lives in Heyting lattices that can fail to be Boolean.
+
+To illuminate these definitions, let us take up a new example. Consider the set $\mathbb{N}$ of so-called `natural numbers', which are just the counting numbers that start 1, 2, 3, 4 and go on without end. Now consider the set $U$ of all the subsets of $\mathbb{N}$ that contain all numbers greater than some chosen number: 
+	\[ U_{n}=\{x\in\mathbb{N}|x>n\} \]
+We impose the obvious order on this set: $U_{n}\subseteq U_{m}$ if and only if $n\le m$ with the usual meaning of `$\le$' when comparing numbers. This is in fact a total order, so meets and joins are very simple; for any two sets $U_{n}$ and $U_{m}$ we must have $n\le m$ or $m\le n$. Assuming the former, we then have $U_{n}\land U_{m}=U_{m}$ and $U_{n}\lor U_{m}=U_{n}$ (another way to see this is just to define meets as intersections and joins as unions). Thus $(U,\subseteq)$ is a lattice. We can give it a top element by including $\mathbb{N}$ itself in $U$, since $U_{n}\land\mathbb{N}=U_{n}$ for all $U_{n}$. Similarly, if we add $\emptyset$this can function as the bottom element. We know that set-theoretical unions and intersections distribute over each other, so it follows immediately that this is a Heyting lattice. However, we do not have any complements at all, so we are certainly not in a Boolean lattice.
+
+Now let us consider infinite meets and joins. Note that the join of two elements in this case is the least one, i.e. $U_{n}\lor U_{m}=U_{n}$ if $U_{n}\le U_{m}$, and $U_{m}$ if the opposite holds. And any collection of positive whole numbers has a least element -- even an infinite collection can go as high as it likes, but it has to start somewhere. Thus the join of an infinite collection of sets is just its least element, and the following identity holds:  
+	\[ (\bigvee_{i\in I}U_{i})\land U_{x}=\bigvee_{i\in I}(U_{i}\land U_{x}) \]
+Since this is a Heyting lattice in which this version of the infinite distributivity rule holds, it is a frame. Is it also a coframe? Note that the meet of two elements is the greater one, i.e. $U_{n}\land U_{m}=U_{m}$ if $U_{n}\le U_{m}$, and $U_{m}$ if the opposite holds. But an infinite collection of positive whole numbers does not have a greatest element, for even though it has to start somewhere it can go as high as it likes. Thus the meet of an infinite collection of sets must be $\emptyset$, which we included precisely so we would always have the meet defined even when things go wrong. Now, if $U$ is a coframe we would have to have 
+	\[ (\bigwedge_{i\in I}U_{i})\lor U_{x}=\bigwedge_{i\in I}(U_{i}\lor U_{x}) \]
+but we have shown that 
+	\[ \bigwedge_{i\in I}U_{i}=\emptyset \]
+from which it obviously follows that 
+	\[ (\bigwedge_{i\in I}U_{i})\lor U_{x}=\emptyset\lor U_{x}=U_{x} \]
+On the other hand, since it's a meet of infinitely many sets, we must have  
+	\[ \bigwedge_{i\in I}(U_{i}\lor U_{x})=\emptyset \]
+which implies that$U_{x}=\emptyset$. Since we must allow $U_{x}$ to be any set at all, this is plainly wrong; $U$ may be a frame but it is not a coframe. This is not a trivial example: $U$ is a topology on $\mathbb{N}$ and most interesting topologies are frames but not coframes. We can't jump into defining a topological space just yet, however; we need to make a crucial detour first.
+
+
+\section{Maps and Categories}
+
+In the world of sets (a world we will never really leave), maps are about \emph{assigning the elements of one set to those of another}, but we make the following unenlightening definition just because we can: 
+
+\begin{defn} 
+	Let $A$ and $B$ be any sets. A \textbf{map} from $A$ to $B$, written $A\to B$, is a subset of $A\times B$ such that for each element $a\in A$ there is exactly one element $(a,x)$ in $A\to B$. 
+\end{defn} 
+
+This definition is similar to the definition of the ordered pair $(a,b)$ as $\{a,\{a,b\}\}$, a fact we forget about as soon as we are sure it works, although in this case we will use it to make a few simple definitions. We instead usually think of a map $A\to B$ as assigning to each element of $A$ some element of $B$, as if $A$ were the set of diners in a restaurant and $B$ the set of meals on the menu. We call $A$ the \textbf{domain} and $B$ the \textbf{codomain}. When we need to give the map a name we usually use a lower-case letter such as $f$ and write $f:A\to B$ (read as `$f$ maps $A$ to $B$') and we write $f(a)$ for the element of $b$ that is assigned to $a\in A$ by the map $f$. 
+
+\begin{thm} 
+	Let $f:A\to B$ and $g:B\to C$ be maps. Then $g\circ f:A\to C$ defined by $g\circ f(x)=g(f(x))$ is a map. 
+\end{thm} 
+
+This operation of `gluing maps together' is called \textbf{composition}. It is usually only possible to form the composition $g\circ f$ if the codomain of $f$ is the domain of $g$, otherwise we can find that $g(f(x))$ is not meaningful. If we cannot form the composition we say that $g\circ f$ is \textbf{not defined}. 
+
+\begin{thm} 
+	Composition of maps between sets is associative; that is, $f\circ(g\circ h)=(f\circ g)\circ h$ for all maps $f,g,h$ for which the appropriate compositions are defined. 
+\end{thm} 
+
+\begin{defn} 
+	Let $f:A\to B$ be a map. Then the set of all \textbf{$b\in B$ }that are assigned to some $a$ is called the \textbf{image} of $f$, written $f(A)$. 
+\end{defn}
+
+\begin{defn} 
+	Let $f:A\to B$ be a map. Then there is a map, $f^{-1}:B\to2^{A}$ that assigns to each element of $B$ the set of elements of $A$ that $f$ assigned to it. We call $f^{-1}(b)$ the \textbf{inverse image} of $b$ under $f$. If $b$ is not assigned to any element of $a$, $f^{-1}(b)=\emptyset$ 
+\end{defn} 
+We can extend the ideas of image and inverse image to subsets of $A$ and $B$ respectively. Thus if $A^{\prime}\subseteq A$ we can write 
+	\[ f(A^{\prime})=\bigcup_{a\in A^{\prime}}f(a) \]
+and similarly if $B^{\prime}\subseteq B$ we have
+	\[ f^{-1}(B^{\prime})=\bigcup_{b\in B^{\prime}}f^{-1}(b) \]
+
+\begin{defn} 
+	Let $f:A\to B$ be a map. We say $f$ is \textbf{surjective }for every $b\in B$ there is \emph{at least one} $a\in A$ such that $f(a)=b$ (that is, $f(A)=B$). We say $f$ is \textbf{injective} if for every $b\in B$ there is \emph{at most one} $a\in A$ such that $f(a)=b$ (that is, $|f^{-1}(b)|=1$ for every $b\in B$). We say that $f$ is \textbf{bijective} if it is both injective and surjective. 
+\end{defn}
+ 
+A bijective map is \emph{perfectly reversible}. Let $f:A\to B$ be a bijective map. Then $f^{-1}(B)$ is the set of singleton subsets of $A$ -- e.g. if $A=\{a,b,c\}$ then $f^{-1}(B)=\{\{a\},\{b\},\{c\}\}$. which we may identify with $A$ itself simply by `removing braces'. In this case we replace $2^{A}$ with $A$ in the definition of the inverse map, which becomes $f^{-1}:B\to A$.  
+
+\begin{defn} 
+	Let $f:A\to B$ be a map. If $f$ is bijective, we call the map $f^{-1}:B\to A$ the \textbf{inverse }of $f$. 
+\end{defn} 
+
+Taking the inverse is another `reflection-like' operation in the sense that when it is carried out twice we end up back where we started: $(f^{-1})^{-1}=f$. It even sometimes happens that $f=f^{-1}$, in which case we say that $f$ is \textbf{self-inverse}. Note that a map only has an inverse map if it is bijective, which is a very strong condition. 
+
+\begin{thm} 
+	{[}Schroder-Bernstein{]} If $A$ and $B$ are finite sets and there exists a bijective map $f:A\to B$ then $A$ and $B$ have the same number of elements.
+\end{thm} 
+
+\begin{proof} 
+	If $f$ is surjective then there must be at least as many elements of $A$ as there are of $B$. If it is injective, there must be at least as many elements of $B$ as there are of $A$. Thus, if both conditions hold the number of elements in each must be the same. 
+\end{proof} 
+
+In classical set theory the Schroder-Bernstein theorem is often used as the basis of a \emph{definition} of the size of an infinite set, but all questions of `higher infinities' are beyond the scope of these notes so we don't pursue that direction here.
+
+We have just described how to map a set to another set. Another way to say this is that we have constructed the category of sets. Categories will be very useful to us in what follows: 
+
+\begin{defn} 
+	A \textbf{category }consists of two collections; a collection of objects denoted \textbf{$Obj$ }and a collection of morphisms denoted $Hom$. The objects can be anything at all. A morphism should be considered an arrow joining two objects together, i.e. $a\to b$ where $a$ and $b$ are objects. To be a category the morphisms must obey some rules. 
+		\begin{itemize} 
+			\item If we have morphisms $m_{1}:a\to b$ and $m_{2}:b\to c$ (i.e. where $m_{2}$ starts from the object $m_{1}$ ends at) there should be a morphism $m_{3}:a\to c$ that has the same effect as following the arrow $m_{1}$ and then the arrow $m_{2}$. This is called \textbf{composition of morphisms} and we write $m_{3}=m_{2}\circ m_{1}$. 
+			\item Composition of morphisms must be associative, i.e. $m_{1}\circ(m_{2}\circ m_{4})=(m_{1}\circ m_{2})\circ m_{4}$ for any three morphisms that can be composed. 
+			\item For every object $a$ there must be a morphism that sends $a$ to itself, $i:a\to a$ such that for any morphism $m$ that ends at $a$ we have $i\circ m=m$ and for any morphism $n$ that starts at $a$ we have $n\circ i=n$. This is called the \textbf{identity morphism }for $a$. 
+		\end{itemize} 
+\end{defn}
+ 
+In the category of sets, written $\mathbf{Set}$, the objects are all possible sets and the morphisms are all possible maps between sets, and of course this is the inspiration for the definition of categories; their morphisms behave just like maps between sets do. We will see shortly that it is sometimes interesting to consider categories in which the morphisms are not maps between sets, however. Also note well that $Obj$ and $Hom$ are not usually sets; they are `too big'. For this reason, category theory cannot be built out of set theory.
+
+One way to say that categories have compositions of morphisms is to say that for any two morphisms $f$ and $g$ there is another, $f\circ g$, such that the following diagram commutes:
+
+We now turn to maps between objects we have already defined: posets and various kinds of lattice. We have defined these as sets with some additional structure (an ordering, at least; perhaps meets and joins, complements, top and bottom elements and so on). The idea will be to describe the kinds of maps that carry us from one object of this type to another while in some sense `respecting the structure'. In each case we will form a category whose objects are the structured sets and whose morphisms are those maps that respect the structure in a way we define. 
+
+\begin{defn} 
+	The category of posets, written \textbf{$\mathbf{Pos}$, }has for its objects all possible partially ordered sets. Its morphisms consist of all maps $f:(S,\le)\to(T,\lhd)$ such that whenever $s_{1}\le s_{2}$ we have $f(s_{1})\lhd f(s_{2})$. Such maps are called \textbf{monotone maps }or \textbf{poset homomorphisms}. 
+\end{defn} 
+
+The term `homomorphism' is supposed to indicate that although something changes (`morphism'), something important stays the same (`homo-'). In this case we say the $\le$structure on $S$ is respected. 
+
+\begin{defn} 
+	Let $f:(S,\le)\to(T,\lhd)$ be a poset homomorphism. If $f$ is bijective and $f^{-1}$ is also a poset homomorphism then we say that $f$ and $f^{-1}$ are \textbf{isomorphisms}. If an isomorphism exists between two posets we say they are \textbf{isomorphic} as posets and write $(S,\le)\cong(T,\lhd)$. 
+\end{defn} 
+
+When two posets are isomorphic they are equivalent or `essentially the same' as far as their partial order structures go. That is, the only difference between them is the labels we give to their elements and the symbol we use for the partial order; the notation or naming we employ may be different but the poset structures are identical.
+
+We will see this pattern repeated many times over the course of these notes. First we identify a type of structure that interests us. We define it abstractly, so we can gather together all objects that share this type of strusture into a category. Then we determine which maps between these objects respects the structure in a way we find meaningful (we have some freedom in how we do this); these are the morphisms of the category. Finally, we look for the isomorphisms, which tell us when two objects in our category are identical with respect to the structure that defines it. 
+
+These isomorphisms will always be reversible, since when `$a$ is equivalent to $b$' we must also always have `$b$ is equivalent to $a$'. In fact there is a name for this kind of thing. 
+
+\begin{defn} Let $R\subseteq A\times A$ be a binary relation on the set $A$. We say $R$ is an \textbf{equivalence relation} if the following criteria are met for all  
+	\begin{multline*} 
+		aRa\ \ \ \ \text{(reflexivity)}\\ 
+		aRb\Leftrightarrow bRa\ \ \ \ \text{(symmetry)}\\ 
+		aRb\ \ \text{and \ \ }bRc\ \ \text{implies \ \ }aRc\ \ \ \ \text{(transitivity)} 
+	\end{multline*}
+\end{defn} 
+
+Notice that an equivalence relation is just like a partial order, except we replace antisymmetry with symmetry. Note too that equivalence relations are here defined in terms of sets, but it turns out that the collection of objects in a category is usually `too big' to be a set. Still, the same fundamental pattern is seen in isomorphisms in a category, so that every object must be equivalent to itself (reflexivity), objects are equivalent `in both directions' (symmetry) and if two things are equivalent to a third thing then they must be equivalent to each other. We usually write equivalence relations as symbols that remind us of the equals sign, which is the first equivalence relation we learn about in a mathematical context; $\cong$is a typical example.
+
+These definitions allow us to frame the following question: is the opposite of a poset always isomorphic to the original poset? That is, if $(S,\le)$ and $(S,\ge)$ are opposite posets, must we have $(S,\le)\cong(S,\ge)$? The answer is `not necessarily'. Consider the poset $(\mathbb{N},\le)$; in particular it contains an element $1$ such that $1\le x$ for all $x\in\mathbb{N}$. But there is no element $\omega\in\mathbb{N}$ such that $\omega\ge x$ for all $x\in\mathbb{N}$. Thus any homomorphism of posets between $(\mathbb{N},\le)$ and its opposite must fail to be an isomorphism, since in order to respect the $\le$ structure it would have to `collapse down' all but finitely many the elements $x$ such that $1\le x$ onto a single element in the opposite poset, and this means the homomorphism fails to be bijective. If it is not bijective there can be no inverse, so it cannot be an isomorphism. Thus $(S,\le)$ and $(S,\ge)$ are \emph{structurally different posets}, not merely different notations for the same thing. 
+
+\begin{defn} 
+	Let $(A,\le_{A},\lor_{A},\land_{A})$ and $(B,\le_{B},\lor_{B},\land_{B})$ be lattices. Then a map $f:A\to B$ is a \textbf{lattice homomorphism} if it is a poset homomorphism and furthermore: 
+		\begin{multline*} 
+			f(x\lor_{A}y)=f(x)\lor_{B}f(y)\\ 
+			f(x\land_{A}y)=f(x)\land_{B}f(y) 
+		\end{multline*}
+	The category of lattices, \textbf{$\mathbf{Lattice}$}, has all lattices as its objects and all lattice homomorphisms as its morphisms. 
+\end{defn} 
+
+It is straightforward to define the morphisms for bounded lattices, complemented lattices, Heyting lattices and Boolean lattices; simply add the appropriate rule about respecting the additional bits of structure. In each case we have done the work needed to define a category of the appropriate type. In each case, is a homomorphism has an inverse that is also a homomorphism, it is an isomorphism and the two objects it connects are essentially the same as far as the structure represented by the category is concerned.
+
+The only category of this kind we need to pay special attention to is the category of frames: 
+
+\begin{defn} 
+	Let $A$ and $B$ be frames. Then $f:A\to B$ is a \textbf{frame homomorphism} if it is a poset homomorphism the following conditions hold:
+		\begin{eqnarray*} 
+			f(x\land_{A}y) & = & f(x)\land_{B}f(y)\\ 
+			f(\bigvee_{i\in I} & x_{i})= & \bigvee_{i\in I}f(x_{i}) 
+		\end{eqnarray*}
+	(Observe that the join on the left of the second line is the join in $A$, whereas the join on the right is the one in $B$.) The category of frames, written \textbf{$\mathbf{Frm}$}, has all frames for its objects and all frame homomorphisms for its morphisms. 
+\end{defn} 
+
+This is precisely what we need if we want the distributive law to work correctly with morphisms, i.e. if $f:A\to B$ is a frame homomorphism then we are \emph{guaranteed }to have
+\[ 
+	f[(\bigvee_{i\in I}a_{i})\land b]=f[\bigvee_{i\in I}(a_{i}\land b)] 
+\] 
+Although we will not really need it, defining \textbf{$\mathbf{Cofrm}$} costs us little extra effort since its morphisms follow an entirely obvious pattern designed to guarantee the distributive law that characterises its objects:
+ 
+\begin{defn} 
+	Let A and B be coframes. Then $f:A\to B$ is a \textbf{coframe homomorphism} if (and only if) the following conditions hold:
+		\begin{eqnarray*} 
+			f(x\lor_{A}y) & = & f(x)\lor_{B}f(y)\\
+			f(\bigwedge_{i\in I} & x_{i})= & \bigwedge_{i\in I}f(x_{i}) 
+		\end{eqnarray*}
+The category \textbf{$\mathbf{Cofrm}$} has all coframes as its objects and all coframe homomorphisms as its morphisms.  
+\end{defn} 
+
+Although will not do much with \textbf{$\mathbf{Cofrm}$} in what follows, we will be interested in another category that can be constructed from \textbf{$\mathbf{Frm}$} by a different `dualizing' process. We approach this by looking again at posets but from a slightly different angle. 
+
+\begin{defn} 
+	The \textbf{poset category} derived from the poset $(S,\le)$ is a category whose objects are the elements of $S$ such that there is at most one morphism between any pair of objects. 
+\end{defn} 
+
+Here we use the term `morphism' to simply mean an arrow connecting two objects; we are not thinking of the elements of $S$ as sets (though they might be), so we are also not thinking of the morphisms as maps between sets. In this case we think of there being an arrow $a\to b$ as meaning $a\le b$ in the poset $(S,\le)$. So far this is just a restatement of the definition of a poset in other terms. 
+
+\begin{defn} 
+	Let \textbf{$\mathbf{C}$ }be a category. The opposite of \textbf{$\mathbf{C}$} written $\mathbf{C^{op}}$, is the category whose objects are the same as those in $C$ and whose morphisms are as follows: for every morphism $a\to b$ in $C$, we have a morphism $b\to a$ in$\mathbf{C^{op}}$.
+\end{defn} 
+
+\begin{thm} 
+	If \textbf{$\mathbf{C}$ }is the poset category derived from some poset $(S,\le)$ then $\mathbf{C^{op}}$is derived from the opposite poset $(S,\ge)$. 
+\end{thm} 
+
+We emphasise again that the opposite of a poset is not necessarily isomorphic to the original, and in a similar way the opposite of a category, through it has the same objects, might not have the same structure of morphisms as the original.
+
+TODO: Endomorphism and Automorphism. Definitions by commutative diagrams as well as sets.
+
+\section{Groups}
+
+We make a brief detour to define various closely-related structures that will be used constantly in what follows. Our approach takes a direct route from the account of locales given thus far to the constructions we need, and so should not be mistaken for an outline of the general theory of these objects.
+
+Consider any category (but of course, we are thinking for the moment of \textbf{Loc}). Some of its morphisms go from one object to another, $A\to B$, while other go from an object back to itself, $A\to A$. Such maps are called \textbf{endomorphisms}. Now consider the following:
+
+\begin{defn}
+	A \textbf{monoid} is a category with a single object.
+\end{defn}
+
+We can take any locale $L$ (or anything else we like that lives in a category) and turn it into a category by simply `throwing away' all the maps that connect to it except the ones that map $L\to L$. Composition of these maps will still be associative; this is inherited from the larger category they came from. Composites will all exist, again because they existe in the parent category and if $f:A\to A$ and $g:A\to A$ then $f\circ g:A\to A$ as well. Finally, the identity for every element in a category exists and is a map from itself to itself, so the identity map for the object we chose exists in the monoid we made from it.
+
+\begin{defn}
+	An \textbf{automorphism} is a n endomorphism $A\to A$ that has an inverse.
+\end{defn}
+
+A monoid in which every morphism has an inverse is special. It represents a single object (such as a topological space) along with all the ways it can be transformed while remaining `within itself' that can be undone by another such transformation. We would like to make an abstract definition that captures the structure of the morphisms in such a monoid, which we can do very explicitly. First we need an abstract version of composition of morphisms:
+
+\begin{defn}
+	A \textbf{binary operation} on a set $S$ is a map $S\times S\to S$.
+\end{defn}
+
+Of course we have in mind here the case when $S$ is the set of morphisms in a monoid and the binary operation is composition, which takes two morphisms and maps them to their composite. Like binary relations, in themselves binary operations are extremely general and not very useful, but once we add a few extra conditions they become extremely flexible bits of structure. We usually write binary operations using symbols, or simply by placing the things being combined side-by-side; thus we may write $fg$ instead of $f\circ g$. Note well, though, that we cannot assume $fg=gf$, just as we cannot assumethat $f\circ g = g\circ f$ (putting on your socks and then your shoes is not at all the same as putting on your shoes and then your socks).
+
+\begin{defn}A \textbf{group} is a set $S$ endowed with a binary operation such that the following conditions hold:
+	\begin{itemize}
+		\item{$a(bc)=(ab)c$ -- that is, the operation is associative (like composition of morphisms)}
+		\item{There is an element $e\in S$ such that $ae = a = ea$ for every $a\in S$ (this corresponds to the identity morphism)}
+		\item{For every element $a\in S$ there is another element, $b$, such that $ab = e = ba$ (here $b$ would be the inverse morphism of $a$)}
+	\end{itemize}
+\end{defn}
+
+A group is the structure that is characteristic of systems of symmetries of an object, in the broad sense of `transformations that leave some property unchanged'. In the theory of locales, of course, we are interested in the group of invertible continuous transformations of a given object, i.e. the homeomorphisms. These leave the space `essentially unchanged' as far as topology is concerned, although they might represent radical changes when viewed in other ways.
+
+Looking to the future, one does not always work with the group of all possible morphisms of an object. For example, in plane Euclidean geometry the object of the monoid is the plane itself and its morphisms are translations, rotations, reflections and dilations (scaling up or down). If a theorem is true, it remains true regardless of how many such transformations are applied. On the other hand, shear transformations are not included in the group defining Euclidean geometry despite the fact that they have inverses, because they do not preserve relative lengths of lines, sizes of angles and so on. Thus we work with a monoid that has been `pruned' to retain only a subset of the available automorphisms. This is a crucial idea that we will formalize (much) later.
+
+\begin{defn}
+	A group $G$ is called \textbf{abelian} if is binary operation is commutative, i.e. if $ab = ba$ for all $a, b\in G$.
+\end{defn}
+
+As a matter of notation, the binary operation of abelian groups is often written as `$+$' to remind us of the first abelian group we meet as children, the group $(\mathbb{Z}, +)$. When we do this we will write the identity element in an abelian group as `$0$' or, to amphasise it belongs to the group $G$, as $0_G$. Any set whose elements can be `added' in some sense is likely to be an abelian group. 
+
+\section{Rings and Fields}
+
+Now, when we learn about $(\mathbb{Z}, +)$ we quickly discover that it has another binary operation, namely multiplication. This motivates the following definition: 
+
+\begin{defn}Let $(R, +)$ be an abelian group. It becomes a \textbf{ring} with the additional binary operation, usually called `multiplication' and written multiplicatively, satisfying the following conditions:
+	\begin{itemize}
+		\item{The additive identity is `absorbative', i.e. $a0 = 0 = 0a$ for all $a\in R$}
+		\item{There is a multiplicative identity, i.e. $e\in R$ such that $ae = a = ea$ for all $a\in R$}
+		\item{Multiplication distributes over addition, i.e. $a(b + c) = ab + ac$ and $(b + c)a$ = $ba + ca$ for all $a, b, c\in R$}
+	\end{itemize}
+\end{defn}
+
+Rings can be quite badly-behaved, at least as far as mutliplication goes. Some, however, are ore respectable than others:
+
+\begin{defn}
+	Let $(R, +, \dot)$ be a ring. If multiplication is commutative, i.e. if $ab = ba$ for all $a, b\in R$, it is called a \textbf{commutative ring}.
+\end{defn}
+
+\begin{defn}
+	A \textbf{field} is a commutative ring $(R, +, \dot)$ in which $(R\setminus 0_R, \dot)$ is a  group. That is, every element $a$ has a multiplicative inverse, written $a^{-1}$, in $R$.
+\end{defn}
+
+Almost (but not quite) all our rings will be commutative. Many concepts we develop, including geometric ones, can be extended to noncommutative rings and these are often of great interest, but here we focus mostly on commutative cases.
+
+\begin{defn}Let $(R, +, \dot)$ be a commutative ring. An \textbf{ideal} of $R$ is a subset $I\subseteq R$ such that:
+	\begin{itemize}
+		\item{$a + b\in I$ whenever both $a\in I$ and $b\in I$.}
+		\item{$ra\in I$ whenever $a\in I$, for all $r\in R$.}
+	\end{itemize}
+\end{defn}
+
+Ideals were originally developed by number theorists as `idealized versions of numbers'. For example, working in the ring $\mathbb{Z}$, instead of the number 3 we might consider the ideal of all multiples of 3, $\{\ldots, -6, -3, 0, 3, 6, \ldots\}$. This leads to the following sequence of definitions:
+
+\begin{defn}
+	Let $R$ be a ring and $S\subseteq R$. The \textbf{ideal generated by $S$} is the set of all sums of elements of $S$ and all multiples of elements of $S$ by elements of $R$. The elements of $S$ are called \textbf{generators} of this ideal, which we sometimes write as $\langle S\rangle$.
+\end{defn}
+
+\begin{defn}
+	An ideal $I$ of a ring $R$ is \textbf{principal} if it is generated by a single element $x\in R$. That is, every $a\in I$ is a multiple of $x$. We sometimes write $\langle a\rangle$ for the principal ideal generated by $a$.
+\end{defn}
+
+\begin{defn}
+	An ideal $I$ of a ring $R$ is \textbf{prime} if whenever $ab\in I$ we have either $a\in I$ or $b\in I$.
+\end{defn}
+
+Since we have in mind the ordinary multiplication of integers, we often write the multiplicative identity as $1$, or $1_R$ to emphasise it belongs to the ring $R$, and denote it $\times$ when we need a symbol for it. Thus we write a typical ring as $(R, +, \times)$. Note that some authors do not require a ring to have a multiplicative identity, but our sense is that requiring it is becoming the standard. Also note that the ring with just its multiplication operation is usually not a group because we make no promise that there will be inverses. For example, $(\mathbb{Z}\\0_{\mathbb{Z}}, \times)$ is not a group; although we can multiply any two integers we like, we cannot find inverses for any nonzero integers besides 1 and -1.
+
+The motivation for this definition comes from the notion of `ideal numbers' above; the ideal $\{\ldots, 5, 10, 15, 20, \ldots\}$ is prime whereas $\{\ldots, 6, 12, 18, 24, \ldots\}$ is not, since $6 = 2\times 3$ but the ideal does not contain either 2 or 3. The great surprise is that this notion of `prime ideal' remains crucial even in the abstract, when numbers vanish. There is something deeper about `primality' than simply `being indivisible except by 1 and itself', the definition we learned at school.
+
+\begin{defn}
+	An ideal $I$ of a ring $R$ is \textbf{maximal} if the only ideals that contain all of its elements are $S$ and $R$ itself.
+\end{defn}
+
+For example, in $\mathbb{Z}$ all prime ideals are maximal, whereas for example $\langle 6\rangle\subset \langle 2\rangle$. For the moment, keep in mind the existence of ideals and these three properties; they will return often. It turns out that the filters we used to define points in locales are in a sense dual to the notion of ideals in rings; and there are therefore notions of ideals in locales and of filters in rings. This will be developed further when we are in a position to make use of it.
+
+\begin{defn}
+	Let $(R, +, \times)$ be a commutative ring. Then $R$ is called a \textbf{field} if $(R\setminus 0_R, \times_R)$ is an abelian group.
+\end{defn}
+
+What makes a field a field is that every element except 0 has a multiplicative inverse. For example, the set of rational numbers $\mathbb{Q}$ is a field, since for any $a\in\mathbb{Q}$ we can form $\frac{1}{a}$ as long as $a\ne 0$, such that $a\times\frac{1}{a} = 1_R$. Fields are very well-behaved examples of rings. 
+
+\section{Linear Spaces [TODO]}
+
+(Modules, Vector Spaces and Algebras)
+
+We now carry out a construction using rings that again yields a somewhat badly-behaved (but often useful) object, then use the niceness of fields to exhibit a class of much tamer examples that are of great importance:
+
+\begin{defn}
+	Let $(R, +_R, \times_R)$ be a ring. Then the abelian group $(G, +_G)$ is an \textbf{$R$-module} if there is a map $R\otimes G\to G$, called \textbf{scalar multiplication}, that satisfies the following:
+	\begin{itemize}
+		\item{$r(g_1 + g_2) = rg_1 + rg_2$}
+		...
+	\end{itemize}
+	$R$ is called in this context the set of \textbf{scalars}.
+\end{defn}
+
+Modules are very general objects. For example, in an obvious way every ring can be considered a module over itself (just let $G = R$).
+
+\begin{defn}
+	When a module's ring of scalars is a field, it is called a \textbf{vector space} and its elements are called \textbf{vectors}.
+\end{defn}
+
+
+
+
+Include tensor product (for forming free Abelian groups) and the adjunction with Hom (as a way to introduce adjunctions -- and NB the forgetful functor is adjoint to the one that forms free objects)
+
+
+\section{Group Actions}
+
+The motivating idea for group actions is the same as that for groups in general: that of the symmetries of an object. We already have the idea that $D_8$ is the symmetry group of the square; $D_8$ consists of three rotations, four reflections and the identity. But where has the \emph{square} gone? 
+
+The disappearance of the square is how group theory achieves most of its power and usefulness. It allows us to focus on the structure of symmetry itself rather than some particular symmetrical thing. But it does not change the fact that, very often, we are interested in how a group acts as the symmetries of an object that is separate from it, like the square is separate from $D_8$.
+
+TODO: Example of $D_8$ acting on the vertices of a coloured octagon. 
+
+Let us generalize this idea. Let $X$ be any set and $G$ a group. To each element $g\in G$ we associate a map $f_g:X\to X$ so that composition of these maps respects the structure of $G$. What this means in practice is that, for $g, h\in G$:
+\[
+	(gh)(x) = f_g(f_h(x))
+\]
+To avoid degenerate cases we also require that, for all $x\in X$,
+\[
+	e(x) = x
+\]
+Such an association of each element of $G$ to some element of $\text{End}(X)$ is called a \textbf{group action} of $G$ on $X$. Where there will be no confusion we clean up our notation by writing $g(x)$ instead of $f_g(x)$ and so on.
+
+
+TODO: Orbits and stabilizers
+
+
+A group action is called \textbf{faithful} if the only element of $G$ that fixes everything is the identity. A stronger situation occurs when the only element of $G$ that fixes \emph{anything} is the identity; such actions are called \textbf{free} (this is only rather distantly related to the notion of a free group). In a free action, $\text{Stab}(x)$ is trivial for every individual $x$ -- that is, it contains only the identity.
+
+A group action is \textbf{transitive} if, for every pair $x_1, x_2\in X$ there is at least one $g$ such that $gx_1 = x_2$. This says that there is only one orbit of the action.
+
+
+\chapter{Manifolds}
+
+\section{Introduction}
+
+We have repeatedly considered what happens when we begin with an open set (think of a finitely precise observation) and `zoom in' by producing a sequence of ever-smaller open sets, each contained in the previous one. Taken to an extreme, we produced points as completely prime filters that `zoom in' in the right way, and `infinitely' in the sense that they lack any finite limiting state.
+
+Suppose you live in a one-dimensional space whose form is that of a letter Y. Imagine it is very, very big and you are extremely small. Most likely, you will assume you simply live on a straight line segment, because you won't be close enough to the `junction' of Y to see it; your local area just looks like a line. But those who live close enough to the junction know they don't live on I because they can `see' the junction.
+
+Now suppose you really want to believe you live on a line segment just as everyone says, but you have strayed close to the junction of Y. You cast your eyes down to the ground, narrowing your gaze so the junction is no longer visible (you are restricting yourself to a smaller open set) and you can now believe the orthodox view again. Unfortunately it seems that there is one spot where this doesn't work. If you're standing directly on the junction of the Y itself, no matter how small an open set you choose, you will still be looking at the junction.
+
+The idea of a topological manifold is that it is a topological space that is `locally homogeneous', meaning that wherever we are in the space, if we zoom in far enough we end up in an open set that looks just the same as the open set we reach at any other point. That is, if you narrow your field of vision enough, you won't be able to tell where you are because the open set you can see at every point looks just like some fixed `model space'. The letter Y space fails to be locally homogeneous because of the junction-point, but a great many important spaces are manifolds or belong to a wider class that can be derived from them (manifolds with boundary or with corners, for example).
+
+
+\section{Locales}
+
+We immediately make the key definition, although its motivation (and an explanation of the odd-seeming terminology) will come afterwards: 
+
+\begin{defn} 
+	The opposite of the category of frames\textbf{,$\mathbf{Frm^{op}}$,} is called the category of \textbf{locales}, written \textbf{$\mathbf{Loc}$. }Its morphisms are called \textbf{continuous maps}. 
+\end{defn} 
+
+Note that the objects of \textbf{$\mathbf{Loc}$ }are just frames, though in this context we call them `locales'. What has changed are the morphisms. It is not yet possible for us to express these as morphisms based on sets, much as we might wish to, and this is in fact for a very good reason. In traditional developments of topology we begin with a set of points, construct a structure on those points that corresponds to an object in \textbf{$\mathbf{Loc}$} (or\textbf{ $\mathbf{Frm}$}, the objects are the same) and call it a `topological space'. We then devise maps between topological spaces that are `continuous', and these are the locale morphisms. In the traditional settings, these are maps of sets that send points in one topological space to points in another. We now produce points out of locales, since without these the locale morphisms seem difficult to motivate. 
+
+\begin{defn} 
+	An \textbf{ideal} $J$ in a locale $(S,\le)$ is a subset of $S$ that meets the following criteria: 
+	\begin{itemize} 
+		\item If $a\in J$ and $b\le a$ then $b\in J$. In words: ideals are \emph{closed downwards.} 
+		\item If $a,b\in J$ then $a\lor b\in J$. In words: ideals are \emph{closed under finite joins.} 
+	\end{itemize} 
+\end{defn}
+
+An ideal is itself a lattice, because it explicitly contains all the joins it needs and its meets are all there thanks to its being closed downwards (since we always have $a\land b\le a$). Unsurprisingly, there is a dual notion: 
+
+\begin{defn} 
+	A \textbf{filter} $F$ in a locale $(S,\le)$ is a subset of $S$ that meets the following criteria: 
+	\begin{itemize} 
+		\item If $a\in F$ and $a\le b$ then $b\in F$. In words: filters are \emph{closed upwards.} 
+		\item If $a,b\in F$ then $a\land b\in F$. In words: filters are \emph{closed under finite meets.} 
+	\end{itemize} 
+\end{defn} 
+
+Again, since $F$ contains all its meets explicitly, and any join it needs will be found thanks to its being closed upwards, any filter is a lattice in its own right.
+
+Filters are the things we want. Suppose I identify a region of a continuum; call it $a$. Certainly I can expand this region to contain any other region that contains it; that means by identifying the region I've also made it possible to identify all regions $b$ such that $a\subseteq b$ -- so I have selected not just my region but a set of regions that are closed upwards. All well and good. But now suppose I want to refine my region by the means described in the introduction: by intersecting it with other regions in order to narrow it down. I can add a new region and all I have to do is include all the intersections (meets) it makes, and also all the bigger regions that contain it. 
+
+Now, where does this process of refinement end? We hope the answer is: at a point. But we know this cannot happen after a finite number of refinements; the smallest element in the filter will always be a region of some finite size. We want to say that however much we zoom in along a filter, there is always more zooming to be done. 
+
+\begin{defn} 
+	A filter $F$ is \textbf{completely prime }if whenever $\bigvee_{i\in I}a_{i}\in F$ we always have one of the $a_{i}\in F$ as well. 
+\end{defn} 
+
+This means that whenever a region is in a completely prime filter, so is some part of it. This means we can keep zooming indefinitely, and \emph{this} is what we call a point: a potentially infinite sequence of refinements of a region that gradually closes in; it does not close in `on a point', because there is no point there, just smaller and smaller pieces of continuum. This is the \emph{definition} of a point in a locale. 
+
+\begin{defn} 
+	A completely prime filter in a locale is called a \textbf{point}. 
+\end{defn}
+
+Note that we are not adding in any strange infinitary joins here; we are explicitly excluding all such joins unless one of their `factors' is needed further `down' the filter. Now we make the connection between these entirely locale-based notions and the traditional topological ones.
+
+\begin{defn}
+	Let $x$ be a point in a topological space. Then an open set $U$ is called a \textbf{neighbourhood} of $x$ if $x\in U$.\end{defn}
+
+\begin{thm}
+	The set, written $U_x$, of all neighbourhoods of a point $x$ in a topological space is a completely prime filter.
+\end{thm}
+
+\begin{thm}
+	In a sober space, the only completely prime filters are the sets of the form $U_x$.
+\end{thm}
+
+This theorem is powerful: it says that we may think of a point in a traditional topological space as a completely prime filter in the lattice of open sets. This is indeed what a point is in the theory of locales. Locales are not made out of points; rather, by specifying a completely prime filter you produce a point, just as you produce a point in Euclidean geometry by intersecting lines or circles.
+
+\begin{defn}
+	The set of all completely prime filters on a locale $L$ is called the \textbf{spectrum} of $L$.
+\end{defn}
+
+Note that this recovers the point-set of the topological space to which the locale $L$ is supposed to correspond. But note also that we are now free to be as careful as we like about which completely prime filters are available (constructible) under which circumstances, rather than having to assume they are all given before we can even define our basic objects.
+
+The process we went through was: first, create an algebraic object (a frame); second, define some kind of subset that is of interest (filters); third, define a notion of `primality' for these subsets (completely prime filters); fourth, consider the collection of all prime subsets to be a space in itself (the spectrum). We will use this exact process again in the future.
+
+Note that the definition of a filter and everything that goes along with it can be dualized to produce prime \emph{ideals}. These will come up later but the enthusiastic reader might like to work out the appropriate definitions and theorems now.
+
+\section{Some General Topology}
+
+\subsection{Sublocales and Quotients}
+
+\begin{defn}
+	A set $B$ of open sets of a locale $L$ is called a \textbf{base} for $L$ if every open $G\subseteq L$ is a join of some elements of $B$.
+\end{defn}
+
+\begin{defn}
+	Let $L$ be a locale. A map $j:L\to L$ is a \textbf{nucleus} on $L$ if the following are true for all $A, B\in L$:
+	\begin{itemize}
+		\item {$j(A\land B) = j(A)\land j(B)$ (meet-preserving)}
+		\item {$A\le j(A)$ (contraction)}
+		\item{$j(j(A))= j(A)$ (stationarity)}
+	\end{itemize}
+\end{defn}
+
+A nucleus causes the locale to `shrink' in such a way that meets are still respected. 
+
+\begin{defn}
+	Let $L$ be a locale and $j:L\to L$ a nucleus on $L$. Then the set $\{a\in L: j(a) = a\}$ is also a locale, called a \textbf{sublocale} of $L$ and written $L/j$.
+\end{defn}
+
+The notation $L/j$ is intended to suggest that in some sense each sublocale of $L$ is a quotient of $L$ by the nucleus.
+
+\begin{defn}
+	Let $L$ be a locale and $a\in L$. The \textbf{closed set} in $L$ corrsponding to $a$ is the sublocale $L/j$, where $j: u\mapsto a\lor u$. 
+\end{defn}
+
+Intuitively, $j$ identifies all the open sets that `touch' $a$; quotienting them out produces a sublocale that is analogous to the complement of $a$. Since $a$, as an element of a locale, is an open set, it makes sense to define its `complement' as a closed set.
+
+
+
+\subsection{TODO: Products of Locales}
+
+This is where the theory of general locales diverges most strongly from that of general topological spaces. 
+
+TODO: Hopefully in the `tame' cases that interest us the two ideas will coincide. It's OK to limit ourselves to finite products.
+
+
+\subsection{Normal Locales}
+
+In this section we define a very large class of `well-behaved' locales that will be used in the next chapter as the basis for the definition of manifolds. These are the spaces in which all our subsequent geometry will take place, so the abstract-seeming definitions that follow actually capture some of the features a locale must have if it is to support something like `ordinary geometry'.
+
+Note that all these definitions work for frames as well as locales; they do not make any use of continuous maps. 
+
+We begin with a property we hope all `good' geometric spaces will have: the property of being able to distinguish between actually different geometric objects. 
+
+\begin{defn}
+	Let $L$ be a locale and $\Delta_a$ and $\Delta_b$ be disjoint closed sets. Then they are said to be \textbf{separable by open sets} if there are $A, B\in L$ such that:\begin{itemize}
+		\item $\Delta_a \subseteq A$
+		\item $\Delta_b \subseteq B$
+		\item $A\cap B = \emptyset$
+	\end{itemize}
+\end{defn}
+
+\begin{defn}
+	A locale in which any pair of disjoint closed sets can always be separated by open sets is called \textbf{normal}.
+\end{defn}
+
+We wish to limit ourselves to normal locales because these are precisely the ones in which geometric objects can be identified. The following series of definitions builds up to an equivalent characterisation of normal locales that is more explicit and reveals some of their structure.
+
+\begin{defn}
+	Let $L$ be a locale. An \textbf{open cover} of $L$ is a subset $S\subseteq L$ such that $\bigcup X = L$.
+\end{defn}
+
+\begin{defn}
+	Let $S\subseteq L$ and $T\subseteq L$ be open covers. Suppose there is a map $\rho:S\to T$ such that $s\le \rho(s)$ for all $s\in S$. Then $S$ is said to be a \textbf{refinement} of $T$.
+\end{defn}
+
+The following definition concerns general subsets of a locale, but in this context we particularly have open covers in mind.
+
+\begin{defn}
+	Let $L$ be a locale and $X\subseteq L$ any subset. Let $\Sigma$ be a completely prime filter in $L$. If $\Sigma$ intersects only finitely many elements of $X$, we say $X$ is \textbf{locally finite at $\Sigma$}. If this is true for any $\Sigma$, we simply say $X$ is \textbf{locally finite}.
+\end{defn}
+
+\begin{defn}A locale $L$ is said to be \textbf{paracompact} if every open cover of $L$ has a locally finite refinement.
+\end{defn}
+
+TODO: Check the following, it's my own invention:
+
+\begin{defn}Let $\Sigma_a$ and $\Sigma_b$ be points of a locale $L$. Suppose there are $A, B\in L$ such that:
+	\begin{itemize}
+		\item{$A \supseteq X_a$ for some $X_a\in \Sigma_a$}
+		\item{$B \cap X_a = \emptyset$}
+		\item{$B \supseteq X_b$ for some $X_b\in \Sigma_b$}
+		\item{$A \cap X_b = \emptyset$}
+	\end{itemize} 	
+	We say $\Sigma_a$ and $\Sigma_b$ are \textbf{separable by open sets}.
+\end{defn}
+
+\begin{defn}
+	If every pair of points in a locale is separated by open sets, we say the locale is \textbf{Hausdorff}.
+\end{defn}
+
+\begin{thm}
+	Every paracompact Hausdorff locale is normal.
+\end{thm}
+
+Note that this means there are non-normal paracompact locales; these are all non-Hausdorff.
+
+\subsection{Connectedness}
+
+Connectedness and components
+
+
+\subsection{Compactness}
+
+
+\subsection{Topological Models of Intuitionistic and Paraconsistent Logic}
+
+Suppose that we adopt a classical, point-based model of the continuous line, which we will here call $L$. We suppose it is equipped with the usual topology, which is the one generated by its open intervals $(a, b)\subseteq L$, where $a < b$; here $a$ is allowed to be $-\infty$ and $b$ can be $+\infty$. 
+
+Point-based geometry has a special affinity for classical logic. $L$ contains subsets of points that form what is called a \emph{Boolean lattice}. Boolean lattices are models of classical logic, meaning we can interpret each point as a proposition that can be true or false, with intersections acting like conjuntions, unions like disjunctions and complementation playing the role of negation. Any collection of propositions can be treated this way, the Boolean lattice to which it gives rise is called its \emph{Lindenbaum-Taski algebra}.
+
+On the other hand, suppose we are only able to observe open sets (not individual points). We will be able to observe the open intervals but not their complements. For example $L\setminus(-\infty, 0) = [0, \infty]$ which is not open in the standard topology. Thus if we have the proposition $r(x) = x\in (-\infty, 0)$ we cannot observe the classical proposition $\lnot r(x) = x\in [0, \infty)$. 
+
+If our logic is to have a negation operator, the best we can do is $\lnot r(x) = x\in \text{int}[0, \infty) = (0, \infty)$. But now it is not the case that $r(x)\lor\lnot r(x)$, since neither is true when $x = 0$.
+
+In locales we only have access to open sets but we may specify points by completely prime filters. Thus when we are speaking of points, at least, our logic must allow for the `middle' term between $r(x)$ and $\lnot r(x)$ that classical logic excludes. The logic that this models is called \emph{intuitionistic logic}, which can accept `gaps' between the truth of $p$ and that of $\lnot p$. 
+
+An interesting aside comes about when we consider the dual objects to topologies, not in the categorical sense (this gives us frames) but the set-theoretic one. Here a topology is specified by its closed sets, with the requirements concerning unions and intersections suitably dualized.
+
+Now our situation is quite different. Suppose now that $s(x) = x\in (-\infty, 0]$ (note that this is a closed set, despite the `open end' at infinity). The best negation we can manage is $\lnot s(x) = x\in [0, \infty)$.
+
+In this case we certainly have $s(x)\lor \lnot s(x)$ -- the classical Law of the Excluded Middle is safe. But more alarmingly we can also have $s(x)\land \lnot s(x)$ -- this happens, in our example, precisely when $x = 0$. Thus it seems we must accept contradictions, and we have a model of \emph{paraconsistent logic}.
+
+The topology can, however, be formulated equally well in terms of open or closed sets, and the formulations are perfectly equivalent. Thus the intuitionistic and paraconsistent logics are dual to each other -- when one can prove a theorem, the other can prove a corresponding dual theorem. This does not mean they are identical, but that for our purposes the choice between them is a matter of preference. 
+
+We have chosen the intuitionistic perspective because it is more familiar to the mathematical community. The reader who would like a very fiddly but probably trivial exercise might try dualizing all the results in this book to be results in paraconsistent logic instead.
+
+Technical note: I have taken a paraconsistent logic to be classical logic without the Law of Non-Contradiction, i.e. without the rule that $p\land\lnot p = \bot$. Dually, intuitionistic logic, on this account is classical logic without the Law of the Excluded Middle, $p\lor\lnot p = \top$. 
+
+On the intuitionistic side we have said nothing about whether it might sometimes happen that $p\land\lnot p = \bot$, or indeed whether it can ever happen that $p\land\lnot p = \top$. All we have done is repeal the general law. Whether true duality holds -- that is, whether one can translate freely between the two perspectives in a truth-preserving way -- will depend on the semantics of the specific situation.
+
+\section{The Rational Number System}
+
+We would like the model space for manifolds to be the simplest, nicest example of a continuum we can think of. We could start with the two-dimensional plane of ordinary Euclidean geometry, but this is already a rather large and complicated object. We certainly can't start with a zero-dimensional point; we have already decided that building continua out of points is not how we want to proceed. We will therefore settle for the simplest continuum that deserves the name. Throughout this section our goal is to define a locale called the `real line' representing an infinitely extended, one-dimensional continuum. 
+
+In this section we show that the rational numbers can be constructed in a principled way using set constructions and integers only. This is important, because at first blush it may look as if the rational numbers could form a model continuum, so assuming we have access to them would be presumptuous. As in traditional treatments we use rational numbers to build a locale but we never consider a rational number to be a spatial point; rather, we use the intuition that the rational numbers capture something important about the infinite divisibility of a continuous line and use that to construct the open sets of a locale.
+
+\begin{defn}
+	An \textbf{integer} is a whole number, positive or negative, or zero. The set of all integers is written $\mathbb{Z}$.
+\end{defn}
+
+Now consider the set $\mathbb{Z}\times\mathbb{Z}$ or ordered pairs of integers, and remove those with zero in the second position -- we call the result $Q$:
+\[
+	Q = (\mathbb{Z}\times\mathbb{Z})\setminus (\mathbb{Z}\times\{0\})
+\]
+We think of elements of $Q$ as fractions, with the numerator being the first item in the pair and the denominator being the second, so that $(3,4)$ can be written $\frac{3}{4}$. The removal of the set $\mathbb{Z}\times\{0\}$ ensures we do not have any fractions with a zero denominator. We now define an equivalence relation on $Q$ as follows:
+\[
+	(a,b)\cong (c,d)\ \ \text{if and only if} \ \ ad = bc
+\]
+This makes, for example, $(2,4)\cong (1,2)$, which captures the idea that $\frac{2}{4}$ and $\frac{1}{2}$ are equivalent fractions.
+
+Now we do something new and very important. Picking any element $x\in Q$ we may form the set of all its equivalent fractions:
+\[
+	[x] = \{y\in Q \ \text{such that}\ y\cong x\}
+\]
+This is called the \textbf{equivalence class} of $x$. 
+
+\begin{thm}
+	Let $S$ be a set and $\equiv$ an equivalence relation on $S$. The equivalence classes of $\equiv$ partition $S$, which is to say every element of $S$ is in exactly one of them.
+\end{thm}
+
+\begin{proof}
+	We must have that $x\in [x]$ by the definition of an equivalence relation, for everything is equvalent to itself. So every element of $S$ is in at least one equivalence class. Suppose that $x\in [x]$ and also $x\in [y]$; then $x\cong y$ and hence $[x]=[y]$.  Hence every element is in at most one equivalence class. 
+\end{proof}
+
+\begin{defn}
+	Let $S$ be a set and $\equiv$ an equivalence relation on $S$. Then the \textbf{quotient} of $S$ by $\equiv$, written $S/\equiv$, is the set of all $\equiv$-equivalence classes of $S$.
+\end{defn}
+
+\begin{defn}
+	The set of \textbf{rational numbers}, written $\mathbb{Q}$,  is $Q/\cong$.
+\end{defn}
+
+This is simply a laborious way to say that a rational number is a fraction, but we don't care about the differences between equivalent fractions and so we `quotient them out' by thinking of them all lumped together as a single object. The quotient construction is in fact extremely general and we will meet it many more times.
+
+We now define the usual ordering on the rational numbers, writing $\le_\mathbb{Z}$ for the usual ordering on the integers (which we do not define here; it can all be done using straightforward set constructions).
+
+\begin{defn}
+	The \textbf{natural ordering} on $\mathbb{Q}$,  written $\le_\mathbb{Q}$, is defined as
+		\[
+			[(a,b)]\le_\mathbb{Q}[(x,y)]\ \ \text{if and only if}\ \ ay\le_\mathbb{Z} bx
+		\]
+\end{defn}
+
+\begin{thm}
+	$(\mathbb{Q}, \le_\mathbb{Q})$ is a totally ordered set without a top of bottom element.
+\end{thm}
+
+From now on we drop the formality and write a rational number $[q]$ as simply $q$, and instead of $\le_\mathbb{Q}$ we simply write $\le$. We also write $a<b$ to mean $a\le b$ and $a\ne b$. 
+
+\begin{defn}
+	Define $\mathbb{Q}^-$ to be the set $\mathbb{Q}$ with an added element, written $-\infty$, such that $-\infty < a$ for all $a\in \mathbb{Q}$. Similarly, by $\mathbb{Q}^+$ is to be understood the set $\mathbb{Q}$ with an added element, written $\infty$, such that $a < \infty$ for all $a\in \mathbb{Q}$.
+\end{defn}
+
+Note that $\infty$ and $-\infty$ play no part in the arithmetic defined on $\mathbb{Q}$, only in its structure as an ordered set.
+
+\begin{defn}
+	An \textbf{open interval} of $\mathbb{Q}$ is an element of $\mathbb{Q}^-\times\mathbb{Q}^+$ and defined as follows:
+	\[
+		(a, b) = \{q\in \mathbb{Q} \ \ \text{such that}\ \ a < q\ \ \text{and}\ \ q < b\}
+	\]
+\end{defn}
+
+You should think of $(a, b)$ as the `line' containing all rational numbers between $a$ and $b$ but not including either; it goes `all the way up' to its endpoints without quite touching them. For example, $(3, 4)$ contains all rational numbers that are greater than 3 but less than 4; it does not include either 3 or 4. An interval of the form $(-\infty, a)$ should be thought of as having one end that goes all the way up to $a$ while the other recedes into the distance forever, like half of an infinitely long line. For example, $(-\infty, 3)$ contains all rational numbers that are strictly less than 3, while $(3, \infty)$ contains all those strictly greater than 3. Note that $(-\infty, 3)\cup(3, \infty)$ contains every rational number except the number 3.
+
+The definition makes it easy to see that $(a, b)\subseteq (x, y)$ if and only if $x\le a$ and $b\le y$ and that $(\mathbb{Q}^-\times\mathbb{Q}^+, \subseteq)$ is thus a poset. We have $a\lor b = a\cup b$ and $a\land b = a\cap b$, but note that $a\cup b$ may fail to be an interval, so $a\lor b$ is not always defined, so this is not a lattice. Relatedly, it has a top element, $(-\infty, infty)$ but no bottom element. Since meets are always defined but joins are not, we call such a structure a \textbf{meet semilattice}. We can, however, generate a topology from it:
+
+\begin{thm}$\mathbb{Q}^-\times\mathbb{Q}^+$ is the base of a topology on $\mathbb{Q}$, which is known as the \textbf{usual topology} on $\mathbb{Q}$.
+\end{thm}
+
+This topology does, of course, include all the unions that are not themselves intervals.
+
+\begin{proof}
+	We need to show how to construct a frame $F$ using $\mathbb{Q}^-\times\mathbb{Q}^+$ as the set of generators. Recall that a frame is a bounded lattice in which the arbitrary distributive law holds. We begin by setting $F=\mathbb{Q}^-\times\mathbb{Q}^+$ and then add more elements as needed until we have a frame.
+	\begin{enumerate}
+		\item Add to $F$ all finite or countably infinite unions of elements of $\mathbb{Q}^-\times\mathbb{Q}^+$. This ensures explicitly that $F$ is closed under joins. It follows from the closure of $\mathbb{Q}^-\times\mathbb{Q}^+$ under meets that $F$ is also closed under meets. Hence $F$ is a lattice.
+		\item By the previous step, the arbitrary distributivity law
+			\[ (\bigvee_{i\in I}a_{i})\land b=\bigvee_{i\in I}(a_{i}\land b) \]
+			is satisfied.
+		\item $\mathbb{Q}^-\times\mathbb{Q}^+$ contains many intervals that are, as sets, all equal to $\emptyset$, namely those of the form $(a, b)$ where $b<a$. Hence $\mathbb{Q}^-\times\mathbb{Q}^+$ already contains a bottom element. Furthermore, $(a, b)\le (-\infty, infty)$ for every $(a, b)$, so it contains a top element. Hence $\mathbb{Q}^-\times\mathbb{Q}^+$ is bounded.
+	\end{enumerate}
+	Hence $F$ is a frame.
+\end{proof}
+
+We will as usual identify the locale $L(F)$ with the topological space $(\mathbb{Q}, F)$ or, where there is no room for ambiguity, simply $\mathbb{Q}$. This is a very nice space but it is not yet `large enough' or perhaps `dense enough' to represent our ideal notion of a real, continuous line. Such a line would have the following property: it can be cut into two parts, with nothing missing, by any constructed length $l$, and if $l_1$ and $l_2$ are two lengths that are not equal then they produce different cuts. To express this more precisely we will develop a little more structure in $\mathbb{Q}$, especially the notions of length and distance on which the characterisation above depends.
+
+To start we make several definitions that are dual to ones we made in Chapter 1:
+
+\begin{defn}
+	Let $(A, \le)$ be a poset. Then $X\subseteq A$ is \textbf{closed under joins} if whenever $x,y\in X$ we also have $x\lor y\in X$.
+\end{defn}
+
+\begin{defn}
+	Let $(A, \le)$ be a poset and $a\in A$. Then the \textbf{down-set} of $a$ is the set $\downarrow a = \{x\in A\ \ \text{such that}\ \ x\le a\}$.
+\end{defn}
+
+In particular, if $(x, y)$ is an open interval of $\mathbb{Q}$ then $\downarrow(x, y)$ is the set of all intervals that are contained in $(x, y)$, plus of course $(x, y)$ itself.
+
+\begin{defn}
+	Let $(A, \le)$ be a poset. An \textbf{ideal} on $A$ is a down-set $X\subseteq A$ that is closed under joins.
+\end{defn}
+
+\begin{thm}
+	$\downarrow a$ is an ideal of $a$, and indeed is the smallest ideal that contains $a$ itself. 
+\end{thm}
+
+\begin{proof}
+	First, $\downarrow a$ is of course a down-set and $a\le a$. Further more, if $b, c\in \downarrow a$ then $b\le a$ and $c\le a$. but then $b\lor c\le a$ as well. Hence  $\downarrow a$ is an ideal of $a$. Now suppose there is another ideal $I$ that contains $a$. Since $I$ is a down-set, $I$ also contains every element below $a$; that is, $I\subseteq \downarrow a$.
+\end{proof}
+
+
+\section{The Real Line}
+
+It is well-known that $\mathbb{Q}$ does not suffice for even the most basic geometry; it is not sufficiently rich to model continuous space. Yet it is obviously very nearly right. 
+
+\subsection{What we are (and are not) attempting}
+
+The terms `point-free' and `pointless' have been applied to this view of topology, but they are misnomers. This is not a topology from which points are banished; rather, it is one in which the dignity of points is reduced. 
+
+In the classical formulations, a topological space begins as a set of points and its continuity properties are expressed by the addition of a lattice of open sets, each of which is simple a subset of the set of points.
+
+In our formulation, the topological space can be imagined as coming to us first as an undifferentiated lump. It is explored by identifying open sets and `probing' the space is carried out by refinement, `zooming in' on smaller and smaller open sets.
+
+We may identify a point as a special refinement of open sets, achieved by `zooming in' infinitely. Indeed we may say that in doing this we \emph{construct} the point, just as in Euclidean geometry we might construct a point by intersecting two lines. Euclidean geometry at no point supposes that the plane is made of points, which must be given in advance; indeed, such a notion would appear to be quite alien to Euclid's way of thinking and was explicitly ruled out by Aristotle.
+
+Our goal in this section is to construct the real numbers. What this means for us is that we wish to construct a topological space (a lattice of open sets) such that we \emph{can} carry out the construction of all and only the spatial points that are classically identified with real numbers. 
+
+We do not suppose that these constructions have all been carried out in advance because of the following well-known fact:
+\begin{thm}
+	Let $L$ be a formal language consisting of countably many symbols and finitely many rules for the formation of well-formed formulae. Let $T$ be a theory in $L$ that contains a finitely-specified construction for each element of $\mathbb{R}$. Then $T$ is inconsistent.
+\end{thm}
+
+\begin{proof}
+	Any such $L$ is capable of producing only countably many finitely-specified  constructions of real numbers. But we know that the cardinality of $\mathbb{R}$ is uncountable.
+\end{proof}
+
+Thus the claim that all real numbers are constructible is a logical absurdity, not merely a matter of practical convenience. When we speak, in classical analysis, of $\mathbb{R}$ as (for instance) the set of all Dedekind cuts or the set of Cauchy sequences modulo equality in the limit, we speak only of a concept, a potentiality. We are not thereby justified in manipulating this set as if it were `given'.
+
+\subsection{Preliminaries}
+
+In point-set topology the smallest topological space is the point-set $\emptyset$ equipped with the topology $\{\emptyset\}$. This space is, of course, not very interesting. 
+
+The next largest is the one-point set $\{a\}$ equipped with the topology $\{\{a\}, \emptyset\}$. This is much more interesting. Thus:
+
+\begin{defn}
+	The \textbf{one-point locale} consists of two elements, $\top$ and $\bot$. It is written $\mathscr{L}(2)$ or just $2$ where no ambiguity is likely.
+\end{defn}
+
+Recall that locales and frames are the same objects and so the one-point frame is defined in exactly the same way.
+
+Note that the one-point locale contains two elements but no points! We can begin to clear this up by means of the following slightly odd-looking definition:
+
+\begin{defn}
+	Let $S$ be a set and $\tau$ a topology on $S$. Then a \textbf{topological point} of $S$ is a continuous map from the one-point space to $(S, \tau)$.
+\end{defn}
+
+In point-set topology we think of such a map as `picking out one point' from $S$ by mapping the single point in the domain onto it. Notice that if we do not have enough open sets in the topology, the `topological points' of the space might not line up with the `actual points' of the underlying point-set. We are taking an approach that dispenses with the underlying point-set so this appears not to matter, but note that locales will not be found that correspond to these topological spaces. In particular, if a locale corresponds to a topological space the latter must be Hausdorff -- quite a strong limitation, but it includes almost all the topological spaces that are of geometric interest.
+
+Of course we can also make the corresponding definition for locales:
+
+\begin{defn}
+	Let $L$ be a locale. Then a \textbf{point} of $L$ is a locale morphism $2\to L$.
+\end{defn}
+
+It is important to remember that locale morphisms are not defined in terms of maps of sets. Rather a locale morphism $2\to L$ \emph{just is} a frame morphism $F \to 2$. Thus, turning the arrows around we also have
+
+\begin{defn}
+	Let $F$ be a frame. Then a \textbf{point} of $F$ is a frame morphism $F\to 2$.
+\end{defn}
+
+Since frames and locales are the same objects, and locale morphisms are explicitly defined as frame morphisms with their arrows reversed, these definitions capture the same objects and can use used (with care) interchangeably. 
+
+But the notion of a point in a frame is a little easier to work with because frame morphisms \emph{are} maps of sets -- precisely the ones that preserve finite meets and arbitrary joins. Thus each map $F\to 2$ is a partition of the frame's elements into two classes, one of which maps to $\top\in 2$ and the other to $\bot\in 2$. What do these two classes look like?
+
+Recall that a filter $X$ in a frame $F$ collection of frame elements that meets the following criteria: 
+\begin{itemize} 
+	\item If $a\in X$ and $a\le b$ then $b\in X$. 
+	\item If $a, b\in X$ then $a\land b\in X$. 
+\end{itemize}
+The idea is that the preimage of $\top$ of each morphism $F\to 2$ is a special kind of filter called a completely prime filter (defined below), and \emph{vice versa}: a completely prime filter can therefore be specified just as well by specifying the corresponding map $F\to 2$.
+
+A point in a frame is therefore a completely prime filter; but transferring this idea from frames to locales this is just what a classical topological point is: a map $2\to L$. This is very neat; we give a more intuitive account of completely prime filters below.
+
+\subsection{Basic Construction}
+
+It is based on the idea that a locale can be specified by giving generators and relations. This is explained in both Johnstone and P and P, but in both cases it is a bit confusing.
+
+The generators are the ordered pairs $(p, q)$ of rationals (this version does not need to adjoin the infinities). 
+
+Of course we assume $\mathbb{Q}$ already has the usual lattice structure given by the total ordering, i.e. $p\land_\mathbb{Q} q = \min(p, q)$ and $p\lor_\mathbb{Q} q = \max(p, q)$
+
+The relations that turn these into a frame are:
+\begin{itemize}
+	\item{$(p, q)\land(r, s) = (p\lor_\mathbb{Q} r, q\lor_\mathbb{Q} s)$ -- that is, meets of intervals are just their intersections}
+	\item{$(p, q)\lor(r, s) = (p, s)$ (i.e. the union of the two intervals) if and only if $p\le r < q\le s$ (i.e., iff the union would itself be an interval), undefined otherwise.}
+	\item{$(p, q) = \bigvee \{(r,s)|p<r<s<q\}$ -- that is, every interval is equal to the union of all its subintervals. Note that this also implies that $(p, q)=\emptyset$ when $p>q$. We define $\bot = \emptyset$ to be the bottom element of the frame.}
+	\item{$\top = \bigvee \{(p, q)|p, q\in \mathbb{Q}\}$ -- that is, the union of all intervals produces a `top level object', which we can identify with all of $\mathbb{Q}$. (Note that without this object there is no `whole space', and the )}
+\end{itemize}
+
+This frame can of course also be thought of as a locale, in which case it is written $\mathscr{L}(\mathbb{R})$ to remind us that this is the locale that corresponds topologically to the real line (though as it stands it contains nothing corresponding to the real \emph{numbers}, i.e. points on the line). 
+
+We do not need anything additional to obtain the infinite `half-lines':
+\begin{defn}
+	We write:
+	\begin{itemize}
+		\item{$(-\infty, p)$ for $\bigvee \{(x, p)|x\in \mathbb{Q}\}$}
+		\item{$(p, \infty)$ for $\bigvee \{(p, x)|x\in \mathbb{Q}\}$}
+	\end{itemize}
+\end{defn}
+
+The following are all geometrically unsurprising:
+
+\begin{thm}
+	\begin{itemize}
+		\item{$(p, \infty)\cap (-\infty, q) = (p, q)$}
+		\item{$(p, \infty)\cup (-\infty, q) = \top$ if it is defined, i.e. if $p<q$}
+		\item{$(p, \infty)= \bigvee \{(r, \infty)|r > p\}$}
+		\item{$(-\infty, p)= \bigvee \{(-\infty, r)|r < p\}$}
+		\item{$\bigvee \{(-\infty, p)| p\in \mathbb{Q}\} = \top = \bigvee \{(p, \infty)| p\in \mathbb{Q}\}$}
+	\end{itemize}
+\end{thm}
+
+These observations can even be used to furnish an alternative definition of $\mathscr{L}(\mathbb{R})$ but this approach seems (to me) to be slightly less natural overall.
+
+
+
+\subsection{Spectrum of a Locale} 
+
+For reference, we reiterate here the definition of a filter explicitly in terms of $\mathscr{L}(\mathbb{R})$:
+\begin{itemize} 
+	\item If $(p, q)\in F$ and $(p, q)\subseteq (r, s)$ then $(r, s)\in F$. 
+	\item If $(p, q) and (a, b)\in F$ then $(p, q)\cap (a, b)\in F$. 
+\end{itemize}
+
+
+We are interested in filters in $\mathscr{L}(\mathbb{R})$ because they look a little like sequences from traditional analysis. We should imagine ourselves choosing as a starting-point any element of the filter and then `walking down it' by choosing each successive element to be strictly less then its predecessor. By doing this the size of the intervals should gradually shrink, mimicking the process of convergence to a limit.
+
+However, this does not always happen. A filter containing $(p, q)$ is required to have all the (infinitely many) `bigger' intervals that contain $(p, q)$, but it is not required to contain any `smaller' intervals. Thus our process of `walking down the filter' may simply stop when we `hit the bottom'.
+
+We therefore identify a special class of filters where this does not happen:
+
+\begin{defn}
+	A filter $\Delta$ is \textbf{prime} if $a\lor b \in \Delta$ implies that either $a\in \Delta$ or $b\in \Delta$ (whimsically, we might say that `meet distributes over logical or'). We may inductively extend this to any join of finitely many elements. If it remains true for countably infinite joins then the filter is said to be \textbf{completely prime}.
+\end{defn}
+
+For every interval a prime filter contains, it also contains \emph{lots} of smaller intervals. This is because $(p, q)$ can be written $(p, r)\cup (s, q)$ for any choice of $r$ and $s$ as long as $p<s<r<q$. So every interval in a prime filter has a great many subintervals `underneath' it, each of which shares one of its endpoints. To take the next step of our walk down the filter we choose one of those subintervals. We can always keep `walking down it' and never run out of smaller intervals.
+
+Recall from the section above that each completely prime filter in a locale corresponds to a map $2\to L$ and thus to a `topological point' in an almost entirely classical way.
+
+The set of all completely prime filters containing a given lattice element $a$ is written $\Sigma_a L$. 
+
+\begin{thm}
+	The set $\tau = \{\Sigma_a L | a\in L\}$ forms a topology on the set on all completely prime filters in $L$.
+\end{thm}
+
+\begin{proof}
+	We need to show that $\tau$ is closed under arbitrary unions and finite intersections, and that it includes $\emptyset$ and the whole set. 
+	
+	First, observe that $L$, as a frame, has top and bottom elements and that $\Sigma_\top$ is the set of all completely prime filters while $\Sigma_\bot = \emptyset$. So the last part is satisfied.
+	
+	Let $A, B\in \tau$; then $\Sigma_{A\land B}  = \Sigma_A \cap \Sigma_B$. Thus $\tau$ is closed under pairwise intersections.
+	
+	Also, $\Sigma_{A\lor B}  = \Sigma_A \cup \Sigma_B$. Thus $\tau$ is closed under pairwise unions. But because these are completely prime filters, this can also be extended to countable joins; no corresponding assumption allows us to so generalise meets.
+	
+	Hence $\tau$ satisfies the axioms for a topology.
+\end{proof}
+
+\begin{defn}
+	The set of all completely prime filters equipped with the topology $\tau$ is called the \textbf{spectrum} of $L$, written $\text{Sp}(L)$.
+\end{defn}
+
+\subsection{Sober Spaces, Spatial Locales}
+
+We may interpret a completely prime filter as a geometric point, obtained constructively by a potentially infinite process of `zooming in' by specifying ever-smaller open sets. Thus, $\text{Sp}(\mathscr{L}(\mathbb{R}))$ ought to be the set of all points in the space, equipped with the topology of open sets given by $\mathscr{L}(\mathbb{R})$ (recall, this is a frame and therefore has exactly the same structure as a topology).
+
+It follows that we can interpret $\text{Sp}$ as a functor from the category of locales to the category of topological spaces. Note that this is a covariant functor, since locale morphisms go in the same direction as continuous maps.
+
+When $L$ is a frame exactly the same construction works, since it depends only on the lattice structure. In this case we obtain a contravariant functor , which P and P write as $\Sigma$, in exactly the same way: elements of the lattice map to open sets in the topology and completely prime filters map to points in the underlying set.
+
+There is also a functor going the other way, written $\Omega$, which sends a topological space to a locale by simply discarding the point-set -- or which does the same, by contravariantly, with a frame. P and P sometimes write this functor as $\text{Lc}$.
+
+Note that  $\text{Sp}$ and $\Sigma$ do not `hit' every topological space. Some topologies do not contain enough open sets to uniquely identify every point; roughly speaking, those are the ones that fail to be Hausdorff. More precisely, the topological spaces that lie in the scope of these functors are the \textbf{sober spaces}. More exotic spaces lie beyond the reach of this approach; they have \emph{too few open sets}.
+
+Furthermore, $\Omega$ has the same problem; some locales cannot be thought of as topological spaces because they have \emph{too few points} (i.e., too few completely prime filters) to correspond to topological spaces. Those that correspond to topologies, i.e. for which $\Omega$ is defined, are called \textbf{spatial locales}.
+
+The correspondence between spatial locales and sober topological spaces is called `Stone duality'. For the most part these notes are concerned only with these spaces.
+
+\subsection{Homeomorphism to $\mathbb{R}$}
+
+We now show how to get from $\mathscr{L}(\mathbb{R})$, which is a lattice of open intervals of $\mathbb{Q}$, to the classical real line $\mathbb{R}$, which is a point-set accompanied by the usual topology of open sets. 
+
+The idea is to consider the completely prime filters to `identify' points in the classical picture, so that elements of $\Sigma \mathscr{L}(\mathbb{R})$ correspond to real numbers.
+
+The intuitive notion of a Dedekind cut motivates the following definition (the terminology is mine):
+
+\begin{defn}
+	A \textbf{cut} in a frame $F$ is a map $h:F\to 2$ where $2 = \{0, 1\}$ that respects the order, i.e. if $p\mapsto 0$ and $q\mapsto 1$ then $p<q$.
+\end{defn}
+
+\begin{defn}
+	A \textbf{Dedekind cut} in $\mathbb{Q}$ is a pair of disjoint open intervals
+\end{defn}
+
+We then have the following theorem:
+
+\begin{thm}
+	There is a homeomorphism $\phi:\Sigma\mathscr{L}\mathbb{R}\to 2$ that satisfies the following: 
+	\[
+	p < \phi(h) < q \Leftrightarrow h(p, \infty) = \top = h(-\infty, q)
+	\]	
+	for all rationals $p, q$ and all completely prime filters $h:\mathscr{L}(\mathbb{R})\to 2$.
+\end{thm}
+
+TODO: work through the proof.
+
+\subsection{Identification of Real Numbers}
+
+How does a completely prime filter in $\mathscr{L}(\mathbb{Q})$ correspond to a number? We will look at some simple examples and also show that $:\Sigma\mathscr{L}\mathbb{R}$ has some of the basic properties we expect of a number system.
+
+Suppose we wish to find the point corresponding to the (rational) real number $x=\frac{3}{2}$. We will construct an explicit Cauchy sequence that converges to $x$ by taking a walk down the completely prime filter corresponding to it; this filter in fact contains all and only those walks that produce Cauchy sequences that converge to $x$.
+
+We may begin by identifying any finite open interval that contains it, $x_1=(p_1, q_1)$ (in this case, for example, we could choose $x_1=(1, 2)$. We now ask whether $x<\frac{q_1]p_1}{2}$. If so, choose $x_2=(p_1, \frac{q_1]p_1}{2})$; if not, choose $x_2=(\frac{q_1]p_1}{2}, q_1)$.
+
+In this way we produce a sequence of nested intervals, each of which shares one endpoint with its predecessor and contains $x$. Considering $\pi_1(x_i)$ to be the sequence of lower bounds of the selected intervals, we obtain a monotone Cauchy sequence whose limit is $x$. Of course, $\pi_2(x_i)$, the sequence of upper bounds, produces a different sequence with the same properties.
+
+For algebraic irrational numbers the procedure is the same, but since $x$ is not given as an element of $\mathbb{Q}$ we need to express the algorithm in terms of a polynomial over $\mathbb{Q}$ whose solution is $x$. The transcendental numbers, on the other hand, must be dealt with on a case-by-case basis that depends on the definition of the number. 
+
+There is a philosophical decision to be made here. You may choose to assume that you are `given' all the rational and irrational numbers at once by virtue of having defined $\mathscr{L}(\mathbb{R})$ and hence (you may claim) all of its completely prime filters. This would be the classical approach; you would then define `the set of real numbers' to be the set of all of the (already-given) completely prime filters, and this leaves you with classical Cauchy-Weierstrass analysis of the kind still taught on standard undergraduate programmes. 
+
+On the other hand, you may prefer to see a completely prime filter as something that must be produced by construction. One way to do this is to specify a Cauchy sequence that it contains; this should suffice to convince all but the most hardened skeptic of the `existence' of the completely prime filter that corresponds to it. 
+
+It follows that any computable number corresponds to a completely prime filter; many transcendental numbers are computable, including all those used in `ordinary' mathematics. Alternatively, fixing a formal theory allows us to define many transcendentals by an explicit well-formed formula, and again a sufficiently strong theory (such as Peano arithmetic) yields all the `usual' transcendentals. 
+
+A problem arises with certain Cauchy sequences that are computable but whose limits are not, such as Specker sequences. If there is not completely prime filter corrsponding to the limit then various classical results fail; in particular, the least upper bound property fails, and this is intuitively something that ought to be true of a continuum. 
+
+I think a better way to think about this is to recall that points are \emph{produced} out of locales, and to keep an open mind about which methods of construction might be admissible. We can accept (if we like) the limits of Specker sequences as points if we accept the method of specifying them as a way to construct a completely prime filter. The question of whether to accept or reject them is a methodological one that does not touch mathematical metaphysics: the locale is the continuum that `exists', and the points are fully supervenient on it. Put another way, when we quantify over points we are quantifying over (potential or actual) actions, not entities.
+
+
+\section{Sheaves [TODO]}
+
+In this section we look more closely at the relationship between morphisms of locales, on the one hand, and groups and rings on the other. The general idea will be that we will `localize' maps to various open sets and consider how to `patch together' local information into global information about the whole space.
+
+We will have an intuitive picture in mind. For any locale $L$ we imagine maps $U\subseteq L\to L(\mathbb{R})$ which can be thought of informally as assigning a real number to every point in the open set $U$. Even more informally, imagine the assigned number represents temperature, so that if $U$ has been `heated up' we have a map of how the heat has spread at a particular moment. Now suppose we have that information for a collection of overlapping open sets that, together, cover $L$. We can think of this as an `atlas' of `charts', each showing a part of $L$, but overlapping so that we can find out way off the edge of one chart onto another. From this we could, for example, get a continuous picture of how the temperature will change over the course of any journel in $L$, even if the journey passes through several charts.
+
+A `sheaf' is simply the name given to the abstract structure you need to be able to assemble a consistent and complete atlas of this kind.
+
+
+
+
+
+
+\section{The Euclidean Spaces}
+
+Recall that the product of two locales is, as an object, just their Cartesian product as frames. There is nothing to prevent us from taking the product of a locale with itself. We went to a lot of trouble to define the real line, so it is natural to seek a repayment on this investment by producing a whole family of spaces. We also build some structures in them that we will use repeatedly later.
+
+\begin{defn}
+	The \textbf{$n$-dimensional real vector space}, written $\mathbb{R}^n$, is the product of $L(\mathbb{R})$ with itself taken $n$ times where $nain \mathbb{N}$.
+\end{defn}
+
+We had better justify the name:
+
+\begin{thm}Each $\mathbb{R}^n$ has a vector space structure over $\mathbb{R}$ with dimension is $n$.
+\end{thm}
+
+We picture $\mathbb{R}^1$ as an infinitely long line, $\mathbb{R}^2$ as an infinitely extended plane and $\mathbb{R}^3$ as an infinite 3D volume. Of course, here pictures run out but the algebra of vector spaces allows us to work with higher values of $n$ almost as conveniently, and sometimes to make intuitive sense of the resulting objects. Note in particular that $\mathbb{R}^1=\mathbb{R}$ is itself a vector space over $\mathbb{R}$.
+
+Note that unless we (classically) help ourselves to the set of all real numbers as a given, we must not think of the plane $\mathbb{R}^2$ as being made of an infinity of lines (copies of $\mathbb{R}$) crammed together, any more than we can see $\mathbb{R}$ itself as a conglomeration of points. Rather, we will take the view that lines may be constructed within $\mathbb{R}^2$ just as points can be constructed within  $\mathbb{R}$. The same thing, \emph{mutatis mutandis}, goes for the higher-dimensional spaces. We will not, however, labour this point.
+
+We now define some general structures that may be found in great variety, but immediately give as examples the most familiar of geometric ideas: the notions of length and distance. These is then used to construct a special topology on $\mathbb{R}$.
+
+\begin{defn}Let $V$ be any real vector space. Then a map $f:V\to \mathbb{R}$ is called a \textbf{norm} if:
+	\begin{itemize}
+		\item{$f(v)\ge 0$ for all $v\in V$}
+		\item{$f(v) = 0$ if and only if $v$ is the zero vector of $V$}
+		\item{$f(kv) = |k|(f(v))$ for all $v\in V$ and $k\in \mathbb{R}$ (see below)}
+		\item{$f(v + w) \le f(v) + f(w)$ for all $v, w\in V$}
+	\end{itemize}
+A vector space equipped with a norm is called a \textbf{normed space}.
+\end{defn}
+
+Here $|k| = k$ if $k\ge 0$ and $|k|=-k$ otherwise, so that $|k|$ is always the `positive value' or `absolute size' of $k$, obtained symbolically by `removing the minus sign, if there is one'. Thus $|-7|=7$.
+
+Instead of $f(x)$ notation We usually write a norm by enclosing $x$ between symbols, most often writing the norm of $x$ as $\|x\|$ and writing the whole normed space as $(V,\|.\|)$. In $\mathbb{R}^n$ there is a very geometric norm that associates to each vector its length in the ordinary sense:
+\begin{defn}
+	Let $V$ be a real vector space and $\{e^1,\ldots,e^n\}$ be a basis of $V$. Then if 
+	\[
+		x = \sum_{i=1}^n v_i e^i
+	\]
+	define the norm on $V$ as
+	\[
+		\|x\| = \sqrt{v_1^2 + \ldots + v_n^2}
+	\]
+	This is called the \textbf{Euclidean norm} on $V$.	
+\end{defn}
+
+\section{Manifolds as Locally Ringed Spaces [TODO]}
+
+Manifolds are topological spaces that, in a precise sense, `close-up look like $\mathbb{R}^n$'. For example, a small creature living on the surface of a vast sphere might think it lived in the plane $\mathbb{R}^2$ (perhaps wrinkled to represent mountains and suchlike). Only if it could travel far enough would it realise its true situation. There is no spot on a sphere that `gives away' its spherical nature -- one must circumnavigate it to be sure. 
+
+Thus, to be a manifold is to be locally indistinguishable from $\mathbb{R}^n$ even while perhaps being something else `globally'. The notion of local-ness is of course captured by open sets, which are what locales are made of. Keeping track of the global picture, on the other hand, is a responsibility to which sheaves are uniquely suited.
+
+We begin by developing the definitions in a general context before specializing to the `model spaces' $\mathbb{R}^n$. Consider, then, any locale $L$ and let $U\in L$ be an open set. Note that the principal down-set $\downarrow U$ is itself a locale. 
+
+\begin{defn}
+	The set of locale morphisms $U\to L(\mathbb{R})$ is called the \textbf{$\mathbb{R}$-algebra of functions} on $U$, written $\mathscr{F}^\star(U)$.
+\end{defn}
+
+Geometrically, we think of elements of $\mathscr{F}^\star(U)$ as `scalar fields' or `heat maps' on $U$ that attach to each point a number (a `temperature', say). The reason for the $\star$ in the symbol will be revealed later. Again, we had better justify the name:
+
+\begin{thm}
+	$\mathscr{F}^\star(U)$ has a natural $\mathbb{R}$-algebra structure inherited from $\mathbb{R}$.
+\end{thm}
+
+\begin{proof}
+	Let $f, g\in \mathscr{F}^\star(U)$. Then $(f + g)$ is a function defined by the rule $(f + g)(V) = f(V) +_\mathbb{R} g(V)$, and since $(f + g)$ is a locale morphism $U\to L(\mathbb{R})$ we have that $(f + g)\in \mathscr{F}^\star(U)$; that is, $ \mathscr{F}^\star(U)$ is closed under addition of functions. Furthermore, we can say the same of $fg$, the product of two functions given by multiplying their values. These two together inherit from $\mathbb{R}$ itself the structure of a ring (actually, a field).
+	[TODO: This is only a description of the ring structure, not an actual proof.]
+\end{proof}
+
+We should by now expect there to be a dual notion involving the set of locale morphisms $L(\mathbb{R})\to U$, which we could write as $\mathscr{F}(U)$ (dropping the $\star$). These morphisms can be interpreted geometrically as curves or paths followed by a particle moving in $U$. Unfortunately they do not have a natural ring structure, so we put them aside for the moment (we return to these important objects later).
+
+\begin{defn}
+	The set of all $\mathscr{F}^\star(U)$, for every open set $U\in L$, is called the \textbf{structure sheaf} over $L$, written $\mathscr{F}(L)$ or simply $\mathscr{F}$ where $L$ is understood.
+\end{defn}
+
+\begin{defn}
+	Let $U_x$ be any completely prime filter in $L$, and let $f$ and $g$ be functions defined on some element of $V\in U_x$ (and thus of all elements $W\subseteq V$). We say $f$ and $g$ have the same \textbf{germ at $x$} if there is an open set $X\subseteq U_x$ on which $f|_X=g|_X$. 
+\end{defn}
+
+\begin{defn}
+	The set of all germs at $x$ is called the \textbf{stalk} of $\mathscr{F}$ at $x$, written $\mathscr{F}_x$.
+\end{defn}
+
+\begin{defn}
+	A ring is called a \textbf{local ring} if the sum of any two non-units is a non-unit.
+\end{defn}
+
+\begin{thm}
+	The stalk $\mathscr{F}_x$ has a unique maximal ideal, which is the set of germs whose value at $x$ is 0. Thus the stalk $\mathscr{F}_x$ is a local ring.
+\end{thm}
+
+\begin{proof}
+	The non-units are the germs whose value at $x$ is zero. Certainly the sum of any two such functions will still have a value of zero at $x$.
+\end{proof}
+
+\begin{defn}
+	A \textbf{locally ringed space} is a locale equipped with a sheaf of rings such that each stalk is a local ring.
+\end{defn}
+
+Our most important examples are the spaces $\mathbb{R}^n$ equipped with the sheaf of continuous maps $U\to \mathbb{R}$ where $U\subseteq \mathbb{R}^n$ is open in the product topology. 
+
+The next step is to define appropriate maps for locally ringed spaces in such a way as to preserve their structure, thus turning them into a category. In the next few definitions, let $L$ and $M$ be any locally ringed spaces. 
+
+\begin{defn}
+	Then a \textbf{morphism of locally ringed spaces} $L\to M$ is a locale morphism $L\to M$ that respects the sheaf structure.
+	[TODO: Details.]
+\end{defn}
+
+\begin{defn}
+	Let $L$ and $M$ be locally ringed spaces. If there is a morphism of locally ringed spaces $L\to M$ that has an inverse $M\to L$, we say $L$ and $M$ are isomorphic as locally ringed spaces and write $L\cong M$.
+\end{defn}
+
+\begin{defn}
+	Let $L$ and $M$ be locally ringed spaces. Then $L$ is \textbf{locally isomorphic} to $M$ if every completely prime filter $U_x$ contains an element $V$ such that, for some $W\in M$, $\downarrow V\cong \downarrow W$ as locally ringed spaces.
+	[TODO: Check.]
+\end{defn}
+
+Finally we reach our key definition, on which everything that follows will be built:
+
+\begin{defn}
+	A locale that is:
+	\begin{itemize}
+		\item{locally isomorphic to $\mathbb{R}^n$}
+		\item{Hausdorff}
+		\item{Second countable}
+	\end{itemize}
+	is a \textbf{topological manifold}.
+\end{defn}.
+
+Note that sober spaces are always Hausdorff, and second-countability is a property of open sets only, so these are `natively localic' concepts. From now on, all our focus will be on topological manifolds and the richer and more rigid structures we can build out of them.
+
+\begin{defn}
+	A \textbf{chart} in a topological manifold is a locally ringed space isomorphism $M\supseteq U\to \mathbb{R}^n$.
+\end{defn}.
+
+The traditional definition of a topological manifold begins with these charts.
+
+
+
+
+\section{Manifolds with Boundary [TODO]}
+
+
+\section{Products and Bundles}
+
+Products of manifolds
+
+Non-trivial fibre bundles: Cylinder vs M{\"o}bius strip. 
+
+
+
+\chapter{Algebraic Topology}
+
+\section{Introduction}
+
+This chapter studies topological manifolds. Its main tool is cohomology, a powerful technique with its roots in geometry but its summit in the clouds of abstraction. This leads us to a number of beautiful duality theorems about manifolds. 
+
+The geometric idea we pursue is that of `triangulation', which means dividing a space into parts that are in some sense generalizations of the idea of a triangle to all available dimensions. In another sense this is just a development from the completely prime filters on the locale. The resulting `cohomology groups' are abstract structures that arise from the manifold and encode information about its global structure such as connectivity, orientability and the presence of holes. 
+
+Looked at axiomatically, (co)homology theories represent a vast territory. By relaxing one of the axioms we obtain a new approach known as `homotopy'. Homotopies are also natural objects in topology; they represent a kind of second-order continuity pertaining to `continuous transformations of continuous transformations'. In general, homotopy theories do not tell us anything cohomology theories can't, and are harder to calculate with, so they seem to be less in favour.
+
+\section{Singular (Co)Homology [TODO]}
+
+\section{Duality in Manifolds [TODO]}
+
+\section{Homotopy [TODO]}
+
+
+
+
+
+
+
+\chapter{Following Fibres: Differential Topology}
+
+
+\section{Introduction}
+
+\section{Smooth Structures}
+
+\section{Tangent and Cotangent Space}
+
+\section{Tangent and Cotangent Bundles}
+
+When we set up the machinery of topological manifolds, one of the recurring structures was the sheaf. In adding some rigidity, we will begin to meet a new structure more frequently: the fibre bundle. This has, like the sheaf, turned out to be a very general kind of setup that is extremely useful.
+
+We begin by constructing the tangent and cotangent bundles, which are very easy and concrete. We then abstract from them a more general picture.
+
+\section{Orientation and the Frame Bundle}
+
+Let $M$ be a manifold and $\pi:E\to M$ any vector bundle; we will particularly have in mind $TM$ as an example. Then of course $\pi^{-1}(p)$ is a vector space. A choice of basis of this space \emph{along with an ordering} is called a frame at $p$. Note that the ordering is important: if $\{x, y\}$ is a basis of $\pi^{-1}(p)$ this gives rise to two different frames, $(x, y)$ and $(y, x)$. In general, a $k$-dimensional fibre will have $k!$ frames for each choice of basis.
+
+The set of all frames at $p$ will be written $F^E(p)$. We can now take the disjoint union and form the fibre bundle $F^EM$ 
+\[
+	F^EM = \coprod_{p\in M}F^E(p)
+\]
+
+whose fibre over each $p$ is precisely $F^E(p)$. This is called the frame bundle of $E$. When we speak of the frame bundle of a manifold without specifying the vector bundle, we will mean the tangent frame bundle $F^{TM}M$.
+
+A smooth section of $F^{TM}M$ is called an orientation of $M$. Not all manifolds admit a global orientation; a familiar example is the M\:obius strip. If an open subset $U\subseteq M$ admits a smooth section then the restriction of the frame bundle to $U$, $F^{TU}U$, is a trivial bundle. That is, it's just a product with no torsion.
+
+Recall that $E(p)$ is a $k$-dimensional vector space over $\mathbb{R}$ and so is isomorphic to $\mathbb{R}^k$. So we can consider the isomorphisms $\mathbb{R}^k\to E(p)$. Assume $\mathbb{R}^k$ is given an ordered, orthonormal basis; if so, a particular frame $f\in F^E(p)$ determines exactly one such map that takes the standard basis vectors of $\mathbb{R}^k$ to $f$, respecting order. What's more, clearly any isomorphism $\mathbb{R}^k\to E(p)$ determines a frame (simply look at the image of the basis vectors).
+
+This means we can think of a frame as a sort of `hyper-local chart' -- a mapping between $M$ and the Euclidean space $\mathbb{R}^k$ that has been shrunk down to a single point. It doesn't matter whether we think of a frame at $p$ as an ordered basis for $E_pM$ or as an isomorphism $\mathbb{R}^k\to E_pM$ or, of course, as its inverse, a map $E_pM\to\mathbb{R}^k$. 
+
+\subsection{A Section of the Frame Bundle is an Orientation}
+
+To justify calling a smooth section of $F^EM$ an `orientation', consider two points $p$ and $q$ and their associated frames $F^EM(p) = f_p$ and $F^EM(q) = f_q$. Then we can consider the map
+\[
+	f_p^{-1}f_q: E(q)\mathbb{R}^k\to E(p)
+\] 
+Recall that both $E(q)$ and $E(p)$ are isomorphic to $\mathbb{R}^k$, so this is just an automorphism of $\mathbb{R}^k$. As such it has a nonzeo determinant that is independent of choice of basis. If that determinant is positive for every pair $p, q\in M$ then the frame section in question remains oriented the same way everywhere on the manifold.
+
+We already limited ourselves, as usual, to considering only smooth sections. Suppose we were to find a smooth section such that the determinant of $f_p^{-1}f_q$ is negative. Without loss of generality, suppose that $\||f_p\|| > 0$ and $\||f_p\|| < 0$. Then any curve in $M$ that passes through both $p$ and $q$ must pass through a point $x$ whose frame has determinant equal to zero, by the intermediate value theorem. But this is impossible, since such a frame would not be an isomorphism $\mathbb{R}^k\to E(x)$. Hence, is a smooth section of the frame bundle exists on $M$, it is an orientation.
+
+
+
+\section{Lie Groups and Principal Bundles}
+
+A Lie group is a manifold whose points have a smooth group structure. This means that every point $p\in M$ can be thought of as a smooth map $M\to M$. Since groups include inverses for all their elements, each of these maps must be invertible, so each $p$ is a diffeomorphism.
+
+A simple example comes from the circle, $\mathbb{S}^1$. We choose one distinguished point and label it $0$. Then each point on the circle is associated with the rotation of the circle that moves that point to the position that 0 was in. Of course, the point 0 itself is the `rotation' that does not move it at all. These rotations form a group, and they are diffeomorphisms of the circle. 
+
+Any point can be chosen to act as 0, and often this choice does not matter at all. For example, consider the fibre bundle $M\times\mathbb{S}^1$ that connects a circle to every point of a manifold $M$. We do not very much care which point of each circle is 0; we can still say that the fibres of $M\times\mathbb{S}^1$ are Lie groups. 
+
+Lie groups are important because they are often found as the fibres of useful bundles. For example, a fibre of $TM$ is isomorphic to $\mathbb{R}^k$, where $k$ is the dimension of the manifold. Therefore it is a $k$-manifold. It is also a group under addition, and vector addition is smooth, so it is a Lie group.
+
+A fibre bundle whose fibres are all isomorphic copies of the same Lie group is called a principal bundle. We require that the whole bundle should be a smooth manifold, but this is no problem; on a local trivialization around any point we can use the product topology to build a chart.
+
+
+\section{Manifolds with Corners}
+
+
+
+
+
+
+\chapter{Crossing Fibres: Riemannian Geometry}
+
+\section*{Introduction}
+
+From `differential topology' we have a natural notion of the derivative of a covector $w$ in $T_p^\star M$: choose a tangent vector $v$, and find $wv$, which is the gradient of $w$ in the $v$-direction. Since this extends to every point on the manifold, we obtain the derivative of a function $f:M\to\mathbb{R}$ with respect to a tangent vector field $V$, which is a section of the tangent bundle.
+
+We can also think of a tangent vector at $p$ as the velocity of any curve passing through $p$ whose germ it is. And we have the Cartan calculus that can give more complex pictures of tangent vector fields on $p$ (e.g. the familiar divergence and curl).
+
+However, we don't have any `second degree' notions. For a function $f:M\to\mathbb{R}$ we can ask about its gradient at a point but not ask how the gradient is changing. More simply, for a particle moving through $p$ we can ask about its velocity but not its acceleration. 
+
+Acceleration has obvious importance in dynamics because of Newton's second law of motion, summed up by the famous equation $F=ma$. A consequence of this formula is that when no forces are acting on an object its acceleration is zero, and under these conditions Newton's first law says the object will move in a straight line with constant velocity. We can turn this around and \emph{define} a straight line as a path that can be followed by a particle moving without acceleration. This will allow us to define the analogues of straight lines on curved manifolds.
+
+To speak of acceleration it seems we would have to look `a little way past $p$' to see how its velocity vector changes as we move along it. But when we do this, we cross the fibres of the vector bundles, and we lack any kind of structure that can, as it were, hold the fibres in place as we do so. The structure we need for this is an affine connection; it is a kind of hairclip for vector bundles.
+
+With such a connection we can develop not only a full-blooded differential calculus capable of describing physical phenomena but also a geometry able to speak of familiar ideas with great precision and generality of application.
+
+For example, we will see how to define what it means for a particle to move `in a straight line' in a manifold that is itself curved. We will also see how to move a vector around on a manifold in a way that `preserves its direction'. These apparently simple achievements -- which are by no means easy in curved spaces -- open up an infinite universe of geometric possibilities.
+
+\section{Riemannian Metric}
+
+Let $X$ and $Y$ be sections of $TM$ over some manifold $M$. Then at each point $p$, $X(p), Y(p)\in T_pM$. Suppose we have an inner product defined on $T_pM$; then we can calculate $\langle X(p), Y(p)\rangle$, a number. If we had such an inner product at every point $p$ then every pair of tangent vector fields would give rise to a scalar field, i.e. we would have a map $g:\Gamma(TM)\times\Gamma(TM)\to \Gamma(\mathbb{R}M)$. As usual we will insist that this scalar field is smooth.
+
+Note that the inner product is an element of $T^\star_pM\otimes T^\star_pM$. However, it is not a differential 2-form because rather than skew-symmetric the inner product is symmetric. The order-$k$ symmetric tensors form their own graded algebra, similar to the exterior algebra, known simply as the symmetric algebra. $S^kT^\star_pM$, so any inner product must be an element of $S^2T^\star_pM$. It follows that we can think of a Riemannian metric as a smooth section of $S^2T^\star M$, the grade-2 symmetric bundle over $M$.
+
+It is important to emphasise that, although it appears to use only ideas we have already seen, specifying a Riemannian metric requires additional structure.
+
+
+\section{Connection}
+
+
+
+\section{The Covariant Derivative}
+
+We write $Gamma(E)$ to represent the set of all suitably well-behaved sections of a vector bundle $E$ over a manifold $M$. then the derivative we seek must be is a map
+\[
+	\nabla:\Gamma(TM)\otimes\Gamma(E)\to\Gamma(E)
+\]
+Each element of $\Gamma(TM)$ represents a direction field -- i.e., a tangent vector at each point with respect to which we are performing the differentiation. An element of $\Gamma(E)$ represents a (not necessarily tangent) vector field that we want to differentiate. What we get back is another (not necessarily tangent) vector field from $\Gamma(E)$.
+
+To have a chance of looking like a derivative, we require that everything is as linear as it can be, and we also impose a Leibniz rule. 
+
+This is still not sufficient to uniquely specify a single covariant derivative, which should not be very surprising as all we've done so far is linear algebra and this hardly seems sufficient to make calculus. However, we can do quite a lot of work with this general definition. It turns out that under some reasonable-looking additional constraints it can indeed be specified uniquely.
+
+
+\end{document}
