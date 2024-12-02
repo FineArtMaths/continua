@@ -1,0 +1,922 @@
+\documentclass[oneside,english]{amsbook} 
+\usepackage[T1]{fontenc} 
+\usepackage[latin9]{inputenc} 
+\usepackage{amsmath} 
+\usepackage{amstext} 
+\usepackage{amsthm} 
+\usepackage{amssymb}
+\usepackage{mathrsfs} 
+\usepackage{hyperref}
+
+\makeatletter 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands. 
+\numberwithin{section}{chapter} 
+\theoremstyle{plain} 
+\newtheorem{thm}{\protect\theoremname}   
+\theoremstyle{definition}   
+\newtheorem{defn}[thm]{\protect\definitionname}
+
+\makeatother
+
+\usepackage{babel}   
+\providecommand{\definitionname}{Definition} 
+\providecommand{\theoremname}{Theorem}
+\providecommand{\Cech}{\v{C}ech }
+\providecommand{\Poinacre}{Poincar\'e }
+
+\begin{document}
+
+\title{Point-Free Topology -- Notes}
+
+\maketitle
+
+\tableofcontents
+
+\chapter*{About this Document}
+
+This is part of \href{https://github.com/FineArtMaths/continua}{the continua project}. The project is broken down into `modules', each covering a specific topic. Each module ultimately becomes one of more courses. The approach is:
+
+\begin{itemize}
+	\item{Identify a topic that should be its own module (this is recorded in the `overview' documents in each main folder)}
+	\item{Create a `notes' document assembling the technical material for each module in a fairly condensed form, but with some indication of how the pedagogy might go (that's what you're looking at now)}
+	\item{Create one or more coursebooks that contain the technical material along with motivation, philosophical reflections, pictures, examples, intuitive explanations and so on.}
+\end{itemize}
+
+When the coursebooks are complete, the notes document is no longer needed and will probably be deleted. So the fact that you're looking at this means this is a work in progress -- it is incomplete, disorganised and probably full of errors.
+
+\chapter{Abstract Structure}
+
+\section{Lattices} 
+
+\begin{defn} 
+	Let $S$ be any set. Then any set $R\subseteq S\times S$ maybe called a \textbf{binary relation on $S$} and we may write $aRb$ if $(a,b)\in R$. 
+\end{defn}
+
+
+\begin{defn} 
+	Let $S$ be any set. Then a binary relation $R$ on $S$ is said to be a \textbf{partial order }if the following criteria are met for all $a,b,c\in S$: 
+	\begin{eqnarray*} 
+		aRa\ \ \text{(reflexivity)}\\ 
+		aRb\land bRa\implies a=b\ \ \text{(antisymmetry)}\\ 
+		aRb\land bRc\implies aRc\ \ \text{(transitivity)} 
+	\end{eqnarray*}
+	 We say the pair $(S,R)$ is a \textbf{partially ordered set} (or \textbf{poset }for short). 
+\end{defn} 
+
+Typically we will use symbols rather than letters to denote binary relations; in particular, when $R$ is an order relation we usually write it as $\le$. Check that the three criteria above make sense when you replace $R$ with $\le$, assuming this symbol has something like its usual meaning. We write, for example, $(S,\le)$ to mean the set $S$ equipped with the partial order $\le$. 
+
+\begin{defn} 
+	Let $(S,\le)$ be a partially ordered set. Then its \textbf{opposite poset} is the poset $(S,\lhd)$ is the poset defined on $S$ such that $a\lhd b$ whenever $b\le a$. 
+\end{defn} 
+
+Clearly when we think of the `normal' meaning of $\le$ the opposite poset would be given by the `normal' meaning of $\ge$. If we think of a poset's elements arranged in space so that when $a\le b$ we arrange $a$ to be physically below $b$ then we can think of turning a poset into its opposite as `turning it upside down' or reflecting it in a horizontal mirror. Clearly the opposite of the opposite of $(S,\le)$ is just $(S,\le)$, just as the reflection of a reflection is just the image you started with. 
+
+\begin{defn} 
+	Let $(S,\le)$ be a partially ordered set. If either $a\le b$ or $b\le a$ is in $\le$for every choice of $a,b\in S$ then $\le$ is called a \textbf{total order} and $(S,\le)$ a \textbf{totally ordered set }(or \textbf{toset }for short). 
+\end{defn} 
+
+Most of the important constructions in this chapter involve posets that are not totally ordered. A poset has very little structure, and a toset a lot; what sits in between is an object called a lattice. Both the logic \emph{and }the set theory we developed in the previous section can be understood as having a lattice structure, and we exploit this by re-using some of the notation. We keep two separate examples in mind. The first we call $L$, a set of logical propositions (of any kind) ordered by implication, i.e. $a\le b$ if $a\impliedby b$ (in words, $a$ is implied by $b$). The second we call $J$, a set of sets ordered by inclusion, i.e. $a\le b$ if $a\subseteq b$. Note that in both cases, depending on which logical propositions are included in $L$ or sets included in $J$, we can very easily fail to get a total order. 
+
+\begin{defn} 
+	Let $(S,\le)$ be a partially ordered set and $a,b\in S$. Then the \textbf{meet} of $a$ and $b$, written $a\land b$, \emph{if it exists} is the element $c\in S$ such that $c\le a$ and $c\le b$ and if $d$ also satisfies these requirements then $d\le c$. 
+\end{defn}
+ 
+A more sophisticated way to say this is that $a\land b$ is the \textbf{greatest lower bound }of $a$ and $b$ in $(S,\le)$. In the case of $(L,\impliedby)$ we see that $a\land b\impliedby a$ and $a\land b\impliedby b$. Clearly no other set of propositions will achieve this unless its propositions are contained wholly by the propositions in both $a$ and $b$, and $a\land b$ (in the sense of `$a$ and $b$') is \emph{by definition} the largest set that achieves this. The case of $(J,\subseteq)$ is almost exactly the same; clearly $a\cap b\subseteq a$ and $a\cap b\subseteq b$, and by a similar argument no smaller set can satisfy both these demands at once.
+
+We now make a \emph{dual }definition, in a sense we will make clear later. Compare this carefully with the previous one, looking for the parallelism of phrases and noticing where a word changes to its opposite. 
+
+\begin{defn} 
+	Let $(S,\le)$ be a partially ordered set and $a,b\in S$. Then the \textbf{join} of $a$ and $b$, written $a\lor b$, \emph{if it exists} is the element $c\in S$ such that $a\le c$ and $b\le c$ and if $d$ also satisfies these requirements then $c\le d$. 
+\end{defn} 
+
+A more sophisticated way to say this is that $a\lor b$ is the \textbf{least upper bound }of $a$ and $b$ in $(S,\le)$. In the case of $(L,\impliedby)$ we see that $a\impliedby a\land b$ and $b\impliedby a\land b$. Clearly no other set of propositions will achieve this unless its propositions wholly contain the propositions in both $a$ and $b$, and $a\lor b$ (in the sense of `$a$ or $b$') is \emph{by definition} the smallest set that achieves this. The case of $(J,\subseteq)$ is almost exactly the same; clearly $a\cup b\subseteq a$ and $a\cup b\subseteq b$, and by a similar argument no larger set can satisfy both these demands at once.
+
+In a general poset $a\land b$ and $a\lor b$ may fail to exist for some (or even all) pairs of elements, but if the poset is `sufficiently nice' this will not happen. 
+
+\begin{thm} 
+	Any fact about posets that mentions only the partial order (and concepts derived from it) can be rewritten with dual terms exchanged and the result is also a fact. 
+\end{thm} 
+
+This is known as the principle of \textbf{duality}, and we will meet many more examples. It essentialy says there is an operation like a reflection that sends meets to joins and top to bottom, turning the whole lattice upside down, and that this is a symmetry of the lattice. We save the proof until later, when we have more of an idea of how symmetries work and we know how to tell when two lattices are `structurally the same'. 
+
+\begin{defn} 
+	Let $(S,\le)$ be a partially ordered set. Then $(S,\le)$ is a \textbf{lattice} if $a\land b\in S$ and $a\lor b\in S$ for every $a,b\in S$.
+\end{defn} 
+
+\begin{thm} 
+	For any set \emph{$X$},$(2^{X},\subseteq)$ is a lattice.
+\end{thm} 
+
+\begin{proof} 
+	Recall that $2^{X}$ is the set of all subsets of $X$. If $a$ and $b$ are subsets of $X$ then so is $a\cap b$, which is their meet. Similarly, so is $a\cup b$, which is their join.  
+\end{proof} 
+
+Note that we must have that $X\in2^{X}$, otherwise some joins will fail to exist; similarly, if we did not have $\emptyset\in2^{X}$ then some meets would fail. Fortunately, in the previous section we defined $2^{X}$ to include them. We now explore the structure of $(2^{X},\subseteq)$ a little further. 
+
+\begin{defn} 
+	Let $(S,\le)$ be a lattice. If it contains an element $a$ such that $a\le b$ for every $b\in S$ then $a$ is referred to as the \textbf{bottom element} of the lattice, sometimes written $\bot$. Similarly, if $c$ is such that $b\le c$ for every $c\in S$ then $b$ is referred to as the \textbf{top element}, sometimes written $\top$. A lattice that contains both is called a \textbf{bounded lattice}. 
+\end{defn} 
+
+Thus $\bot\land a=\bot$ and $\top\lor a=\top$ for all $a\in S$. Top and bottom elements need not necessarily exist, but if they do they are unique. In $(2^{X},\subseteq)$ we have $\top=X$ and $\bot=\emptyset$. Recall that we had to make sure the power set definition included these so we would get the lattive structure. In $(L,\impliedby)$ we also need special elements. We usually say $\top$ represents some vacuously true statement such as $1=1$ and $\bot$ represents some vacuously false statement such as $1\ne1$. 
+
+\begin{thm} 
+	Meets and joins in a lattice are \textbf{commutative}, i.e. $a\lor b=b\lor a$ and $a\land b=b\land a$; they are also \textbf{associative}, i.e. $a\lor(b\lor c)=(a\lor b)\lor c$ and $a\land(b\land c)=(a\land b)\land c$. 
+\end{thm} 
+
+The associativity of meet and join license us in writing chains of one or the other without brackets, for example $a\lor b\lor c\lor d$, since we can place the brackets in any way we please to evaluate it and will always get the same answer. If an expression contains a mixture of meets and joins we must still employ brackets, however.
+
+We can even adopt notation like this: 
+	\[ \bigvee_{i\in I}a_{i} \]
+Here $I$ is some set, called the \textbf{indexing set}, which we usually think of as a set of counting numbers, to which we assume we've already matched up some objects (the $a_{i}$). We run through the elements in the ndexing set one by one, joining together the $a_{i}$ that correspond to them. For example, 
+	\[ \bigvee_{i\in\{1,2,3,4\}}a_{i}=a_{1}\lor a_{2}\lor a_{3}\lor a_{4} \]
+ Of course, we can do the same thing with meets: 
+ 	\[ \bigwedge_{i\in I}ai \]
+
+We also make some seemingly trivial definitions that tidy things up for us so that we can write meets and joins of sets without worrying whether they have at least two elements: 
+
+\begin{defn} 
+	In a bounded lattice, we define the \textbf{empty join }to be $\bigvee\emptyset=\bot$ and similarly the \textbf{empty meet }to be $\text{\ensuremath{\bigwedge\emptyset}=\ensuremath{\top}}$. We also define the \textbf{trivial join }of a single element to be $\bigvee\{x\}=x$ and the \textbf{trivial meet }to be $\bigwedge\{x\}=x$. 
+\end{defn} 
+
+Now a definition that will be crucial to the objects we are working towards in this section: 
+
+\begin{defn} 
+	Let $(S,\le)$ be a lattice. It is said to be \textbf{distributive} if $a\lor(b\land c)=(a\lor b)\land(a\lor c)$ for all $a,b,c\in S$.
+\end{defn} 
+
+\begin{thm} 
+	If $a\lor(b\land c)=(a\lor b)\land(a\lor c)$ for all $a,b,c\in S$ then $x\land(y\lor z)=(x\land y)\lor(x\land z)$ for all $x,y,z\in S$ .
+\end{thm} 
+\begin{proof} 
+	Apply the principle of duality. 
+\end{proof} 
+
+An important caveat: in a distributive lattice we have 
+	\[ 
+		(\bigvee_{i\in I}a_{i})\land b=\bigvee_{i\in I}(a_{i}\land b)\ \ \ \text{and\ \ \  }(\bigwedge_{i\in I}a_{i})\lor b=\bigwedge_{i\in I}(a_{i}\lor b) 
+	\]
+as long as the indexing set $I$ is finite -- that is, as long as we're only meeting or joining a finite number of objects. If $I$ were, for example, the set of \emph{all }counting numbers, associativity no longer suffices. 
+
+\begin{defn} 
+	A \textbf{Heyting lattice} is a bounded distributive lattice. 
+\end{defn} 
+
+Heyting lattices will be \emph{very} important in all that follows. We can see \emph{almost }right away that $(2^{X},\subseteq$) and $(L,\impliedby)$ are both Heyting lattices. For $(2^{X},\subseteq)$, you can convince yourself of the distributive law by drawing Venn diagrams; $a\cup(b\cap c)=(a\cup b)\cap(a\cup c)$; clearly $(a\cup b)\cap(a\cup c)$ is the whole set $a$ (which is on both sides of the intersection) unioned with whatever $b$ and $c$ have in common. For $(L,\impliedby)$ simply draw up truth tables for $a\lor(b\land c)$ and $(a\lor b)\land(a\lor c)$ to show they are equivalent regardless of the truth values assigned to $a$, $b$ and $c$.
+
+We have considered distributivity between pairs of elements and seen that it extends to finite meets and joins unproblematically, but sounded a word of warning about passing to the infinite case. In fact we will be very interested in examples where infinite joins work well but infinite meets don't. This motivates the following definition, along with its dual: 
+
+\begin{defn} 
+	A \textbf{frame }is a Heyting lattice in which the following always holds, even for infinitely many $a_{i}$:
+		\[ (\bigvee_{i\in I}a_{i})\land b=\bigvee_{i\in I}(a_{i}\land b) \]
+\end{defn}
+
+\begin{defn} 
+	A \textbf{coframe }is a Heyting lattice in which the following always holds, even for infinitely many $a_{i}$: 
+		\[ (\bigwedge_{i\in I}a_{i})\lor b=\bigwedge_{i\in I}(a_{i}\lor b) \]
+\end{defn} 
+
+It is perfectly possible for a structure to simultaneously be a frame and a coframe -- for example, $(2^{X},\subseteq)$ when $X$ itself is an infinite set. Coframes that are not frames do come up in some places, although most of our focus will be on the other case: frames that fail to be coframes.
+
+Note that if $A$ is a frame with some ordering $\le$, we obtain a coframe $A^{\prime}$by reversing the direction of the ordering: if $a\le b$ in $A$, set $b\le a$ in $A^{\prime}.$ All meets become joins and \emph{vice versa, }and so the infinite joins in the frame $A$ become infinite meets in $A^{\prime}$. If we repeat this `direction-reversing' idea on $A^{\prime}$we get back to the frame $A$ again. This is another example of duality.
+
+The definition of a frame is crucial to what follows. We now make a brief further foray into the structure of $2^{X}$. 
+
+\begin{defn} 
+	Let $(S,\le)$ be a bounded lattice and let $a\in S$. If there is a $b\in S$ such that $a\lor b=\bot$ and $a\land b=\top$ we say $b$ is a \textbf{complement} of $a$ in $(S,\le)$. 
+\end{defn} 
+
+In the case of $2^{X}$, we can see that the complement of a subset $a$ is precisely the subset of $X$ that contains everything in $X$ that is \emph{not} in $a$. For example, if $X=\{v,w,x,y,z\}$ and $a=\{v,w\}$, its complement is $\{x,y,z\}$. This is the normal sense of `the complement of $a$ in $X$', which is usually written $X\setminus a$. From this it is evident that if $b$ is the complement of $a$ then $a$ must be the complement of $b$.
+
+In $(L,\impliedby)$ the complements are very similar, although the details are a bit messier. In this case complementation corresponds to the `not' operator; we write the complement of $a$ as $\lnot a$, pronounced `not $a$'. Of course, at least in classical logic, $a\lor\lnot a$ is always true ($\top$) and $a\land\lnot a$ is always false ($\bot$). We have to be careful with negation when $a$ is a compound of statements connected by ands and ors; this is a matter you learn to deal with in any basic logic class, but not one that will detain us for now.
+
+Note that in both our examples the complement of an element is uniquely determined; this is \emph{not} a requirement and it is quite possible to construct a lattice in which an element has multiple complements. 
+
+\begin{defn} 
+	A \textbf{Boolean lattice} is a Heyting lattice in which every element has a complement. 
+\end{defn} 
+
+We have just shown what complements mean in $(2^{X},\subseteq)$ and by the definitions of all the terms involved they always exist , so $(2^{X},\subseteq)$ is a Boolean lattice. It seems that $(L,\impliedby)$ should be too, for is it not true that for every proposition $a$ there ought to be a corrsponding $\lnot a$ such that $a\land\lnot a=\bot$and $a\lor\lnot a=\top$? In fact this second part of the claim is contested -- that there is always a $\lnot a$ such that $a\lor\lnot a=\top$. In classical logic it is true by virtue of something called the Law of the Excluded Middle, and this logic is called \textbf{Boolean logic }because $(L,\impliedby)$ is a boolean lattice (historically this is false, but conceptually it's true). However, some mathematicians and physicists have become uneasy about helping ourselves to the Law of the Excluded Middle. Such people use what has become known as \textbf{intuitionistic logic} and it lives in Heyting lattices that can fail to be Boolean.
+
+To illuminate these definitions, let us take up a new example. Consider the set $\mathbb{N}$ of so-called `natural numbers', which are just the counting numbers that start 1, 2, 3, 4 and go on without end. Now consider the set $U$ of all the subsets of $\mathbb{N}$ that contain all numbers greater than some chosen number: 
+	\[ U_{n}=\{x\in\mathbb{N}|x>n\} \]
+We impose the obvious order on this set: $U_{n}\subseteq U_{m}$ if and only if $n\le m$ with the usual meaning of `$\le$' when comparing numbers. This is in fact a total order, so meets and joins are very simple; for any two sets $U_{n}$ and $U_{m}$ we must have $n\le m$ or $m\le n$. Assuming the former, we then have $U_{n}\land U_{m}=U_{m}$ and $U_{n}\lor U_{m}=U_{n}$ (another way to see this is just to define meets as intersections and joins as unions). Thus $(U,\subseteq)$ is a lattice. We can give it a top element by including $\mathbb{N}$ itself in $U$, since $U_{n}\land\mathbb{N}=U_{n}$ for all $U_{n}$. Similarly, if we add $\emptyset$this can function as the bottom element. We know that set-theoretical unions and intersections distribute over each other, so it follows immediately that this is a Heyting lattice. However, we do not have any complements at all, so we are certainly not in a Boolean lattice.
+
+Now let us consider infinite meets and joins. Note that the join of two elements in this case is the least one, i.e. $U_{n}\lor U_{m}=U_{n}$ if $U_{n}\le U_{m}$, and $U_{m}$ if the opposite holds. And any collection of positive whole numbers has a least element -- even an infinite collection can go as high as it likes, but it has to start somewhere. Thus the join of an infinite collection of sets is just its least element, and the following identity holds:  
+	\[ (\bigvee_{i\in I}U_{i})\land U_{x}=\bigvee_{i\in I}(U_{i}\land U_{x}) \]
+Since this is a Heyting lattice in which this version of the infinite distributivity rule holds, it is a frame. Is it also a coframe? Note that the meet of two elements is the greater one, i.e. $U_{n}\land U_{m}=U_{m}$ if $U_{n}\le U_{m}$, and $U_{m}$ if the opposite holds. But an infinite collection of positive whole numbers does not have a greatest element, for even though it has to start somewhere it can go as high as it likes. Thus the meet of an infinite collection of sets must be $\emptyset$, which we included precisely so we would always have the meet defined even when things go wrong. Now, if $U$ is a coframe we would have to have 
+	\[ (\bigwedge_{i\in I}U_{i})\lor U_{x}=\bigwedge_{i\in I}(U_{i}\lor U_{x}) \]
+but we have shown that 
+	\[ \bigwedge_{i\in I}U_{i}=\emptyset \]
+from which it obviously follows that 
+	\[ (\bigwedge_{i\in I}U_{i})\lor U_{x}=\emptyset\lor U_{x}=U_{x} \]
+On the other hand, since it's a meet of infinitely many sets, we must have  
+	\[ \bigwedge_{i\in I}(U_{i}\lor U_{x})=\emptyset \]
+which implies that$U_{x}=\emptyset$. Since we must allow $U_{x}$ to be any set at all, this is plainly wrong; $U$ may be a frame but it is not a coframe. This is not a trivial example: $U$ is a topology on $\mathbb{N}$ and most interesting topologies are frames but not coframes. We can't jump into defining a topological space just yet, however; we need to make a crucial detour first.
+
+
+\section{Maps and the Category of Posets}
+
+We now turn to maps between objects we have already defined: posets and various kinds of lattice. We have defined these as sets with some additional structure (an ordering, at least; perhaps meets and joins, complements, top and bottom elements and so on). The idea will be to describe the kinds of maps that carry us from one object of this type to another while in some sense `respecting the structure'. In each case we will form a category whose objects are the structured sets and whose morphisms are those maps that respect the structure in a way we define. 
+
+\begin{defn} 
+	The category of posets, written \textbf{$\mathbf{Pos}$, }has for its objects all possible partially ordered sets. Its morphisms consist of all maps $f:(S,\le)\to(T,\lhd)$ such that whenever $s_{1}\le s_{2}$ we have $f(s_{1})\lhd f(s_{2})$. Such maps are called \textbf{monotone maps }or \textbf{poset homomorphisms}. 
+\end{defn} 
+
+The term `homomorphism' is supposed to indicate that although something changes (`morphism'), something important stays the same (`homo-'). In this case we say the $\le$structure on $S$ is respected. 
+
+\begin{defn} 
+	Let $f:(S,\le)\to(T,\lhd)$ be a poset homomorphism. If $f$ is bijective and $f^{-1}$ is also a poset homomorphism then we say that $f$ and $f^{-1}$ are \textbf{isomorphisms}. If an isomorphism exists between two posets we say they are \textbf{isomorphic} as posets and write $(S,\le)\cong(T,\lhd)$. 
+\end{defn} 
+
+When two posets are isomorphic they are equivalent or `essentially the same' as far as their partial order structures go. That is, the only difference between them is the labels we give to their elements and the symbol we use for the partial order; the notation or naming we employ may be different but the poset structures are identical.
+
+These isomorphisms will always be reversible, since when `$a$ is equivalent to $b$' we must also always have `$b$ is equivalent to $a$'. In fact there is a name for this kind of thing. 
+
+\begin{defn} Let $R\subseteq A\times A$ be a binary relation on the set $A$. We say $R$ is an \textbf{equivalence relation} if the following criteria are met for all  
+	\begin{multline*} 
+		aRa\ \ \ \ \text{(reflexivity)}\\ 
+		aRb\Leftrightarrow bRa\ \ \ \ \text{(symmetry)}\\ 
+		aRb\ \ \text{and \ \ }bRc\ \ \text{implies \ \ }aRc\ \ \ \ \text{(transitivity)} 
+	\end{multline*}
+\end{defn} 
+
+Notice that an equivalence relation is just like a partial order, except we replace antisymmetry with symmetry. Note too that equivalence relations are here defined in terms of sets, but it turns out that the collection of objects in a category is usually `too big' to be a set. Still, the same fundamental pattern is seen in isomorphisms in a category, so that every object must be equivalent to itself (reflexivity), objects are equivalent `in both directions' (symmetry) and if two things are equivalent to a third thing then they must be equivalent to each other. We usually write equivalence relations as symbols that remind us of the equals sign, which is the first equivalence relation we learn about in a mathematical context; $\cong$is a typical example.
+
+These definitions allow us to frame the following question: is the opposite of a poset always isomorphic to the original poset? That is, if $(S,\le)$ and $(S,\ge)$ are opposite posets, must we have $(S,\le)\cong(S,\ge)$? The answer is `not necessarily'. Consider the poset $(\mathbb{N},\le)$; in particular it contains an element $1$ such that $1\le x$ for all $x\in\mathbb{N}$. But there is no element $\omega\in\mathbb{N}$ such that $\omega\ge x$ for all $x\in\mathbb{N}$. Thus any homomorphism of posets between $(\mathbb{N},\le)$ and its opposite must fail to be an isomorphism, since in order to respect the $\le$ structure it would have to `collapse down' all but finitely many the elements $x$ such that $1\le x$ onto a single element in the opposite poset, and this means the homomorphism fails to be bijective. If it is not bijective there can be no inverse, so it cannot be an isomorphism. Thus $(S,\le)$ and $(S,\ge)$ are \emph{structurally different posets}, not merely different notations for the same thing. 
+
+\begin{defn} 
+	Let $(A,\le_{A},\lor_{A},\land_{A})$ and $(B,\le_{B},\lor_{B},\land_{B})$ be lattices. Then a map $f:A\to B$ is a \textbf{lattice homomorphism} if it is a poset homomorphism and furthermore: 
+		\begin{multline*} 
+			f(x\lor_{A}y)=f(x)\lor_{B}f(y)\\ 
+			f(x\land_{A}y)=f(x)\land_{B}f(y) 
+		\end{multline*}
+	The category of lattices, \textbf{$\mathbf{Lattice}$}, has all lattices as its objects and all lattice homomorphisms as its morphisms. 
+\end{defn} 
+
+It is straightforward to define the morphisms for bounded lattices, complemented lattices, Heyting lattices and Boolean lattices; simply add the appropriate rule about respecting the additional bits of structure. In each case we have done the work needed to define a category of the appropriate type. In each case, is a homomorphism has an inverse that is also a homomorphism, it is an isomorphism and the two objects it connects are essentially the same as far as the structure represented by the category is concerned.
+
+The only category of this kind we need to pay special attention to is the category of frames: 
+
+\begin{defn} 
+	Let $A$ and $B$ be frames. Then $f:A\to B$ is a \textbf{frame homomorphism} if it is a poset homomorphism the following conditions hold:
+		\begin{eqnarray*} 
+			f(x\land_{A}y) & = & f(x)\land_{B}f(y)\\ 
+			f(\bigvee_{i\in I} & x_{i})= & \bigvee_{i\in I}f(x_{i}) 
+		\end{eqnarray*}
+	(Observe that the join on the left of the second line is the join in $A$, whereas the join on the right is the one in $B$.) The category of frames, written \textbf{$\mathbf{Frm}$}, has all frames for its objects and all frame homomorphisms for its morphisms. 
+\end{defn} 
+
+This is precisely what we need if we want the distributive law to work correctly with morphisms, i.e. if $f:A\to B$ is a frame homomorphism then we are \emph{guaranteed }to have
+\[ 
+	f[(\bigvee_{i\in I}a_{i})\land b]=f[\bigvee_{i\in I}(a_{i}\land b)] 
+\] 
+Although we will not really need it, defining \textbf{$\mathbf{Cofrm}$} costs us little extra effort since its morphisms follow an entirely obvious pattern designed to guarantee the distributive law that characterises its objects:
+ 
+\begin{defn} 
+	Let A and B be coframes. Then $f:A\to B$ is a \textbf{coframe homomorphism} if (and only if) the following conditions hold:
+		\begin{eqnarray*} 
+			f(x\lor_{A}y) & = & f(x)\lor_{B}f(y)\\
+			f(\bigwedge_{i\in I} & x_{i})= & \bigwedge_{i\in I}f(x_{i}) 
+		\end{eqnarray*}
+The category \textbf{$\mathbf{Cofrm}$} has all coframes as its objects and all coframe homomorphisms as its morphisms.  
+\end{defn} 
+
+Although will not do much with \textbf{$\mathbf{Cofrm}$} in what follows, we will be interested in another category that can be constructed from \textbf{$\mathbf{Frm}$} by a different `dualizing' process. We approach this by looking again at posets but from a slightly different angle. 
+
+\begin{defn} 
+	The \textbf{poset category} derived from the poset $(S,\le)$ is a category whose objects are the elements of $S$ such that there is at most one morphism between any pair of objects. 
+\end{defn} 
+
+Here we use the term `morphism' to simply mean an arrow connecting two objects; we are not thinking of the elements of $S$ as sets (though they might be), so we are also not thinking of the morphisms as maps between sets. In this case we think of there being an arrow $a\to b$ as meaning $a\le b$ in the poset $(S,\le)$. So far this is just a restatement of the definition of a poset in other terms. 
+
+\begin{defn} 
+	Let \textbf{$\mathbf{C}$ }be a category. The opposite of \textbf{$\mathbf{C}$} written $\mathbf{C^{op}}$, is the category whose objects are the same as those in $C$ and whose morphisms are as follows: for every morphism $a\to b$ in $C$, we have a morphism $b\to a$ in$\mathbf{C^{op}}$.
+\end{defn} 
+
+\begin{thm} 
+	If \textbf{$\mathbf{C}$ }is the poset category derived from some poset $(S,\le)$ then $\mathbf{C^{op}}$is derived from the opposite poset $(S,\ge)$. 
+\end{thm} 
+
+We emphasise again that the opposite of a poset is not necessarily isomorphic to the original, and in a similar way the opposite of a category, through it has the same objects, might not have the same structure of morphisms as the original.
+
+\section{Reminder on Ideals of Rings}
+
+(This topic should be covered in the preliminary algebra coursebook but is worth recalling here since prime ideals will be so important shortly.)
+
+\begin{defn}Let $(R, +, \dot)$ be a commutative ring. An \textbf{ideal} of $R$ is a subset $I\subseteq R$ such that:
+	\begin{itemize}
+		\item{$a + b\in I$ whenever both $a\in I$ and $b\in I$.}
+		\item{$ra\in I$ whenever $a\in I$, for all $r\in R$.}
+	\end{itemize}
+\end{defn}
+
+Ideals were originally developed by number theorists as `idealized versions of numbers'. For example, working in the ring $\mathbb{Z}$, instead of the number 3 we might consider the ideal of all multiples of 3, $\{\ldots, -6, -3, 0, 3, 6, \ldots\}$. This leads to the following sequence of definitions:
+
+\begin{defn}
+	Let $R$ be a ring and $S\subseteq R$. The \textbf{ideal generated by $S$} is the set of all sums of elements of $S$ and all multiples of elements of $S$ by elements of $R$. The elements of $S$ are called \textbf{generators} of this ideal, which we sometimes write as $\langle S\rangle$.
+\end{defn}
+
+\begin{defn}
+	An ideal $I$ of a ring $R$ is \textbf{principal} if it is generated by a single element $x\in R$. That is, every $a\in I$ is a multiple of $x$. We sometimes write $\langle a\rangle$ for the principal ideal generated by $a$.
+\end{defn}
+
+\begin{defn}
+	An ideal $I$ of a ring $R$ is \textbf{prime} if whenever $ab\in I$ we have either $a\in I$ or $b\in I$.
+\end{defn}
+
+Since we have in mind the ordinary multiplication of integers, we often write the multiplicative identity as $1$, or $1_R$ to emphasise it belongs to the ring $R$, and denote it $\times$ when we need a symbol for it. Thus we write a typical ring as $(R, +, \times)$. Note that some authors do not require a ring to have a multiplicative identity, but our sense is that requiring it is becoming the standard. Also note that the ring with just its multiplication operation is usually not a group because we make no promise that there will be inverses. For example, $(\mathbb{Z}\\0_{\mathbb{Z}}, \times)$ is not a group; although we can multiply any two integers we like, we cannot find inverses for any nonzero integers besides 1 and -1.
+
+The motivation for this definition comes from the notion of `ideal numbers' above; the ideal $\{\ldots, 5, 10, 15, 20, \ldots\}$ is prime whereas $\{\ldots, 6, 12, 18, 24, \ldots\}$ is not, since $6 = 2\times 3$ but the ideal does not contain either 2 or 3. The great surprise is that this notion of `prime ideal' remains crucial even in the abstract, when numbers vanish. There is something deeper about `primality' than simply `being indivisible except by 1 and itself', the definition we learned at school.
+
+\begin{defn}
+	An ideal $I$ of a ring $R$ is \textbf{maximal} if the only ideals that contain all of its elements are $S$ and $R$ itself.
+\end{defn}
+
+For example, in $\mathbb{Z}$ all prime ideals are maximal, whereas for example $\langle 6\rangle\subset \langle 2\rangle$. For the moment, keep in mind the existence of ideals and these three properties; they will return often. It turns out that the filters we used to define points in locales are in a sense dual to the notion of ideals in rings; and there are therefore notions of ideals in locales and of filters in rings. This will be developed further when we are in a position to make use of it.
+
+
+\chapter{Locales and Frames}
+
+\section{Introduction}
+
+We have repeatedly considered what happens when we begin with an open set (think of a finitely precise observation) and `zoom in' by producing a sequence of ever-smaller open sets, each contained in the previous one. Taken to an extreme, we produced points as completely prime filters that `zoom in' in the right way, and `infinitely' in the sense that they lack any finite limiting state.
+
+Suppose you live in a one-dimensional space whose form is that of a letter Y. Imagine it is very, very big and you are extremely small. Most likely, you will assume you simply live on a straight line segment, because you won't be close enough to the `junction' of Y to see it; your local area just looks like a line. But those who live close enough to the junction know they don't live on I because they can `see' the junction.
+
+Now suppose you really want to believe you live on a line segment just as everyone says, but you have strayed close to the junction of Y. You cast your eyes down to the ground, narrowing your gaze so the junction is no longer visible (you are restricting yourself to a smaller open set) and you can now believe the orthodox view again. Unfortunately it seems that there is one spot where this doesn't work. If you're standing directly on the junction of the Y itself, no matter how small an open set you choose, you will still be looking at the junction.
+
+The idea of a topological manifold is that it is a topological space that is `locally homogeneous', meaning that wherever we are in the space, if we zoom in far enough we end up in an open set that looks just the same as the open set we reach at any other point. That is, if you narrow your field of vision enough, you won't be able to tell where you are because the open set you can see at every point looks just like some fixed `model space'. The letter Y space fails to be locally homogeneous because of the junction-point, but a great many important spaces are manifolds or belong to a wider class that can be derived from them (manifolds with boundary or with corners, for example).
+
+
+\section{Locales}
+
+We immediately make the key definition, although its motivation (and an explanation of the odd-seeming terminology) will come afterwards: 
+
+\begin{defn} 
+	The opposite of the category of frames\textbf{,$\mathbf{Frm^{op}}$,} is called the category of \textbf{locales}, written \textbf{$\mathbf{Loc}$. }Its morphisms are called \textbf{continuous maps}. 
+\end{defn} 
+
+Note that the objects of \textbf{$\mathbf{Loc}$ }are just frames, though in this context we call them `locales'. What has changed are the morphisms. It is not yet possible for us to express these as morphisms based on sets, much as we might wish to, and this is in fact for a very good reason. In traditional developments of topology we begin with a set of points, construct a structure on those points that corresponds to an object in \textbf{$\mathbf{Loc}$} (or\textbf{ $\mathbf{Frm}$}, the objects are the same) and call it a `topological space'. We then devise maps between topological spaces that are `continuous', and these are the locale morphisms. In the traditional settings, these are maps of sets that send points in one topological space to points in another. We now produce points out of locales, since without these the locale morphisms seem difficult to motivate. 
+
+\begin{defn} 
+	An \textbf{ideal} $J$ in a locale $(S,\le)$ is a subset of $S$ that meets the following criteria: 
+	\begin{itemize} 
+		\item If $a\in J$ and $b\le a$ then $b\in J$. In words: ideals are \emph{closed downwards.} 
+		\item If $a,b\in J$ then $a\lor b\in J$. In words: ideals are \emph{closed under finite joins.} 
+	\end{itemize} 
+\end{defn}
+
+An ideal is itself a lattice, because it explicitly contains all the joins it needs and its meets are all there thanks to its being closed downwards (since we always have $a\land b\le a$). Unsurprisingly, there is a dual notion: 
+
+\begin{defn} 
+	A \textbf{filter} $F$ in a locale $(S,\le)$ is a subset of $S$ that meets the following criteria: 
+	\begin{itemize} 
+		\item If $a\in F$ and $a\le b$ then $b\in F$. In words: filters are \emph{closed upwards.} 
+		\item If $a,b\in F$ then $a\land b\in F$. In words: filters are \emph{closed under finite meets.} 
+	\end{itemize} 
+\end{defn} 
+
+Again, since $F$ contains all its meets explicitly, and any join it needs will be found thanks to its being closed upwards, any filter is a lattice in its own right.
+
+Filters are the things we want. Suppose I identify a region of a continuum; call it $a$. Certainly I can expand this region to contain any other region that contains it; that means by identifying the region I've also made it possible to identify all regions $b$ such that $a\subseteq b$ -- so I have selected not just my region but a set of regions that are closed upwards. All well and good. But now suppose I want to refine my region by the means described in the introduction: by intersecting it with other regions in order to narrow it down. I can add a new region and all I have to do is include all the intersections (meets) it makes, and also all the bigger regions that contain it. 
+
+Now, where does this process of refinement end? We hope the answer is: at a point. But we know this cannot happen after a finite number of refinements; the smallest element in the filter will always be a region of some finite size. We want to say that however much we zoom in along a filter, there is always more zooming to be done. 
+
+\begin{defn} 
+	A filter $F$ is \textbf{completely prime }if whenever $\bigvee_{i\in I}a_{i}\in F$ we always have one of the $a_{i}\in F$ as well. 
+\end{defn} 
+
+This means that whenever a region is in a completely prime filter, so is some part of it. This means we can keep zooming indefinitely, and \emph{this} is what we call a point: a potentially infinite sequence of refinements of a region that gradually closes in; it does not close in `on a point', because there is no point there, just smaller and smaller pieces of continuum. This is the \emph{definition} of a point in a locale. 
+
+\begin{defn} 
+	A completely prime filter in a locale is called a \textbf{point}. 
+\end{defn}
+
+Note that we are not adding in any strange infinitary joins here; we are explicitly excluding all such joins unless one of their `factors' is needed further `down' the filter. Now we make the connection between these entirely locale-based notions and the traditional topological ones.
+
+\begin{defn}
+	Let $x$ be a point in a topological space. Then an open set $U$ is called a \textbf{neighbourhood} of $x$ if $x\in U$.\end{defn}
+
+\begin{thm}
+	The set, written $U_x$, of all neighbourhoods of a point $x$ in a topological space is a completely prime filter.
+\end{thm}
+
+\begin{thm}
+	In a sober space, the only completely prime filters are the sets of the form $U_x$.
+\end{thm}
+
+This theorem is powerful: it says that we may think of a point in a traditional topological space as a completely prime filter in the lattice of open sets. This is indeed what a point is in the theory of locales. Locales are not made out of points; rather, by specifying a completely prime filter you produce a point, just as you produce a point in Euclidean geometry by intersecting lines or circles.
+
+\begin{defn}
+	The set of all completely prime filters on a locale $L$ is called the \textbf{spectrum} of $L$.
+\end{defn}
+
+Note that this recovers the point-set of the topological space to which the locale $L$ is supposed to correspond. But note also that we are now free to be as careful as we like about which completely prime filters are available (constructible) under which circumstances, rather than having to assume they are all given before we can even define our basic objects.
+
+The process we went through was: first, create an algebraic object (a frame); second, define some kind of subset that is of interest (filters); third, define a notion of `primality' for these subsets (completely prime filters); fourth, consider the collection of all prime subsets to be a space in itself (the spectrum). We will use this exact process again in the future.
+
+Note that the definition of a filter and everything that goes along with it can be dualized to produce prime \emph{ideals}. These will come up later but the enthusiastic reader might like to work out the appropriate definitions and theorems now.
+
+\section{Some General Topology}
+
+\subsection{Sublocales and Quotients}
+
+\begin{defn}
+	A set $B$ of open sets of a locale $L$ is called a \textbf{base} for $L$ if every open $G\subseteq L$ is a join of some elements of $B$.
+\end{defn}
+
+\begin{defn}
+	Let $L$ be a locale. A map $j:L\to L$ is a \textbf{nucleus} on $L$ if the following are true for all $A, B\in L$:
+	\begin{itemize}
+		\item {$j(A\land B) = j(A)\land j(B)$ (meet-preserving)}
+		\item {$A\le j(A)$ (contraction)}
+		\item{$j(j(A))= j(A)$ (stationarity)}
+	\end{itemize}
+\end{defn}
+
+A nucleus causes the locale to `shrink' in such a way that meets are still respected. 
+
+\begin{defn}
+	Let $L$ be a locale and $j:L\to L$ a nucleus on $L$. Then the set $\{a\in L: j(a) = a\}$ is also a locale, called a \textbf{sublocale} of $L$ and written $L/j$.
+\end{defn}
+
+The notation $L/j$ is intended to suggest that in some sense each sublocale of $L$ is a quotient of $L$ by the nucleus.
+
+\begin{defn}
+	Let $L$ be a locale and $a\in L$. The \textbf{closed set} in $L$ corrsponding to $a$ is the sublocale $L/j$, where $j: u\mapsto a\lor u$. 
+\end{defn}
+
+Intuitively, $j$ identifies all the open sets that `touch' $a$; quotienting them out produces a sublocale that is analogous to the complement of $a$. Since $a$, as an element of a locale, is an open set, it makes sense to define its `complement' as a closed set.
+
+
+
+\subsection{TODO: Products of Locales}
+
+This is where the theory of general locales diverges most strongly from that of general topological spaces. 
+
+TODO: Hopefully in the `tame' cases that interest us the two ideas will coincide. It's OK to limit ourselves to finite products.
+
+
+\subsection{Normal Locales}
+
+In this section we define a very large class of `well-behaved' locales that will be used in the next chapter as the basis for the definition of manifolds. These are the spaces in which all our subsequent geometry will take place, so the abstract-seeming definitions that follow actually capture some of the features a locale must have if it is to support something like `ordinary geometry'.
+
+Note that all these definitions work for frames as well as locales; they do not make any use of continuous maps. 
+
+We begin with a property we hope all `good' geometric spaces will have: the property of being able to distinguish between actually different geometric objects. 
+
+\begin{defn}
+	Let $L$ be a locale and $\Delta_a$ and $\Delta_b$ be disjoint closed sets. Then they are said to be \textbf{separable by open sets} if there are $A, B\in L$ such that:\begin{itemize}
+		\item $\Delta_a \subseteq A$
+		\item $\Delta_b \subseteq B$
+		\item $A\cap B = \emptyset$
+	\end{itemize}
+\end{defn}
+
+\begin{defn}
+	A locale in which any pair of disjoint closed sets can always be separated by open sets is called \textbf{normal}.
+\end{defn}
+
+We wish to limit ourselves to normal locales because these are precisely the ones in which geometric objects can be identified. The following series of definitions builds up to an equivalent characterisation of normal locales that is more explicit and reveals some of their structure.
+
+\begin{defn}
+	Let $L$ be a locale. An \textbf{open cover} of $L$ is a subset $S\subseteq L$ such that $\bigcup X = L$.
+\end{defn}
+
+\begin{defn}
+	Let $S\subseteq L$ and $T\subseteq L$ be open covers. Suppose there is a map $\rho:S\to T$ such that $s\le \rho(s)$ for all $s\in S$. Then $S$ is said to be a \textbf{refinement} of $T$.
+\end{defn}
+
+The following definition concerns general subsets of a locale, but in this context we particularly have open covers in mind.
+
+\begin{defn}
+	Let $L$ be a locale and $X\subseteq L$ any subset. Let $\Sigma$ be a completely prime filter in $L$. If $\Sigma$ intersects only finitely many elements of $X$, we say $X$ is \textbf{locally finite at $\Sigma$}. If this is true for any $\Sigma$, we simply say $X$ is \textbf{locally finite}.
+\end{defn}
+
+\begin{defn}A locale $L$ is said to be \textbf{paracompact} if every open cover of $L$ has a locally finite refinement.
+\end{defn}
+
+TODO: Check the following, it's my own invention:
+
+\begin{defn}Let $\Sigma_a$ and $\Sigma_b$ be points of a locale $L$. Suppose there are $A, B\in L$ such that:
+	\begin{itemize}
+		\item{$A \supseteq X_a$ for some $X_a\in \Sigma_a$}
+		\item{$B \cap X_a = \emptyset$}
+		\item{$B \supseteq X_b$ for some $X_b\in \Sigma_b$}
+		\item{$A \cap X_b = \emptyset$}
+	\end{itemize} 	
+	We say $\Sigma_a$ and $\Sigma_b$ are \textbf{separable by open sets}.
+\end{defn}
+
+\begin{defn}
+	If every pair of points in a locale is separated by open sets, we say the locale is \textbf{Hausdorff}.
+\end{defn}
+
+\begin{thm}
+	Every paracompact Hausdorff locale is normal.
+\end{thm}
+
+Note that this means there are non-normal paracompact locales; these are all non-Hausdorff.
+
+\subsection{Connectedness}
+
+Connectedness and components
+
+
+\subsection{Compactness}
+
+
+\subsection{Topological Models of Intuitionistic and Paraconsistent Logic}
+
+Suppose that we adopt a classical, point-based model of the continuous line, which we will here call $L$. We suppose it is equipped with the usual topology, which is the one generated by its open intervals $(a, b)\subseteq L$, where $a < b$; here $a$ is allowed to be $-\infty$ and $b$ can be $+\infty$. 
+
+Point-based geometry has a special affinity for classical logic. $L$ contains subsets of points that form what is called a \emph{Boolean lattice}. Boolean lattices are models of classical logic, meaning we can interpret each point as a proposition that can be true or false, with intersections acting like conjuntions, unions like disjunctions and complementation playing the role of negation. Any collection of propositions can be treated this way, the Boolean lattice to which it gives rise is called its \emph{Lindenbaum-Taski algebra}.
+
+On the other hand, suppose we are only able to observe open sets (not individual points). We will be able to observe the open intervals but not their complements. For example $L\setminus(-\infty, 0) = [0, \infty]$ which is not open in the standard topology. Thus if we have the proposition $r(x) = x\in (-\infty, 0)$ we cannot observe the classical proposition $\lnot r(x) = x\in [0, \infty)$. 
+
+If our logic is to have a negation operator, the best we can do is $\lnot r(x) = x\in \text{int}[0, \infty) = (0, \infty)$. But now it is not the case that $r(x)\lor\lnot r(x)$, since neither is true when $x = 0$.
+
+In locales we only have access to open sets but we may specify points by completely prime filters. Thus when we are speaking of points, at least, our logic must allow for the `middle' term between $r(x)$ and $\lnot r(x)$ that classical logic excludes. The logic that this models is called \emph{intuitionistic logic}, which can accept `gaps' between the truth of $p$ and that of $\lnot p$. 
+
+An interesting aside comes about when we consider the dual objects to topologies, not in the categorical sense (this gives us frames) but the set-theoretic one. Here a topology is specified by its closed sets, with the requirements concerning unions and intersections suitably dualized.
+
+Now our situation is quite different. Suppose now that $s(x) = x\in (-\infty, 0]$ (note that this is a closed set, despite the `open end' at infinity). The best negation we can manage is $\lnot s(x) = x\in [0, \infty)$.
+
+In this case we certainly have $s(x)\lor \lnot s(x)$ -- the classical Law of the Excluded Middle is safe. But more alarmingly we can also have $s(x)\land \lnot s(x)$ -- this happens, in our example, precisely when $x = 0$. Thus it seems we must accept contradictions, and we have a model of \emph{paraconsistent logic}.
+
+The topology can, however, be formulated equally well in terms of open or closed sets, and the formulations are perfectly equivalent. Thus the intuitionistic and paraconsistent logics are dual to each other -- when one can prove a theorem, the other can prove a corresponding dual theorem. This does not mean they are identical, but that for our purposes the choice between them is a matter of preference. 
+
+We have chosen the intuitionistic perspective because it is more familiar to the mathematical community. The reader who would like a very fiddly but probably trivial exercise might try dualizing all the results in this book to be results in paraconsistent logic instead.
+
+Technical note: I have taken a paraconsistent logic to be classical logic without the Law of Non-Contradiction, i.e. without the rule that $p\land\lnot p = \bot$. Dually, intuitionistic logic, on this account is classical logic without the Law of the Excluded Middle, $p\lor\lnot p = \top$. 
+
+On the intuitionistic side we have said nothing about whether it might sometimes happen that $p\land\lnot p = \bot$, or indeed whether it can ever happen that $p\land\lnot p = \top$. All we have done is repeal the general law. Whether true duality holds -- that is, whether one can translate freely between the two perspectives in a truth-preserving way -- will depend on the semantics of the specific situation.
+
+\section{The Rational Number System}
+
+We would like the model space for manifolds to be the simplest, nicest example of a continuum we can think of. We could start with the two-dimensional plane of ordinary Euclidean geometry, but this is already a rather large and complicated object. We certainly can't start with a zero-dimensional point; we have already decided that building continua out of points is not how we want to proceed. We will therefore settle for the simplest continuum that deserves the name. Throughout this section our goal is to define a locale called the `real line' representing an infinitely extended, one-dimensional continuum. 
+
+In this section we show that the rational numbers can be constructed in a principled way using set constructions and integers only. This is important, because at first blush it may look as if the rational numbers could form a model continuum, so assuming we have access to them would be presumptuous. As in traditional treatments we use rational numbers to build a locale but we never consider a rational number to be a spatial point; rather, we use the intuition that the rational numbers capture something important about the infinite divisibility of a continuous line and use that to construct the open sets of a locale.
+
+\begin{defn}
+	An \textbf{integer} is a whole number, positive or negative, or zero. The set of all integers is written $\mathbb{Z}$.
+\end{defn}
+
+Now consider the set $\mathbb{Z}\times\mathbb{Z}$ or ordered pairs of integers, and remove those with zero in the second position -- we call the result $Q$:
+\[
+	Q = (\mathbb{Z}\times\mathbb{Z})\setminus (\mathbb{Z}\times\{0\})
+\]
+We think of elements of $Q$ as fractions, with the numerator being the first item in the pair and the denominator being the second, so that $(3,4)$ can be written $\frac{3}{4}$. The removal of the set $\mathbb{Z}\times\{0\}$ ensures we do not have any fractions with a zero denominator. We now define an equivalence relation on $Q$ as follows:
+\[
+	(a,b)\cong (c,d)\ \ \text{if and only if} \ \ ad = bc
+\]
+This makes, for example, $(2,4)\cong (1,2)$, which captures the idea that $\frac{2}{4}$ and $\frac{1}{2}$ are equivalent fractions.
+
+Now we do something new and very important. Picking any element $x\in Q$ we may form the set of all its equivalent fractions:
+\[
+	[x] = \{y\in Q \ \text{such that}\ y\cong x\}
+\]
+This is called the \textbf{equivalence class} of $x$. 
+
+\begin{thm}
+	Let $S$ be a set and $\equiv$ an equivalence relation on $S$. The equivalence classes of $\equiv$ partition $S$, which is to say every element of $S$ is in exactly one of them.
+\end{thm}
+
+\begin{proof}
+	We must have that $x\in [x]$ by the definition of an equivalence relation, for everything is equvalent to itself. So every element of $S$ is in at least one equivalence class. Suppose that $x\in [x]$ and also $x\in [y]$; then $x\cong y$ and hence $[x]=[y]$.  Hence every element is in at most one equivalence class. 
+\end{proof}
+
+\begin{defn}
+	Let $S$ be a set and $\equiv$ an equivalence relation on $S$. Then the \textbf{quotient} of $S$ by $\equiv$, written $S/\equiv$, is the set of all $\equiv$-equivalence classes of $S$.
+\end{defn}
+
+\begin{defn}
+	The set of \textbf{rational numbers}, written $\mathbb{Q}$,  is $Q/\cong$.
+\end{defn}
+
+This is simply a laborious way to say that a rational number is a fraction, but we don't care about the differences between equivalent fractions and so we `quotient them out' by thinking of them all lumped together as a single object. The quotient construction is in fact extremely general and we will meet it many more times.
+
+We now define the usual ordering on the rational numbers, writing $\le_\mathbb{Z}$ for the usual ordering on the integers (which we do not define here; it can all be done using straightforward set constructions).
+
+\begin{defn}
+	The \textbf{natural ordering} on $\mathbb{Q}$,  written $\le_\mathbb{Q}$, is defined as
+		\[
+			[(a,b)]\le_\mathbb{Q}[(x,y)]\ \ \text{if and only if}\ \ ay\le_\mathbb{Z} bx
+		\]
+\end{defn}
+
+\begin{thm}
+	$(\mathbb{Q}, \le_\mathbb{Q})$ is a totally ordered set without a top of bottom element.
+\end{thm}
+
+From now on we drop the formality and write a rational number $[q]$ as simply $q$, and instead of $\le_\mathbb{Q}$ we simply write $\le$. We also write $a<b$ to mean $a\le b$ and $a\ne b$. 
+
+\begin{defn}
+	Define $\mathbb{Q}^-$ to be the set $\mathbb{Q}$ with an added element, written $-\infty$, such that $-\infty < a$ for all $a\in \mathbb{Q}$. Similarly, by $\mathbb{Q}^+$ is to be understood the set $\mathbb{Q}$ with an added element, written $\infty$, such that $a < \infty$ for all $a\in \mathbb{Q}$.
+\end{defn}
+
+Note that $\infty$ and $-\infty$ play no part in the arithmetic defined on $\mathbb{Q}$, only in its structure as an ordered set.
+
+\begin{defn}
+	An \textbf{open interval} of $\mathbb{Q}$ is an element of $\mathbb{Q}^-\times\mathbb{Q}^+$ and defined as follows:
+	\[
+		(a, b) = \{q\in \mathbb{Q} \ \ \text{such that}\ \ a < q\ \ \text{and}\ \ q < b\}
+	\]
+\end{defn}
+
+You should think of $(a, b)$ as the `line' containing all rational numbers between $a$ and $b$ but not including either; it goes `all the way up' to its endpoints without quite touching them. For example, $(3, 4)$ contains all rational numbers that are greater than 3 but less than 4; it does not include either 3 or 4. An interval of the form $(-\infty, a)$ should be thought of as having one end that goes all the way up to $a$ while the other recedes into the distance forever, like half of an infinitely long line. For example, $(-\infty, 3)$ contains all rational numbers that are strictly less than 3, while $(3, \infty)$ contains all those strictly greater than 3. Note that $(-\infty, 3)\cup(3, \infty)$ contains every rational number except the number 3.
+
+The definition makes it easy to see that $(a, b)\subseteq (x, y)$ if and only if $x\le a$ and $b\le y$ and that $(\mathbb{Q}^-\times\mathbb{Q}^+, \subseteq)$ is thus a poset. We have $a\lor b = a\cup b$ and $a\land b = a\cap b$, but note that $a\cup b$ may fail to be an interval, so $a\lor b$ is not always defined, so this is not a lattice. Relatedly, it has a top element, $(-\infty, infty)$ but no bottom element. Since meets are always defined but joins are not, we call such a structure a \textbf{meet semilattice}. We can, however, generate a topology from it:
+
+\begin{thm}$\mathbb{Q}^-\times\mathbb{Q}^+$ is the base of a topology on $\mathbb{Q}$, which is known as the \textbf{usual topology} on $\mathbb{Q}$.
+\end{thm}
+
+This topology does, of course, include all the unions that are not themselves intervals.
+
+\begin{proof}
+	We need to show how to construct a frame $F$ using $\mathbb{Q}^-\times\mathbb{Q}^+$ as the set of generators. Recall that a frame is a bounded lattice in which the arbitrary distributive law holds. We begin by setting $F=\mathbb{Q}^-\times\mathbb{Q}^+$ and then add more elements as needed until we have a frame.
+	\begin{enumerate}
+		\item Add to $F$ all finite or countably infinite unions of elements of $\mathbb{Q}^-\times\mathbb{Q}^+$. This ensures explicitly that $F$ is closed under joins. It follows from the closure of $\mathbb{Q}^-\times\mathbb{Q}^+$ under meets that $F$ is also closed under meets. Hence $F$ is a lattice.
+		\item By the previous step, the arbitrary distributivity law
+			\[ (\bigvee_{i\in I}a_{i})\land b=\bigvee_{i\in I}(a_{i}\land b) \]
+			is satisfied.
+		\item $\mathbb{Q}^-\times\mathbb{Q}^+$ contains many intervals that are, as sets, all equal to $\emptyset$, namely those of the form $(a, b)$ where $b<a$. Hence $\mathbb{Q}^-\times\mathbb{Q}^+$ already contains a bottom element. Furthermore, $(a, b)\le (-\infty, infty)$ for every $(a, b)$, so it contains a top element. Hence $\mathbb{Q}^-\times\mathbb{Q}^+$ is bounded.
+	\end{enumerate}
+	Hence $F$ is a frame.
+\end{proof}
+
+We will as usual identify the locale $L(F)$ with the topological space $(\mathbb{Q}, F)$ or, where there is no room for ambiguity, simply $\mathbb{Q}$. This is a very nice space but it is not yet `large enough' or perhaps `dense enough' to represent our ideal notion of a real, continuous line. Such a line would have the following property: it can be cut into two parts, with nothing missing, by any constructed length $l$, and if $l_1$ and $l_2$ are two lengths that are not equal then they produce different cuts. To express this more precisely we will develop a little more structure in $\mathbb{Q}$, especially the notions of length and distance on which the characterisation above depends.
+
+To start we make several definitions that are dual to ones we made in Chapter 1:
+
+\begin{defn}
+	Let $(A, \le)$ be a poset. Then $X\subseteq A$ is \textbf{closed under joins} if whenever $x,y\in X$ we also have $x\lor y\in X$.
+\end{defn}
+
+\begin{defn}
+	Let $(A, \le)$ be a poset and $a\in A$. Then the \textbf{down-set} of $a$ is the set $\downarrow a = \{x\in A\ \ \text{such that}\ \ x\le a\}$.
+\end{defn}
+
+In particular, if $(x, y)$ is an open interval of $\mathbb{Q}$ then $\downarrow(x, y)$ is the set of all intervals that are contained in $(x, y)$, plus of course $(x, y)$ itself.
+
+\begin{defn}
+	Let $(A, \le)$ be a poset. An \textbf{ideal} on $A$ is a down-set $X\subseteq A$ that is closed under joins.
+\end{defn}
+
+\begin{thm}
+	$\downarrow a$ is an ideal of $a$, and indeed is the smallest ideal that contains $a$ itself. 
+\end{thm}
+
+\begin{proof}
+	First, $\downarrow a$ is of course a down-set and $a\le a$. Further more, if $b, c\in \downarrow a$ then $b\le a$ and $c\le a$. but then $b\lor c\le a$ as well. Hence  $\downarrow a$ is an ideal of $a$. Now suppose there is another ideal $I$ that contains $a$. Since $I$ is a down-set, $I$ also contains every element below $a$; that is, $I\subseteq \downarrow a$.
+\end{proof}
+
+
+\section{The Real Line}
+
+It is well-known that $\mathbb{Q}$ does not suffice for even the most basic geometry; it is not sufficiently rich to model continuous space. Yet it is obviously very nearly right. 
+
+\subsection{What we are (and are not) attempting}
+
+The terms `point-free' and `pointless' have been applied to this view of topology, but they are misnomers. This is not a topology from which points are banished; rather, it is one in which the dignity of points is reduced. 
+
+In the classical formulations, a topological space begins as a set of points and its continuity properties are expressed by the addition of a lattice of open sets, each of which is simple a subset of the set of points.
+
+In our formulation, the topological space can be imagined as coming to us first as an undifferentiated lump. It is explored by identifying open sets and `probing' the space is carried out by refinement, `zooming in' on smaller and smaller open sets.
+
+We may identify a point as a special refinement of open sets, achieved by `zooming in' infinitely. Indeed we may say that in doing this we \emph{construct} the point, just as in Euclidean geometry we might construct a point by intersecting two lines. Euclidean geometry at no point supposes that the plane is made of points, which must be given in advance; indeed, such a notion would appear to be quite alien to Euclid's way of thinking and was explicitly ruled out by Aristotle.
+
+Our goal in this section is to construct the real numbers. What this means for us is that we wish to construct a topological space (a lattice of open sets) such that we \emph{can} carry out the construction of all and only the spatial points that are classically identified with real numbers. 
+
+We do not suppose that these constructions have all been carried out in advance because of the following well-known fact:
+\begin{thm}
+	Let $L$ be a formal language consisting of countably many symbols and finitely many rules for the formation of well-formed formulae. Let $T$ be a theory in $L$ that contains a finitely-specified construction for each element of $\mathbb{R}$. Then $T$ is inconsistent.
+\end{thm}
+
+\begin{proof}
+	Any such $L$ is capable of producing only countably many finitely-specified  constructions of real numbers. But we know that the cardinality of $\mathbb{R}$ is uncountable.
+\end{proof}
+
+Thus the claim that all real numbers are constructible is a logical absurdity, not merely a matter of practical convenience. When we speak, in classical analysis, of $\mathbb{R}$ as (for instance) the set of all Dedekind cuts or the set of Cauchy sequences modulo equality in the limit, we speak only of a concept, a potentiality. We are not thereby justified in manipulating this set as if it were `given'.
+
+\subsection{Preliminaries}
+
+In point-set topology the smallest topological space is the point-set $\emptyset$ equipped with the topology $\{\emptyset\}$. This space is, of course, not very interesting. 
+
+The next largest is the one-point set $\{a\}$ equipped with the topology $\{\{a\}, \emptyset\}$. This is much more interesting. Thus:
+
+\begin{defn}
+	The \textbf{one-point locale} consists of two elements, $\top$ and $\bot$. It is written $\mathscr{L}(2)$ or just $2$ where no ambiguity is likely.
+\end{defn}
+
+Recall that locales and frames are the same objects and so the one-point frame is defined in exactly the same way.
+
+Note that the one-point locale contains two elements but no points! We can begin to clear this up by means of the following slightly odd-looking definition:
+
+\begin{defn}
+	Let $S$ be a set and $\tau$ a topology on $S$. Then a \textbf{topological point} of $S$ is a continuous map from the one-point space to $(S, \tau)$.
+\end{defn}
+
+In point-set topology we think of such a map as `picking out one point' from $S$ by mapping the single point in the domain onto it. Notice that if we do not have enough open sets in the topology, the `topological points' of the space might not line up with the `actual points' of the underlying point-set. We are taking an approach that dispenses with the underlying point-set so this appears not to matter, but note that locales will not be found that correspond to these topological spaces. In particular, if a locale corresponds to a topological space the latter must be Hausdorff -- quite a strong limitation, but it includes almost all the topological spaces that are of geometric interest.
+
+Of course we can also make the corresponding definition for locales:
+
+\begin{defn}
+	Let $L$ be a locale. Then a \textbf{point} of $L$ is a locale morphism $2\to L$.
+\end{defn}
+
+It is important to remember that locale morphisms are not defined in terms of maps of sets. Rather a locale morphism $2\to L$ \emph{just is} a frame morphism $F \to 2$. Thus, turning the arrows around we also have
+
+\begin{defn}
+	Let $F$ be a frame. Then a \textbf{point} of $F$ is a frame morphism $F\to 2$.
+\end{defn}
+
+Since frames and locales are the same objects, and locale morphisms are explicitly defined as frame morphisms with their arrows reversed, these definitions capture the same objects and can use used (with care) interchangeably. 
+
+But the notion of a point in a frame is a little easier to work with because frame morphisms \emph{are} maps of sets -- precisely the ones that preserve finite meets and arbitrary joins. Thus each map $F\to 2$ is a partition of the frame's elements into two classes, one of which maps to $\top\in 2$ and the other to $\bot\in 2$. What do these two classes look like?
+
+Recall that a filter $X$ in a frame $F$ collection of frame elements that meets the following criteria: 
+\begin{itemize} 
+	\item If $a\in X$ and $a\le b$ then $b\in X$. 
+	\item If $a, b\in X$ then $a\land b\in X$. 
+\end{itemize}
+The idea is that the preimage of $\top$ of each morphism $F\to 2$ is a special kind of filter called a completely prime filter (defined below), and \emph{vice versa}: a completely prime filter can therefore be specified just as well by specifying the corresponding map $F\to 2$.
+
+A point in a frame is therefore a completely prime filter; but transferring this idea from frames to locales this is just what a classical topological point is: a map $2\to L$. This is very neat; we give a more intuitive account of completely prime filters below.
+
+\subsection{Basic Construction}
+
+It is based on the idea that a locale can be specified by giving generators and relations. This is explained in both Johnstone and P and P, but in both cases it is a bit confusing.
+
+The generators are the ordered pairs $(p, q)$ of rationals (this version does not need to adjoin the infinities). 
+
+Of course we assume $\mathbb{Q}$ already has the usual lattice structure given by the total ordering, i.e. $p\land_\mathbb{Q} q = \min(p, q)$ and $p\lor_\mathbb{Q} q = \max(p, q)$
+
+The relations that turn these into a frame are:
+\begin{itemize}
+	\item{$(p, q)\land(r, s) = (p\lor_\mathbb{Q} r, q\lor_\mathbb{Q} s)$ -- that is, meets of intervals are just their intersections}
+	\item{$(p, q)\lor(r, s) = (p, s)$ (i.e. the union of the two intervals) if and only if $p\le r < q\le s$ (i.e., iff the union would itself be an interval), undefined otherwise.}
+	\item{$(p, q) = \bigvee \{(r,s)|p<r<s<q\}$ -- that is, every interval is equal to the union of all its subintervals. Note that this also implies that $(p, q)=\emptyset$ when $p>q$. We define $\bot = \emptyset$ to be the bottom element of the frame.}
+	\item{$\top = \bigvee \{(p, q)|p, q\in \mathbb{Q}\}$ -- that is, the union of all intervals produces a `top level object', which we can identify with all of $\mathbb{Q}$. (Note that without this object there is no `whole space', and the )}
+\end{itemize}
+
+This frame can of course also be thought of as a locale, in which case it is written $\mathscr{L}(\mathbb{R})$ to remind us that this is the locale that corresponds topologically to the real line (though as it stands it contains nothing corresponding to the real \emph{numbers}, i.e. points on the line). 
+
+We do not need anything additional to obtain the infinite `half-lines':
+\begin{defn}
+	We write:
+	\begin{itemize}
+		\item{$(-\infty, p)$ for $\bigvee \{(x, p)|x\in \mathbb{Q}\}$}
+		\item{$(p, \infty)$ for $\bigvee \{(p, x)|x\in \mathbb{Q}\}$}
+	\end{itemize}
+\end{defn}
+
+The following are all geometrically unsurprising:
+
+\begin{thm}
+	\begin{itemize}
+		\item{$(p, \infty)\cap (-\infty, q) = (p, q)$}
+		\item{$(p, \infty)\cup (-\infty, q) = \top$ if it is defined, i.e. if $p<q$}
+		\item{$(p, \infty)= \bigvee \{(r, \infty)|r > p\}$}
+		\item{$(-\infty, p)= \bigvee \{(-\infty, r)|r < p\}$}
+		\item{$\bigvee \{(-\infty, p)| p\in \mathbb{Q}\} = \top = \bigvee \{(p, \infty)| p\in \mathbb{Q}\}$}
+	\end{itemize}
+\end{thm}
+
+These observations can even be used to furnish an alternative definition of $\mathscr{L}(\mathbb{R})$ but this approach seems (to me) to be slightly less natural overall.
+
+
+
+\subsection{Spectrum of a Locale} 
+
+For reference, we reiterate here the definition of a filter explicitly in terms of $\mathscr{L}(\mathbb{R})$:
+\begin{itemize} 
+	\item If $(p, q)\in F$ and $(p, q)\subseteq (r, s)$ then $(r, s)\in F$. 
+	\item If $(p, q) and (a, b)\in F$ then $(p, q)\cap (a, b)\in F$. 
+\end{itemize}
+
+
+We are interested in filters in $\mathscr{L}(\mathbb{R})$ because they look a little like sequences from traditional analysis. We should imagine ourselves choosing as a starting-point any element of the filter and then `walking down it' by choosing each successive element to be strictly less then its predecessor. By doing this the size of the intervals should gradually shrink, mimicking the process of convergence to a limit.
+
+However, this does not always happen. A filter containing $(p, q)$ is required to have all the (infinitely many) `bigger' intervals that contain $(p, q)$, but it is not required to contain any `smaller' intervals. Thus our process of `walking down the filter' may simply stop when we `hit the bottom'.
+
+We therefore identify a special class of filters where this does not happen:
+
+\begin{defn}
+	A filter $\Delta$ is \textbf{prime} if $a\lor b \in \Delta$ implies that either $a\in \Delta$ or $b\in \Delta$ (whimsically, we might say that `meet distributes over logical or'). We may inductively extend this to any join of finitely many elements. If it remains true for countably infinite joins then the filter is said to be \textbf{completely prime}.
+\end{defn}
+
+For every interval a prime filter contains, it also contains \emph{lots} of smaller intervals. This is because $(p, q)$ can be written $(p, r)\cup (s, q)$ for any choice of $r$ and $s$ as long as $p<s<r<q$. So every interval in a prime filter has a great many subintervals `underneath' it, each of which shares one of its endpoints. To take the next step of our walk down the filter we choose one of those subintervals. We can always keep `walking down it' and never run out of smaller intervals.
+
+Recall from the section above that each completely prime filter in a locale corresponds to a map $2\to L$ and thus to a `topological point' in an almost entirely classical way.
+
+The set of all completely prime filters containing a given lattice element $a$ is written $\Sigma_a L$. 
+
+\begin{thm}
+	The set $\tau = \{\Sigma_a L | a\in L\}$ forms a topology on the set on all completely prime filters in $L$.
+\end{thm}
+
+\begin{proof}
+	We need to show that $\tau$ is closed under arbitrary unions and finite intersections, and that it includes $\emptyset$ and the whole set. 
+	
+	First, observe that $L$, as a frame, has top and bottom elements and that $\Sigma_\top$ is the set of all completely prime filters while $\Sigma_\bot = \emptyset$. So the last part is satisfied.
+	
+	Let $A, B\in \tau$; then $\Sigma_{A\land B}  = \Sigma_A \cap \Sigma_B$. Thus $\tau$ is closed under pairwise intersections.
+	
+	Also, $\Sigma_{A\lor B}  = \Sigma_A \cup \Sigma_B$. Thus $\tau$ is closed under pairwise unions. But because these are completely prime filters, this can also be extended to countable joins; no corresponding assumption allows us to so generalise meets.
+	
+	Hence $\tau$ satisfies the axioms for a topology.
+\end{proof}
+
+\begin{defn}
+	The set of all completely prime filters equipped with the topology $\tau$ is called the \textbf{spectrum} of $L$, written $\text{Sp}(L)$.
+\end{defn}
+
+\subsection{Sober Spaces, Spatial Locales}
+
+We may interpret a completely prime filter as a geometric point, obtained constructively by a potentially infinite process of `zooming in' by specifying ever-smaller open sets. Thus, $\text{Sp}(\mathscr{L}(\mathbb{R}))$ ought to be the set of all points in the space, equipped with the topology of open sets given by $\mathscr{L}(\mathbb{R})$ (recall, this is a frame and therefore has exactly the same structure as a topology).
+
+It follows that we can interpret $\text{Sp}$ as a functor from the category of locales to the category of topological spaces. Note that this is a covariant functor, since locale morphisms go in the same direction as continuous maps.
+
+When $L$ is a frame exactly the same construction works, since it depends only on the lattice structure. In this case we obtain a contravariant functor , which P and P write as $\Sigma$, in exactly the same way: elements of the lattice map to open sets in the topology and completely prime filters map to points in the underlying set.
+
+There is also a functor going the other way, written $\Omega$, which sends a topological space to a locale by simply discarding the point-set -- or which does the same, by contravariantly, with a frame. P and P sometimes write this functor as $\text{Lc}$.
+
+Note that  $\text{Sp}$ and $\Sigma$ do not `hit' every topological space. Some topologies do not contain enough open sets to uniquely identify every point; roughly speaking, those are the ones that fail to be Hausdorff. More precisely, the topological spaces that lie in the scope of these functors are the \textbf{sober spaces}. More exotic spaces lie beyond the reach of this approach; they have \emph{too few open sets}.
+
+Furthermore, $\Omega$ has the same problem; some locales cannot be thought of as topological spaces because they have \emph{too few points} (i.e., too few completely prime filters) to correspond to topological spaces. Those that correspond to topologies, i.e. for which $\Omega$ is defined, are called \textbf{spatial locales}.
+
+The correspondence between spatial locales and sober topological spaces is called `Stone duality'. For the most part these notes are concerned only with these spaces.
+
+\subsection{Homeomorphism to $\mathbb{R}$}
+
+We now show how to get from $\mathscr{L}(\mathbb{R})$, which is a lattice of open intervals of $\mathbb{Q}$, to the classical real line $\mathbb{R}$, which is a point-set accompanied by the usual topology of open sets. 
+
+The idea is to consider the completely prime filters to `identify' points in the classical picture, so that elements of $\Sigma \mathscr{L}(\mathbb{R})$ correspond to real numbers.
+
+The intuitive notion of a Dedekind cut motivates the following definition (the terminology is mine):
+
+\begin{defn}
+	A \textbf{cut} in a frame $F$ is a map $h:F\to 2$ where $2 = \{0, 1\}$ that respects the order, i.e. if $p\mapsto 0$ and $q\mapsto 1$ then $p<q$.
+\end{defn}
+
+\begin{defn}
+	A \textbf{Dedekind cut} in $\mathbb{Q}$ is a pair of disjoint open intervals
+\end{defn}
+
+We then have the following theorem:
+
+\begin{thm}
+	There is a homeomorphism $\phi:\Sigma\mathscr{L}\mathbb{R}\to 2$ that satisfies the following: 
+	\[
+	p < \phi(h) < q \Leftrightarrow h(p, \infty) = \top = h(-\infty, q)
+	\]	
+	for all rationals $p, q$ and all completely prime filters $h:\mathscr{L}(\mathbb{R})\to 2$.
+\end{thm}
+
+TODO: work through the proof.
+
+\subsection{Identification of Real Numbers}
+
+How does a completely prime filter in $\mathscr{L}(\mathbb{Q})$ correspond to a number? We will look at some simple examples and also show that $:\Sigma\mathscr{L}\mathbb{R}$ has some of the basic properties we expect of a number system.
+
+Suppose we wish to find the point corresponding to the (rational) real number $x=\frac{3}{2}$. We will construct an explicit Cauchy sequence that converges to $x$ by taking a walk down the completely prime filter corresponding to it; this filter in fact contains all and only those walks that produce Cauchy sequences that converge to $x$.
+
+We may begin by identifying any finite open interval that contains it, $x_1=(p_1, q_1)$ (in this case, for example, we could choose $x_1=(1, 2)$. We now ask whether $x<\frac{q_1]p_1}{2}$. If so, choose $x_2=(p_1, \frac{q_1]p_1}{2})$; if not, choose $x_2=(\frac{q_1]p_1}{2}, q_1)$.
+
+In this way we produce a sequence of nested intervals, each of which shares one endpoint with its predecessor and contains $x$. Considering $\pi_1(x_i)$ to be the sequence of lower bounds of the selected intervals, we obtain a monotone Cauchy sequence whose limit is $x$. Of course, $\pi_2(x_i)$, the sequence of upper bounds, produces a different sequence with the same properties.
+
+For algebraic irrational numbers the procedure is the same, but since $x$ is not given as an element of $\mathbb{Q}$ we need to express the algorithm in terms of a polynomial over $\mathbb{Q}$ whose solution is $x$. The transcendental numbers, on the other hand, must be dealt with on a case-by-case basis that depends on the definition of the number. 
+
+There is a philosophical decision to be made here. You may choose to assume that you are `given' all the rational and irrational numbers at once by virtue of having defined $\mathscr{L}(\mathbb{R})$ and hence (you may claim) all of its completely prime filters. This would be the classical approach; you would then define `the set of real numbers' to be the set of all of the (already-given) completely prime filters, and this leaves you with classical Cauchy-Weierstrass analysis of the kind still taught on standard undergraduate programmes. 
+
+On the other hand, you may prefer to see a completely prime filter as something that must be produced by construction. One way to do this is to specify a Cauchy sequence that it contains; this should suffice to convince all but the most hardened skeptic of the `existence' of the completely prime filter that corresponds to it. 
+
+It follows that any computable number corresponds to a completely prime filter; many transcendental numbers are computable, including all those used in `ordinary' mathematics. Alternatively, fixing a formal theory allows us to define many transcendentals by an explicit well-formed formula, and again a sufficiently strong theory (such as Peano arithmetic) yields all the `usual' transcendentals. 
+
+A problem arises with certain Cauchy sequences that are computable but whose limits are not, such as Specker sequences. If there is not completely prime filter corrsponding to the limit then various classical results fail; in particular, the least upper bound property fails, and this is intuitively something that ought to be true of a continuum. 
+
+I think a better way to think about this is to recall that points are \emph{produced} out of locales, and to keep an open mind about which methods of construction might be admissible. We can accept (if we like) the limits of Specker sequences as points if we accept the method of specifying them as a way to construct a completely prime filter. The question of whether to accept or reject them is a methodological one that does not touch mathematical metaphysics: the locale is the continuum that `exists', and the points are fully supervenient on it. Put another way, when we quantify over points we are quantifying over (potential or actual) actions, not entities.
+
+
+\section{Sheaves [TODO]}
+
+In this section we look more closely at the relationship between morphisms of locales, on the one hand, and groups and rings on the other. The general idea will be that we will `localize' maps to various open sets and consider how to `patch together' local information into global information about the whole space.
+
+We will have an intuitive picture in mind. For any locale $L$ we imagine maps $U\subseteq L\to L(\mathbb{R})$ which can be thought of informally as assigning a real number to every point in the open set $U$. Even more informally, imagine the assigned number represents temperature, so that if $U$ has been `heated up' we have a map of how the heat has spread at a particular moment. Now suppose we have that information for a collection of overlapping open sets that, together, cover $L$. We can think of this as an `atlas' of `charts', each showing a part of $L$, but overlapping so that we can find out way off the edge of one chart onto another. From this we could, for example, get a continuous picture of how the temperature will change over the course of any journel in $L$, even if the journey passes through several charts.
+
+A `sheaf' is simply the name given to the abstract structure you need to be able to assemble a consistent and complete atlas of this kind.
+
+
+
+
+
+
+
+\chapter{Stone Duality and Spectral Theory [TODO]}
+
+\section{Stone duality}
+\section{Stone-\Cech Compactification}
+\section{The Zariski and Peirce spectra of a ring}
+
+\end{document}
