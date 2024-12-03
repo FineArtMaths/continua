@@ -43,4 +43,12 @@ These are lower-priority topics I have an interest in, and have taught to variou
 
 which are all underpinned by measure theory. Because of this common root, these topics may organise themselves into something more substantial in time. They might also end up being cut from the project as the first two sections grow horribly out of control.
 
+# General Approach
+
+The project is broken down into sections, each of which will result in one or more courses. These are built by first producing a "notes" document for the whole section, which is my attempt to synthesize all the main information without care for pedagogy or even the needs of any reader besides myself. These notes are then used to build the coursebooks that are the final output of the project. The coursebooks will be available here as downloadable PDFs and elsewhere as hard copies (I haven't decided how best to do that yet).
+
+The overview.tex documents in each folder indicate the scope of the project as I currently undrstand it. I intend to work on continua and structure in parallel but with priority on the former, ignoring measure for now. The structure courses might get done out of sequence but the continua ones probably won't. 
+
+Starting in early 2025 I expect to generate two or three notes documents, then start producing coursebooks and more notes in parallel. A couple of courses are already quite well-developed but need to be typeset into LaTeX and reconfigured for the needs of the current project. By the end of 2025 we should have several coursebooks in a complete state (but subject to revision) and notes documents approaching completion for several more. Ideally I would like to have continua coursebooks done up to and including Smooth Manifolds by the end of 2025 and have notes for Homological Algebra by the same point. That should put me on track for having first drafts of most (perhaps all) of the coursebooks done by the end of 2026.
+
 License: [CC-BY-NC-SA-4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
