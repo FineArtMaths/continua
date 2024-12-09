@@ -1,0 +1,171 @@
+\documentclass[oneside,english]{amsbook} 
+\usepackage[T1]{fontenc} 
+\usepackage[latin9]{inputenc} 
+\usepackage{amsmath} 
+\usepackage{amstext} 
+\usepackage{amsthm} 
+\usepackage{amssymb}
+\usepackage{mathrsfs} 
+\usepackage{hyperref}
+
+\makeatletter 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands. 
+\numberwithin{section}{chapter} 
+\theoremstyle{plain} 
+\newtheorem{thm}{\protect\theoremname}   
+\theoremstyle{definition}   
+\newtheorem{defn}[thm]{\protect\definitionname}
+
+\makeatother
+
+\usepackage{babel}   
+\providecommand{\definitionname}{Definition} 
+\providecommand{\theoremname}{Theorem}
+\providecommand{\Cech}{\v{C}ech }
+\providecommand{\Poinacre}{Poincar\'e }
+\providecommand{\Kunneth}{K{\"u}nneth }
+
+\begin{document}
+	
+	\title{Algebraic Topology -- Notes}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	\chapter*{About this Document}
+	
+	This is part of \href{https://github.com/FineArtMaths/continua}{the continua project}. The project is broken down into `modules', each covering a specific topic. Each module ultimately becomes one of more courses. The approach is:
+	
+	\begin{itemize}
+		\item{Identify a topic that should be its own module (this is recorded in the `overview' documents in each main folder)}
+		\item{Create a `notes' document assembling the technical material for each module in a fairly condensed form, but with some indication of how the pedagogy might go (that's what you're looking at now)}
+		\item{Create one or more coursebooks that contain the technical material along with motivation, philosophical reflections, pictures, examples, intuitive explanations and so on.}
+	\end{itemize}
+	
+	When the coursebooks are complete, the notes document is no longer needed and will probably be deleted. So the fact that you're looking at this means this is a work in progress -- it is incomplete, disorganised and probably full of errors.
+	
+	\part{Homology}
+	
+	\chapter{Mod 2 Cohomology}
+
+	\section*{Note}
+
+	I already have course material written for the first few sections of this chapter but it's not yet typeset in \LaTeX. I'll therefore skip the sections that are already well-worked-out but leave the headings as places to add extra ideas or material if that turns out to be useful. There's no benefit in transcribing those notes here since this document will be superseded by the coursebooks anyway. 
+
+
+	\section{Simplicial Complexes [DONE ELSEWHERE]}
+	\section{Cochain Groups [DONE ELSEWHERE]}
+	\section{Cohomology Groups [DONE ELSEWHERE]}
+	\section{Cohomology Rings and a `Little' \Kunneth Formula}
+	
+	We will do this only for (co)homology with coefficients in a field (which includes Mod 2 of course). If a space $X$ is a product $A\times B$ then
+	\[
+		H_k (X) \cong \bigoplus_{i+j=k} H_i(A)\otimes H_j (B) 
+ 	\]
+ 	The association of a $i$-cycle of $A$ and a $j$-cycle of $B$ with an $i+j$-cycle of $X$ can be stated concretely and explicitly. We should do this with a non-trivial example.
+ 	
+ 	For coefficients in a general ring, the \Kunneth formula is complicated by the need to `correct' it using the Tor functor, which we won't attempt to cover here (it belongs in the Homological Algebra courses).
+
+	\chapter{Integral Cohomology}
+	\section{Relative Cohomology}
+	
+	\subsection{Definition}
+	
+	\subsection{The Excision Property}
+	
+	If $U\subseteq A\subseteq X$, we say that $U$ has the excision property if the inclusion map $(X\\ U, A\\ U)\to (X, A)$ induces a homomorphism on the relative homologies $H_{n}(X\setminus U,A\setminus U)\cong H_{n}(X,A)$. The theorem gives a condition for this to be possible: if the closure of $U$ is in the interior of $A$.
+	
+	For this we need the notions of closure and interior. The interior of $A$ is just the union of open sets that are subsets of $A$, so that's easy. The closure of $U$ is the union of $U$ itself with the set of its limit points, which are points such that every neighbourhood of that point has a non-empty intersection with $U$.
+	
+	It would be good to start with a concrete example to show why these ideas make intuitive sense of the concept of excision before defining it precisely.
+	
+	As a non-trivial consequence of the excision theorem it turns out that for a topological space $X$ and its suspension $SX$, $\widetilde{H}_n(X)\cong \widetilde{H}_{n+1}(SX)$.
+
+	\section{Orientation}
+	
+	The key result is that an $n$-manifold $M$ is orientable if and only if
+	\[
+		H_n(M, \partial M) \cong \mathbb{Z}  
+	\]
+	
+	\section{The Cup Product}
+	\section{Exact Homology Sequence of a Pair}
+	
+	\chapter{Further Topics}
+	\section{Cap Products}
+	\section{Poincar\'e Duality}
+	
+	Munkres's second proof of Poincar\'e Duality uses cap products and that's probably useful, although the first proof he offers is pretty concrete.
+	
+	\section{\Cech Cohomology}
+	\section{Alexander-Pontryagin Duality}
+	
+	This section of Munkres includes a proof of quite a general version of the Jordan Curve Theorem, which might be a nice point to end on.
+	
+	\part{Homotopy}
+	
+	\chapter{Homotopy Groups}
+	
+	\section{The Fundamental Group}
+	
+	Lee Ch 7 and 8
+	
+	\section{The Seifert-van Kampen Theorem}
+	
+	Lee Ch 10
+	
+	\section{Higher Homotopy Groups}
+	
+	Worth looking at Hu IV.14 here to get clearer on the independence (or not) of the choice of base point.
+
+	\section{The Hurewicz Theorem}
+	
+	Hu says it like this (p.143):
+	\begin{quote}
+		For every integer $n > 0$, there is a natural homomorphism $\pi_n(X, x_0)\to H_n(X)$, where $H_n(X)$ is the $n^\text{th}$ integral singular homology group. If $n > 2$ and if $X$ is $(n - 1)$-connected, then Hurewicz's theorem states that this is an isomorphism. 
+	\end{quote}
+	
+	We probably can't get deep into this but it's worth showing this relationship off at least a bit.
+	
+	\section{A Note on Cohomotopy}
+	
+	Hu Ch 7, but I don't think we can get much into this. It's here because one of our guiding principles is to look for duality and we've emphasised that cohomology is the one you should consider natural (rather than homology), so we owe the attentive reader an explanation of the existence of a dual theory to homotopy and why it isn't the main one (if we can do that).	
+
+	\chapter{Covering Spaces}
+	
+	\section{Definitions}
+	
+	Lee Ch 11
+	
+	Hu chapter 3 -- I'm not yet familiar with how Hu does things but he covers some of the same territory as Lee in a different way, emphasising the fibre bundle structure of covers. Because of the other topics we're interested in, this is a potentially rich avenue to explore.
+	
+	Also Hu Ch 4 ss 9 defines the fibring property, which he says is the counterpart to the excision property in homology. When translated into homological language, the fibring property is no true in general, and the same goes \emph{vice versa} for the excision property. This might be too deep into the weeds but it's an interesting connection that might be pedagogically useful to bring out. Readers will have legitimate questions about the relationship between these two quite similar-looking theories. NB there is a Homotopy Excision Theorem but presumably it's a bit different -- check this!
+
+	\section{The Covering Group}
+	
+	Lee Ch 11
+	
+	\section{The Universal Covering Space}
+	
+	Lee Ch 12
+
+	\section{The Classification Theorem}
+	
+	Lee Ch 12
+
+	\chapter{Algebra of Homotopy Groups}	
+
+	Hu chapter 4 ad 5
+	
+	Hu V.6 contains some nice, natural results.
+
+	\chapter{Obstruction Theory}	
+
+	Hu chapter 6
+
+	\chapter{Spectral Sequences}	
+
+	Hu chapter 8 and 9; I don't know whether we can get this far without a proper course of homological algebra, though.
+
+\end{document}
