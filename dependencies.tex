@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{prerex}
+
+\begin{document}
+	
+	\begin{chart}%\grid
+		\begin{scope}[every rectangle node/.style={
+				sharp corners,
+				line width=0.6pt,
+				fill=gray!15
+			}]
+			\reqhalfcourse 50,40:{}{Point-Free Topology}{continua}
+			\reqhalfcourse 50,30:{}{Algebraic Topology}{continua}
+			\reqhalfcourse 50,20:{}{Smooth Manifolds}{continua}
+			\reqhalfcourse 50,10:{}{Differential Topology}{continua}		
+			\reqhalfcourse 50,0:{}{Riemannian Geometry}{continua}
+
+			\reqhalfcourse 15,50:{}{Hors d'Oeuvre}{structure}
+			\reqhalfcourse 15,40:{}{Group Theory and\\Linear Algebra}{structure}
+			\reqhalfcourse 0,30:{}{Galois Theory}{structure}		
+			\reqhalfcourse 7,20:{}{Hopf Algebras}{structure}
+			\reqhalfcourse 15,10:{}{Homological Algebra}{structure}
+			\reqhalfcourse 30,4:{}{Lie Algebras}{structure}
+		\end{scope}
+		
+		\prereq 50,40,50,30:
+		\prereq 50,30,50,20:
+		\prereq 50,20,50,10:
+		\prereq 50,10,50,0:
+		
+		\prereq 15,50,50,40:
+
+		\prereq 15,40,0,30:
+		\prereq 15,40,7,20:
+		\prereq 15,40,15,10:
+		\prereq 15,40,30,4:
+		
+		\prereq 50,30,15,10:
+		\prereq 50,20,30,4:
+		
+		\begin{pgfonlayer}{courses}
+		\end{pgfonlayer}
+	\end{chart}
+	
+\end{document}
