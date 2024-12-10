@@ -36,20 +36,15 @@ It may be worth including a bit more of the language of categories since I'm not
 
 \section{Group Theory}
 
-This course is already written but will need to be converted to \LaTeX. It's currently very traditional and could be expanded with more interesting material but I think many of the topics I'm interested in will come up more naturally in other courses anyway.
+The introductory course is already written but will need to be converted to \LaTeX. It's currently very traditional and could be expanded with more interesting material but I think many of the topics I'm interested in will come up more naturally in other courses anyway.
 
+Lots of follow-up courses are possible: I'd be especially interested in doing one on braids, one on Coxeter groups and perhaps one on group cohomology if that isn't adequately covered elsewhere (e.g. in the Lie Algebras block).
 
 \section{Linear Algebra}
 
-This course is already written but will need to be converted to \LaTeX. It's actually currently two courses; I'd like to cut some of the later applications and condense it into one.
+The introductory course is already written but will need to be converted to \LaTeX. A follow-up course based around applications to data analysis is also already written. I don't think we'll want more than that here.
 
 \section{Homological Algebra}
-
-\begin{itemize}
-	\item{Stammbach, \textit{A Course in Homological Algebra} (first c170pp)}
-	\item{Rotman, \textit{Introduction to Homological Algebra}}
-	\item{Bjork, \textit{Rings of Differential Operators}}
-\end{itemize}
 
 I'd like to start from the position that homological algebra is a toolkit for solving problems, which means we're not really studying things like exact sequences for their own sake but rather learning techniques that deploy them to solve other kinds of problems. It's therefore plausible that we might make this dependent on the homology part of Algebraic Topology, since that would mean the student came to it with lots of material for examples. Otherwise it's probably a bit too dry.
 
@@ -61,15 +56,15 @@ Bjork is a bit of a weird inclusion here but I'd like to see whether there are a
 
 Philosophically I like the characterisation that homology `measures the gap between ought and is'. But more deeply, if maths is taken to be maximally rational we could say homology measures the shortfall of our current conception of it: if we saw things correctly, we would no longer have a mismatch between what we expect to be true (`ought') and what is.
 
-\section{Galois Theory}
+My guess is this is two courses, just an introduction covering the essentials (maybe culminatign in Ext and Tor with some applications) and a more advanced follow-up with interesting topics (e.g. spectral sequences).
 
 \begin{itemize}
-	\item{Roman, \textit{Field Theory} (first c200 pages)}
-	\item{Berhuy, \textit{An Introduction to Galois Cohomology and its Applications}}
-	\item{Malle and Matzat, \textit{Inverse Galois Theory}}
-	\item{Pommaret, \textit{Differential Galois Theory}}
-	\item{Borceux and Janelidze, \textit{Galois Theories}}
+	\item[]{Stammbach, \textit{A Course in Homological Algebra} (first c170pp)}
+	\item[]{Rotman, \textit{Introduction to Homological Algebra}}
+	\item[]{Bjork, \textit{Rings of Differential Operators}}
 \end{itemize}
+
+\section{Galois Theory}
 
 I think the theme here is that Galois theory provides a way to understand extension problems and obstructions to solving them, which gives it a homological flavour. I'm sure all these references won't be needed but I don't know this territory.
 
@@ -77,24 +72,32 @@ There is some rationale to these choices, although some of this may turn out to 
 
 I suspect Malle and Matzat offer one route towards `Galois theory in itself' rather than as a technique for solving problems in other fields. Borceax and Janelidze appear to give a higher-level view of `Galois theory as a whole', providing more opportunities for structural connections that span multiple topics.
 
-\section{Lie Algebras and Representaion Theory}
+My guess is this is one long interesting-for-its-own-sake course but it might end up being broken into two for convenience.
 
 \begin{itemize}
-	\item{Fulton and Harris, \textit{Representation Theory: A First Course}}
-	\item{Hochschild, \textit{Basic Theory of Algebraic Groups and Lie Algebras}}
-	\item{Brown, \textit{Cohomology of Groups}}
-	\item{Pittner, \textit{Algebraic Foundations of Non-Commutative Differential Geometry and Quantum Groups}}
+	\item[]{Roman, \textit{Field Theory} (first c200 pages)}
+	\item[]{Berhuy, \textit{An Introduction to Galois Cohomology and its Applications}}
+	\item[]{Malle and Matzat, \textit{Inverse Galois Theory}}
+	\item[]{Pommaret, \textit{Differential Galois Theory}}
+	\item[]{Borceux and Janelidze, \textit{Galois Theories}}
 \end{itemize}
+
+\section{Lie Algebras and Representaion Theory}
 
 This will be an \textit{algebraic} course rather than a geometric look at Lie groups but there is obvious overlap and it's not yet clear to me how much of this material belongs with differential geometry. Pittner is included specifically for advanced stuff on Lie groups and the connection with non-commutative objects that comes up in various other places.
 
 I'm keeping Alexandrino and Bettiol, \textit{Lie Groups and Geometric Aspects of Isometric Actions} in reserve for two reasons. First, it's intended for undergraduates so it likely to have some pedagogic features. Second, it may have some nice geometric examples and applications that aren't covered elsewhere. However, they make Riemannian geometry a prerequisite and I'd prefer to make our Lie Algebras material accessible straight after Smooth Manifolds so their approach might end up being of limited use to us. It could even be that we steal some ideas from them for the Riemannian Geometry courses instead.
 
-\section{Hopf Algebras}
+Probably this is one course with representations front and centre but I'm open to expanding it to two if it's interesting enough without taking us too far afield.
 
 \begin{itemize}
-	\item{Dascalescu, Nastasescu and Raianu, \textit{Hopf Algebras: An Introduction}}
+	\item[]{Fulton and Harris, \textit{Representation Theory: A First Course}}
+	\item[]{Hochschild, \textit{Basic Theory of Algebraic Groups and Lie Algebras}}
+	\item[]{Brown, \textit{Cohomology of Groups}}
+	\item[]{Pittner, \textit{Algebraic Foundations of Non-Commutative Differential Geometry and Quantum Groups}}
 \end{itemize}
+
+\section{Hopf Algebras}
 
 Dascalescu goes slowly and has some good examples that are relevant to us. This is probably material to scatter throughout several parts of the project so it might not be a separate course. On the other hand since it comes up in several places it might be best to have a single source to learn it from.
 
@@ -105,6 +108,12 @@ The following is mentioned in the Wikipedia entry for the Tor functor -- it seem
 	For a commutative ring $R$ with a homomorphism onto a field $k$, $\text{Tor}_\bullet^R(k, k)$ is a graded-commutative Hopf algebra over $k$. If $R$ is a Noetherian local ring with residue field $k$ then the dual Hopf algebra to $Tor_\bullet^R(k,k)$ is $\text{Ext}^\bullet_R(k, k)$
 \end{quote}
 The reference given looks a bit specialized but it might be worth making something of this connection.
+
+Pretty sure this block will be just one course.
+
+\begin{itemize}
+	\item[]{Dascalescu, Nastasescu and Raianu, \textit{Hopf Algebras: An Introduction}}
+\end{itemize}
 
 
 \end{document}
