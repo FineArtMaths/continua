@@ -43,11 +43,24 @@ These are lower-priority topics I have an interest in, and have taught to variou
 
 which are all underpinned by measure theory. Because of this common root, these topics may organise themselves into something more substantial in time. They might also end up being cut from the project as the first two sections grow horribly out of control.
 
+# Overall Structure
+
+The project is broken down into **blocks**, each of which will result in one or more **courses**. Each block will have a course called "Introduction to X" where X is the name of the block; other courses in the block will usually have this as a prerequisite. The prerequisite structure of courses *within* each block is currently undecided. 
+
+Prerequisites *between* blocks are shown in the dependencies document in this folder; if block X is a prerequisite for block X, only the introductory course is needed. For example, suppose the Algebraic Topology block contained courses "Introduction to Algebraic Topology", "Homotopy Theory" and "Topology of 4-Manifolds", while the Smooth Manifolds block contains courses "Introduction to Smooth Manifolds" and "Applications of the Cartan Calculus". It follows that the prerequisites for "Applications of the Cartan Calculus" are:
+
+* Introduction to Smooth Manifolds, because Applications of the Cartan Calculus is part of the Smooth Manifolds block but isn't the introduction course; and
+* Introduction to Algebraic Topology, because this is a prerequisite for any course in the Smooth Manifolds block
+
+I hope this will be a lot clearer when there are enough courses in place that we can start building a detailed diagram. But that will be a long way off; I wanted to capture the general idea here as it will inform choices about which courses to create and sequencing the work on them.
+
 # General Approach
 
-The project is broken down into sections, each of which will result in one or more courses. These are built by first producing a "notes" document for the whole section, which is my attempt to synthesize all the main information without care for pedagogy or even the needs of any reader besides myself. These notes are then used to build the coursebooks that are the final output of the project. The coursebooks will be available here as downloadable PDFs and elsewhere as hard copies (I haven't decided how best to do that yet).
+We begin with a "notes" document for the whole block, which is my attempt to synthesize all the main information without care for pedagogy or even the needs of any reader besides myself. These notes are then used to build the coursebooks that are the final output of the project. The coursebooks will be available here as downloadable PDFs and elsewhere as hard copies (I haven't decided how best to do that yet).
 
-The overview.tex documents in each folder indicate the scope of the project as I currently undrstand it. I intend to work on Continuity and Structure in parallel but with priority on the former, ignoring Measure for now. The Structure courses might get done out of sequence but the Continuity ones probably won't. 
+The overview.tex documents in each folder indicate the scope of the project as I currently understand it. I intend to work on Continuity and Structure in parallel but with priority on the former, ignoring Measure for now. The Structure courses might get done out of sequence but the Continuity ones probably won't. 
+
+It would be ideal to produce all the notes documents, work out which topics need to be included in the Introduction courses (because they're required in later courses) and then start writing the coursebooks. Realistically, though, I think it makes sense to proceed more iteratively since (a) assumptions about prerequisites may not survive contact with reality and (b) it will be more sustainable for me to be able to work on research and note-taking in parallel.
 
 Starting in early 2025 I expect to generate two or three notes documents, then start producing coursebooks and more notes in parallel. A couple of courses are already quite well-developed but need to be typeset into LaTeX and reconfigured for the needs of the current project. By the end of 2025 we should have several coursebooks in a complete state (but subject to revision) and notes documents approaching completion for several more. Ideally I'd like to have Continuity coursebooks done up to and including Smooth Manifolds by the end of 2025 and have notes for Homological Algebra by the same point. That should put me on track for having first drafts of most (perhaps all) of the coursebooks done by the end of 2026.
 
