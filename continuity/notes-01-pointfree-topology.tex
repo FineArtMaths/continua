@@ -44,15 +44,124 @@ This is part of \href{https://github.com/FineArtMaths/continua}{the continua pro
 
 When the coursebooks are complete, the notes document is no longer needed and will probably be deleted. So the fact that you're looking at this means this is a work in progress -- it is incomplete, disorganised and probably full of errors.
 
-\part{Introduction to General Topology}
+\part{Introduction to Topology}
 
-\begin{itemize}
-	\item{Definitions, emphasising systems of open sets and producing points as filters}
-	\item{Interior, boundary, limit point}
-	\item{Continuous maps, products, quotients, subspaces}
-	\item{Connectedness, compactness}
-	\item{Sheaves, manifolds and fibre bundles -- mostly just the definitions}
-\end{itemize}
+\chapter{Topological Spaces}
+
+\section{Open Sets}
+
+\begin{defn} 
+	An \textbf{open set} is an object that behaves like an ordinary set with respect to the operations $\cup$, $\cap$, $\subseteq$ and $=$. However, an open set is not necessarily defined in terms of elements.
+\end{defn} 
+
+\begin{defn} 
+	A \textbf{system of open sets} $S$ is a collection of open sets obeying the following axioms:
+	\begin{itemize}
+		\item For $X, Y\in S$, $X\cap Y\in S$ and this extends to the intersection of any finite collection of open sets.
+		\item For $X, Y\in S$, $X\cup Y\in S$ and this extends to the intersection of any finite \textit{or infinite} collection of open sets.
+		\item $S$ contains an open set $\bot$ such that $\bot\subseteq X$ for every $X\in S$.
+		\item $S$ contains an open set $\top$ such that $\top\subseteq X$ for every $X\in S$.
+	\end{itemize}
+\end{defn} 
+
+\begin{defn} 
+	A \textbf{topological space} is some object we would like to consider as a continuum; to achieve this we equip it with a system of open sets. We interpret $\top$ as representing the whole space and $\bot$ the `empty set'; intermediate open sets represent distinguishable or observable parts of the continuum.
+\end{defn} 
+
+\begin{defn} 
+	A \textbf{topological space} is some object we would like to consider as a continuum; to achieve this we equip it with a system of open sets. We interpret $\top$ as representing the whole space and $\bot$ the `empty set'; intermediate open sets represent distinguishable or observable parts of the continuum.
+\end{defn} 
+
+\section{Points}
+
+\begin{defn} 
+	A \textbf{filter} in a topological space $X$ is a collection of open sets F = $\{U_i\}$ obeying the following axioms:
+	\begin{itemize}
+		\item If $A$ and $B$ are in $F$, so is $A\cap B$.
+		\item If $A\subset B$ and $A\in F$, so is $B$.
+		\item $\bot$ and $\top$ are both in $F$
+	\end{itemize}
+\end{defn} 
+
+\begin{defn} 
+	A \textbf{prime filter} of a topological space $X$ is a filter obeying the following additional rule:
+	\begin{itemize}
+		\item If $A\cup B\in F$ then either $A\in F$ or $B\in F$
+	\end{itemize}
+\end{defn} 
+
+\begin{defn} 
+	A \textbf{completely prime filter} of a topological space $X$ is a filter obeying the following additional rule:
+	\begin{itemize}
+		\item If $\bigcup_i A_i \in F$ then at least one of the $A_i$ is in $F$
+	\end{itemize}
+\end{defn} 
+
+\begin{defn} 
+	Two completely prime filters of a topological space $X$ are \textbf{equivalent} if TODO!
+\end{defn} 
+
+\begin{defn} 
+	A \textbf{topological point} of a topological space $X$ is an equivalence class of completely prime filters in $X$. Informally, if $a$ us a topological point of $X$ we write $a \in X$.
+\end{defn} 
+
+Note that the filters might be infinite, so that the topological point it produces is not necessarily an open set.
+
+In general topology, the definition of a point is different. The space $X$, in addition to its system of open sets, is assumed to contain a set of points, which I'll call its `general points'. Then problems arise then a topology does not have enough open sets to give rise to all those points as topological points. In almost all the topological spaces that interest us here and in future, there are `enough open sets' and the notion of topological point and general point coincide. We study spaces where this does not happen in \textbf{Topics in General Topology}.
+
+Our approach is based on emphasising topological points as `what we can infer from observation' -- when thinking about continua in the physical world, general points that are not topological would be ineffable mysteries. However, in many applications we do consider `weak' topologies that cannot distinguish all points that we have other reasons to believe in. We speak about points in $X$ in the same way whether they are topological points arising from completely prime filters or general points that are `given' in some way external to the topology.
+
+\begin{defn} 
+	A topological point $a$ is \textbf{inside an open set} $U$ if $U$ is an element of any of the completely prime filters that define $a$. By an abuse of notation we write $a\in U$.
+\end{defn} 
+
+\begin{defn} 
+	A \textbf{closed set} $C$ of a topological space $X$ is a set of topological points such that $X\setminus C$ is an open set.
+\end{defn} 
+
+Note that a set may be both closed and open, or neither closed nor open.
+
+
+
+\section{Continuous Maps}
+
+If topological spaces are to form a category -- which is the kind of thing we 
+
+\begin{defn} 
+	Let $X$ and $Y$ be topological spaces. A \textbf{map} from $X$ to $Y$, written $f:X\to Y$, associates to each point in $X$ a point in $Y$.
+\end{defn} 
+
+\begin{defn} 
+	A map $f:X\to Y$ is \textbf{continuous} if for every open set $U\in Y$, $f^{-1}(U)$ is an open set in $X$.
+\end{defn} 
+
+Note that the above definition (which is central to everything we will do) is easily confused with the following, which is quite different and much less important:
+
+\begin{defn} 
+	A map $f:X\to Y$ is \textbf{open} if for every open set $U\in X$, $f(U)$ is an open set in $Y$.
+\end{defn} 
+
+
+
+\chapter{New Objects from Old}
+
+Products, quotients, subspaces. 
+
+\chapter{Interior and Boundary}
+
+Interior, boundary, limit point
+
+\chapter{Connectedness}
+
+\chapter{Compactness}
+
+I am sure this can be expressed with a sheaf but haven't found a reference yet; `every open cover has a finite subcover' just sounds sheafy. Specifically, we're saying . From NLab:  A sheaf on a topological space $X$ is a sheaf on the site $Op(X)$ whose underlying category is the category of open subsets of $X$, and whose coverage consists of the open covers of topological spaces.
+
+Locally compact -> Compact -> one-point compactification
+
+\chapter{Important Classes of Topological Space}
+
+Sheaves, manifolds and fibre bundles -- mostly just definitions and examples, as far as they'll be needed later
 
 \part{Topology, Logic and Stone Duality}
 \begin{itemize}
@@ -62,12 +171,13 @@ When the coursebooks are complete, the notes document is no longer needed and wi
 \end{itemize}
 
 \part{Topics in General Topology}
-		\begin{itemize}
+
+\begin{itemize}
 	\item{Separation properties}
 	\item{Tychonoff Theorem, Tietze Extension Theorem}
 	\item{Classification of 2-manifolds}
 	\item{Some introductory material on knots}
-	\item{In general, this is the only course where we deal with spaces such as the Cantor Set, the line with two origins etc that are degenerate in various ways with respect to `nice' spaces}
+	\item{In general, this is the only course where we deal with spaces such as the Cantor Set, the line with two origins etc that are degenerate in various ways with respect to the sober spaces we usually restrict ourselves to}
 \end{itemize}
 
 \part{OLD NOTES - To be incorporated above}
@@ -375,6 +485,8 @@ Now suppose you really want to believe you live on a line segment just as everyo
 
 The idea of a topological manifold is that it is a topological space that is `locally homogeneous', meaning that wherever we are in the space, if we zoom in far enough we end up in an open set that looks just the same as the open set we reach at any other point. That is, if you narrow your field of vision enough, you won't be able to tell where you are because the open set you can see at every point looks just like some fixed `model space'. The letter Y space fails to be locally homogeneous because of the junction-point, but a great many important spaces are manifolds or belong to a wider class that can be derived from them (manifolds with boundary or with corners, for example).
 
+Since we are interested in building a foundation for studying continua, we prefer a restricted version of topology that does not admit so many wild examples. In particular, point-free topology restricts us to a subset of the spaces that point-set topology can study -- in particular, we will not have to be so concerned about spaces whose points are at odds in one way or another with their system of open sets, for the only points that are `available' in a topological space will be precisely those the open sets are able to disclose. As a side-benefit, our topological spaces form a well-behaved category.
+
 
 \section{Locales}
 
@@ -611,7 +723,7 @@ This is called the \textbf{equivalence class} of $x$.
 \end{thm}
 
 \begin{proof}
-	We must have that $x\in [x]$ by the definition of an equivalence relation, for everything is equvalent to itself. So every element of $S$ is in at least one equivalence class. Suppose that $x\in [x]$ and also $x\in [y]$; then $x\cong y$ and hence $[x]=[y]$.  Hence every element is in at most one equivalence class. 
+	We must have that $x\in [x]$ by the definition of an equivalence relation, for everything is equivalent to itself. So every element of $S$ is in at least one equivalence class. Suppose that $x\in [x]$ and also $x\in [y]$; then $x\cong y$ and hence $[x]=[y]$.  Hence every element is in at most one equivalence class. 
 \end{proof}
 
 \begin{defn}
@@ -875,6 +987,8 @@ Note that  $\text{Sp}$ and $\Sigma$ do not `hit' every topological space. Some t
 Furthermore, $\Omega$ has the same problem; some locales cannot be thought of as topological spaces because they have \emph{too few points} (i.e., too few completely prime filters) to correspond to topological spaces. Those that correspond to topologies, i.e. for which $\Omega$ is defined, are called \textbf{spatial locales}.
 
 The correspondence between spatial locales and sober topological spaces is called `Stone duality'. For the most part these notes are concerned only with these spaces.
+
+Comment from Wikipedia, for further investigation (probably for the follow-up course): A space $X$ is sober if every functor from the category of sheaves Sh($X$) to Set that preserves all finite limits and all small colimits must be the stalk functor of a unique point $x$.
 
 \subsection{Homeomorphism to $\mathbb{R}$}
 

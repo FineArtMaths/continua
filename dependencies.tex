@@ -9,38 +9,47 @@
 				line width=0.6pt,
 				fill=gray!15
 			}]
-			\reqhalfcourse 50,40:{}{Point-Free Topology}{continua}
-			\reqhalfcourse 50,30:{}{Algebraic Topology}{continua}
-			\reqhalfcourse 50,20:{}{Smooth Manifolds}{continua}
-			\reqhalfcourse 60,10:{}{Differential Topology}{continua}		
-			\reqhalfcourse 50,0:{}{Riemannian Geometry}{continua}
+			\reqhalfcourse 30,40:{}{Point-Free Topology}{continua}
+			\reqhalfcourse 30,30:{}{Algebraic Topology}{continua}
+			\reqhalfcourse 30,20:{}{Smooth Manifolds}{continua}
+			\reqhalfcourse 40,10:{}{Differential Topology}{continua}		
+			\reqhalfcourse 30,0:{}{Riemannian Geometry}{continua}
 
-			\reqhalfcourse 50,50:{}{Hors d'Oeuvre}{structure}
-			\reqhalfcourse 5,20:{}{Group Theory and\\Linear Algebra}{structure}
-			\reqhalfcourse 20,10:{}{Hopf Algebras}{structure}		
-			\reqhalfcourse 5,10:{}{Galois Theory}{structure}
-			\reqhalfcourse 25,30:{}{Homological Algebra}{structure}
-			\reqhalfcourse 40,10:{}{Lie Algebras}{structure}
+			\reqhalfcourse 30,50:{}{Hors d'Oeuvre}{structure}
+			\reqhalfcourse -10,20:{}{Group Theory and\\Linear Algebra}{structure}
+			\reqhalfcourse 2,10:{}{Hopf Algebras}{structure}		
+			\reqhalfcourse -12,10:{}{Galois Theory}{structure}
+			\reqhalfcourse 0,30:{}{Homological Algebra}{structure}
+			\reqhalfcourse 20,10:{}{Lie Algebras}{structure}
+			
+			\reqhalfcourse 60,20:{}{Measure Theory}{measure}
+			\reqhalfcourse 65,10:{}{Probability\\and Statistics}{measure}
+			\reqhalfcourse 55,0:{}{Nonsmooth Analysis}{measure}
 		\end{scope}
 		
-		\prereq 50,40,50,30:
-		\prereq 50,30,50,20:
-		\prereq 50,20,60,10:
-		\prereq 50,20,50,0:
+		\prereq 30,40,30,30:
+		\prereq 30,30,30,20:
+		\prereq 30,20,20,10:
+		\prereq 30,20,30,0:
 		
-		\prereq 50,50,50,40:
+		\prereq 30,50,30,40:
 
-		\prereq 5,20,20,10:
-		\prereq 5,20,5,10:
-		\prereq 5,20,25,30:
-		\prereq 5,20,40,10:
+		\prereq -10,20,2,10:
+		\prereq -10,20,-12,10:
+		\prereq -10,20,0,30:
+		\prereq -10,20,20,10:
 		
-		\prereq 50,30,25,30:
-		\prereq 50,20,40,10:
+		\prereq 30,30,0,30:
+		\prereq 30,20,20,10:
+		\prereq 30,20,40,10:
 		
-		\recomm 40,10,50,0:
-		\recomm 5,20,50,30:
-		\recomm 50,20,20,10:
+		\prereq 30,20,60,20:
+		\prereq 60,20,65,10:
+		\prereq 60,20,55,0:
+		
+		\recomm 20,10,30,0:
+		\recomm -10,20,30,30:
+		\recomm 30,20,2,10:
 		
 		\begin{pgfonlayer}{courses}
 		\end{pgfonlayer}
