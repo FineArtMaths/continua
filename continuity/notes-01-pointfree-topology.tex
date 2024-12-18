@@ -48,6 +48,16 @@ When the coursebooks are complete, the notes document is no longer needed and wi
 
 \chapter{Topological Spaces}
 
+\section{Approach}
+
+We will start with a section about how we understand observation of continuous phenomena. This can include some notes from the history of ideas, starting with Aristotle's response to Zeno.
+
+In what follows, we try to think of points as ideal objects that a topology allows us to produce, not pre-existing elements from which it is made. This emphasis makes sense for a project with continua at its core. 
+
+However, we are not pedantic about this: along with continua, we will need discrete topological spaces such as graphs and in those cases the points are often `given' in a very natural way.
+
+The specific view of topological spaces as continua is elaborated in more detail in \textbf{Topology, Logic and Stone Duality}. The traditional point-set view gives rise to a strictly larger theory whose outer reaches are explored in \textbf{Topics in General Topology}.
+
 \section{Open Sets}
 
 \begin{defn} 
@@ -55,7 +65,7 @@ When the coursebooks are complete, the notes document is no longer needed and wi
 \end{defn} 
 
 \begin{defn} 
-	A \textbf{system of open sets} $S$ is a collection of open sets obeying the following axioms:
+	A \textbf{system of open sets} $S$ is a set of open sets obeying the following axioms:
 	\begin{itemize}
 		\item For $X, Y\in S$, $X\cap Y\in S$ and this extends to the intersection of any finite collection of open sets.
 		\item For $X, Y\in S$, $X\cup Y\in S$ and this extends to the intersection of any finite \textit{or infinite} collection of open sets.
@@ -64,12 +74,10 @@ When the coursebooks are complete, the notes document is no longer needed and wi
 	\end{itemize}
 \end{defn} 
 
-\begin{defn} 
-	A \textbf{topological space} is some object we would like to consider as a continuum; to achieve this we equip it with a system of open sets. We interpret $\top$ as representing the whole space and $\bot$ the `empty set'; intermediate open sets represent distinguishable or observable parts of the continuum.
-\end{defn} 
+Note that the condition that $S$ be a set implies that there cannot be two open sets $U, V\in S$ that are different as open sets but such that $U = V$. 
 
 \begin{defn} 
-	A \textbf{topological space} is some object we would like to consider as a continuum; to achieve this we equip it with a system of open sets. We interpret $\top$ as representing the whole space and $\bot$ the `empty set'; intermediate open sets represent distinguishable or observable parts of the continuum.
+	A \textbf{topological space} is some object we would like to consider as a continuum; to achieve this we equip it with a system of open sets. We interpret $\top$ as representing the whole space and $\bot$ the `empty set'; intermediate open sets represent distinguishable or observable parts of the continuum that have a containment relationship isomorphic to that of the open sets.
 \end{defn} 
 
 \section{Points}
@@ -105,27 +113,39 @@ When the coursebooks are complete, the notes document is no longer needed and wi
 	A \textbf{topological point} of a topological space $X$ is an equivalence class of completely prime filters in $X$. Informally, if $a$ us a topological point of $X$ we write $a \in X$.
 \end{defn} 
 
-Note that the filters might be infinite, so that the topological point it produces is not necessarily an open set.
+Note that the filters might be infinite, so that the topological point it produces is not necessarily an open set. In that case we can think of the point as the `limit' of a process of refinement -- as we move down the filter, the open sets get smaller and smaller, slowly `zooming in' on the theoretical point they identify without ever actually getting there.
 
-In general topology, the definition of a point is different. The space $X$, in addition to its system of open sets, is assumed to contain a set of points, which I'll call its `general points'. Then problems arise then a topology does not have enough open sets to give rise to all those points as topological points. In almost all the topological spaces that interest us here and in future, there are `enough open sets' and the notion of topological point and general point coincide. We study spaces where this does not happen in \textbf{Topics in General Topology}.
+In general topology the definition of a point is different. The space $X$ is assumed to contain a set of points that are available to us in advance, independently of the definition of its open sets. I'll call these the `general points' of the space. This setup is superficially much simpler, since we can just define open sets in terms of the points they contain rather than conjuring points out of filters of open sets.
+
+	Complications arise, however, when a topology does not have enough open sets to give rise to all of its general points as topological points. In almost all the topological spaces that interest us here and in future, there are `enough open sets' and the notion of topological point and general point coincide. We study spaces where this does not happen in \textbf{Topics in General Topology}.
 
 Our approach is based on emphasising topological points as `what we can infer from observation' -- when thinking about continua in the physical world, general points that are not topological would be ineffable mysteries. However, in many applications we do consider `weak' topologies that cannot distinguish all points that we have other reasons to believe in. We speak about points in $X$ in the same way whether they are topological points arising from completely prime filters or general points that are `given' in some way external to the topology.
+
+\section{Some Definitions Involving Points}
 
 \begin{defn} 
 	A topological point $a$ is \textbf{inside an open set} $U$ if $U$ is an element of any of the completely prime filters that define $a$. By an abuse of notation we write $a\in U$.
 \end{defn} 
 
 \begin{defn} 
-	A \textbf{closed set} $C$ of a topological space $X$ is a set of topological points such that $X\setminus C$ is an open set.
+	Any open set that contains a topological point $a$ is said to be a \textbf{neighbourhood} of $a$.
+\end{defn} 
+
+Note that according to our definitions, every point in a topological space is inside at least one open set. It is certainly possible to define topological spaces that contain additional points but we will not be concerned with those here.
+
+\begin{thm} 
+	Let $U$ and $V$ be open sets in a topological space $X$. If the set of all points in $U$ is equal to the set of all points in $V$ then $U = V$.
+\end{thm} 
+
+\begin{defn} 
+	A \textbf{closed set} $C$ of a topological space $X$ is a set of topological points such that the collection of all points \textit{not} inside $C$ form an open set.
 \end{defn} 
 
 Note that a set may be both closed and open, or neither closed nor open.
 
-
-
 \section{Continuous Maps}
 
-If topological spaces are to form a category -- which is the kind of thing we 
+If topological spaces are to form a category -- which is the kind of thing we can study in mathematics -- we need objects and morphisms. the objects are the topological spaces, of course, and the morphisms are maps that respect the continuity of the spaces involved.
 
 \begin{defn} 
 	Let $X$ and $Y$ be topological spaces. A \textbf{map} from $X$ to $Y$, written $f:X\to Y$, associates to each point in $X$ a point in $Y$.
@@ -145,7 +165,7 @@ Note that the above definition (which is central to everything we will do) is ea
 
 \chapter{New Objects from Old}
 
-Products, quotients, subspaces. 
+Products, quotients, subspaces. In particular, note we can make a closed line segment by `excising' it as a subspace of the real line.
 
 \chapter{Interior and Boundary}
 
