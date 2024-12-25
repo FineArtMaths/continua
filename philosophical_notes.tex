@@ -1,4 +1,4 @@
-\documentclass[article]{article}
+\documentclass[oneside,english]{amsbook} 
 \usepackage[T1]{fontenc} 
 \usepackage[latin9]{inputenc} 
 \usepackage{amsmath} 
@@ -7,43 +7,98 @@
 \usepackage{amssymb}
 \usepackage{mathrsfs} 
 \usepackage{hyperref}
-\usepackage{babel}   
+\usepackage{url}
 
 \makeatletter 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands. 
+\numberwithin{section}{chapter} 
+\theoremstyle{plain} 
+\newtheorem{thm}{\protect\theoremname}   
+\theoremstyle{definition}   
+\newtheorem{defn}[thm]{\protect\definitionname}
 
 \makeatother
 
-
+\usepackage{babel}   
 \providecommand{\definitionname}{Definition} 
 \providecommand{\theoremname}{Theorem}
 \providecommand{\Cech}{\v{C}ech }
 \providecommand{\Poinacre}{Poincar\'e }
-\providecommand{\Kunneth}{K{\"u}nneth }
 
 \begin{document}
 	\title{Continua Project: Notes on the Background Philosophy}
 	\author{Rich Cochrane}
 	\maketitle
 	
-\section*{Remark}
+\chapter*{Remark}
 
-This document aims to collect the main philosophical points informing the Continua project. My intention is for these to mostly be in the background of the project, keeping them out of the way of those who hold a different position but still want to use the resources for learning. I expect there will be set-aside sections of some courses that discuss these topics, but they may end up segregated into a separate book to allow a through line to be developed.
+This document aims to collect the main philosophical perspective informing the Continua project. My intention is for these to mostly stay in the background, keeping them out of the way of those who hold a different position but still want to use the resources for learning. I expect they will probably end up segregated into a separate, stand-alone coursebook, which would also allow a through line to be developed.
 
-\section{Pragmatism}
+\chapter{Pragmatism}
 
-`My job has been finding definitions exactly by showing what you can deduce from them' - Giovanni Sambin, from his talk: https://www.youtube.com/watch?v=SiswEyrk2h4&t=307s. 
+\section{What is Good in the Way of Belief}
+
+\section{All the Rest is the Work of Man}
+
+`My job has been finding definitions exactly by showing what you can deduce from them' - Giovanni Sambin, from his talk: \url{https://www.youtube.com/watch?v=SiswEyrk2h4&t=307s}.
 
 I take Sambin to mean that definitions don't capture something that already exists -- they're made by people for the purpose of deducing theories from them. A mathematical object has the definition it does only because it leads to a theory that people find worthwhile to investigate.
 
+
+
+
+\section{Foundations}
+
+\section{Pre-Foundational Mathematics}
+
+Mathematics doesn't begin with foundations the way a house does.
+
+\section{The Drive to Foundationalism}
+
+Foundationalism is a sign that we don't understand something and seems to be a typical step in the dialectical movement away from na\"ive practicality.
+
+\section{Post-Foundationalism and Category Theory}
+
 Mathematics does not need foundations -- it grows `downwards' from practical concerns, not `upwards' from some set of universal ideas. Category theory emphasises this -- it starts as a set of observations about how successful mathematicians operate in the world and develops into a toolbox for doing mathematics well. It doesn't present itself as a foundation and shouldn't be mistaken for one. 
 
-\section{The Nature of the Continuum}
+
+
+
+\chapter{The Objects of Study}
 
 \section{The Nature of Structure}
 
-\section{The Role of Rationality}
+Talk here about the idea of abstraction, and especially the separation of form from content (Aristotle might be useful here).
 
-Logic and probability
+\section{The Nature of Continua}
+
+Continua arise phenomenologically first -- Zeno and Aristotle. 
+
+\section{The Nature of Infinity}
+
+Potential vs actual infinity. No need to be a realist about actual infinities except in the sense of Quine's formula that `to be is to be the value of a bound variable'. Not only are the sets we quantify over usually infinite, sometimes the objects they contain are, too. This doesn't pose a problem unless we ask whether these objects `exist' in some transcendent sense that's hard to pin down.
+
+Higher infinities.
+
+\chapter{Systems of Rationality}
+
+Logic is an example of abstraction -- in this case it separates the forms of `sound' arguments from their subject-matter, creating a calculus for rapidly assessing arguments we haven't seen before. 
+
+The problem is that `soundness' does not have a single definition, and doesn't even seem to be definable prior to a choice of logic. Such a choice is to some extent sociological: it's wise to use forms of argument that our peers find acceptable. But that doesn't mean the choice is arbitrary; we can expect that successful societies will develop logics that are a reasonably good fit for the wider context of what they're trying to accomplish. 
+
+Different logics have been found suitable for different purposes throughout human history and especially in the present, when societies are often more complex, and enagged in a greater variety of projects, than ever before.
+
+\subsection{Classical Logic: The Way of Assertion}
+
+\subsection{Intuitionistic Logic: The Way of Proof}
+
+\subsection{Paraconsistent Logic: The Way of Paradox}
+
+\subsection{Modal Logic: The Way of Permission}
+
+\subsection{Fuzzy Logic: The Way of Control}
+
+\subsection{Probability: The Way of Uncertainty}
 
 \end{document}
 

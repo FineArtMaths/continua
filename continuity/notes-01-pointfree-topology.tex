@@ -80,6 +80,14 @@ Note that the condition that $S$ be a set implies that there cannot be two open 
 	A \textbf{topological space} is some object we would like to consider as a continuum; to achieve this we equip it with a system of open sets. We interpret $\top$ as representing the whole space and $\bot$ the `empty set'; intermediate open sets represent distinguishable or observable parts of the continuum that have a containment relationship isomorphic to that of the open sets.
 \end{defn} 
 
+\begin{defn} 
+	The system of open sets in a topological space is called its \textbf{topology}.
+\end{defn} 
+
+The usual definition of a topological space is a bit different. It requires that the underlying object be a set of `points' that are already given to us, and the open sets be subsets of those points. This is a perfectly fine way to think about a topological space.
+
+Nevertheless, we will expend some effort in the next section to show that, at least for the most useful spaces for our purposes, we don't need to assume the points are given in advance -- we can actually derive them from the system of open sets. That perspective is made much more rigorous in the course \textit{Topology, Logic and Stone Duality}.
+
 \section{Points}
 
 \begin{defn} 
@@ -124,14 +132,16 @@ Our approach is based on emphasising topological points as `what we can infer fr
 \section{Some Definitions Involving Points}
 
 \begin{defn} 
-	A topological point $a$ is \textbf{inside an open set} $U$ if $U$ is an element of any of the completely prime filters that define $a$. By an abuse of notation we write $a\in U$.
+	A topological point $a$ is \textbf{inside an open set} $U$ if $U$ is an element of any of the completely prime filter that defines $a$. By an abuse of notation we write $a\in U$ and say that $U$ `contains' the point $a$.
 \end{defn} 
+
+In the more traditional approach, where $U$ is defined in advance as a set of points, there is no abuse of notation going on; the point is literally in the set. 
 
 \begin{defn} 
 	Any open set that contains a topological point $a$ is said to be a \textbf{neighbourhood} of $a$.
 \end{defn} 
 
-Note that according to our definitions, every point in a topological space is inside at least one open set. It is certainly possible to define topological spaces that contain additional points but we will not be concerned with those here.
+Note that every point in a topological space is inside at least one open set since the whole space is always an open set -- every completely prime filter contains the open set that is the whole space. Thus every point has at least one neighbourhood. In spaces of interest to us, a single point usually has an infinite number of neighbourhoods.
 
 \begin{thm} 
 	Let $U$ and $V$ be open sets in a topological space $X$. If the set of all points in $U$ is equal to the set of all points in $V$ then $U = V$.
@@ -151,37 +161,230 @@ If topological spaces are to form a category -- which is the kind of thing we ca
 	Let $X$ and $Y$ be topological spaces. A \textbf{map} from $X$ to $Y$, written $f:X\to Y$, associates to each point in $X$ a point in $Y$.
 \end{defn} 
 
+It's probably good to first use this definition to define the image of a map, the fibre over a point and what sections of a map look like as these help give an idea of what a map is before getting to the definition of continuity. Probably even recap surjection / injection / bijection.
+
+We need a clear motivating example for the main definition. From a localic point of view, a continuous map is simply a frame homomorphism in the opposite direction, but I don't think we'll have enough machinery to do that here. Can we somehow suggest there's something `backwards' about continuous maps, though, without doing the whole frames / locales setup?
+
 \begin{defn} 
 	A map $f:X\to Y$ is \textbf{continuous} if for every open set $U\in Y$, $f^{-1}(U)$ is an open set in $X$.
 \end{defn} 
 
-Note that the above definition (which is central to everything we will do) is easily confused with the following, which is quite different and much less important:
+Note that the above definition (which is central to everything we will do) is easily confused with the following, which is quite different and much less important (we only want to show it here to emphasise that this isn't what continuity means so give at least one example of an open map that's not continuous, and a continuous map that's not open):
 
 \begin{defn} 
 	A map $f:X\to Y$ is \textbf{open} if for every open set $U\in X$, $f(U)$ is an open set in $Y$.
 \end{defn} 
 
+Key examples of continuous maps are paths ($f:\mathbb{R}\to X$) and scalar fields ($f:X\to \mathbb{R}$).
 
+\chapter{New Spaces from Old}
 
-\chapter{New Objects from Old}
+\section{Products}
 
-Products, quotients, subspaces. In particular, note we can make a closed line segment by `excising' it as a subspace of the real line.
+For products, start with the real line and make the Euclidean spaces
 
-\chapter{Interior and Boundary}
+\section{Subspaces}
 
-Interior, boundary, limit point
+For the subspace topology, we can make a closed line segment by `excising' it as a subspace of the real line. We can then make rectangles, cubes etc.
 
-\chapter{Connectedness}
+\section{Quotients}
+
+For quotients, so surfaces by identification.
+
+\chapter{Some Topological Properties}
+
+\section{Connectedness}
+
+\begin{defn} 
+	Two open sets in a topology are \textbf{disjoint} if they do not share any point (i.e. there is no point that is a completely prime filter of both sets).
+\end{defn} 
+
+\begin{defn} 
+	A topological space is \textbf{disconnected} if it is the union of two disjoint open sets.
+\end{defn} 
+
+\begin{defn} 
+	A topological space is that is not disconnected is \textbf{connected}.
+\end{defn} 
+
+\begin{defn} 
+	A topological space is \textbf{disconnected} if it is the union of two disjoint open sets.
+\end{defn} 
+
+It follows that if a topological space is connected, its only open sets that are also closed as $\emptyset$ and the whole space.
+
+It turns out that this definition of connectedness is a bit slippery. The following definition is more complicated but more explicitly captures our intuitive understanding of what it means for a space to be `connected together':
+
+\begin{defn} 
+	A topological space $X$ is \textbf{path-connected} if for any two points $a, b\in X$ there is a continuous map $f:[0, 1]\to X$ with $f(0)=a$ and $f(1)=b$.
+\end{defn} 
+
+A space that is path-connected is necessarily connected but, oddly, not \textit{vice versa}: it's possible to construct topological spaces that are connected but not path-connected. However, in most of the spaces of interest on these courses the two concepts exactly coincide.
+
+This definition relies on the fact that $[0, 1]$ is in some sense the prototype of a connected space: every point is connected to every other by a segment of the line in a very explicit and visual way. This property can be used to `probe' the connectedness of other spaces via a continuous map, but it only works in spaces that have a `strong' sort of connectedness. Some spaces are connected in topological terms but not in a way the $[0, 1]$ probe can `see'.
+
+\section{Limit, Interior and Boundary}
+
+Limit point -- not all filters of open sets define points in the space! Show why a not-completely-prime filter may `converge' to something that, intuitively, doesn't exist (such as a boundary point of an open set). Show why the completely-primeness of the filter is what makes it right for the definition of a point.
+
+The interior of an open set $X$ is the union of all subsets of $X$ that are open sets.
+
+The closure of an open set is the open set plus all its limit points. Is there a more locale-flavoured definition, though?
+
+The boundary of an open set is the closure minus the interior. Again it would be nice to be able to express this in a less pointy way.
+	
+\section{Covers}
+
+\begin{defn}
+	An \textbf{open cover} of a topological space is a collection of its open sets whose union is the whole space.
+\end{defn}
+
+\begin{defn}
+	A \textbf{closed cover} of a topological space is a collection of its closed sets whose union is the whole space.
+\end{defn}
+
+\begin{defn}
+	A \textbf{finite cover} of a topological space is a cover that consists of a finite number of open sets.
+\end{defn}
+
+\begin{defn}
+	Let $X$ be a topological space and $C$ a cover of $X$. A \textbf{subcover} of $C$ is a subset of the sets in $C$ that is also a cover of $X$.
+\end{defn}
+
+Even covers
 
 \chapter{Compactness}
 
-I am sure this can be expressed with a sheaf but haven't found a reference yet; `every open cover has a finite subcover' just sounds sheafy. Specifically, we're saying . From NLab:  A sheaf on a topological space $X$ is a sheaf on the site $Op(X)$ whose underlying category is the category of open subsets of $X$, and whose coverage consists of the open covers of topological spaces.
+\begin{defn}
+	A topological space is \textbf{compact} if every open cover of the space has a finite subcover.
+\end{defn}
 
-Locally compact -> Compact -> one-point compactification
+\begin{defn}
+	A topological space is \textbf{locally compact} if each point in the space has a compact neighbourhood.
+\end{defn}
 
-\chapter{Important Classes of Topological Space}
+\begin{thm}
+	If a topological space is locally compact, it is compact.
+\end{thm}
 
-Sheaves, manifolds and fibre bundles -- mostly just definitions and examples, as far as they'll be needed later
+The converse is not true: for example, $\mathbb{R}$ is locally compact but not compact.
+
+We should do the Alexandroff compactification (appending one point).
+
+\chapter{Uniformity and Completeness (*)}
+
+Willard, \textit{General Topology} has a chapter on this that may be helpful. This may be useful here because it introduces some ideas in a purely topological setting that will be useful later when we develop the calculus. But it may also be a hinderance at this point since it might be hard to get to an application of it without literally inventing calculus. Part of the appeal is the focus on scalar fields defined on fairly well-behaved spaces, which will of course be one of the main things we want the reader to be thinking of in future. But if there's too much technical baggage here it would be better cut.
+
+I think the intention here is partly to define completeness (and uniform convergence) without reference to a metric or extraneous notions of limit (there's already an idea of limit baked into filters anyway, in a sense). So trying to recover as much of calculus as we can just from topology. I approve of this idea, I'm just not sure whether this will work out here.
+
+\section{Uniform Spaces}
+
+The definitions of this section are independent of topology: it is possible to define a `uniform space' as a set of points equipped with a uniformity (defined below) without ever specifying a topology. For our purposes, however, we will almost always start with a topological space.
+
+We start with the following odd-looking definition. in the present context, the intuition behind it is as follows. We are interested in pairs of points that are `tolerably close together'. In this case, $(x, y)$ are in $U$, which means they're `close together', and $(y, z)$ are in $V$, which means they're `close together' too. If $x$ is close to $y$ and $y$ is close to $z$, that doesn't mean $x$ is close to $z$. However, it does mean there's a way to get from $x$ to $z$ by making two short journeys: we can go via $y$.
+
+\begin{defn}
+	Let $X$ be a set (in particular, it will often be the set of points of a topological space) and consider the product set $X\times X$. Let $U$ and $V$ be subsets of $X\times X$. Then the \textbf{composite} $U\circ V$ is the set of all pairs of the form $(x, z)$ where we can find some $y\in X$ such that $(x, y)\in U$ and $(y, Z)\in V$
+\end{defn}
+
+The above idea is used to define a very general idea of `closeness' that we can now set out -- it has a lot of parts so will need some unpacking, especially the intuition behind the last condition that uses composites:
+
+\begin{defn} 
+	A \textbf{uniformity} on a topological space $X$ is a subset $U$ of $X\times X$ that satisfies the following:
+	\begin{itemize}
+		\item For every $x\in X$, $(x, x)\in U$ (the binary relation is `reflexive')
+		\item if $(x, y)\in U$ then $(y, x)\in U$ too (the binary relation is `symmetric')
+		\item $U$ forms a filter on $X\times X$ (that is, for every element of $U$, all its supersets are also in $U$, and for every pair of elements their intersection is also in $U$)
+		\item For each $x$ in $U$, there is a $y$ such that the composite $y\circ y$ is a subset of $x$.
+	\end{itemize}
+\end{defn} 
+
+\begin{defn}
+	An element of a uniformity is called an \textbf{entourage}.
+\end{defn}
+
+\section{Uniformization}
+
+\begin{defn}
+	Lat $X$ be a uniform space. The \textbf{induced topology} on $X$ (that is, the topology induced by its uniform structure) is TODO
+\end{defn}
+
+\begin{defn}
+	A topological space is \textbf{uniformizable} if it is possible to define a uniform structure on the points of $X$ that induces the topology of $X$.
+\end{defn}
+
+We can also go the other way, inducing a uniformity from a given topology.
+
+\begin{defn}
+	Lat $X$ be a topological space. Let $C(X)$ be the set of all continuous maps $X\to\mathbb{R}$. Consider the entourages of the form $D_{f, e}=\{(x, y) : |f(x) - f(y)| < e \}$. The \textbf{initial uniformity} on $X$ is the uniformity generated by these entourages.
+\end{defn}
+ (I'm not sure this is quite right. Also we surely need to include the final uniformity, if we include the initial one: \url{https://mathoverflow.net/questions/471104/what-is-final-uniformity-in-general}?)
+
+\section{Cauchy Completeness}
+
+\begin{defn}
+	A \textbf{Cauchy filter} on a uniform space is a proper filter on the subsets of the space that satisfies the following criterion:
+	\begin{itemize}
+		\item For each entourage $E$ in the space, there is an element $F$ of the filter such that every pair in $F\times F$ is in $E$
+	\end{itemize}
+	A filter that has this property is said to `be Cauchy'.
+\end{defn}
+
+\begin{defn}
+	Let $x$ be any point in a uniform space $X$. The \textbf{principal ultrafilter} $U_x$ at the point $x$ is the set of all subsets of $X$ that contain $x$.
+\end{defn}
+
+\begin{thm}
+	$U_x$ is Cauchy at every point $x$.
+\end{thm}
+
+\begin{defn}
+	A filter $F$ \textbf{converges} to a point $x$ is $F\int U_x$ is Cauchy.
+\end{defn}
+
+\begin{defn}
+	A uniform space is called \textbf{complete} if every Cauchy filter converges.
+\end{defn}
+
+This means the space must include all its limit points. 
+
+\begin{defn}
+	A uniform space is called \textbf{compact} if it is complete and totally bounded.
+\end{defn}
+
+All Haudorff spaces are uniformizable, so possibly all the spaces that interest us as uniform: \url{https://ncatlab.org/nlab/show/uniform+space}; uniformity was invented to include metric spaces and topological groups, which are probably all we're going to use anyway. 
+
+So `closed and bounded' becomes `uniform, complete and totally bounded' and the subtleties might be worth teasing out.
+
+
+\chapter{Sheaves}
+
+introduce the sheaf of sets on a topological space, and the sheaf of functions from each open set to $\mathbb{R}$.
+
+Can we do much with them here though? It would be nice to introduce them early, but confusing if we do that and then don't use them for anything. It's enough if the Rosiak stuff in the next chapter works though.
+
+One thing that might work is to look at connectedness, which I think can be expressed in terms of locally constant sheaves.
+
+Another thing that might make sense is to look at covering spaces as etale spaces (the wiki entry for covering spaces refers to this). That would prepare the ground for the final chapter as well as giving an example of a sheaf.
+
+\chapter{Fibre Bundles}
+
+We can do the thing with the mobius strip here.
+
+
+\subsection{Covering Spaces}
+
+\subsection{Fibre Bundles}
+
+\subsection{Local Trivializations}
+
+\subsection{The Bundle Functor}
+
+Note that there is an adjunction between the bundle functor and the sections functor that's explained in Rosiak (Theorem 214) -- this might be a good capstone result for this course and give us a guiding thread through the later chapters. 
+
+
+
+
 
 \part{Topology, Logic and Stone Duality}
 \begin{itemize}
@@ -1003,6 +1206,8 @@ When $L$ is a frame exactly the same construction works, since it depends only o
 There is also a functor going the other way, written $\Omega$, which sends a topological space to a locale by simply discarding the point-set -- or which does the same, by contravariantly, with a frame. P and P sometimes write this functor as $\text{Lc}$.
 
 Note that  $\text{Sp}$ and $\Sigma$ do not `hit' every topological space. Some topologies do not contain enough open sets to uniquely identify every point; roughly speaking, those are the ones that fail to be Hausdorff. More precisely, the topological spaces that lie in the scope of these functors are the \textbf{sober spaces}. More exotic spaces lie beyond the reach of this approach; they have \emph{too few open sets}.
+
+The following seems to be mathematical folklore: a sober space is one in which we don't hallucinate (see things that aren't there, as in a space with not enough points for its open sets such as an atomless Boolean algebra, which has no points at all!) and we don't have blind spots (places where there are too many points for our completely prime filters to see them, as in the line with two origins).
 
 Furthermore, $\Omega$ has the same problem; some locales cannot be thought of as topological spaces because they have \emph{too few points} (i.e., too few completely prime filters) to correspond to topological spaces. Those that correspond to topologies, i.e. for which $\Omega$ is defined, are called \textbf{spatial locales}.
 
