@@ -1,0 +1,70 @@
+\documentclass[oneside,english]{amsbook} 
+\usepackage[T1]{fontenc} 
+\usepackage[latin9]{inputenc} 
+\usepackage{amsmath} 
+\usepackage{amstext} 
+\usepackage{amsthm} 
+\usepackage{amssymb}
+\usepackage{mathrsfs} 
+\usepackage{hyperref}
+
+\makeatletter 
+
+\numberwithin{section}{chapter} 
+\theoremstyle{plain} 
+\newtheorem{thm}{\protect\theoremname}   
+\theoremstyle{definition}   
+\newtheorem{defn}[thm]{\protect\definitionname}
+
+\makeatother
+
+\usepackage{babel}   
+\providecommand{\definitionname}{Definition} 
+\providecommand{\theoremname}{Theorem}
+\providecommand{\Cech}{\v{C}ech }
+\providecommand{\Poinacre}{Poincar\'e }
+\providecommand{\Kunneth}{K{\"u}nneth }
+
+\begin{document}
+	
+	\title{Algebraic Topology -- Notes}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	\chapter*{About this Document}
+	
+	This is part of \href{https://github.com/FineArtMaths/continua}{the continua project}. The project is broken down into `modules', each covering a specific topic. Each module ultimately becomes one of more courses. The approach is:
+	
+	\begin{itemize}
+		\item{Identify a topic that should be its own module (this is recorded in the `overview' documents in each main folder)}
+		\item{Create a `notes' document assembling the technical material for each module in a fairly condensed form, but with some indication of how the pedagogy might go (that's what you're looking at now)}
+		\item{Create one or more coursebooks that contain the technical material along with motivation, philosophical reflections, pictures, examples, intuitive explanations and so on.}
+	\end{itemize}
+	
+	When the coursebooks are complete, the notes document is no longer needed and will probably be deleted. So the fact that you're looking at this means this is a work in progress -- it is incomplete, disorganised and probably full of errors.
+	
+	\part{Introduction to Smooth Manifolds}
+	
+	\chapter{Locally Ringed Spaces}
+	
+	\chapter{The Tangent and Cotangent Bundles}
+
+	\chapter{The Alternating Algebra}
+	
+	\chapter{Differential Forms}
+
+	\chapter{The Exterior Derivative}
+
+	\chapter{Integration of Forms}
+
+	\chapter{De Rham's Theorem}
+	
+	\chapter{Vector Flows and Integral Curves}
+
+	\chapter{The Lie Derivative}
+
+	\chapter{The Frobenius Theorem}
+
+\end{document}
