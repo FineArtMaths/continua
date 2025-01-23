@@ -47,24 +47,86 @@
 	
 	\part{Introduction to Smooth Manifolds}
 	
-	\chapter{Locally Ringed Spaces}
+	\chapter*{General Approach}
 	
-	\chapter{The Tangent and Cotangent Bundles}
-
-	\chapter{The Alternating Algebra}
+	The idea is to develop as much as we can in flat space first,, with concrete examples and calculations. This will include introducing the idea of a limit, which I'd like to approach in the SDG manner without being dogmatic.
 	
-	\chapter{Differential Forms}
+	In the same spirit, I'd like to introduce manifolds as locally ringed spaces and do things with that setup (including developing a little bit of sheaf cohomology) but keep most of the material quite traditional. 
 
-	\chapter{The Exterior Derivative}
-
-	\chapter{Integration of Forms}
-
-	\chapter{De Rham's Theorem}
+	\chapter{Calculus in Flat Space}
 	
+		\section{Linear Algebra Review}
+			\subsection{Dual Space and Inner Product}
+			\subsection{Covariance and Contravariance}
+			Recall scalar fields and curves
+			Include algebra of scalar fields. Note there is no algebra of curves. 
+			\subsection{The Exterior Algebra}
+		\subsection{Fibre Bundles}
+		Scalar Fields, vector fields and covector fields as sections of bundles
+		
+		\section{Locally Ringed Spaces}
+		
+			\begin{defn} 
+				A \textbf{sheaf of rings} $\mathscr{O}(X)$ on a topological space $X$ assigns a ring to each open set of $X$ such that the sheaf axioms hold, that is (here $U$, $V$ and $W$ are open sets in $X$):
+				\begin{itemize}
+					\item For every pair $U\subseteq V$ there is a ring homomorphism $res_U^V: \mathscr{O}(V)\to \mathscr{O}(U)$
+					\item For each open set $U$, $res_U^U$ is the identity map
+					\item $res_U^V \circ res_V^W = res_U^W$ (a sort of `triangle inequality')
+				\end{itemize}
+			\end{defn}
+			
+			\begin{defn} 
+				A \textbf{ringed space} is a topological space $X$ equipped with a sheaf of rings $\mathscr{O}(X)$, which is called its \textbf{structure sheaf}
+			\end{defn}
+			
+			\begin{defn} 
+				A \textbf{local ring} is a ring that has a unique maximal ideal.
+			\end{defn}
+			
+			\begin{defn} 
+				A \textbf{locally ringed space} is a ringed space such that the stalk of the structure sheaf at every point is a local ring.
+			\end{defn}
+
+		\section{Infinitesimals and Limits}
+		
+		The first part of Bell's essay here is a good approach: \url{https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=9100113e2c74c99c5262c6a686a63b166dc9aaa7}
+		
+		\section{Differential Forms}
+		
+		\url{https://rigtriv.wordpress.com/2008/04/14/differential-forms-and-the-canonical-bundle/}
+	
+		\section{The Exterior Derivative}
+	
+		\section{Integration of Differential Forms}
+
+
+	\chapter{Calculus on Manifolds}
+	
+		\section{Smooth Manifolds}
+
+		\section{Diffeomorphisms}
+
+		\section{Closed and Exact Forms}
+		\section{De Rham Cohomology}
+		\section{The Boundary Operator}
+
+		\section{Pushforwards and Pullbacks}
+		\section{Stokes's Theorem}
+
+	\chapter{The Three-Dimensional Case}
+	
+		A brief chapter where we develop normal vector calculus (as far as we can without a metric!) in the foregoing language. Should be very concrete and rather easy, with plenty of opportunities to reinforce what we've done.
+
 	\chapter{Vector Flows and Integral Curves}
+	
+		\section{Differential Equations}
 
-	\chapter{The Lie Derivative}
+		\section{Foliations}
 
-	\chapter{The Frobenius Theorem}
+		\section{The Lie Derivative}
+	
+		\section{The Frobenius Theorem}
+
+
 
 \end{document}

@@ -359,13 +359,34 @@ So `closed and bounded' becomes `uniform, complete and totally bounded' and the 
 
 \chapter{Sheaves}
 
-introduce the sheaf of sets on a topological space, and the sheaf of functions from each open set to $\mathbb{R}$.
+	introduce the sheaf of sets on a topological space, and the sheaf of functions from each open set to $\mathbb{R}$.
+	
+	Can we do much with them here though? It would be nice to introduce them early, but confusing if we do that and then don't use them for anything. It's enough if the Rosiak stuff in the next chapter works though, as this chapter can just be structured as prep for that one.
+	
+	One thing that might work is to look at connectedness, which I think can be expressed in terms of locally constant sheaves.
+	
+	Another thing that might make sense is to look at covering spaces as etale spaces (the wiki entry for covering spaces refers to this). That would prepare the ground for the final chapter as well as giving an example of a sheaf.
 
-Can we do much with them here though? It would be nice to introduce them early, but confusing if we do that and then don't use them for anything. It's enough if the Rosiak stuff in the next chapter works though, as this chapter can just be structured as prep for that one.
+		\begin{defn} 
+			A \textbf{presheaf} $\mathscr{O}(X)$ on a topological space $X$ assigns an object of some kind to each open set of $X$ such that the following axioms hold (here $U$, $V$ and $W$ are open sets in $X$):
+			\begin{itemize}
+				\item For every pair $U\subseteq V$ there is a ring homomorphism $res_U^V: \mathscr{O}(V)\to \mathscr{O}(U)$ (these are called \textbf{restriction maps})
+				\item For each open set $U$, $res_U^U$ is the identity map
+				\item $res_U^V \circ res_V^W = res_U^W$ (a sort of `triangle inequality')
+			\end{itemize}
+		\end{defn}
+		
+		\begin{defn} 
+			A \textbf{sheaf} $\mathscr{O}(X)$ on a topological space $X$ is a presheaf that obeys the following additional axioms (here $U$ is an open set and  $\{U_i\}$ is an open cover of $U$ such that $U_i\subseteq U$ for all $U_i$):
+			\begin{itemize}
+				\item If $res_{U_i}^U(x) = res_{U_i}^U(y)$ for all $U_i$ then $x=y$
+				\item Suppose we choose one element from each object, i.e. $\{s_i \in \mathscr{O}(U_i)\}$. If $res_{U_i\cap U_j}^{U_i}(s_i) = res_{U_i\cap U_j}^{U_j}(s_j)$ then there is an $s\in \mathscr{O}(U)$ such that $res_{U_i}^{U} = s_i$ for all $i$.
+			\end{itemize}
+		\end{defn}
 
-One thing that might work is to look at connectedness, which I think can be expressed in terms of locally constant sheaves.
+	TODO: Stalks. This doc does it nice and tersely: \url{https://www.math.purdue.edu/~arapura/preprints/sheaves3.pdf}
+	
 
-Another thing that might make sense is to look at covering spaces as etale spaces (the wiki entry for covering spaces refers to this). That would prepare the ground for the final chapter as well as giving an example of a sheaf.
 
 \chapter{Fibre Bundles}
 
