@@ -8,17 +8,17 @@ This project is at a very early stage and any documents you may find here are li
 
 This repo aims to become a broad and innovative modern maths curriculum. The target audience is adults who are motivated enough to put in a sustained effort but have no formal training in maths beyond high school. The goal is to produce a set of interlinked resources with clear dependencies that are suitable for self-study or as the basis of taught courses. They come out of my long-standing educational practice in universities, art schools, adult education colleges and elsewhere. 
 
-None of this should not be understood as a criticism of what anyone is already doing. In particular, I literally have no opinion on how best to educate future mathematicians, physicists, engineers and so on. And although I think school maths curricula are in dire need of reform, that's not what this project is about.
+None of this should be understood as a criticism of what anyone is already doing. In particular, I literally have no opinion on how best to educate future mathematicians, physicists, engineers and so on. And although I think school maths curricula are in dire need of reform, that's not what this project is about.
 
 ## Continuity
 
-The backbone is an "alternative calculus sequence" that I expect to look something like this:
+The backbone is an "alternative calculus sequence" that I expect to look something like the following. 
 
 * Point-free topology as an account of continua in the spirit of Aristotle;
 * Algebraic topology with the main focus on (co)homology as a generalizable technique for measuring "the gap between ought and is";
 * Differential geometry with the "locally ringed space" approach, making much use of sheaves as the most natural way to "turn local data into global information";
-* Differential topology as a first application of the above, probably with an emphasis on Morse theory;
-* Riemannian geometry as a more classical application, with a view to trying to show off all the usual machinery. 
+* Differential topology and the study of Lie groups as applications of the above;
+* Riemannian geometry, with a view to showing off lots of the usual machinery. 
 
 ## Structure
 
