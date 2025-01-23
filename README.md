@@ -12,13 +12,13 @@ None of this should be understood as a criticism of what anyone is already doing
 
 ## Continuity
 
-The backbone is an "alternative calculus sequence" that I expect to look something like this:
+The backbone is an "alternative calculus sequence" that I expect to look something like the following. 
 
 * Point-free topology as an account of continua in the spirit of Aristotle;
 * Algebraic topology with the main focus on (co)homology as a generalizable technique for measuring "the gap between ought and is";
 * Differential geometry with the "locally ringed space" approach, making much use of sheaves as the most natural way to "turn local data into global information";
-* Differential topology as a first application of the above, probably with an emphasis on Morse theory;
-* Riemannian geometry as a more classical application, with a view to trying to show off all the usual machinery. 
+* Differential topology and the study of Lie groups as applications of the above;
+* Riemannian geometry, with a view to showing off lots of the usual machinery. 
 
 ## Structure
 
