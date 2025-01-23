@@ -8,7 +8,7 @@ This project is at a very early stage and any documents you may find here are li
 
 This repo aims to become a broad and innovative modern maths curriculum. The target audience is adults who are motivated enough to put in a sustained effort but have no formal training in maths beyond high school. The goal is to produce a set of interlinked resources with clear dependencies that are suitable for self-study or as the basis of taught courses. They come out of my long-standing educational practice in universities, art schools, adult education colleges and elsewhere. 
 
-None of this should not be understood as a criticism of what anyone is already doing. In particular, I literally have no opinion on how best to educate future mathematicians, physicists, engineers and so on. And although I think school maths curricula are in dire need of reform, that's not what this project is about.
+None of this should be understood as a criticism of what anyone is already doing. In particular, I literally have no opinion on how best to educate future mathematicians, physicists, engineers and so on. And although I think school maths curricula are in dire need of reform, that's not what this project is about.
 
 ## Continuity
 
