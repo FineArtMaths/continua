@@ -64,6 +64,6 @@ It would be ideal to produce all the notes documents, work out which topics need
 
 Starting in early 2025 I expect to generate two or three notes documents, then start producing coursebooks and more notes in parallel. A couple of courses are already quite well-developed but need to be typeset into LaTeX and reconfigured for the needs of the current project. By the end of 2025 we should have several coursebooks in a complete state (but subject to revision) and notes documents approaching completion for several more. Ideally I'd like to have Continuity coursebooks done up to and including Smooth Manifolds by the end of 2025 and have notes for Homological Algebra by the same point. That should put me on track for having first drafts of most (perhaps all) of the coursebooks done by the end of 2026.
 
-I'll post a detailed project roadmap here and update it regularly once work is properly underway (early 2025).
+Eventually there'll be a detailed roadmap to completion here with regular updates but that's not likely to happen before 2026.
 
 License: [CC-BY-NC-SA-4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
