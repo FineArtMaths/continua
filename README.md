@@ -56,7 +56,9 @@ I hope this will be a lot clearer when there are enough courses in place that we
 
 # General Approach
 
-We begin with a "notes" document for the whole block, which is my attempt to synthesize all the main information without care for pedagogy or even the needs of any reader besides myself. These notes are then used to build the coursebooks that are the final output of the project. The coursebooks will be available here as downloadable PDFs and elsewhere as hard copies (I haven't decided how best to do that yet).
+
+
+We begin with an outline of the main strand (Continuity, Structure and Measure) that identifies the blocks I expect to have in each of them, Then for each block we produce a "notes" document, which is my attempt to synthesize all the main information without care for pedagogy or even the needs of any reader besides myself. These notes are then used to build the coursebooks that are the final output of the project. The coursebooks will be available here as downloadable PDFs and elsewhere as hard copies (I haven't decided how best to do that yet). In some cases I expect to have more than one coursebook for a single block.
 
 The overview.tex documents in each folder indicate the scope of the project as I currently understand it. I intend to work on Continuity and Structure in parallel but with priority on the former, ignoring Measure for now. The Structure courses might get done out of sequence but the Continuity ones probably won't. 
 
