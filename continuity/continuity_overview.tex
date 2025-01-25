@@ -31,10 +31,13 @@
 	\item{Introduction to General Topology}
 	\item{Topology, Logic and Stone Duality}
 	\item{Topics in General Topology}
+	\item{Knot Theory}
 \end{itemize}
 This is the part I already have the most complete set of notes for, although they need finishing and there's a lot of pedagogical finesse missing. One thing that's missing at present is some traditional topics in elementary topology (compactness, covering spaces, classification of 2-manifolds). 
 
 The downside if this approach is of course that it takes a lot more work to get to those topics; the advantage is the friends we make along the way. That's kind of a theme for a lot of this project, though.
+
+It would be nice to do something with knot theory but probably that doesn't fit here as it's quite a quirky subject; maybe an additional short course makes sense. I think we could cover some interesting stuff without needing algebraic topology or manifolds.
 
 \begin{itemize}
 	\item[]{Vickers, \emph{Topology via Logic}}
@@ -68,9 +71,14 @@ I'm less clear on what would be needed for homotopy, but I like that Hu (a) cast
 
 \section{Smooth Manifolds}
 
+\begin{itemize}
+	\item{Introduction to Smooth Manifolds}
+	\item{Differential and Integral Equations}
+\end{itemize}
+
 This block is primarily about developing the Cartan calculus on manifolds from scratch using the `locally ringed space' approach. I can't help but think of this as "partially rigid geometry" even though that's not quite right (we don't get to measure much). 
 
-I'm unsure how many courses this is but I think of this as the heart of the project so I'd prefer to keep it very focused. I therefore expect this to be one, longer-then-usual course that covers everything needed for subsequent courses where the fancier stuff happens.
+I think of this as the heart of the project so I'd prefer to keep it very focused. I therefore expect this to be one, longer-then-usual course that covers everything needed for subsequent courses where the fancier stuff happens. Perhaps the connection with differential equations could be hived off into a separate course, though, since I don't think it'll be needed later.
 
 The reading here has a lot of overlaps. I'm intending to get most of what I want from Wedhorn Ch 4, 5, and then 8-10, which has the right emphasis but is probably missing rather a lot. Ramanan is a bit more terse than Wedhorn, which may or may not be an advantage -- only his first 100 pages are relevant here.
 
@@ -93,19 +101,33 @@ I'm undecided at this point whether to emphasise the SDG `infinitesimals' perspe
 
 \section{Lie Groups}
 
+\begin{itemize}
+	\item{Introduction to Lie Groups}
+	\item{Quantum Geometry}
+\end{itemize}
+
 Think of this as an optional application of Smooth Manifolds, but it's an important one and maybe we fold them together. I'm assuming I'll hive off the real algebra to another course. Hilgert and Neeb should be a good guiding light but Curtis covers some interesting topics that might make the connection with geometry (and linear algebra) even more explicit. 
 
 Since Lie groups are the kinds of symmetries that continuous spaces should have, it makes sense that Thurston's eight geometries of 3-manifolds are defined using them. The spaces on which the Lie groups act are fibre bundles so there's a chance this material actually ends up looking rather attractive at this point. If included, this would just be the `lite' version of geometrization, mostly just showing off the resulting spaces.
 
-Note there is a lot of material that connects this to smooth manifolds in both Lee and Ramanan, which is probably the place to start to make sure this material doesn't become too disconnected from the main trunk, at least in the introductory course. I expect this block to contain a single course but you never know.
+Note there is a lot of material that connects this to smooth manifolds in both Lee and Ramanan, which is probably the place to start to make sure this material doesn't become too disconnected from the main trunk, at least in the introductory course. 
+
+I hope to base the Quantum Geometry course around Sontz but I need to do more reading on that to see if it fits best here.
 
 \begin{itemize}
 	\item[]{Hilgert and Neeb, \textit{Structure and Geometry of Lie Groups}}
 	\item[]{Curtis, \textit{Matrix Groups}}
 	\item[]{Thurston, \textit{Geometry and Topology of 3-Manifolds}}
+	\item Sontz \textit{Principal Bundles: The Quantum Case}
 \end{itemize}
 
 \section{Differential Topology}
+
+\begin{itemize}
+	\item{Introduction to Differential Topology}
+	\item{Vector Bundles, K Theory and Characteristic Classes}
+	\item{4-Manifolds and Kirby Calculus}
+\end{itemize}
 
 I'm seeing this primarily as an application of the Cartan calculus and I'm hoping there's enough rigidity there to do some interesting topology. If not this might need a re-think or to be scaled down.
 
@@ -115,7 +137,8 @@ As an application of Morse theory, Nicolaescu includes a discussion of hamiltoni
 
 Husemoller is a bit less forgiving than Hatcher, probably has fewer good examples but goes deeper; I'm not sure which, if either, will be the most useful yet or what exactly I'm looking for in this area.
 
-This might be two courses: a very concrete, perhaps even physics-inspired one about Morse theory and a higher-level one about vector bundles.
+This might be two courses: a very concrete, perhaps even physics-inspired one about Morse theory and a higher-level one about vector bundles. It could also be that a separate course based around Stipcisz and Gompf, \textit{4-Manifolds and Kirby Calculus} would be a cool supplement.
+
 
 One result to aim for might be the h-Cobordism Theorem: \url{https://www.math.uchicago.edu/~may/VIGRE/VIGRE2011/REUPapers/MacKieMason.pdf}. This would probably require the homotopy course though so it should be separate from the introductory material.
 
@@ -124,24 +147,27 @@ One result to aim for might be the h-Cobordism Theorem: \url{https://www.math.uc
 	\item[]{Nicolaescu, \textit{Invitation to Morse Theory}}
 	\item[]{Hatcher, \textit{Vector Bundles and K Theory} (early chapters)}
 	\item[]{Husemoller, \textit{Fibre Bundles}}
+	\item Milnor, \textit{Characteristic Classes}
 \end{itemize}
 
 \section{Riemannian Geometry}
+
+\begin{itemize}
+	\item{Introduction to Riemannian Geometry}
+	\item{Geometric Applications of Vector Flows}
+\end{itemize}
 
 The slogan here is `geometry is the study of a connection on a principal bundle' -- the goal is to understand that statement and believe it because one has seen it in action. Getting to noncommutative geometry (Sontz) would be great and I think it should be possible to find a through-line that gets us there given all the preparation of the previous sections. 
 
 Note that Ramanan develops the beginnings of Riemannian geometry and it's probably useful to get the basic machinery form that perspective.
 
-I'm less convinced we can do much with the proofs of the Geometrization or Poincar\'e conjectures but it's worth a look to see if there's a part of it that makes sense to include. Morgan and Fong's book looks like being the right path to that if such a thing exists.
-
-There might be three courses here: a substantial introduction covering the main topics and follow-ups on Ricci flow and on non-commutative geometry.
+I'm less convinced we can do much with the proofs of the Geometrization or Poincar\'e conjectures but it's worth a look to see if there's a part of it that makes sense to include. Morgan and Fong's book looks like being the right path to that if such a thing exists. That's what the second course in this list would be if it looks feasible.
 
 \begin{itemize}
 	\item[]{Berger, \textit{A Panoramic View of Riemannian Geometry}}
 	\item[]{Sharpe, \textit{Differential Geometry: Cartan's Generalization of Klein's Erlangen Programme}}
 	\item{Alexandrino and Bettiol \textit{Lie Groups and Geometric Aspects of Isometric Actions}}
 	\item[]{Vassiliou, \textit{Geometry of Principal Sheaves}}
-	\item[]{Sontz, \textit{Principal Bundles: The Quantum Case}}
 	\item[]{Morgan and Fong, \textit{Ricci Flow and Geometrization of 3-Manifolds} (aspirational)}
 \end{itemize}
 

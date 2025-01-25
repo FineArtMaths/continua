@@ -1,0 +1,81 @@
+\documentclass[oneside,english]{amsbook} 
+\usepackage[T1]{fontenc} 
+\usepackage[latin9]{inputenc} 
+\usepackage{amsmath} 
+\usepackage{amstext} 
+\usepackage{amsthm} 
+\usepackage{amssymb}
+\usepackage{mathrsfs} 
+\usepackage{hyperref}
+
+\makeatletter 
+
+\numberwithin{section}{chapter} 
+\theoremstyle{plain} 
+\newtheorem{thm}{\protect\theoremname}   
+\theoremstyle{definition}   
+\newtheorem{defn}[thm]{\protect\definitionname}
+
+\makeatother
+
+\usepackage{babel}   
+\providecommand{\definitionname}{Definition} 
+\providecommand{\theoremname}{Theorem}
+\providecommand{\Cech}{\v{C}ech }
+\providecommand{\Poinacre}{Poincar\'e }
+\providecommand{\Kunneth}{K{\"u}nneth }
+
+\begin{document}
+	
+	\title{Algebraic Topology -- Notes}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	\chapter*{About this Document}
+	
+	This is part of \href{https://github.com/FineArtMaths/continua}{the continua project}. The project is broken down into `modules', each covering a specific topic. Each module ultimately becomes one of more courses. The approach is:
+	
+	\begin{itemize}
+		\item{Identify a topic that should be its own module (this is recorded in the `overview' documents in each main folder)}
+		\item{Create a `notes' document assembling the technical material for each module in a fairly condensed form, but with some indication of how the pedagogy might go (that's what you're looking at now)}
+		\item{Create one or more coursebooks that contain the technical material along with motivation, philosophical reflections, pictures, examples, intuitive explanations and so on.}
+	\end{itemize}
+	
+	When the coursebooks are complete, the notes document is no longer needed and will probably be deleted. So the fact that you're looking at this means this is a work in progress -- it is incomplete, disorganised and probably full of errors.
+
+	\chapter*{Notes}
+	
+		Things I'd like to look into more:
+		\begin{itemize}
+			\item Chapter 2 of Boffi and Buchsbaum, \textit{Threading Homology Through Algebra} uses the Koszul complex to prove results about the dimension of a local ring. Since local rings are of great importance elsewhere, this might contain some nice nuggets.
+		\end{itemize}
+
+	\part{Introduction to Homological Algebra}
+	
+	\chapter{Generalities on Modules}
+	
+	As well as recalling some thing about modules and covering some extra stuff on tensor algebra, we can generalize from modules to the notion of abelian categories, where homological algebra is possible.
+	
+	If we make Algebraic Topology a prerequisite for this course we can assume students have seen plenty of chain complexes and calculated homology on them; there's no need to review all that here so we can get to the algebraic stuff more rapidly.
+	
+	\chapter{Projective, Injective and Flat Modules}
+	
+	\chapter{Derived Functors}
+	
+	Ext and Tor as way to measure projectivity and flatness
+	
+	\chapter{Homological Dimension}
+	
+	Weibel's chapter on this might be a nice way to develop the previous ideas while showing some applications.
+	
+	\chapter{Sheaf and \Cech Cohomology}
+	
+	This is discussed in Rotman 6.3 but rather drily -- it would be nice to show examples (not necessarily of calculations but at least of what it means to find homology in these cases).
+
+	\chapter{Spectral Sequences}
+	
+	Cartan and Eilenberg include a whole chapter of applications of spectral sequences -- a sample of these might be worth including here.
+
+\end{document}
