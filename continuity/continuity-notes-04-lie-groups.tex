@@ -1,0 +1,88 @@
+\documentclass[oneside,english]{amsbook} 
+\usepackage[T1]{fontenc} 
+\usepackage[latin9]{inputenc} 
+\usepackage{amsmath} 
+\usepackage{amstext} 
+\usepackage{amsthm} 
+\usepackage{amssymb}
+\usepackage{mathrsfs} 
+\usepackage{hyperref}
+
+\makeatletter 
+
+\numberwithin{section}{chapter} 
+\theoremstyle{plain} 
+\newtheorem{thm}{\protect\theoremname}   
+\theoremstyle{definition}   
+\newtheorem{defn}[thm]{\protect\definitionname}
+
+\makeatother
+
+\usepackage{babel}   
+\providecommand{\definitionname}{Definition} 
+\providecommand{\theoremname}{Theorem}
+\providecommand{\Cech}{\v{C}ech }
+\providecommand{\Poinacre}{Poincar\'e }
+\providecommand{\Kunneth}{K{\"u}nneth }
+
+\begin{document}
+	
+	\title{Lie Groups -- Notes}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	\chapter*{About this Document}
+	
+	This is part of \href{https://github.com/FineArtMaths/continua}{the continua project}. The project is broken down into `modules', each covering a specific topic. Each module ultimately becomes one of more courses. The approach is:
+	
+	\begin{itemize}
+		\item{Identify a topic that should be its own module (this is recorded in the `overview' documents in each main folder)}
+		\item{Create a `notes' document assembling the technical material for each module in a fairly condensed form, but with some indication of how the pedagogy might go (that's what you're looking at now)}
+		\item{Create one or more coursebooks that contain the technical material along with motivation, philosophical reflections, pictures, examples, intuitive explanations and so on.}
+	\end{itemize}
+	
+	When the coursebooks are complete, the notes document is no longer needed and will probably be deleted. So the fact that you're looking at this means this is a work in progress -- it is incomplete, disorganised and probably full of errors.
+	
+	\part{Introduction to Lie Groups}
+	
+	\chapter{The Lie Functor}
+	
+	This is how H and G get started with the manifolds part of their book (9.1). Starting the basic definitions from the categorical construction might be a nice way to make it clear this isn't something arbitrary.
+		\section{Lie Groups}
+		\section{The Lie Algebra of a Lie Group}
+		\section{Principal Bundles}
+
+	\chapter{The Exponential Map}
+		It's worth looking at Arnold ch 13-17 on this alongside Fecko as he has a very strong focus on calculation.
+	
+		\section{One-Parameter Subgroups}
+		\section{The Exponent}
+			From Fecko 11.4: `the motion along a one-parameter subgroup is the image with respect to exp of the uniform straight-line motion in the Lie algebra'.
+		\section{The Logarithm}
+		\section{Invariant Forms}
+			Fecko 11.5 and 11.6 -- connection with differential forms and integration on the manifold. See also Azcarraga \& Izquirerdo, esp 1.6.
+
+	\chapter{The Adjoint Representation}
+		I don't want to get into the representation theory here (that belongs on the algebra course) but Fecko 12.3 and surrounding sections gives a nice structural feature that's worth pulling out because it relates closely to the geometry and calculus. NB Lee's \textit{Smooth Manifolds} has a section on this too.
+	
+	\chapter{Model Geometries}
+		\section{Basic Definitions}
+			This chapter and the next can take their start from Nachiketa's essay. A model geometry is a manifold equipped with a Lie group that is maximal in a specific way, and with a couple of other conditions that make it reasonably simple.
+			
+		\section{The Developing Map}
+	
+		\section{Compact Point Stabilizers}
+
+		\section{Model Geometries in Two Dimensions}
+
+	\chapter{Thurston's Geometrization Conjecture}
+
+		\section{Setup}
+
+		\section{The Eight Model Geometries}
+
+		\section{Outline of the Proof}
+
+\end{document}
