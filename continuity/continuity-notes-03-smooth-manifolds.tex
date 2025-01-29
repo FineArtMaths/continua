@@ -53,19 +53,241 @@
 	
 	In the same spirit, I'd like to introduce manifolds as locally ringed spaces and do things with that setup (including developing a little bit of sheaf cohomology) but keep most of the material quite traditional. 
 
-	\chapter{Calculus in Flat Space}
-	
-		\section{Linear Algebra Review}
+	\chapter{Introduction}
+		\section{Intuitive Overview}
+			Examples of where we want to get to, without any formalism.
+		\section{Algebra Review}
 			\subsection{Dual Space and Inner Product}
 			\subsection{Covariance and Contravariance}
 			Recall scalar fields and curves
-			Include algebra of scalar fields. Note there is no algebra of curves. 
-			\subsection{The Exterior Algebra}
-		\subsection{Fibre Bundles}
-		Scalar Fields, vector fields and covector fields as sections of bundles
+			Include algebra of scalar fields. Point out there is no corresponding algebra of curves. 
+			\subsection{The Exterior Product}
+			\subsection{Fibre Bundles}
+			Scalar Fields, vector fields and covector fields as sections of bundles
+			\subsection{Ideals and Quotients of Rings}
+
+	
+	\chapter{The Microlocal Structure of $\mathbb{R}$}
+	
+		In Introduction to General Topology we gave an information characterization of the continuous line $\mathbb{R}$ and the open sets of its usual topology. In Topology, Logic and Stone Duality this object is constructed in a rigorous way that agrees with the intuition that it is a true continuum within which one can identify `regions' as open sets, which are capable of unlimited refinement.
 		
+		Topology alone is capable of characterising the structure of continuous phenomena but it is insufficient for describing them precisely. For this we need to dig deeper into the microscopic structure that lies between the level of open sets (which all can be thought of as having some finite size) and the imaginary points they contain (which have no size). 
+		
+		\section{The Algebra of Germs at a Point}
+		
+			\begin{defn}
+				A \textbf{function} on an open set $U\subseteq \mathbb{R}$ is a map $U\to \mathbb{R}$.
+			\end{defn}
+			
+			In this section we will consider only continuous functions, i.e. maps that are compatible with the usual topology of $\mathbb{R}$.
+		
+			\begin{thm}
+				The functions on the open sets of $\mathbb{R}$ form a sheaf.
+			\end{thm}
+
+			\begin{thm}
+				Let $U$ and $V$ be open sets in $\mathbb{R}$ such that $U\subset V$. Let $f_V$ be a function on $V$. Then there is a function $f_U$ on $U$ such that $\text{res}^V_U(f_V) = f_U$.  
+			\end{thm}
+			
+			\begin{thm}
+				Let $U$ and $V$ be open sets in $\mathbb{R}$ such that $U \cap V\ne\emptyset $. Let $f_V$ be a function on $V$ and $f_U$ be a function on $U$. Then there is a function $g = f_{U\cap V}$ on $U$ such that $\text{res}^V_g(g_V) = \text{res}^U_g(f_U)$.
+			\end{thm}
+			
+			\begin{defn}
+				Let $x$ be a point of $\mathbb{R}$ and $f$ a function defined on any open neighbourhood of $f$. The \textbf{germ} of $f$ at $x$, written $[f]_x$, is the set of all functions $g$ such that there is an open neighbourhood $U$ of $x$ on which $f_U = g_U$.  
+			\end{defn}
+			
+			The point of this definition is to capture the idea that some functions are identical if you stay close enough to $x$ even if they become different further away. A function's germ is the set of functions that `look identical to it' if we stay close enough to $x$. Note that $U$ may be different for different functions; the only requirement is that it must be a neighbourhood of $x$.
+			
+			\begin{defn}
+				Let $x$ be a point of $\mathbb{R}$. The set of all germs of (continuous) functions at $x$ is called the \textbf{stalk} at $x$, written $\mathscr{C}^0_x$.
+			\end{defn}
+			
+			The 0 in this notation will be explained shortly. The stalk arises from a process of `zooming in' on $x$ by looking at ever-smaller neighbourhoods. Two functions that do not agree on a large open set might still be equal on a small one. Of course, two functions whose values at $x$ are different will never share the same germ. 
+			
+		\section{Differentials at a Point}
+		
+			\begin{thm}
+				The functions in each germ at $x$ form an algebra with the usual operations, i.e. where $f, g$ are functions and $k$ is a real number we have
+				\begin{itemize}
+					\item{$[f]_x + [g]_x = [f + g]_x$}
+					\item{$[f]_x [g]_x = [fg]_x$}
+					\item{$k[f]_x = [kf]_x$}
+				\end{itemize}
+				Multiplication in this algebra inherits commutativity from multiplication in $\mathbb{R}$.
+			\end{thm}
+			
+			We are interested in devloping a language to express change, which does not really take much interest in where we start. When a sprinter runs the 100 metres race, we are interested in how fast they went, how quickly they accelerated, whether they fell at the end and so on. Information about where they began the race is not part of the information about the process of change the race represented. We would therefore like to focus on the germs of a function that all start in the same place so we can compare the way they change as we move away, not unlike the sprinters in the race.
+			
+			\begin{thm}
+				The set of germs whose functions are all equal to 0 at $x$ is an ideal of the algebra $\mathscr{C}^0_x$.
+			\end{thm}
+			
+			\begin{proof}
+				Write the set of germs that are zero at $x$ as $I_0$. Suppose $[f]_x$ and $[g]_x$ are in $I_0$, i.e. for any $f\in [f]_x$ and $g\in [g]_x$ we have $f(x) = g(x) = 0$. Then $[f + g]_x$ must also be in $I_0$ by the definition of addition. Also, since $f(x)=0$ for any other function $h$ we must have $h(x)f(x) = 0$ and therefore $[hf]_x\in I_0$. 
+			\end{proof}
+			
+			\begin{thm}
+				Let $[f]_x$ be a germ at $x$ whose value $f(x)$ is not necessarily zero. Then $[f - f(x)]_x \in I_0$.
+			\end{thm}
+							
+			This fact allows us to treat the germs in $I_0$ as representatives of all germs at $x$. If you are interested in a function with a non-zero value there, simply transform it into a function with a zero value -- the characteristics we will be interested in do not change, only its `position'. Suppose you watched a 100m sprint on television believing it was taking place in Birmingham but later discovered it actually happened in Glasgow. Although your opinion would change about the \emph{locations} of the runners, you would probably not feel anything had changed about the \emph{race}.
+			
+			We will now perform the most technical and also the most intuition-based step in this section. Imagine zooming in on the point where a tangent line touches a circle -- the closer we get to that point, the more both lines appear straight. We can imagine zooming into an `infinitesimal' region around the point, too small to be any open set but larger than the zero-sized point itself. This imaginary pocket of space is just large enough to hold some information about \emph{which way} things are changing at the point -- this is a kind of linear information that we can imagine as a vector pointing away from the point saying `$f$ is going that-a-way'. But there's not enough room in this infinitesimal region to represent any higher-order information such as how $f$ is accelerating. There is room in this region for a straight line but not for a curve.
+			
+			The germs in $I_0$ include the germ of the constant function $f(a) = 0$ for every $a\in \mathbb{R}$. While our infinitesimal region can contain other germs that are different from this, their deviations from zero must be extremely small -- so small that if we square any function in one of those germs those tiny differences vanish. 
+			
+			This leads to the following definitions: 
+			
+			\begin{defn}
+				The \textbf{higher order elements} of $I_0$ are the elements of $I_0^2$, that is, the smallest ideal containing all the products of elements of $I_0$. Specifically, an element of $I_0^2$ is a sum of finitely many products of pairs of germs in $I_0$. 
+			\end{defn}
+			
+			What do the higher order elements look like? In fact, they are everywhere. For example, take $x = 0$. Clearly $[x^3]_0\in I_0^2$ because $[x^3]_0 = [x^2]_0[x]_0$, which is a finite product of elements of $I_0$. An intuitive way to say this is that if we zoom in close enough -- infinitely close -- the graphs of $f(x) = 0$ and $g(x) = x^3$ should look identical. 
+						
+			On the other hand, $[x]_0\notin I_0^2$ because the functions that multiply together would have to be defined on an open neighbourhood of $0$, which means they would include negative numbers; roots of negative numbers are not defined, which means the functions we need aren't available where we need them! 
+			
+			Let's now consider the germ $[x + x^3]_0 = [x]_0 + [x^3]_0$ Our claim is that since $[x^3]_0$ is a higher-order element of $I_0$, it can be disregarded and we ought to be able to express an equivalence relation `$\cong$' so that $[x + x^3]_0 \cong [x]_0$. The following definition shows how to define this equivalence precisely:
+
+			\begin{defn}
+				The \textbf{differentials} at $x$ are the elements of $I_0/I_0^2$, i.e. the ideal containing equivalence classes of germs that differ only by a second-order element. The equivalence class to which $[f]_x$ belongs is written $df_x$; it contains all $[g]_x$ such that $[f]_x - [g]_x \in I_0^2$.
+			\end{defn}
+			
+			A differential's job is to give the least possible amount of information about how a function is changing as we move an infinitesimal distance away from $x$.
+			
+			As an example, let $f(a) = a^2$ and choose the point $x = 1$. We look at the germ $[f - f(1)]_1$, represented by the function $f(x) =  x^2 - 1$. We can represent an infinitesimal distance $x$ as $\epsilon$. We will show that $[f - f(1)]_1$ is equivalent to  $[g - g(1)]_1$ where $g(x) = 2x$. To do this we calculate the difference between the two functions as we move a variable distance $\epsilon$ away from $x = 1$:
+
+			\begin{align}[rcl]
+				(x + \epsilon)^2 - 1 - (2(x + \epsilon) - 2) &=& x^2 - 2x + - 2\epsilon + 2\epsilon x + \epsilon^2 +1 \\
+                                           &=& - 2\epsilon + 2\epsilon + \epsilon^2 \\
+                                           &=& \epsilon^2
+			\end{align}
+
+			But $[\epsilon^2]_0 \in I_0^2$, since this is nothing but the germ $[x^2]_0$. It follows that $d[x^2]_1 = d[2x]_1$. That is, in a microlocal region around 1, $x^2$ and $2x$ change in the same way. Each differential at a point can be thought of in this way: it's a collection of all the functions that are indistinguishable on a microlocal region around that point. 
+			
+			In each equivalence class of germs there is one which is linear: in this case it's $[2x]_1$. In a sense this linear germ is the simplest possible representative of the differential because any others will be equal to it except for some higher-order element that vanishes when we zoom in enough. We will often abuse notation and write $dx^2(1) = 2x$ -- all we have done here is removed the square brackets that remind us we're dealing with germs and write $dx^2$ as if it were a function being evaluated at $x = 1$. This is not unreasonable since we could vary the value we evaluate the differential at and get different results. 
+
+			\begin{defn}
+				A function defined on an open neighbourhood of $a$ is \textbf{differentiable} at $a$ if its germ is equivalent to a differential in $I_0/I_0^2$. If $[kx]_a$ is the representative germ of that differential we call $k$ the \textbf{rate of change} of the function at $a$. 
+			\end{defn}
+			
+			This observation leads us to adopt the following Principle: 
+
+			\begin{defn}
+				The \textbf{Principle of Microaffineness} states that every function defined on an open neighbourhood of a point is differentiable at that point. 
+			\end{defn}
+			
+			Without it, there would be functions that do not have differentials. Such functions are frequently considered and used in traditional courses on analysis, but often they pose unnecessary problems because they are in some sense `fictional' functions that never arise in real applications. But this is not universally true; in some situations the Principle of Microaffineness does not hold. We could perhaps state it more as an aspiration: every function \emph{ought} to be differentiable at every point where it's defined. On this course the Principle of Microaffineness holds and all functions are differentiable everywhere they're defined.
+
+			\begin{defn}
+				Let $f$ be a function defined on an open set $U\subseteq \mathbb{R}$ and suppose it is differentiable at every point in $U$. The \textbf{derivative} of $f$ is the function $df:U\to\mathbb{R}$ that assigns to each point the rate of change $k$ such that $[f]_a\equiv [kx]_a$.
+			\end{defn}
+			
+			\begin{defn}
+				The process of finding the derivative of a function is called \textbf{differentiation}.
+			\end{defn}
+
+			Notice that the derivative of a function is another function with the same domain and codomain, so we can perform the operation of `taking derivatives' multiple times. 
+			
+			Let's show this through another example. We will start with the function $f(x) = x^3 - x^2$. Again we subtract the value of $f$ at the point of interest but this time we allow that point to be any value of $x$, then we set higher powers of $\epsilon$ to zero because they vanish in our extreme close-up view:
+			\begin{align}
+				f(x + \epsilon) - f(x) &=& (x + \epsilon)^3 - (x + \epsilon)^2 - x^3 + x^2 \\
+	                                                  &=& x^3 - 3 x^2 \epsilon + 3 \epsilon^2 x  - \epsilon^3 - x^2 - 2x\epsilon -\epsilon^2 - x^3 + x^2 \\
+	                                                   &=& 3 x^2 \epsilon + 3 \epsilon^2 x  - \epsilon^3 - 2x\epsilon -\epsilon^2 \\
+	                                                   &\cong& 3 x^2 \epsilon + 2x\epsilon 
+			\end{align}
+			So $d(x^3-x^2) = 3x^2 + 2x$. For any valid value of $x$, the slope of the graph of $x^3-x^2$ can be calculated by plugging $x$ into $3x^2 + 2x$. 
+						
+		\section{The Covariance of Differentials}
+			
+			Recall that $\mathbb{R}$ is a vector space, although admittedly its one dimension is a bit restricted and it can't contain very much geometry. The following remark is fairly obvious:
+			\begin{thm}
+				The differentials of all functions at a point $p$ in $\mathbb{R}$ form a one-dimensional vector space over $\mathbb{R}$ with basis, for example, $\{[x]_p\}$.
+			\end{thm}
+			There is only one-dimensional vector space over $\mathbb{R}$ but when we have two of them we can ask what happens to one when we change the coordinates of the other. In $\mathbb{R}$ we can think of this as changing our units of measurement for some physical phenomenon, then looking at what happened to the coefficients of the differentials.
+			
+			To be concrete, suppose we are using metres and we have the function $f(x) = x^2$ representing the temperature at points along $\mathbb{R}$, measured in Celsius. We are interested in the rate of change of this function at $x = 3$, i.e. 3 metres away from the origin where the temperature is $f(3) = 9^\circ$ Celsius. We calculate the derivative as in the previous section and arrive at $df(x) = 2x$ so what $x = 3$ we have the rate of change $df(3) = 6$, in units of Celsius per metre.
+			
+			Now we change our units of measurement to centimetres. The same spot is now $x = 300$ and the temperature function is no longer $f(x) = x^2$ but $g(x) = x^2/10000$. It turns out that the derivative $dg(x) = 2x/10000$, which is a rate of $dg(300) = 0.06$ Celsius per centimetre at the point of interest. Of course this is exactly the same as the 6 Celsius per metre we arrived at earlier, which is just as well because we're trying to describe a physical phenomenon that doesn't care which units of measurement we use!
+			
+			Notice that when we converted from metres to centimetres, the unit vector shrank (by a factor of 100) and the differential also shrank (by the same factor squared, which isn't too surprising). Since they varied in the same direction, we conclude they are covariant and so
+			
+			\begin{thm}
+				Differentials in $\mathbb{R}$ are elements of $\mathbb{R}^\star$. A function defines a differential at each point in its domain, which is a covector field that describes how the function is changing throughout its domain.
+			\end{thm}
+						
+		\section{Some Rules for Differentials}
+			
+			We can prove these in more or less the usual way
+			
+			\begin{thm}
+				The \textbf{scalar multiple rule} states that $d[kf]_x = kd[f]_x$
+			\end{thm}
+			
+			\begin{thm}
+				The \textbf{sum rule} states that $d[f + g]_x = d[f]_x + d[g]_x$
+			\end{thm}
+			
+			\begin{thm}
+				The \textbf{product rule} states that $d[fg]_x = fd[g]_x + gd[f]_x$
+			\end{thm}
+			
+			\begin{thm}
+				The \textbf{power rule} states that $d[x^n]_x = d[nx^{n-1}]_x$
+			\end{thm}
+
+	\chapter{The Exterior Calculus in $\mathbb{R}^n$}
+	
+		\section{The Alternating Algebra of Differentials}
+		
+			We saw that a function on an open set $U\subseteq \to \mathbb{R}$ gives rise, through a process called `differentiation', to a covector field $U\subseteq \to \mathbb{R}^\star$ that assignes to each point the differential at that point. When we expand our interests to $\mathbb{R}^n$ there is room for a lot more structure.
+			
+			We will always assume that $\mathbb{R}^n$ is equipped with an orthonormal basis $\{v_1, v_2, ... v_n\}$. We therefore have access to the dot product but we will use it judiciously and take note when we do because in the spaces we study later this will not b so straightforward.
+			
+			We begin by reviewing some linear algebra and defining some alternative jargon that's used in the present context.
+			
+			\begin{defn}
+				The \textbf{$k^{\text{th}}$ external product} of $\mathbb{R}^{n}$ is the vector space
+					\[
+						\Omega^k(\mathbb{R}^{n}) = \bigwedge^k \mathbb{R}^{n\star}
+					\] 
+				Its induced basis consists of all linearly indepdenent $k$-covectors.
+			\end{defn}
+			
+			For example, suppose we are looking at $\Omega^2(\mathbb{R}^{4})$. The following twofold wedges of basis covectors are linearly independent:
+				\begin{align}[c]
+					v_1\wedge v_2, v_1\wedge v_3, v_1\wedge v_4, \\
+					v_2\wedge v_3, v_2\wedge v_4, v_3\wedge v_4
+				\end{align}
+			Thus, $\Omega^2(\mathbb{R}^{4})$ is a six-dimensional vector space.
+			
+			\begin{thm}
+				if $k > n$, $\Omega^k(\mathbb{R}^{n})$ is the trivial vector space containing only the zero element.
+			\end{thm}
+			
+			\begin{defn}
+				The \textbf{external algebra} in $\mathbb{R}^n$, written $\Omega(\mathbb{R}^n)$, is the direct sum of all non-trivial external products of $\mathbb{R}^n$,
+				\[
+					\bigoplus_{0<k\le n}\Omega^k(\mathbb{R}^n)
+				\]
+			\end{defn}
+			
+			\begin{defn}
+				A continuous (but not necessarily linear) scalar field on $\mathbb{R}^n$ will here be called a 
+			\end{defn}
+
+		\section{Differential Forms}
+		
+		\url{https://rigtriv.wordpress.com/2008/04/14/differential-forms-and-the-canonical-bundle/}
+	
+		\section{The Exterior Derivative}
+	
+		\section{Integration of Differential Forms}
+
+	\chapter{Differential Calculus on Manifolds}
+	
 		\section{Locally Ringed Spaces}
-		
+
 			\begin{defn} 
 				A \textbf{sheaf of rings} $\mathscr{O}(X)$ on a topological space $X$ assigns a ring to each open set of $X$ such that the sheaf axioms hold, that is (here $U$, $V$ and $W$ are open sets in $X$):
 				\begin{itemize}
@@ -87,20 +309,6 @@
 				A \textbf{locally ringed space} is a ringed space such that the stalk of the structure sheaf at every point is a local ring.
 			\end{defn}
 
-		\section{Infinitesimals and Limits}
-		
-		The first part of Bell's essay here is a good approach: \url{https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=9100113e2c74c99c5262c6a686a63b166dc9aaa7}
-		
-		\section{Differential Forms}
-		
-		\url{https://rigtriv.wordpress.com/2008/04/14/differential-forms-and-the-canonical-bundle/}
-	
-		\section{The Exterior Derivative}
-	
-		\section{Integration of Differential Forms}
-
-	\chapter{Differential Calculus on Manifolds}
-	
 		\section{Smooth Manifolds}
 
 		\section{Diffeomorphisms}
