@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{mathrsfs} 
 \usepackage{hyperref}
+\usepackage[all,cmtip]{xy}
 
 \makeatletter 
 
@@ -51,7 +52,9 @@
 	
 	The idea is to develop as much as we can in flat space first,, with concrete examples and calculations. This will include introducing the idea of a limit, which I'd like to approach in the SDG manner without being dogmatic.
 	
-	In the same spirit, I'd like to introduce manifolds as locally ringed spaces and do things with that setup (including developing a little bit of sheaf cohomology) but keep most of the material quite traditional. 
+	I have notes from a previous course elsewhere that cover most of this material but without the unifying view. Given where this course falls in the sequence, I think we can be more ambitious here and aim for something conceptually harmonious. 
+	
+	In that spirit, I'd like to introduce manifolds as locally ringed spaces and do things with that setup (including developing a little bit of sheaf cohomology). But I still want the reader to come away with the same understanding as their peers who studied this stuff elsewhere so it's a balancing act. I'm not sure how to carry that off yet so these notes are likely to move around a lot over time as the right approach comes into focus. 
 
 	\chapter{Introduction}
 		\section{Intuitive Overview}
@@ -236,8 +239,12 @@
 				The \textbf{power rule} states that $d[x^n]_x = d[nx^{n-1}]_x$
 			\end{thm}
 
-	\chapter{The Exterior Calculus in $\mathbb{R}^n$}
+	\chapter{Calculus in $\mathbb{R}^n$}
 	
+		\section{The Directional Derivative}
+		
+		TODO: Define the tangent bundle and sections of it. Show in $\mathbb{R}^2$ how the derivative of a scalar field can be combined with a tangent vector. 
+		
 		\section{The Alternating Algebra of Differentials}
 		
 			We saw that a function on an open set $U\subseteq \to \mathbb{R}$ gives rise, through a process called `differentiation', to a covector field $U\subseteq \to \mathbb{R}^\star$ that assignes to each point the differential at that point. When we expand our interests to $\mathbb{R}^n$ there is room for a lot more structure.
@@ -268,21 +275,116 @@
 			\begin{defn}
 				The \textbf{external algebra} in $\mathbb{R}^n$, written $\Omega(\mathbb{R}^n)$, is the direct sum of all non-trivial external products of $\mathbb{R}^n$,
 				\[
-					\bigoplus_{0<k\le n}\Omega^k(\mathbb{R}^n)
+					\Omega(\mathbb{R}^n) = \bigoplus_{0<k\le n}\Omega^k(\mathbb{R}^n)
 				\]
 			\end{defn}
 			
+		\section{The Cotangent Bundle}
+		
 			\begin{defn}
-				A continuous (but not necessarily linear) scalar field on $\mathbb{R}^n$ will here be called a 
+				Let $B$ and $E$ be topological spaces and $p:E\to B$ be a surjective homomorphism. The set $(B, E, p)$ taken together is called a \textbf{bundle} over $B$ and $p$ is called its \textbf{projection}. At a point $x\in B$ the preimage $p^{-1}(\{x\})$ is called the \textbf{fibre} over $x$.
+			\end{defn}			
+			
+			\begin{defn}
+				Let $(B, E, p)$ be a bundle over $B$. It is called a \textbf{vector bundle} if the following criteria are met:
+				\begin{itemize}
+					\item The fibre over each point in $B$ is isomorphic as a vector space to $\mathbb{R}^n$ for some fixed $n$; we write $F$ for the fibre.
+					\item There is an open cover of $B$ such that for each open set it contains, $p^{-1}(U)\cong U\times F$.
+				\end{itemize}
 			\end{defn}
-
+			
+			The intuition here is that a vector bundle attaches a copy of the vector space $F$ to every point of the base space $B$.
+			
+			\begin{defn}
+				A map $s:B\to E$ is called a \textbf{section} of the vector bundle $(B, E, p)$ if $s\circ p$ is the identity map.
+			\end{defn}
+			
+			\begin{defn}
+				The vector bundle $(\mathbb{R}^n, \mathbb{R}^n\times \Omega^k(\mathbb{R}^n), p)$ , where $p^{-1}(x)\cong \Omega^k(\mathbb{R}^n)$, is called the \textbf{contangent bundle} over $\mathbb{R}^n$ and is written $T^\star\mathbb{R}^n$. The fibre at the point $p$ is written $T_p^\star\mathbb{R}^n$.
+			\end{defn}
+			
+			Later we will meet the tangent bundle to a manifold and this terminology and notation should seem slightly less peculiar.
+			
 		\section{Differential Forms}
 		
-		\url{https://rigtriv.wordpress.com/2008/04/14/differential-forms-and-the-canonical-bundle/}
-	
+			\begin{defn}
+				A \textbf{differential 0-form} on $\mathbb{R}^n$ is a section of the vector bundle $(\mathbb{R}^n, \mathbb{R}^n\times \mathbb{R}, p)$, i.e. a scalar field.
+			\end{defn}
+
+			\begin{defn}
+				A \textbf{differential $k$-form} (where $k > 0$) on $\mathbb{R}^n$ is a section of the cotangent bundle $(\mathbb{R}^n, \mathbb{R}^n\times \Omega^k(\mathbb{R}^n), p)$.
+			\end{defn}
+			
+			We've already seen that a differential 1-form arises as the derivative of a 0-form -- at each point, the covector indicates the gradient of the scalar field. The same pattern continues: a differential 2-form is the derivative of a 1-form and so on. The problem this presents, though, is that differential $k$-forms can be difficult to picture in arbitrary dimensions. If we choose three dimensions as a comfortable place for forming intuitive pictures, we get the wrong pictures because in each dimension the $k$-forms behave a bit differently. This is because $k$-forms only exist up to $k=n$ and their dimensions vary according to both $k$ and $n$, a fact you've previously encountered in the context of linear algebra:
+			
+			\begin{thm}
+				$\Omega^k(\mathbb{R}^n)$ is a vector space is equal to the binomial coefficient 
+				\[
+					\binom{n}{k} = \frac{n!}{k!(n-k)!}
+				\]
+			\end{thm}
+			
+			Thus, one of the obstacles to forming \emph{visual} intuitions about differential forms is that their meaning and even dimension changes depending on the base space. In a sense, the calculus we will develop embodies the right intuition but, admittedly, that is not very satisfactory in the beginning. 
+
 		\section{The Exterior Derivative}
+
+			The differentiation process we have discussed so far turns 0-forms into 1-forms. We want to generalise this to turn $k$-forms into $(k+1)$-forms in a consistent way. Specifically, we want it to be a morphism of sheaves so that it takes the sheaf $()$
+			
+			\begin{defn}
+				The \textbf{exterior derivative} on $\mathbb{R}^n$ is a map $d:\Omega(\mathbb{R}^n)\to \Omega(\mathbb{R}^n)$ defined as follows:
+				\begin{itemize}
+					\item When $f$ is a 0-form, $df$ is its differential.
+					\item If $f, g$ are $k$-forms, $d(f + g) = df + dg$
+					\item For any $k$-form $f$ and scalar $a$, $d(af) = adf$
+					\item For any $k$-form $f$, ddf = 0
+					\item For any $k$-form $f$ and $j$-form $g$, $d(f\wedge g) = df\wedge g + (-1)^kf\wedge dg$
+				\end{itemize}
+			\end{defn}
+			
+			TODO: Discuss the last two rules and why they're needed
+			
+			TODO: Set out explicitly how to calculate $df$ with worked examples. This is already done in the Intermediate Calculus notes -- do it briefly here in the abstract, then we'll see concrete applications in the vector calc chapter.
+			
 	
 		\section{Integration of Differential Forms}
+		
+			
+
+		\section{A Glimpse of De Rham Cohomology}
+		
+			\begin{defn}
+				A differential $k$-form $f$ is \textbf{exact} if there is a $g$ such that $dg = f$. 
+			\end{defn}
+			
+			The exact forms are the ones that can be integrated, since if $d:g\mapsto f$ then $g$ is the primitive of $f$. Since integration can be tricky, it would be good to have a quick and easy test that determines whether a differentiable form is exact before we proceed to integrating it. We might start by noticing the following:
+
+			\begin{thm}
+				If $f$ is an exact form, so that $dg = f$, then $df = 0$.
+			\end{thm}
+			
+			This leads us to give a name to `differential forms whose derivative is zero':
+			
+			\begin{defn}
+				A differential $k$-form $f$ is \textbf{closed} if $df = 0$. 
+			\end{defn}
+	
+			It looks as if `closed' and `exact' might be two names for the same idea, which would be very convenient. But are there closed forms that are not exact? Consider the following chain complex of maps between exterior powers (each map is just $d$ with its domain restricted to the appropriate exterior power)):		
+			\[ 
+			\xymatrix@C+0.3em{
+				0 \ar[r] & \Omega^0(\mathbb{R}^n))\ar[r] & \Omega^1(\mathbb{R}^n))\ar[r] & ... \ar[r] & \Omega^0(\mathbb{R}^n))\ar[r]  & 0
+			}
+			\]
+			At each stage the kernel of $d$ is the closed forms in its domain while its image is the exact forms in its codomain. Thus the exact differential forms are cocycles and the closed forms are the coboundaries.
+			
+			Since every exact form is closed, this is indeed a chain complex. However, is it an exact sequence? To decide this we could compute cohomology at each point; this is called the De Rham cohomology. 
+			
+			In $\mathbb{R}^n$ these groups are all zero but in the spaces we meet later this will not be the case; de Rham cohomology will measure an important way in which exterior differentiation `misbehaves' in spaces whose topology differs from $\mathbb{R}^n$.
+
+			TODO: Is it useful to point out that $d$ acts like a `boundary operator' on forms at this point? This would already be familiar to the reader...
+			
+	\chapter{Vector Calculus in $\mathbb{R}^3$}
+
+		A brief chapter where we show that normal vector calculus (as far as we can express it without a metric!) just `drops out of' the work we've already done. Should be very concrete and rather easy, with plenty of opportunities for reinforcement. No new theory so the chapter can be skipped.
 
 	\chapter{Differential Calculus on Manifolds}
 	
@@ -313,9 +415,10 @@
 
 		\section{Diffeomorphisms}
 
-		\section{Closed and Exact Forms}
-		\section{De Rham Cohomology}
-		\section{The Boundary Operator}
+		\section{De Rham Cohomology Revisited}
+		
+			Guillemin and Haine have a nice section on this that shows how to use Mayer-Vietoris and the Long Exact Sequence to calculate de Rham cohomology. Some of the calculations are left as an exercise but we should work them out in full here (or another example).
+
 
 	\chapter{Integral Calculus on Manifolds}
 
@@ -323,9 +426,6 @@
 		\section{Integration of Forms}
 		\section{Stokes's Theorem}
 
-	\chapter{The Three-Dimensional Case}
-	
-		A brief chapter where we show that normal vector calculus (as far as we can express it without a metric!) just `drops out of' all the work we've already done. Should be very concrete and rather easy, with plenty of opportunities for reinforcement.
 
 	\chapter{Vector Flows and Integral Curves}
 	
