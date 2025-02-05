@@ -46,6 +46,8 @@
 	When the coursebooks are complete, the notes document is no longer needed and will probably be deleted. So the fact that you're looking at this means this is a work in progress -- it is incomplete, disorganised and probably full of errors.
 
 	\chapter*{Notes}
+		
+		There is a \emph{lot} of category theory jargon to digest early on. At one level I'd like to cut through this because it always frustrated me as it seemed to be a lot of sludge to wade through before you got to the meat of the subject. But at another level perhaps homological algebra is the place where you have to learn it because it's a key part of it, both historically and in terms of the flavour of the subject. We'll see but I think this is the one place where I'll allow all the abstract nonsense to stay, at least in the notes...
 	
 		Things I'd like to look into more:
 		\begin{itemize}
@@ -60,11 +62,167 @@
 	
 	If we make Algebraic Topology a prerequisite for this course we can assume students have seen plenty of chain complexes and calculated homology on them; there's no need to review all that here so we can get to the algebraic stuff more rapidly.
 	
-	\chapter{Projective, Injective and Flat Modules}
+	\section{Left and Right Modules}
 	
+		\begin{defn}
+			A \textbf{right $R$-module} $M$ is an abelian group $(M, +)$ and a ring $R$ equipped with a scalar multiplication operation $R\times M\to M$ such that the following hold:
+			\begin{itemize}
+				\item $1_Rm = m$ where $1_R$ is the multiplicative identity of $R$ and $m$ is any element of $M$
+				\item $r(m + n) = rm + rn$ where $r$ is any element of $R$ and $m, n$ any elements of $M$.
+				\item $(r + s)m = rm + sm$ where $r, s$ are any elements of $R$ and $m$ any element of $M$.
+				\item $(rs)m = r(sm)$ where $r, s$ are any elements of $R$ and $m$ any element of $M$.
+			\end{itemize}
+		\end{defn}
+	
+		\begin{defn}
+			A \textbf{left $R$-module} $M$ is an abelian group $(M, +)$ and a ring $R$ equipped with a scalar multiplication operation $M\times R\to M$ such that the following hold:
+			\begin{itemize}
+				\item $m1_R = m$ where $1_R$ is the multiplicative identity of $R$ and $m$ is any element of $M$
+				\item $(m + n)r = mr + nr$ where $r$ is any element of $R$ and $m, n$ any elements of $M$.
+				\item $m(r + s) = mr + ms$ where $r, s$ are any elements of $R$ and $m$ any element of $M$.
+				\item $m(rs) = (ms)r$ where $r, s$ are any elements of $R$ and $m$ any element of $M$.
+			\end{itemize}
+		\end{defn}
+		
+		\begin{defn}
+			An \textbf{$(R, S)$-bimodule} is an abelian group $M$ that is simultaneously a left $R$-module and a right $S$-module.
+		\end{defn}
+		
+		\begin{thm}
+			If multiplication in $R$ is commutative, each left $R$-module is isomorphic to a right $R$-module and \textit{vice versa}.
+		\end{thm}
+		
+	\section{Direct Product and Quotient (TODO)}
+	
+		Introduce these categorically and connect with kernel and cokernel.
+	
+	\section{Tensor Products of Modules}
+
+		In Introduction to Linear Algebra we defined the tensor product very explicitly in terms of basis vectors of the two spaces. This was possible because we were working in the category of finite-dimensional vector spaces over $\mathbb{R}$. With modules, however, there is often no basis and we must define tensor products more abstractly.
+		
+		\begin{defn}
+			Let $M$ be right $R$-module and $N$ a left $R$-module. Then the tensor product $M\otimes_R N$ is defined as it is for vector spaces:
+		\end{defn}
+
+	\chapter{Projective, Injective and Flat Modules}
+
+		\section{Abelian Categories}
+	
+			For any ring $R$, left $R$-modules and their homomorphisms form a category. The right $R$-modules form essentially the same category so we will focus only on the left versions, as is traditional.
+			
+			The category of $R$-modules in fact has some important features that are summed up by its being an `abelian category'. In this section we describe all those features. The abelian categories are the ones where we can do all the essential constructions of homology; while $R$-modules will be our examples, these constructions work in any suitable category and we will see other examples as we go along.
+	
+			\begin{defn}
+				A \textbf{zero object} in a category, often ust written as $0$, is one for which, given any object $X$, there is precisely one morphism $0\to X$ and one morphism $X\to 0$. A category with a zero object is said to be \textbf{pointed}.
+			\end{defn}
+			
+			\begin{thm}
+				If a category has a zero object, it is unique.
+			\end{thm}
+			
+			\begin{thm}
+				In the category of left $R$-modules, the module containing a single element is the zero object.
+			\end{thm}
+		
+			Suppose $M$ and $N$ are left $R-modules$ and $f:M\to N$ and $g:M\to N$ are left $R$-module homomorphisms. Then $(f+g):M\to N$ is also an $R$-module homomorphism that maps $m\in M$ to $f(m) + g(m)$, where `$+$' means addition in $N$. This `addition of morphisms' operation gives every hom-set in the category the structure of an abelian group. There are many ways this could be done, but since composition of morphisms is of central importance in category theory we make a special definition when addition and composition are compatible:
+
+			\begin{defn}
+				A \textbf{pre-additive category} is one in which every hom-set has been given the structure of an abelian group and composition of morphisms distributes over the group operation.				
+			\end{defn}
+
+			\begin{defn}
+				product and coproduct
+			\end{defn}
+			
+			\begin{thm}
+				In a preadditive category, products and coproducts are the same objects when they involve a finite number of objects.
+			\end{thm}
+			
+			Caution: You may be used to using `product' and `multiplication' intechangeably, which is usually harmless. However, there is a notion of `comultiplication' that is completely different to `coproduct'. We don't discuss comultiplication on this course but you may enounter it elsewhere (for instance, in the context of Hopf algebras).
+			
+			\begin{defn}
+				Let $A$ and $B$ be objects in a category. Then $X$ is the \textbf{biproduct} of $A$ and $B$, written $X = A\oplus B$, if the following morphisms exist:
+				\begin{itemize}
+					\item \textbf{Projections} $\pi_A: A\oplus B\to A$ and $\pi_B: A\oplus B\to B$ 
+					\item \textbf{Embeddings} $\iota_A: A\to A\oplus B$ and $\iota_B: B\to A\oplus B$ 
+				\end{itemize}
+				such that
+				\begin{itemize}
+					\item $\pi_A\circ\iota_A = \text{id}_A$
+					\item $\pi_A\circ\iota_B$ is the zero morphism that maps all of $A$ onto the identity element of $B$.
+				\end{itemize}
+				and
+				\begin{itemize}
+					\item $(A\oplus B, \pi)$ is a product
+					\item $(A\oplus B, \iota)$ is a coproduct
+				\end{itemize}
+			\end{defn}
+			
+			\begin{defn}
+				an \textbf{additive category} is a category that is pre-additive and furthermore contains a biproduct $A\oplus B$ for every pair of objects $A, B$.
+			\end{defn}
+
+			\begin{defn}
+				An \textbf{abelian category} is one that meets the following criteria:
+				\begin{itemize}
+					\item It is additive (addition of morphisms makes sense, biproducts exist)
+					\item It is pointed (has a zero object)
+					\item It is normal (kernels and cokernals are what we would hope)
+				\end{itemize}
+					
+			\end{defn}
+			
+			It is clear from the foregoing that the category of (left or right) $R$-modules over any ring $R$ will be abelian. We will use this fact in what follows; as we build the theory of homological algebra we will see that it only really works in abelian categories.
+			
+		\section{Injectivity and Projectivity}
+		
+			The following definition captures the idea of extending a morphism from its original domain to a larger one. 
+					
+			\begin{defn}
+				Let $f:X\to Y$ be injective and let $g:X\to Q$ be any morphism. Then we expect to be able to find an $h:Y\to Q$ such that $h\circ f = g$. If such a morphism always exists for any choices of $X$, $Y$, $f$ and $g$ we say $Q$ is an \textbf{injective object} in the category. 
+			\end{defn}
+			
+			\begin{defn}
+				An abelian category is said to have \textbf{enough injectives} if for every object $M$ in the category there exists an injective object $I$ such that at least one $f:M\to I$ exists and is injective.
+			\end{defn}
+			
+	
+		\section{Morita Equivalence (TODO)}
+		
+			This is discussed briefly in Rotman p.271 -- I think we'll have most of what we need here to do this and it should make all this look less arbitrary.
+		
 	\chapter{Derived Functors}
 	
-	Ext and Tor as way to measure projectivity and flatness
+		\section{Hom and Tensor as Functors}
+
+			\begin{defn}
+				A functor $f:\mathscr{C}\to \mathscr{D}$ is \textbf{covariant} if it send every map $x\to y$ in $\hom_\mathscr{C}$ to a map $f(x)\to f(y)$ in $\hom_\mathscr{D}$. It is instead \textbf{contravariant} if it sends each  $x\to y$ to $f(y)\to f(x)$.
+			\end{defn}
+			
+			\begin{defn}
+				Let $R$ be a ring. Then $\hom_R(X, _)$ maps any $R$-module $M$ you insert into the blank space to an abelian group that is the group of $R$-module homomorphisms $X\to M$. Similarly, $\hom_R(_, X)$ maps $M$ to the group of $R$-module homomorphisms $M\to X$
+			\end{defn}
+			
+			\begin{thm}
+				As defined above, $\hom_R(X, _)$ and $\hom_R(_, X)$ are functors $\textbf{RMod}\to \textbf{Ab}$; the former is covariant while the latter is contravariant.
+			\end{thm}
+			
+			\begin{defn}
+				Let $R$ be a ring and $X$ and $R$-module. Then $X\otimes \_ $ maps any $R$-module $M$ you insert into the blank space to an $R$-module $X\otimes M$. Similarly, $_\otimes X$ maps $M$ to $M\otimes X$.
+			\end{defn}
+			
+			\begin{thm}
+				As defined above, $X\otimes \_$ and $_\otimes X$ are functors  $\textbf{RMod}\to \textbf{Ab}$; the former is covariant while the latter is contravariant.
+			\end{thm}
+			
+			As discussed above, $A\otimes B$ is not guaranteed to be an $R$-module, which is why the functor goes to mere abelian groups. In the category of commutative $R$-modules, however, both $\hom$ and $\otimes$ define functors from and to the category $\textbf{RMod}$.
+			
+	
+		\section{Ext and Tor}
+		
+			\begin{defn}
+				Let $M$ be a left $R$-module. The right derived functors of $\hom(M, _)$ are the \textbf{Ext functors}, written $\text{Ext}^i_R(M, _)$.
+			\end{defn}
 	
 	\chapter{Homological Dimension}
 	
