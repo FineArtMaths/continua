@@ -114,7 +114,7 @@
 
 	\section{Exact Sequences}
 	
-		Homological algebra is, in one sense, the study of chain complexes and when they fail to be exact.
+		Homological algebra is, in one sense, the study of chain complexes and when they fail to be exact. It's possible we can motivate this by starting with the fact that in vector spaces, `every short exact sequence splits' is almost equivalent to the Rank-Nullity Theorem, which is a very powerful result that we're glad is true. In \RMod this statement is false, so we need a more sophisticated approach.
 		
 		\begin{defn}
 			Lat $\{X_0,\ldots,X_n\}$ be an indexed set of $R$-modules and $\{f_0,\ldots,f_{n-1}\}$ and indexed set of morphisms such that $f_i:X_i\to X_{i+1}$, i.e. 
@@ -188,11 +188,8 @@
 			
 		\end{defn}
 		
-		In the category of finite-dimensional vector spaces over a field, every short exact sequence is split; this is a consequence of the Rank-Nullity Theorem and the fact that there is only one vector space of each finite dimension. In \RMod the situation is more cplincated and not every short exact sequence splits, as we will see.
+		In the category of finite-dimensional vector spaces over a field, every short exact sequence is split; this is a consequence of the Rank-Nullity Theorem and the fact that there is only one vector space of each finite dimension. In \RMod the situation is more complicated and not every short exact sequence splits, as we will see.
 		
-		The following result is known as the `splitting lemma':
-		
-
 		
 		
 	\chapter{Projective, Injective and Flat Modules}
@@ -286,6 +283,8 @@
 
 		\section{Injectivity and Projectivity}
 		
+			We said that we would like every short exact sequence to split, as it does in the world of vector spaces, but this is not so. However, for certain modules it is true. As a preview, we will say a module is `injective' if having it in the first non-zero position in a short exact sequence guarantees that it splits, and `projective' if having it in the last non-zero position has the same effect. Later we will develop tools to determine which modules are injective, projective or both.
+		
 			The following definition captures the idea of extending a morphism from its original domain to a larger one. The intuitions is that if I can map $X$ to $Q$, I should still be able to so that if I've injectively embedded $X$ in some larger object $Y$ first. If I can't, some morphisms we expect to find in the category are `missing'.
 					
 			\begin{defn}
@@ -318,6 +317,42 @@
 						& & Q
 					}
 				\end{center}
+			\end{thm}
+			
+			\begin{thm}
+				A module $X$ is injective if and only if every short exact sequence of the following form splits:
+				
+				\begin{center}
+					\xymatrix{
+						0 \ar@{^{(}->}[r] & X \ar@{^{(}->}[r]^f & Y \ar@{->>}[r]^h & Z \ar@{->>}[r]^h &  0
+					}
+				\end{center}
+
+
+			\end{thm}
+			
+			Even more so than in the theory of vector spaces, in homological algebra we will always be on the lookout for dual ideas and theorems. There is a very simple dual notion of injectivity that we arrive at by reversing the arrows in the diagram above. Note that this turns injective morphisms into surjective ones.
+			
+			\begin{defn}
+				We say $Q$ is \textbf{projective} if for every surjective $f:Y\to X$ and every (not necessarily surjective) $g:Q\to X$, there is a morphism $h:Q\to Y$ that makes the following diagram commute:
+
+				\begin{center}
+					\xymatrix{
+						0 \ar@{<<-}[r] & X \ar@{<-}[dr]_g \ar@{<<-}[r]^f & Y \ar@{<.}[d]^h \\
+						& & Q
+					}
+				\end{center}
+
+			\end{defn}
+			
+			\begin{thm}
+				A module $Z$ is projective if and only if every short exact sequence of the following form splits:
+				
+				\begin{center}
+					\xymatrix{
+						0 \ar@{^{(}->}[r] & X \ar@{^{(}->}[r]^f & Y \ar@{->>}[r]^h & Z \ar@{->>}[r]^h &  0
+					}
+				\end{center}				
 			\end{thm}
 			
 		\section{Morita Equivalence (TODO)}
