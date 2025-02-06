@@ -7,6 +7,7 @@
 \usepackage{amssymb}
 \usepackage{mathrsfs} 
 \usepackage{hyperref}
+\usepackage[all]{xy}
 
 \makeatletter 
 
@@ -24,6 +25,11 @@
 \providecommand{\Cech}{\v{C}ech }
 \providecommand{\Poinacre}{Poincar\'e }
 \providecommand{\Kunneth}{K{\"u}nneth }
+
+\newcommand{\catname}[1]{{\normalfont\textbf{#1}}}
+\newcommand{\RMod}{\catname{RMod\ }}
+\newcommand{\im}{\text{\upshape{im}}}
+
 
 \begin{document}
 	
@@ -47,7 +53,11 @@
 
 	\chapter*{Notes}
 		
-		There is a \emph{lot} of category theory jargon to digest early on. At one level I'd like to cut through this because it always frustrated me as it seemed to be a lot of sludge to wade through before you got to the meat of the subject. But at another level perhaps homological algebra is the place where you have to learn it because it's a key part of it, both historically and in terms of the flavour of the subject. We'll see but I think this is the one place where I'll allow all the abstract nonsense to stay, at least in the notes...
+		There is a \emph{lot} of category theory jargon to digest early on. At one level I'd like to cut through this because it always frustrated me as it seemed to be a lot of sludge to wade through before you got to the meat of the subject. But at another level perhaps homological algebra is the place where you have to learn it because it's a key part of it, both historically and in terms of the flavour of the subject. We'll see but I think this is the one place where I'll allow all the abstract nonsense to stay, at least in the notes.
+		
+		It's possible that the coursebook switches the usual order and takes a similar approach to Algebraic Topology -- we have a first part that focuses only on \RMod and gets a lot of concrete results, then a second part that shows the same techniques can be generalised to any abelian category.
+		
+		When it comes to the second part, I like it when (a) you get plenty of concrete examples and non-examples of each thing and (b) it's explained why that thing is important, especially in the form of `if $x$ is true, you can do this obviously useful thing, otherwise you can't'. This seems much easier to do if the student has already seen these ideas in action.
 	
 		Things I'd like to look into more:
 		\begin{itemize}
@@ -92,28 +102,113 @@
 			If multiplication in $R$ is commutative, each left $R$-module is isomorphic to a right $R$-module and \textit{vice versa}.
 		\end{thm}
 		
-	\section{Direct Product and Quotient (TODO)}
-	
-		Introduce these categorically and connect with kernel and cokernel.
-	
+		The left and right $R$-modules form identical categories and have all the same properties so we will from now on write \RMod for either category. We will use left $R$-modules in examples but bear in mind everything works the same for right $R$-modules.
+
 	\section{Tensor Products of Modules}
 
 		In Introduction to Linear Algebra we defined the tensor product very explicitly in terms of basis vectors of the two spaces. This was possible because we were working in the category of finite-dimensional vector spaces over $\mathbb{R}$. With modules, however, there is often no basis and we must define tensor products more abstractly.
 		
 		\begin{defn}
-			Let $M$ be right $R$-module and $N$ a left $R$-module. Then the tensor product $M\otimes_R N$ is defined as it is for vector spaces:
+			Let $M$ be right $R$-module and $N$ a left $R$-module. Then the tensor product $M\otimes_R N$ is TODO
 		\end{defn}
 
+	\section{Exact Sequences}
+	
+		Homological algebra is, in one sense, the study of chain complexes and when they fail to be exact.
+		
+		\begin{defn}
+			Lat $\{X_0,\ldots,X_n\}$ be an indexed set of $R$-modules and $\{f_0,\ldots,f_{n-1}\}$ and indexed set of morphisms such that $f_i:X_i\to X_{i+1}$, i.e. 
+			\begin{center}
+				\xymatrix{
+					X_0 \ar@{^{(}->}[r]^{f_0} & X_1 \ar@{^{(}->}[r]^{f_1} & \ldots \ar@{^{(}->}[r]^{f_{i-1}} & X_{i}
+				}	
+			\end{center}					
+			Suhc an arrangement is called a \textbf{sequence} of $R$-modules.
+		\end{defn}
+		
+		\begin{defn}
+			In a sequence of $R$-modules, if $\Im(f_i) = \ker(f_{i+1})$ then we say the sequence is \textbf{exact} at $X_{i+1}$.
+		\end{defn}
+
+		\begin{defn}
+			If a sequence is exact at each of its objects we say it is an \textbf{exact sequence}.
+		\end{defn}
+		
+		\begin{defn}
+			A sequence is called a \textbf{complex} if $f{i+1}\circ f_i = 0$ for every $i$.
+		\end{defn}
+		
+		\begin{thm}
+			Every exact sequence is a complex, but not \textit{vice versa}.
+		\end{thm}
+		
+		\begin{defn}
+			Given a complex of $R$-modules, the $R$-module
+			\[
+				H_i = \frac{\im(f_{i-1})}{\ker(f_{i})}
+			\]
+			is called the \textbf{homology module} at $X_i$.
+		\end{defn}
+		
+		\begin{thm}
+			If a complex is an exact sequence, its homology modules are all trivial.
+		\end{thm}
+		
+		As our subject is `homological algebra', it will be unsurprising to learn that we will be most interested in the exactness of sequences and discovering when and how it fails. We might think that all complexes \textit{ought} to be exact sequences and homology describes how mathematical reality falls short of this ideal. But another way to say it is that homology gives us clues about how our understanding falls short by \textit{expecting} complexes to be exact.
+		
+		\begin{defn}
+			An exact sequence is called \textbf{short} if it is of the following form:
+			\begin{center}
+				\xymatrix{
+					0 \ar@{->}[r]^{f_0} & X_1 \ar@{->}[r]^{f_1} & X_2 \ar@{->}[r]^{f_{2}} & X_3 \ar@{->}[r]^{f_{3}} & 0
+				}	
+			\end{center}					
+		\end{defn}
+		
+		\begin{thm}
+			In a short exact sequence as described above, $f_1$ is injective and $f_{2}$ is surjective.
+
+			\begin{center}
+				\xymatrix{
+					0 \ar@{->}[r]^{f_0} & X_1 \ar@{^{(}->}[r]^{f_1} & X_2 \ar@{->>}[r]^{f_{2}} & X_3 \ar@{->}[r]^{f_{3}} & 0
+				}	
+			\end{center}
+			
+		\end{thm}
+		
+		\begin{defn}
+			A short exact sequence is called \textbf{split} or \textbf{split exact} if there is an isomorphism $g: X_2\to X_1\oplus X_3$ such that the following diagram commutes:
+			
+			\begin{center}
+				\xymatrix{
+					0 \ar@{->}[r]^{f_0} & X_1 \ar@{^{(}->}[r]^{f_1} \ar@{^{(}->}[d]^{id_1} & X_2 \ar@{->>}[r]^{f_{2}} \ar@{^{(}->}[d]^{g} & X_3 \ar@{->}[r]^{f_{3}} \ar@{^{(}->}[d]^{id_3} & 0 \\
+					0 \ar@{->}[r]^{f_0} & X_1 \ar@{^{(}->}[r]^{f_1} & X_1\oplus X_3 \ar@{->>}[r]^{f_{2}} & X_3 \ar@{->}[r]^{f_{3}} & 0
+				}	
+			\end{center}
+			
+		\end{defn}
+		
+		In the category of finite-dimensional vector spaces over a field, every short exact sequence is split; this is a consequence of the Rank-Nullity Theorem and the fact that there is only one vector space of each finite dimension. In \RMod the situation is more cplincated and not every short exact sequence splits, as we will see.
+		
+		The following result is known as the `splitting lemma':
+		
+
+		
+		
 	\chapter{Projective, Injective and Flat Modules}
 
 		\section{Abelian Categories}
 	
 			For any ring $R$, left $R$-modules and their homomorphisms form a category. The right $R$-modules form essentially the same category so we will focus only on the left versions, as is traditional.
 			
-			The category of $R$-modules in fact has some important features that are summed up by its being an `abelian category'. In this section we describe all those features. The abelian categories are the ones where we can do all the essential constructions of homology; while $R$-modules will be our examples, these constructions work in any suitable category and we will see other examples as we go along.
+			The category of $R$-modules in fact has some important features that are summed up by its being an `abelian category'. In this section we describe all those features. 
+			
+			The abelian categories are the ones where we can do all the essential constructions of homology; while $R$-modules will be our examples, these constructions work in any suitable category and we will see other examples as we go along.
 	
+			Suppose $M$ and $N$ are left $R-modules$ and $f:M\to N$ and $g:M\to N$ are left $R$-module homomorphisms. Then $(f+g):M\to N$ is also an $R$-module homomorphism that maps $m\in M$ to $f(m) + g(m)$, where `$+$' means addition in $N$. This `addition of morphisms' operation gives every hom-set in the category the structure of an abelian group. There are many ways this could be done, but since composition of morphisms is of central importance in category theory we make a special definition when addition and composition are compatible:
+
 			\begin{defn}
-				A \textbf{zero object} in a category, often ust written as $0$, is one for which, given any object $X$, there is precisely one morphism $0\to X$ and one morphism $X\to 0$. A category with a zero object is said to be \textbf{pointed}.
+				A \textbf{zero object} in a category, often just written as $0$, is one for which, given any object $X$, there is precisely one morphism $0\to X$ and one morphism $X\to 0$. A category with a zero object is said to be \textbf{pointed}.
 			\end{defn}
 			
 			\begin{thm}
@@ -121,15 +216,15 @@
 			\end{thm}
 			
 			\begin{thm}
-				In the category of left $R$-modules, the module containing a single element is the zero object.
+				In the category of left $R$-modules, the module containing a single element (its additive identity, i.e. the zero element) is the zero object.
 			\end{thm}
-		
-			Suppose $M$ and $N$ are left $R-modules$ and $f:M\to N$ and $g:M\to N$ are left $R$-module homomorphisms. Then $(f+g):M\to N$ is also an $R$-module homomorphism that maps $m\in M$ to $f(m) + g(m)$, where `$+$' means addition in $N$. This `addition of morphisms' operation gives every hom-set in the category the structure of an abelian group. There are many ways this could be done, but since composition of morphisms is of central importance in category theory we make a special definition when addition and composition are compatible:
 
 			\begin{defn}
 				A \textbf{pre-additive category} is one in which every hom-set has been given the structure of an abelian group and composition of morphisms distributes over the group operation.				
 			\end{defn}
-
+			
+			TODO: The categorical definitions of product and coproduct are quite heavy but might be necessary -- wait and see what we can get away with simplifying here:
+			
 			\begin{defn}
 				product and coproduct
 			\end{defn}
@@ -159,37 +254,77 @@
 			\end{defn}
 			
 			\begin{defn}
-				an \textbf{additive category} is a category that is pre-additive and furthermore contains a biproduct $A\oplus B$ for every pair of objects $A, B$.
+				An \textbf{additive} category is a category that is pre-additive and furthermore contains a biproduct $A\oplus B$ for every pair of objects $A, B$.
 			\end{defn}
-
+			
 			\begin{defn}
-				An \textbf{abelian category} is one that meets the following criteria:
+				A \textbf{preabelian} category is an additive category in which every morphism has both a kernel and a cokernel.
+			\end{defn}
+			
+			To work across all categories, one needs rather abstract definitions of kernel and cokernel. All the categories we consider, however, will be concrete and we can say the following:
+			
+			\begin{thm}
+				The category \RMod is preabelian. Specifically, if $f:M\to N$ is a morphism of $R$-modules,
 				\begin{itemize}
-					\item It is additive (addition of morphisms makes sense, biproducts exist)
-					\item It is pointed (has a zero object)
-					\item It is normal (kernels and cokernals are what we would hope)
+					\item The kernel of $f$ is $\ker(f) = \{m\in M : f(m) = 0\}$
+					\item The image of $f$ is $\im(f) = \{n\in N : f(m) = n\ \text{for some }\ m\in M\}$
+					\item The cokernel of $f$ is $N/\im(f)$
 				\end{itemize}
-					
-			\end{defn}
+			\end{thm}
 			
-			It is clear from the foregoing that the category of (left or right) $R$-modules over any ring $R$ will be abelian. We will use this fact in what follows; as we build the theory of homological algebra we will see that it only really works in abelian categories.
+			The move from preabelian to abelian is a bit of a technical detail since it expresses kernels and cokernels as morphisms rather than subobjects. Since we work in concrete categories it would be nice to handwave this a bit of possible: 
 			
-		\section{Injectivity and Projectivity}
-		
-			The following definition captures the idea of extending a morphism from its original domain to a larger one. 
-					
 			\begin{defn}
-				Let $f:X\to Y$ be injective and let $g:X\to Q$ be any morphism. Then we expect to be able to find an $h:Y\to Q$ such that $h\circ f = g$. If such a morphism always exists for any choices of $X$, $Y$, $f$ and $g$ we say $Q$ is an \textbf{injective object} in the category. 
+				An \textbf{abelian category} is a preabelian category in which every injective morphism is a kernel and every surjective morphism is a cokernel.
 			\end{defn}
+			
+			It is clear from the foregoing that \RMod over any ring $R$ will be abelian. We will use this fact in what follows; as we build the theory of homological algebra we will see that it only really works in abelian categories.
 			
 			\begin{defn}
 				An abelian category is said to have \textbf{enough injectives} if for every object $M$ in the category there exists an injective object $I$ such that at least one $f:M\to I$ exists and is injective.
 			\end{defn}
+
+		\section{Injectivity and Projectivity}
+		
+			The following definition captures the idea of extending a morphism from its original domain to a larger one. The intuitions is that if I can map $X$ to $Q$, I should still be able to so that if I've injectively embedded $X$ in some larger object $Y$ first. If I can't, some morphisms we expect to find in the category are `missing'.
+					
+			\begin{defn}
+				Let $f:X\to Y$ be injective and let $g:X\to Q$ be any morphism. Then we expect to be able to find an $h:Y\to Q$ such that $h\circ f = g$. 
+				\begin{center}
+					\xymatrix{
+						X \ar@{^{(}->}[r]^f \ar@{->}[dr]_g & Y \ar@{.>}[d]^h \\
+						& Q
+					}
+				\end{center}					
+				If such a morphism always exists for any choices of $X$, $Y$, $f$ and $g$ we say $Q$ is an \textbf{injective object} in the category. 
+			\end{defn}
 			
-	
+			\begin{defn}
+				An $R$-module is \textbf{injective} if it plays the role of $Q$ in the previous definition for any $X$ and $Y$.
+			\end{defn}
+
+			\begin{thm}
+				Let the following be a commutative diagram (note that the top line is an exact sequence):
+				\begin{center}
+					\xymatrix{
+						0 \ar@{^{(}->}[r] & X \ar@{->}[dr]_g \ar@{^{(}->}[r]^f \ar@{->}[dr]_g & Y \\
+						& & Q
+					}
+				\end{center}
+				Then if $Q$ is injective, we can find a morphism $h:Y\to Q$ such that the following diagram commutes:
+				\begin{center}
+					\xymatrix{
+						0 \ar@{^{(}->}[r] & X \ar@{->}[dr]_g \ar@{^{(}->}[r]^f \ar@{->}[dr]_g & Y \ar@{.>}[d]^h \\
+						& & Q
+					}
+				\end{center}
+			\end{thm}
+			
 		\section{Morita Equivalence (TODO)}
 		
 			This is discussed briefly in Rotman p.271 -- I think we'll have most of what we need here to do this and it should make all this look less arbitrary.
+			
+			This may also be helpful: \url{http://mattbooth.info/notes/morita.pdf}
 		
 	\chapter{Derived Functors}
 	
