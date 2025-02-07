@@ -52,10 +52,16 @@
 	When the coursebooks are complete, the notes document is no longer needed and will probably be deleted. So the fact that you're looking at this means this is a work in progress -- it is incomplete, disorganised and probably full of errors.
 
 	\chapter*{Notes}
+	
+		I think I want to introduce this subject as follows: you already know a lot about vector spaces and will have noticed the theory about them is very nice: almost everything that `ought' to be true really is! But when we generalise our objects to modules, this is no longer the case. Homology teaches us where and how we need to change our understanding of things in that context. In the process we develop a technique that we've already seen is useful elsewhere (i.e. in Algebraic Topology).
+		
+		So the coursebook probably switches the usual order and takes a similar approach to Algebraic Topology -- we have a first part that focuses only on \RMod and gets a lot of concrete results, then a second part that shows the same techniques can be generalised to any abelian category.
+		
+		I'm inclined to focus on re
+		
+		
 		
 		There is a \emph{lot} of category theory jargon to digest early on. At one level I'd like to cut through this because it always frustrated me as it seemed to be a lot of sludge to wade through before you got to the meat of the subject. But at another level perhaps homological algebra is the place where you have to learn it because it's a key part of it, both historically and in terms of the flavour of the subject. We'll see but I think this is the one place where I'll allow all the abstract nonsense to stay, at least in the notes.
-		
-		It's possible that the coursebook switches the usual order and takes a similar approach to Algebraic Topology -- we have a first part that focuses only on \RMod and gets a lot of concrete results, then a second part that shows the same techniques can be generalised to any abelian category.
 		
 		When it comes to the second part, I like it when (a) you get plenty of concrete examples and non-examples of each thing and (b) it's explained why that thing is important, especially in the form of `if $x$ is true, you can do this obviously useful thing, otherwise you can't'. This seems much easier to do if the student has already seen these ideas in action.
 	
@@ -362,6 +368,14 @@
 			This may also be helpful: \url{http://mattbooth.info/notes/morita.pdf}
 		
 	\chapter{Derived Functors}
+	
+		From Reddit: `Suppose you have an exact sequence of R-modules, where R is a ring. Given a fixed R-module N, the functor Hom(-,N) is not necessarily exact. What is the best concept to understand the exactness defect? homology. Consequently take your exact sequence, apply Hom(-,N) and take homology. This is the idea behind the definition of the Ext functor.'
+		
+		Ext and Tor are not all that mysterious. The motivation is that they let us measure, for a given $R$-module $X$, the ways in which $\hom(\_, X)$ and $X\otimes\_$, when applied to an exact sequence, fail to yield an exact sequence in return. 
+		
+		One motivation for this is the Universal Coefficient Theorem. Another more general one is just that exact sequences are meaningful (e.g. in resolutions) and the Hom and Tensor functors are very useful in applications, so knowing when we've `broken' exactness is important.
+		
+		They're calculated by applying the functor in question to a projective (for Ext) or injective (for Tor) resolution of $X$, which gives another complex, then taking homology; if the homology groups are all trivial, the functor in question is exact. 
 	
 		\section{Hom and Tensor as Functors}
 
