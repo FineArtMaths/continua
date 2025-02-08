@@ -1,0 +1,265 @@
+\documentclass[oneside,english]{amsbook} 
+\usepackage[T1]{fontenc} 
+\usepackage[latin9]{inputenc} 
+\usepackage{amsmath} 
+\usepackage{amstext} 
+\usepackage{amsthm} 
+\usepackage{amssymb}
+\usepackage{mathrsfs} 
+\usepackage{hyperref}
+\usepackage[all]{xy}
+
+\makeatletter 
+
+\numberwithin{section}{chapter} 
+\theoremstyle{plain} 
+\newtheorem{thm}{\protect\theoremname}   
+\theoremstyle{definition}   
+\newtheorem{defn}[thm]{\protect\definitionname}
+
+\makeatother
+
+\usepackage{babel}   
+\providecommand{\definitionname}{Definition} 
+\providecommand{\theoremname}{Theorem}
+\providecommand{\Cech}{\v{C}ech }
+\providecommand{\Poinacre}{Poincar\'e }
+\providecommand{\Kunneth}{K{\"u}nneth }
+
+\newcommand{\catname}[1]{{\normalfont\textbf{#1}}}
+\newcommand{\RMod}{\catname{RMod\ }}
+\newcommand{\im}{\text{\upshape{im}}}
+\newcommand{\kVect}{\mathbf{k}\mathbf{Vect}}
+
+
+\begin{document}
+	
+	\title{Introduction to Homological Algebra}
+	
+	\maketitle
+	
+	\tableofcontents
+	
+	\chapter*{Welcome!}
+	
+		In a slogan, homological algebra is a toolkit for studying objects that don't behave the way we think they ought to. Homology can detect -- and describe, to some extent -- the ways in which our object of interest `falls short' of our idealised expectations. 
+		
+		It first arose in topology, where for instance on a 2D surface we expect a closed loop to contain a region of space; if it doesn't, there must be a hole there. Homology can detect holes and tell us what kinds they are. And if we think we have a cylinder, homology can tell us when, in fact, it's twisted like a M\:obius strip. 
+		
+		This course isn't about topology but the structure of the tools that began there and how they can be generalized to situations beyond topology. We primarily study sequences of objects that have certain desirable properties and develop tools to detect when those properties fail.
+
+		The first half of this course develops homological algebra as a tool for studying modules, which are vector spaces whose scalars don't necessarily form a field. Remember that a field must obey very strict rules about both addition and multiplication that exclude some very useful number systems. Let's review the definition of a field and see a key example of a set of numbers that would like to be scalars in a vector field but aren't qualified for the job.
+
+		The second half of the course generalizes this study to a wide range of mathematical objects -- those that form `abelian categories' -- and look at some important example applications. We finish with some more advanced tools from the toolkit.
+		
+		This course assumes you are very familiar with the content of Introduction to Linear Algebra. If you find the material excessively abstract it may help to study Introduction to Algebraic Topology, where we introduce a specific homology theory in a very concrete setting. You could study that alongside this course if that suits you.
+	
+	\part{Linear Algebra over Rings}
+	
+	\chapter{Modules}
+		
+		\section{From Fields to Rings}
+				
+			We'll start with a definition you may or many not have seen before -- it will be useful to us later on and will make our upcoming definitions shorter:
+			
+			\begin{defn}
+				A set $S$ is a \textbf{group} if it's equipped with a binary operation, call it $\star$, such that the following are true (where $a$, $b$ and $c$ are elements of $S$):
+				\begin{itemize}
+					\item $a\star b$ is defined for every value of $S$ and its value is another element of $S$ (`closure')
+					\item There is an element in $S$, call it $e$, such that $a\star e = a$ and $e\star a = a$ (`identity element')
+					\item For every element $a$, there is another element $b$ such that $a\star b = e$ and $b\star a = e$ (`existence of inverses')
+					\item We can simplify $a\star (b\star c) = (a\star b)\star c$ (`associativity')
+				\end{itemize}
+				If in addition we always have that $a\star b = b\star a$ we say that $\star$ is \textbf{commutative} and call $(S, \star)$ an \textbf{abelian group}.
+			\end{defn}
+			
+			There's a lot in this definition but here we'll just use it as a sort of building block for the main things we're interested in -- if you haven't seen it before, press on to the examples that come in a moment and it will hopefully make more sense.
+			
+			The scalars that belong to vector spaces form a field, which we can now define as follows:
+			
+			\begin{defn}
+				A set $S$ is a \textbf{field} if it's equipped with binary operations $+$ and $\times$ that obey the following rules:
+				\begin{itemize}
+					\item $(S, +)$ is an abelian group
+					\item $(S\setminus\{0\}, \times)$ is an abelian group (here $0$ denotes the additive identity)
+					\item $a(b + c) = ab + ac = (b + c)a$
+				\end{itemize}
+			\end{defn}
+			
+			We're used to thinking of the scalars in a vector space as numbers, but there are some sets of numbers that don't qualify as a field. For example, consider the integers, written $\mathbb{Z}$, that consist of all the positive and negative whole numbers, along with zero. They behave well under addition but their multiplication operation is a bit of a problem: while it's associative, it has closure (you can multiply any two integers and get another integer) and it has an identity element (the number 1), it doesn't have any multiplicative inverses. For example, there's no number you can multiply 5 by to get 1.
+			
+			Examples like this led to the definition of a `field lite' that has most of the properties of a field but drops a couple, making it much more permissive:
+		
+			\begin{defn}
+				A set $S$ is a \textbf{ring} if it obeys the same rules as a field except its multiplication operation is allowed either of the following exceptions:
+				\begin{itemize}
+					\item Multiplication need not be commutative
+					\item Multiplicative inverses need not exist
+					\end{itemize}
+			\end{defn}
+			
+			Note that fields are also rings, they just don't happen to make use of the exceptions. 
+		
+		\section{Ideals of Rings (TODO)}
+		\section{Modules Defined}
+				
+			Now, integers, and especially ordered lists of them, are of great importance in many applications involving algorithms, data and computer programming in general. These \emph{look} like vectors, but since the integers aren't a field, there are no `vector spaces over the integers' and we can't bring our linear algebra knowledge to bear on such objects. 
+			
+			This motivates us to try substituting rings for fields in the definition of a vector space, which reveals our main object a study:
+			
+			\begin{defn}
+				A \textbf{left $R$-module} is a vector space over a ring ($R$) instead of a field. More formally, a left $R$-module is an abelian group $(S, +)$ along with a ring $R$ and an operation of `scalar multiplication on the left' that maps $R\times S\to S$ according to the following rules (here $a$ and $b$ are elements of $S$, $x$ and $y$ are elements of $R$):
+				\begin{itemize}
+					\item $x(a + b) = xa + xb$ 
+					\item $(x + y)a = xa + ya$
+					\item $(xy)a = x(ya)$
+					\item $1_Ra = a$, where $1_R$ is the multiplicative identity in the ring $R$.
+				\end{itemize}
+			\end{defn}
+			
+			It may look odd that we called it a `left module' and only defined scalar multiplication `on the left'. That is, $xa$ makes sense when $x$ is a scalar and $a$ is an element of $S$, but $ax$ does not. We can make the completely equivalent definition of a `right module' as follows:
+			
+			\begin{defn}
+				A \textbf{right $R$-module} is a vector space over a ring ($R$) instead of a field. More formally, a right $R$-module is an abelian group $(S, +)$ along with a ring $R$ and an operation of `scalar multiplication on the right' that maps $S\times R\to S$ according to the following rules (here $a$ and $b$ are elements of $S$, $x$ and $y$ are elements of $R$):
+				\begin{itemize}
+					\item $(a + b)x = ax + bx$ 
+					\item $a(x + y) = ax + ay$
+					\item $a(xy) = (ax)y$
+					\item $a1_R = a$, where $1_R$ is the multiplicative identity in the ring $R$.
+				\end{itemize}
+			\end{defn}
+	
+			Usually we won't bother with this and will do all of our work with left $R$-modules but it's worth bearing in mind that a set can simultaneously have the structure of a left $R$-module and a right $T$-module for some other ring $T$ -- this won't come up very often, though. To keep things short, we'll often just say `$R$-module' instead of `left $R$-module' unless there's room for confusion.
+			
+			As you can see, an $R$-module is a `vector space over the ring $R$'. Since fields are also rings (in the way that carrots are also vegetables) we can turn this around and say a vector space is an $R$-module where $R$ is a field.
+
+		\section{Examples of Modules}
+
+			We said that every ring is an abelian group equipped with the extra structure of scalar multiplication. In Introduction to group Theory you ay have learned that we have a full classification of abelian groups -- that is, we have a description that covers all of them. We will review this fact quickly here since it will furnish us with a large collection of modules. 
+			
+			We begin by noticing that we are already very familiar with one abelian group:
+			
+			\begin{thm}
+				The integers, written $\mathbb{Z}$, form an abelian group under addition.
+			\end{thm}
+			
+			Now, when talking about groups, rings and modules it's easy to get mixed up between them. The set $\mathbb{Z}$ is an abelian group under addition; it can also be equipped with a multiplication operation, turning it into a ring. Or, as we'll see shortly, it can be equipped with a scalar multiplication operation, turning it into a module. We'll try to be clear about which structure we care about every time there could ba ambiguity. For the moment, we're just interested in $\mathbb{Z}$ as an abelian group.
+			
+			In the group of integers $\mathbb{Z}$ we can identify subsets of the form $n\mathbb{Z}$ that contain all the integers multiplied by a set integer $n$. For example, $2\mathbb{Z}$ contains all the even integers, $3\mathbb{Z}$ contains all the integer multiples of 3 and so on. Here we will take it on trust that the quotient $\mathbb{Z}/n\mathbb{Z}$ always makes sense and is an abelian group (this is something you will learn more about in Introduction to Group Theory if you haven't seen it before). It consists of the numbers $\{0, 1, 2, \ldots, n-1\}$ with addition modulo $n$.
+			
+			We can easily turn into a $\mathbb{Z}$-module in the following way:
+			\begin{defn}
+				By $\mathbb{Z}_n$ we mean the $\mathbb{Z}$-module formed by the abelian group $\mathbb{Z}/n\mathbb{Z}$ with scalar multiplication defined as repeated addition, following the rules for a module.
+			\end{defn}
+			
+
+	
+		\section{Maps of Modules}
+			
+			Continuing our analogy with the theory of vector spaces, we want to identify the maps between $R$-modules that `respect their structure' -- the equivalent of homomorphisms of vector spaces. Fortunately we can just lift the definition from the world of vector spaces and it works just the same:
+			
+			\begin{defn}
+				An \textbf{$R$-module homomorphism} from $A$ to $B$ (where $A$ and $B$ are of course $R$-modules) is a map $f:A\to B$ that satisfies the following, for all $r$ in $R$, $a$ in $A$ and $b$ in $B$:
+				\begin{itemize}
+					\item $rf(a) = f(ra)$
+					\item $f(a + b) = f(a) + f(b)$
+				\end{itemize}
+			\end{defn}
+			
+			We've now defined a collection of objects -- the $R$-modules for a given ring $R$ -- and the structure-preserving maps between them. This is enough information to create a `category'. We will call this category \RMod. For two objects $A$ and $B$, the set of all maps $A\to B$ will be written $\hom(A, B)$ as you've seem before in relation to vector spaces. In the first part of this course we develop some rather refined techniques for probing the inner structure and behaviour of $R$-modules; in the second part we generalise those techniques to study a wide range of other mathematical objects that live in categories that are sufficiently similar to \RMod. This generalizability is what makes homological algebra so powerful outside the world of abstract algebra.
+		
+		\section{Quotients and Products (TODO)}
+	
+		\section{A Note on Duality (*)}
+	
+			In your previous study of linear algebra the idea of the dual to a vector space played a crucial part. Indeed, the perfect duality we find in the theory of vector spaces turns out to be a big part of why it's so neat and tidy.
+			
+			As a reminder, we observed that every finite-dimensional vector space $V$ over a given field has a dual, $V^\star$, that is isomorphic to $V$. Homomorphisms $V\to W$ can be characterised as elements of the tensor product $W\otimes V^\star$. But crucially, $W\otimes V^\star\cong V\otimes W^\star$, so each of these can also be thought of as a homomorphism between the dual spaces going in the opposite direction, i.e. $W^\star\to V^\star$. Concretely this corresponds to `applying the matrix to a (horizontal) covector on the right, instead of applying it to a (vertical) vector on the left'.
+			
+			Abstractly, we were working in the category $\kVect$ of finite-dimensional vector spaces over the field $\mathbf{k}$. This category has an opposite, which is obtained by keeping the objects the same but reversing all the morphisms; if we think of the objects as being the (isomorphic) dual spaces then the morphisms do indeed reverse direction all by themselves.
+			
+			What this meant for the theory is that everything in $\kVect$ has a mirror-image in the opposite category; almost any statement we make there has not only a dual statement but also a dual proof that we get `for free' by translating our original statement and proof into their mirror-image counterparts.
+			
+			The situation is subtly different in the category of modules over a particular ring. The dual of such a category is almost never equivalent to it -- worse, it usually isn't a category of modules at all! This means that we lose one of the most reassuring structural symmetries that we had in the theory of vector spaces. We will learn much later that so-called `abelian categories' are self-dual but that module categories are abelian categories plus additional information that messes up the duality. 
+			
+			Although we will have to wait a while to understand this properly, for now it's worth noting that a pair of dual statements in module theory, even when both are true, may have to be understood (and proved) in very different ways. The power of duality in the world of vector spaces is greatly reduced when it comes to modules and we can't expect to find dual versions of things everywhere, nor for them to have exact mirror-image features when we do.
+
+	\chapter{Exact Sequences and Resolutions}
+
+		Every module admits a free, projective, injective and flat resolution. 
+		
+		projective (dually, injective) resolutions allow us to define a version of dimension for modules. 
+
+	\chapter{Hom and Tensor}
+	
+		\section{Introduction}
+
+			In Introduction to Linear Algebra we defined the tensor product very explicitly in terms of basis vectors of the two spaces. This was possible because we were working in the category of finite-dimensional vector spaces over $\mathbb{R}$. With modules, however, there is often no basis and we must define tensor products more abstractly.
+			
+			The definition given in this chapter is certainly less concrete than the one we gave for vector spaces, but it's equivalent to it; think of it as a more sophisticated perspective on the same idea that allows it to be applied to all modules, not just vector spaces.
+			
+		\section{Multilinear and Linear Maps}
+		
+		\section{Solving the Universal Problem}
+
+		\section{Hom and Tensor as Functors}
+
+		\section{The Tensor-Hom Adjunction Revisited}
+
+
+	\chapter{Tor and Ext}
+		
+		NOTE: This could be two chapters if the two topics get long. It's worth introducing the ideas slowly.
+		
+		\section{Torsion in Modules}
+			
+			We can consider $\mathbb{Z}_n = \mathbb{Z}/n\mathbb{Z}$ a $\mathbb{Z}$-module by keeping addition as usual and defining scalar multiplication by the following rules (here $x$ is any element of $\mathbb{Z}_n$ and $n$ is any element of $\mathbb{Z}$):
+			\begin{itemize}
+				\item $-1x$ is the additive inverse of $x$
+				\item $nx$, where $n$ is positive, is $x$ added to itself $n$ times
+				\item $0x$ is the additive identity element of $\mathbb{Z}_n$
+			\end{itemize}
+			When we're thinking of it this way we `forget about' the multiplication we can define on $\mathbb{Z}_n$ and just treat it as an additive group.
+
+		\section{Calculating Tor}
+
+			NOTE: Concentrate on the role of Tor 1?
+
+		\section{Extensions}
+		
+			Rotman p.420 -- Ext 1 detects when an extension splits. Specifically, There is an isomorphism between Ext1(B,A)
+			and the group of equivalence classes of short exact sequences that start with A and end with B.
+		
+		\section{Calculating Ext}
+		If you apply Hom to an exact sequence and lose exactness, Ext can be used to `repair' it (Rotman p367)
+
+
+	\chapter{The Universal Coefficient Theorem}
+		
+
+	\part{Homological Algebra in Other Categories}
+	
+	\chapter{Abelian Categories}
+	
+		Criteria for homological algebra to work.
+		
+		Derived category construction.
+	
+	\chapter{Group Cohomology}
+	
+		Show this as a first application of homological algebra outside \RMod.
+	
+	\chapter{Sheaf and \Cech Cohomology}
+
+		This is discussed in Rotman 6.3 but rather drily -- it would be nice to show examples (not necessarily of calculations but at least of what it means to find homology in these cases).
+		
+	\chapter{Spectral Sequences}
+
+		Cartan and Eilenberg include a whole chapter of applications of spectral sequences -- a sample of these might be worth including here.
+
+	\chapter{The Cup and Cap Products}
+
+		I think do this in the context of topology? Not sure whether it really belongs here.
+	
+	
+\end{document}
