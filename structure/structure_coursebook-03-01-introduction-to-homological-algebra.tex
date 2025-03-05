@@ -101,6 +101,9 @@
 			Note that fields are also rings, they just don't happen to make use of the exceptions. 
 		
 		\section{Ideals of Rings (TODO)}
+		
+			TODO: Include the idea of a Integral Domain and Principal Ideal Domain, which have important things in common with the integers. Some results for modules are only true over PIDs.
+		
 		\section{Modules Defined}
 				
 			Now, integers, and especially ordered lists of them, are of great importance in many applications involving algorithms, data and computer programming in general. These \emph{look} like vectors, but since the integers aren't a field, there are no `vector spaces over the integers' and we can't bring our linear algebra knowledge to bear on such objects. 
@@ -185,10 +188,15 @@
 			Although we will have to wait a while to understand this properly, for now it's worth noting that a pair of dual statements in module theory, even when both are true, may have to be understood (and proved) in very different ways. The power of duality in the world of vector spaces is greatly reduced when it comes to modules and we can't expect to find dual versions of things everywhere, nor for them to have exact mirror-image features when we do.
 
 	\chapter{Exact Sequences and Resolutions}
-
-		Every module admits a free, projective, injective and flat resolution. 
 		
-		projective (dually, injective) resolutions allow us to define a version of dimension for modules. 
+		\section{Sequences, Exact Sequences and Complexes}
+		\section{Maps of Complexes}
+			
+		\section{Resolutions of Modules}
+			Every module admits a free, projective, injective and flat resolution. 
+			
+		\section{Homological Dimension (*)}
+			projective (dually, injective) resolutions allow us to define a version of dimension for modules. 
 
 	\chapter{Hom and Tensor}
 	
@@ -207,32 +215,87 @@
 		\section{The Tensor-Hom Adjunction Revisited}
 
 
-	\chapter{Tor and Ext}
+	\chapter{Torsion}
 		
-		NOTE: This could be two chapters if the two topics get long. It's worth introducing the ideas slowly.
-		
-		\section{Torsion in Modules}
+		\section{Free Modules [TODO]}
 			
-			We can consider $\mathbb{Z}_n = \mathbb{Z}/n\mathbb{Z}$ a $\mathbb{Z}$-module by keeping addition as usual and defining scalar multiplication by the following rules (here $x$ is any element of $\mathbb{Z}_n$ and $n$ is any element of $\mathbb{Z}$):
+			Vector spaces don't have torsion because they're always free modules. This is probably a good place to talk about non-free modules and how torsion arises.
+			
+			Here is a result that shows the importance of free modules -- we could build up to this:
+			
+			\begin{thm}
+				Every module can be expressed as a quotient of a free module.
+			\end{thm}
+			
+			\begin{proof}
+				Let $M$ be the module in question and $R$ its ring of scalars. Create a free module
+				\[
+					F = \bigoplus_{m\in M} R
+				\]
+				the elements of $F$ `look like' vectors, i.e. we can think of them as lists of scalars, with each position corresponding to an element of $M$. In particular, $F$ has a natural basis, which is the elements that have a 1 assigned to one element of $M$ and 0 assigned to all the others.
+				
+				Now consider the homomorphism $f:F\to M$ defined by assigning each basis element to the element of $M$ that is has a 1 assigned to and extending linearly.
+				
+				Then $M\cong F/\ker(f)$. TODO: Finish this proof  
+			\end{proof}
+
+		\section{Torsion Elements}
+			
+			Let's consider the $\mathbb{Z}$-module $\mathbb{Z}_2\oplus\mathbb{Z}_3$. This consists of the following elements:
 			\begin{itemize}
-				\item $-1x$ is the additive inverse of $x$
-				\item $nx$, where $n$ is positive, is $x$ added to itself $n$ times
-				\item $0x$ is the additive identity element of $\mathbb{Z}_n$
+				\item $(0, 0)$, the identity element
+				\item$(1, 0)$
+				\item$(0, 1)$
+				\item$(1, 1)$
+				\item$(0, 2)$
+				\item$(1, 2)$
 			\end{itemize}
-			When we're thinking of it this way we `forget about' the multiplication we can define on $\mathbb{Z}_n$ and just treat it as an additive group.
+			Remember that scalar multiplication is done modulo each factor, so for example
+			\begin{align}[rcl]
+				7(1, 2) &=& (7\times 1 \text{mod 2}, 7\times 2 \text{mod 3})
+				 &=& (7 \text{mod 2}, 14 \text{mod 3})
+				 &=& (1, 2)
+			\end{align}
+			This means that sometimes a non-zero scalar can multiply a non-zero vector and produce the zero vector, as in the following example:
+			\begin{align}[rcl]
+				6(1, 2) &=& (6\times 1 \text{mod 2}, 6\times 2 \text{mod 3})
+				 &=& (6 \text{mod 2}, 12 \text{mod 3})
+				&=& (0, 0)
+			\end{align}
+			This leads us to the following definition:
+			\begin{defn}
+				Suppose an $R$-module $M$ has an element $v$ and a non-zero scalar $k$ such that $kv$ is the zero element of $M$. Then $v$ is called a \textbf{torsion element} of the module.
+			\end{defn}
+			In $\mathbb{Z}_2\oplus\mathbb{Z}_3$ every element is a torsion element -- a module with this property is called a `torsion module' and a module with no torsion elements is said to be `torsion-free'.
 
-		\section{Calculating Tor}
+		\section{The Tor Functor}
 
-			NOTE: Concentrate on the role of Tor 1?
+			\subsection{Definition}
 
+			\subsection{The First Tor Module}
+
+		\section{Example Calculations with Tor}
+
+	\chapter{Extensions}
+	
 		\section{Extensions}
+			\subsection{Extensions of Modules}
+			
+				This has some nice pedagogic explanations of the basics: \url{https://www.mas.ncl.ac.uk/library/display_pdf.php?id=270}
+			
+			\subsection{Split Extensions}
+				Rotman p.420 -- Ext 1 detects when an extension splits. Specifically, There is an isomorphism between Ext1(B,A)
+				and the group of equivalence classes of short exact sequences that start with A and end with B.
 		
-			Rotman p.420 -- Ext 1 detects when an extension splits. Specifically, There is an isomorphism between Ext1(B,A)
-			and the group of equivalence classes of short exact sequences that start with A and end with B.
-		
-		\section{Calculating Ext}
-		If you apply Hom to an exact sequence and lose exactness, Ext can be used to `repair' it (Rotman p367)
+		\section{The Ext Functor}
 
+			\subsection{Definition}
+			
+			\subsection{The First Ext Module}
+			
+				If you apply Hom to an exact sequence and lose exactness, Ext can be used to `repair' it (Rotman p367)
+		\section{Example Calculations with Ext}
+		
 
 	\chapter{The Universal Coefficient Theorem}
 		
