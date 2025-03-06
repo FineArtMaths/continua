@@ -56,6 +56,65 @@
 	
 	\part{Linear Algebra over Rings}
 	
+	\chapter{Vector Spaces Revisited}
+	
+		\section{The Theme of this Course}
+		
+			In \textbf{Introduction to Linear Algebra} we studied the thery of finite-dimensional vector spaces over a field. These in fact live within a more general class of algebraic structures called `modules'. The first half of this course will introduce modules and aims to study them in the spirit of the linear algebra you already know.
+			
+			The problem is that the theory of modules is a lot less neat and tidy. Vector spaces have certain properties that aren't immediately obvious but that make their theory work smoothly. These properties aren't shared by all modules. A major theme of the first half of this course is to study modules as if they were `defective' vector spaces and develop tools to notice, measure and understand their defects.
+			
+			In reality, there is nothing defective about modules; the defect is in our understanding, and our expectation that every module `ought' to behave like the vector spaces we're familiar with. This is a human perspective that helps us develop the theory and, in the process, grow beyond our naive expectations. 
+			
+			To get our ideas aligned, this chapter looks at some properties of finite-dimensional vector spaces that were taken somewhat for granted in the previous course. We describe each property and say what it contributes to the elegance and simplicity of the theory. Then we will learn about modules in general and tangle with the fact that they do not always have these properties.
+			
+		\section{Free Objects}
+
+			You already know that every vector space has a basis, which is a set of elements of the space that have the following properties:
+			\begin{itemize}
+				\item They are \textbf{linearly independent}, meaning you can't make any one of them from a linear combination of the others. Recall that a linear combination of vectors is a sum of scalar multiples of them.
+				\item They \textbf{span} the vector space in the sense that any other vector can be made from a linear combination of basis vectors.
+			\end{itemize}
+			It is a non-obvious fact that all the bases of a given vector space have the same number of elements, and this is called the `dimension' of the space. We limited ourselves to finite-dimensional vector spaces on the introduction course but the theory can be extended (with modifications) to infinite-dimensional spaces as well.
+			
+			As a philosophical aside, it's worth noting that there are vector spaces for which no basis can ever be given, but mathematicians allow themselves assumptions that imply such a basis `exists' nevertheless. An example would be if we consider the space that has the real numbers as its vectors and the rational numbers as its scalars. Whether we can claim this space has a basis depends on how strong a logic we are willing to use. We will not concern ourselves with such issues on this course.
+
+			In the wider context we will say that all vector spaces are `free modules', which simply means they have can all be assigned a basis. The more interesting modules we meet on this course will not be free, and so will not have any basis. This means we can't work `in coordinates' or `in a basis' and often have to make do with more abstract definitions. For instance, the tensor product for all modules can't be constructed from basis elements the way we did for vector spaces.
+			
+			The freeness of vector spaces means that cannot have any so-called `torsion elements'. Suppose that $v$ is an element of a vector space and $k$ a scalar. It may seem obvious that if $kv$ is the zero vector, it must be that either $k = 0$ or that $v$ was already the zero vector. In the world of modules, though, it can happen that $kv = 0$ even though $k\ne 0$ and $v\ne 0$! Then $v$ is a torsion element of the module.
+			
+			To see why this can never happen in a vector space, think about how we would express a torsion element as a linear combination of basis elements. Then a scalar multiple of that linear combination would be the zero vector -- but that means the basis wasn't linearly independent, and so wasn't a basis after all! Thus if we want to have torsion elements in our modules, we have to give up the convenience of having bases.
+			
+		\section{Split Extensions}
+		
+			Suppose that $V$ and $W$ are vector spaces. We know how to form their direct sum, $V\oplus W$. In fact, if we start with any vector space we can always decompose into a direct sum of simpler or `smaller' vector spaces, often in multiple ways. For example, $\mathbb{R}^5 = \mathbb{R}^2\oplus\mathbb{R}^3$, or alternatively $\mathbb{R}^5 = \mathbb{R}^1\oplus\mathbb{R}^4$. 
+			
+			These different ways to `split' the vector space could help us understand its structure, although they don't seem very powerful in this context because they seem completely obvious. In the world of modules, however, a decomposition like this can be very enlightening.
+			
+			We can look at the situation a bit differently by considering, say, $\mathbb{R}^2$ and asking how we could `extend' it using $\mathbb{R}^3$ and the direct sum. With vector spaces this only works in one way, and leads to $\mathbb{R}^5$.  What's more, using the quotient we can get back to where we started, since $\mathbb{R}^5/\mathbb{R}^3 = \mathbb{R}^2$.
+			
+			This ability to put vector spaces together and break them apart using the direct sum is extremely convenient. It works so well because all extensions of one vector space by another are direct sums. For modules this is not true, so we need some machinery that can help us understand and enumerate all the possible extensions and in particular to know under what conditions they split like a direct sum. 
+
+		\section{The Role of Homology}
+			
+			This course introduces \emph{homological} algebra, and you've already studied homology in the context of topological spaces. It;s possible to interpret the phrase `homological algebra' in two ways that are both correct:
+			
+			\begin{itemize}
+				\item The study of algebra using homology: here modules (and later other objects) play the role of topological spaces and we hope that their homology will tell us useful things about them, appliying homological techniques we already know to new objects.
+				\item The study of homology using algebra: here the exact sequences that arise from homology are treated as object of study that have intrinsic interest, and hopefully as we learn more about them we can devise more powerful applications.
+			\end{itemize}
+			
+			As in the context of topology our slogan will be that homology measures the gap between `ought' and `is'. In particular, here are some very high-level assumptions that we might bring with us from the world of vector spaces:
+			
+			\begin{itemize}
+				\item Vector spaces are free
+				\item The direct sum and quotient of vectors spaces form a nice arithmetic that works very smoothly
+				\item in particular, extensions of vector spaces work in a straightforward way
+				\item The tensor product is very well-behaved
+			\end{itemize}
+			
+			Perhaps we think these `ought' to be true of modules, too, but they are not. Homology is the tool that will help us deal with this, and perhaps it will even help us change our perspective so we no longer think of these things as failings of the theory of modules.
+
 	\chapter{Modules}
 		
 		\section{From Fields to Rings}
