@@ -28,6 +28,7 @@
 
 \newcommand{\catname}[1]{{\normalfont\textbf{#1}}}
 \newcommand{\RMod}{\catname{RMod\ }}
+\newcommand{\SMod}{\catname{SMod\ }}
 \newcommand{\im}{\text{\upshape{im}}}
 \newcommand{\kVect}{\mathbf{k}\mathbf{Vect}}
 
@@ -347,6 +348,8 @@
 				First looking at $M$ as a left $R$-module, we multiply $m$ by $r$ to give $rm$ and then multiply this by $s$, giving $srm$. This is equivalent to multiplying $m$ by the scalar $sr$, which is some element of $R$.
 				
 				Let's compare this with the `same' operation on $M$ considered as a right $R$-module. First we multiply $m$ by $r$, giving $mr$, then by $s$ to give $mrs$. This is the same as multiplying $m$ by the scalar $rs$. The key thing to notice is that multiplicatio in $R$ need not be commutative, so it may be that $rs$ and $sr$ are completely different scalars. 
+				
+				It turns out that the dual of a right $R$-module is a left $R$-module and \emph{vice versa}. When $R$ is non-commutative, the dual of each of its modules is not of `the same kind' as the original. This creates wrinkles in the theory that we don't have to worry about when $R$ is commutative, as in the case of vector spaces. We'll see some consequences of this in the first half of this course but make a more systematic study of the problem in the second half, when we recast the idea of duality in terms of `opposite categories'.
 
 			\subsection{Examples of Modules}
 
@@ -415,13 +418,13 @@
 				
 				As you may have come to expect by now, not every module can do this. On the upside, though, vector spaces are not the only ones that can. We can form the direct sum of multiple copies of a ring just as we can with a field, which leads to the following definition:				
 				\begin{defn}
-					Let $M$ be and $R$-module. Then $M$ is a \textbf{free module} is there is a set $S$ such that
+					Let $M$ be and $R$-module. Then $M$ is a \textbf{free module} is there if a set $S$ such that
 					\[
-						M \cong \bigoplus_{m\in S} R
+						M \cong \bigoplus_{x\in S} R
 					\]
 				\end{defn}
 	
-				Free modules perform a universal role in module theory that is important but far from obvious, so as well as stating it we'd like to offer a proof. To do the proof we'll need the following intermediate result (such results are often called `lemmas'):
+				Free modules perform a universal role in module theory that is important but far from obvious, so as well as stating it we'll offer a proof. To do the proof we'll need the following intermediate result (such results are often called `lemmas'):
 				
 				\begin{thm}
 					Let $M$ and $N$ be $R$-modules and consider a homomorphism $f:M\to N$. Then the following are all true:
@@ -432,9 +435,7 @@
 					\end{itemize}
 				\end{thm}
 				
-				The first two should be unsurprising from your previous experience with homomorphisms of other algebraic objects: they are mroe or less what we mean when we say such maps are `structure-preserving'. We will use the last fact in the above list to prove out result.
-				
-				Here is the key result that shows the importance of free modules, followed by a proof:
+				The first two should be unsurprising from your previous experience with homomorphisms of other algebraic objects: they are more or less what we mean when we say such maps are `structure-preserving'. We will use the last fact in the above list to prove our key result:
 				
 				\begin{thm}
 					Every module can be expressed as a quotient of a free module.
@@ -445,7 +446,7 @@
 					\[
 						F = \bigoplus_{m\in M\setminus\{0\}} R
 					\]
-					Here we are terating the nonzero elements of $M$ as basis vectors and creating a (probably enormous) free module whose elements `look like' vectors, i.e. we can think of them as lists of scalars, with each position corresponding to an element of $M$. In particular, $F$ has a natural basis, which is the elements that have a 1 assigned to one element of $M$ and 0 assigned to all the others.
+					Here we are iterating through the nonzero elements of $M$ as basis vectors and creating a (probably enormous) free module whose elements `look like' vectors, i.e. we can think of them as lists of scalars, with each position corresponding to an element of $M$. In particular, $F$ has a natural basis, which is the elements that have a 1 assigned to one element of $M$ and 0 assigned to all the others.
 					
 					(Aside: This direct sum will often involve an infinite number of basis elements; in that case the direct sum only includes `vectors' that have a finite number of non-zero entries.)
 					
@@ -460,10 +461,12 @@
 		\section{Maps of Complexes}
 		
 		\section{Resolutions of Modules}
-		Every module admits a free, projective, injective and flat resolution. 
+			
+			Every module admits a free resolution. We will expand this to projective, injective and flat in the next chapter.
 		
 		\section{Homological Dimension (*)}
-		projective (dually, injective) resolutions allow us to define a version of dimension for modules. 
+		
+			projective (dually, injective) resolutions allow us to define a version of dimension for modules. 
 
 	\chapter{Hom and Tensor}
 
@@ -477,38 +480,140 @@
 
 			\subsection{Solving the Universal Problem}
 		
-		\section{Change of Rings}
-		
-			\subsection{Introduction}
-				
-				Suppose $R$ and $S$ are rings and there is a ring homomorphism $f:R\to S$. If we know a lot about $R$-modules, we might be able to use that to learn about $S$-modules by `translating' what we know using the homomorphism $f$. Conceptually we can imagine ourselves changing the underlying ring of an $R$-module to $S$ to make it into an $S$-module or \emph{vice versa}.
-				
-				We can form a wider point of view by considering $f$ to be a machine that turns $R$-modules into $S$-modules and \emph{vice versa}. In this section we'll concentrate on the technique applied to individual modules but in the next we'll see how this translates quite easily to the wider perspective, which turns out to be extremely powerful.
-		
-			\subsection{Extension of Scalars}
-				
-				Given $f:R\to S$, this expands $R$-modules into $S$-modules
-				
-			\subsection{Restriction of Scalars}
 
-				Given $f:R\to S$, this restricts $S$-modules to $R$-modules.
+			\subsection{Explicit Calculations of Small Tensor Products}
+			
+				Include as many `tricks' as we can -- e.g. any pure tensor that involves the additive identity in either module will collapse down to $0\otimes 0$.
 
 		\section{Hom and Tensor as Functors}
 		
 			Exactness is the key property here, and we need to motivate it very clearly. I've seen a suggestion that the exactness of the tensor product essentially tells you when you can change rings without messing up your exact sequences; the exactness of hom relates to duality. But in general hopefully we've seen enough exact sequences by now to appreciate their importance and usefulness.
 		
-		\section{Projective, Injective and Flat Modules}
+		\section{Projective and Injective Modules}
+						
+			\subsection{Projective Modules}
 		
-			$\hom(P,\_)$ is exact iff $P$ is projective, 
+				$\hom(P,\_)$ is exact iff $P$ is projective; equivalently, any short exact sequence with $P$ in the last position splits.
+				
+				In a PID, `projective' and `free' are equivalent. So you need something that fails to be a PID to see the difference.
+				
+				Example: $\mathbb{Z}/2\mathbb{Z}$ as a module over $\mathbb{Z}/6\mathbb{Z}$. It is projective but couldn't be a free module as it only has two elements, so it can't a a direct sum of copies of the six-element $\mathbb{Z}/6\mathbb{Z}$.
+				
+				Talk about projective resolutions
 			
-			$\hom(\_, I)$ is exact iff $I$ is injective
+			\subsection{Injective modules}			
 			
-			$F \otimes\_$ is exact iff $F$ is flat.
-			
-			The Govorov-Lazard Theorem: a module is flat iff it can be expressed as the direct limit of finitely generated free modules 
-			
-		\section{The Tensor-Hom Adjunction Revisited}
+				$\hom(\_, I)$ is exact iff $I$ is injective; equivalently, any short exact sequence with $I$ in the first position splits.
+				
+				Example: $\mathbb{Q}$ as a $\mathbb{Z}$-module.
+				
+				Talk about injective resolutions
 
+		\section{The Tensor-Hom Adjunction Revisited}
+			
+			
+		\section{Change of Rings}
+
+			\subsection{Introduction}
+			
+				Suppose $R$ and $S$ are rings and there is a ring homomorphism $f:R\to S$. If we know a lot about $R$-modules, we might be able to use that to learn about $S$-modules by `translating' what we know using the homomorphism $f$. Conceptually we can imagine ourselves changing the underlying ring of an $R$-module to $S$ to make it into an $S$-module or \emph{vice versa}.
+				
+				We can form a wider point of view by considering $f$ to be a machine that turns $R$-modules into $S$-modules and \emph{vice versa}. In this section we'll concentrate on the technique applied to individual modules but in the next we'll see how this translates quite easily to the wider perspective, which turns out to be extremely powerful.
+				
+			\subsection{Restriction of Scalars}
+			
+				In this section we consider the problem of converting an $R$-module into an $S$-module, where we somehow `embed' a copy of $R$ into $S$. We will show how this works by means of examples. 
+				
+				The most natural situation occurs when the image of $f$ is isomorphic to $R$. For our first example, suppose we have a $mathbb{Q}$-module $Q$ that we would like to restrict to just a $\mathbb{Z}$-module. This kind of thing occurs often when we have information in floating point format and want to round it off into integers to make data manipulation easier. We find a $f:\mathbb{Z} \to \mathbb{Q}$ such that $f(n) = n/1$. 
+				
+				We can now define left-multiplication of an element $m$ in $Q$ by an integer $n$ as simply $f(n)m$. Since $f(n)$ is an element of $\mathbb{Q}$, we retain exactly the same module structure except now we can only use integers as our scalars. This turns $Q$ into a $\mathbb{Z}$-module.
+				
+				For a less intuitive example, consider a $\mathbb{Z}/12\mathbb{Z}$-module $Z_{12}$ that we would like to turn into a $\mathbb{Z}$-module -- a requirement that might come up when dealing with data that involves times or dates. We will choose the homomorphism $f:\mathbb{Z}\to \mathbb{Z}/12\mathbb{Z}$ defined by $f(n) = n \mod 12$.
+				
+				Again we can define left-multiplication of an element $m$ of $Z_{12}$ by any element $n$ of $\mathbb{Z}$ by $f(n)m$. Thus turns $Z_{12}$ into a $\mathbb{Z}$-module.
+				
+				There are two things to note about the second example. The first is that when we `restricted' our scalars, we actually ended up with a larger set of scalars that we started with -- we went from a finite ring to an infinite one, in fact. The reason we use the term `restriction' in this context will become clearer in the next section.
+				
+				The second is that there is no isomorphic copy of $\mathbb{Z}$ inside $\mathbb{Z}/12\mathbb{Z}$, but that doesn't matter. As long as we have a homomorphism from the ring we want to the ring we started with, we can carry out the construction.
+				
+				Care is obviously needed when restricting scalars: if the homomorphism we chose does violence to its domain as it embeds it in the codomain we may not get the structure we expected.
+				
+				We do not only need to restrict scalars on one $R$-module; if we have a homomorphism $S\to R$ then we can use the same idea ofn \emph{any} $R$-module. This leads to the idea of a functor that maps the whole of \RMod to \SMod. We will leave out some details here but we will introduce the notation
+				\[
+					F^\star:\RMod \to \SMod
+				\]
+				for the functor derived from a ring homomorphism $f:S\to R$. This functor has both a left adjoint and a right adjoint; we will look at those two operations concretely and then in each case see how their adjunction to restriction of scalars resembles the adjunction of tensor to Hom.
+				
+			\subsection{Extension of Scalars}
+			
+				As usual, let $R$ and $S$ be rings and $f:R\to S$ a ring homomorphism. This time we start with an $R$-module $M$ and carry out the following operation:
+				\[
+					S\otimes_R M					
+				\]
+				Now this only works if $S$ can be considered an $R$-odule, since otherwise the tensor product is nonsense. But this is what $f$ does for us -- we can left-multiply an element $s\in S$ with a scalar $R\in R$ by $f(r)s$, where multiplication now is just the multiplication defined inside $S$ (which it has, because it's a ring!). Here we exploit the ring multiplication in $S$ and the existence of the homomorphism $f$ to build an $R$-module structure onto $S$. 
+				
+				With that done, the tensor product makes sense. This turns $M$ into an $S$-module because now multiplication of an element $s\otimes_R m$ by a scalar $x\in S$ is just
+				\[
+					x(s\otimes_R m) = xs\otimes_R m
+				\]
+				which is an element of the tensor product. 
+				
+				Note that for the result to be an $S$-module we need to ensure that, for any element of $r$,
+				\[
+					f(r)s\otimes_R m = s\otimes_R rm
+				\]
+				but this is guaranteed by the tensor product's definition, since we always have $xa\otimes b = a\otimes xb$.
+				
+				Again we can extend this to the whole category \RMod and define a functor
+				\[
+					F_!:\RMod\to \SMod
+				\]
+				The elements of the $S$-module $F_!(M)$ are the pairs in $S\times M$ with the tensor product's `rules' quotiented out, i.e.
+				\[
+					(f(r)s, m) \equiv (s, rm)
+				\]
+				
+				As an example, consider the problem of extending an $\mathbb{R}$-module to the complex numbers, i.e. turning an $\mathbb{R}$-module into a $\mathbb{C}$-module. If we write a complex number as $a + bi$ the simplest ring homomorphism is $f:\mathbb{R}\to \mathbb{C}$ defined by $f(x) = x + 0i$. The resulting $\mathbb{C}$-module is called the `complexification' of the original.
+				
+				You might wonder why the (simpler) restriction of scalars construction wouldn't also solve this problem, but the issue is that then we would need a homomorphism $\mathbb{C}\to \mathbb{R}$ and any we choose will `collapse complex numbers down to mere real numbers' -- the result only \emph{seems} to complexify the original module. 
+				
+				For example, the most natural function would be $f(a + bi) = a$, which projects each complex number onto its real part, discarding the complex part. While we can use this to restrict scalars and multiply elements of our $\mathbb{R}$-module by complex numbers, we're just fooling ourselves: the homomorphism throws away all the interesting features of the complex scalars.
+				
+				Extension of scalars, by contrast, really does turn our $\mathbb{C}$-module into a $\mathbb{C}$-module, keeping the same structure of its abelian group of elements but fully expanding the scalars to the complex numbers.
+				
+				The functor $F_!$ is left adjoint to the functor $f^\star$. TODO: Add explanation and proof
+				
+			\subsection{Co-Extension of Scalars (*)}
+
+				This section is included for neatness and symmetry although we will never need this construction in practice. The idea is that just as extension of scalars is left-adjoint to restriction, there is a dual right-adjoint known as co-extension. It will probably not astonish you to learn that in place of the tensor product, co-extension uses Hom.
+				
+				We will start with an $R$-module and, once again, the desire to `enlarge' it to an $S$-module using a ring homomorphism $f:R\to S$. Note that this goes in the same direction as for extension of scalars (so we will be going `from small to big') and both are the opposite direction to restriction (which goes `from big to small').
+				
+				We can now think of $\hom_R(S, M)$, which is naturally an $R$-module, as an $S$-module simply by defining, for each $h$, $(sh)(x) =h(sx)$. The left hand side is the homomorphism we get from scalar-multiplying by a ring element $s\in S$; the right hand side simply scales each element of the domain by $s$ before applying the homomorphism, which is obviously another element of $\hom_R(S, M)$.
+				
+				Therefore we can think of $\hom_R(S, M)$ as an $S$-module and define a new function, the co-extension of scalars:
+				\[
+					F_\star: \RMod\to \SMod
+				\]
+				 that takes each $R$-module $M$ to the $S$-module $\hom_R(S, M)$.
+				 
+				 TODO: Show that this is adjoint to restriction, and show off the symmetry of the whole machine. Ideally show an example, although I don't know of a really meaningful one.  Perhaps useful: \url{https://math.stackexchange.com/questions/1846772/extension-restriction-and-coextension-of-scalars-adjunctions-in-the-case-of-no}
+				 
+				 As en example, consider the rings $\mathbb{Z}/2\mathbb{Z}$ and $\mathbb{Z}/4\mathbb{Z}$, along with the only ring homomorphism $f: \mathbb{Z}/2\mathbb{Z}\to \mathbb{Z}/4\mathbb{Z}$ given by $f(n) = 2n$. 
+				 
+				 For simplicity we'll choose $\mathbb{Z}$ as a module over $\mathbb{Z}/2\mathbb{Z}$, with scalar multiplication defined as you should expect -- multiplication by 0 gives 0, multiplication by 1 is the identity. Our goal is to change rings to $\mathbb{Z}/4\mathbb{Z}$ and we will do this using extension of scalars first, then co-extension.
+				 
+				 Using the formula for extending scalars gives the module
+				 \[
+				 	\mathbb{Z}/4\mathbb{Z}\otimes_{\mathbb{Z}/2\mathbb{Z}}\mathbb{Z}
+				 \]
+				 Since this is the tensor product of two very small modules we can write out all of its elements; these turn out to be just the pure tensors that don't involve a zero: $1\otimes 1$, $2\otimes 1$, $3\otimes 1$ along with the zero element $0\otimes 0$. The additive group is isomorphic to the Klein 4-group.
+				  
+				 On the other hand, co-extending gives the module
+				 \[
+				 	\hom_{\mathbb{Z}/2\mathbb{Z}}(\mathbb{Z}/4\mathbb{Z}, \mathbb{Z})
+				 \]
+				 This time there are just two module elements, corresponding to the maps $f(x) = 0$ and $f(x) = x \mod 2$; as we can see, extension and co-extension yielded different $\mathbb{Z}/4\mathbb{Z}$-modules.
 
 	\chapter{Torsion}
 		
@@ -552,12 +657,26 @@
 
 		\section{Example Calculations with Tor}
 
+			\subsection{Flat modules}			
+			
+				Not sure whether to do this here but maybe it's the right place?
+
+				$F \otimes\_$ is exact iff $F$ is flat.
+				
+				The Govorov-Lazard Theorem: a module is flat iff it can be expressed as the direct limit of finitely generated free modules 
+				
+				Talk about flat resolutions
+				
+
+
 	\chapter{Extensions}
 	
 		\section{Extensions}
 			\subsection{Extensions of Modules}
 			
 				This has some nice pedagogic explanations of the basics: \url{https://www.mas.ncl.ac.uk/library/display_pdf.php?id=270}
+				
+				Specifically call out the danger of confusion with extension of modules!
 			
 			\subsection{Split Extensions}
 				Rotman p.420 -- Ext 1 detects when an extension splits. Specifically, There is an isomorphism between Ext1(B,A)
