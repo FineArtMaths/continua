@@ -57,7 +57,7 @@
 	
 	\part{Linear Algebra over Rings}
 	
-	\chapter{Introduction to Rings and Modules}
+	\chapter{Introduction to Rings}
 
 		\section{Vector Spaces Revisited}
 		
@@ -121,51 +121,51 @@
 				Perhaps we think these `ought' to be true of modules, too, but they are not. Homology is the tool that will help us deal with this, and perhaps it will even help us change our perspective so we no longer think of these things as failings of the theory of modules.
 
 		\section{From Fields to Rings}
-		
-			\subsection{Rings Defined}
-				
-				We'll start with a definition you may or many not have seen before -- it will be useful to us later on and will make our upcoming definitions shorter:
-				
-				\begin{defn}
-					A set $S$ is a \textbf{group} if it's equipped with a binary operation, call it $\star$, such that the following are true (where $a$, $b$ and $c$ are elements of $S$):
-					\begin{itemize}
-						\item $a\star b$ is defined for every value of $S$ and its value is another element of $S$ (`closure')
-						\item There is an element in $S$, call it $e$, such that $a\star e = a$ and $e\star a = a$ (`identity element')
-						\item For every element $a$, there is another element $b$ such that $a\star b = e$ and $b\star a = e$ (`existence of inverses')
-						\item We can simplify $a\star (b\star c) = (a\star b)\star c$ (`associativity')
-					\end{itemize}
-					If in addition we always have that $a\star b = b\star a$ we say that $\star$ is \textbf{commutative} and call $(S, \star)$ an \textbf{abelian group}.
-				\end{defn}
-				
-				There's a lot in this definition but here we'll just use it as a sort of building block for the main things we're interested in -- if you haven't seen it before, press on to the examples that come in a moment and it will hopefully make more sense.
-				
-				The scalars that belong to vector spaces form a field, which we can now define as follows:
-				
-				\begin{defn}
-					A set $S$ is a \textbf{field} if it's equipped with binary operations $+$ and $\times$ that obey the following rules:
-					\begin{itemize}
-						\item $(S, +)$ is an abelian group
-						\item $(S\setminus\{0\}, \times)$ is an abelian group (here $0$ denotes the additive identity)
-						\item $a(b + c) = ab + ac = (b + c)a$
-					\end{itemize}
-				\end{defn}
-				
-				We're used to thinking of the scalars in a vector space as numbers, but there are some sets of numbers that don't qualify as a field. For example, consider the integers, written $\mathbb{Z}$, that consist of all the positive and negative whole numbers, along with zero. They behave well under addition but their multiplication operation is a bit of a problem: while it's associative, it has closure (you can multiply any two integers and get another integer) and it has an identity element (the number 1), it doesn't have any multiplicative inverses. For example, there's no number you can multiply 5 by to get 1.
-				
-				Examples like this led to the definition of a `field lite' that has most of the properties of a field but drops a couple, making it more permissive:
 			
-				\begin{defn}
-					A set $S$ is a \textbf{ring} if it obeys the same rules as a field except its multiplication operation is allowed either of the following exceptions:
-					\begin{itemize}
-						\item Multiplication need not be commutative
-						\item Multiplicative inverses need not exist
-						\end{itemize}
-				\end{defn}
+			We'll start with a definition you may or many not have seen before -- it will be useful to us later on and will make our upcoming definitions shorter:
+			
+			\begin{defn}
+				A set $S$ is a \textbf{group} if it's equipped with a binary operation, call it $\star$, such that the following are true (where $a$, $b$ and $c$ are elements of $S$):
+				\begin{itemize}
+					\item $a\star b$ is defined for every value of $S$ and its value is another element of $S$ (`closure')
+					\item There is an element in $S$, call it $e$, such that $a\star e = a$ and $e\star a = a$ (`identity element')
+					\item For every element $a$, there is another element $b$ such that $a\star b = e$ and $b\star a = e$ (`existence of inverses')
+					\item We can simplify $a\star (b\star c) = (a\star b)\star c$ (`associativity')
+				\end{itemize}
+				If in addition we always have that $a\star b = b\star a$ we say that $\star$ is \textbf{commutative} and call $(S, \star)$ an \textbf{abelian group}.
+			\end{defn}
+			
+			There's a lot in this definition but here we'll just use it as a sort of building block for the main things we're interested in -- if you haven't seen it before, press on to the examples that come in a moment and it will hopefully make more sense.
+			
+			The scalars that belong to vector spaces form a field, which we can now define as follows:
+			
+			\begin{defn}
+				A set $S$ is a \textbf{field} if it's equipped with binary operations $+$ and $\times$ that obey the following rules:
+				\begin{itemize}
+					\item $(S, +)$ is an abelian group
+					\item $(S\setminus\{0\}, \times)$ is an abelian group (here $0$ denotes the additive identity)
+					\item $a(b + c) = ab + ac = (b + c)a$
+				\end{itemize}
+			\end{defn}
+			
+			We're used to thinking of the scalars in a vector space as numbers, but there are some sets of numbers that don't qualify as a field. For example, consider the integers, written $\mathbb{Z}$, that consist of all the positive and negative whole numbers, along with zero. They behave well under addition but their multiplication operation is a bit of a problem: while it's associative, it has closure (you can multiply any two integers and get another integer) and it has an identity element (the number 1), it doesn't have any multiplicative inverses. For example, there's no number you can multiply 5 by to get 1.
+			
+			Examples like this led to the definition of a `field lite' that has most of the properties of a field but drops a couple, making it more permissive:
+		
+			\begin{defn}
+				A set $S$ is a \textbf{ring} if it obeys the same rules as a field except its multiplication operation is allowed either of the following exceptions:
+				\begin{itemize}
+					\item Multiplication need not be commutative
+					\item Multiplicative inverses need not exist
+					\end{itemize}
+			\end{defn}
+			
+			Note that fields are also rings, they just don't happen to make use of the exceptions. 
 				
-				Note that fields are also rings, they just don't happen to make use of the exceptions. 
-				
-			\subsection{Ideals of Rings}
-				
+		\section{Ideals of Rings}
+		
+			\subsection{Ideals are Kernels of Homomorphisms}
+			
 				In the theory of vector spaces, groups or just about any other algebraic objects, a special role is played by subsets that `inherit' the algebraic structure. In the case of rings there are two to consider.
 				
 				The first is the subring. This is easy enough to deal with: a subring is a subset of a ring that is, itself, a ring with the same multiplication and addition operations. For example, consider the ring of polynomials over the integers $\mathbb{Z}[x]$. Clearly $\mathbb{Z}$ is a subring of $\mathbb{Z}[x]$.
@@ -175,7 +175,7 @@
 				An ideal is in a sense more than a subring, since it must be closed under multiplication by \emph{any} element of the ring (not just the ones in the ideal) but also less, since it doesn't have to contain the multiplicative identity.
 				
 				Now to the formal definitions. We would like to say that an ideal of a ring $R$ is a subset of $R$ that is a group under addition of its own elements and multiplication by any element of $R$. However, we have to be careful because the ring might not be commutative! So we end up with the following definitions:
-				 
+			 
 				\begin{defn}
 					A \textbf{left ideal} of a ring $R$ is a subset of $R$ that is a group under addition, as well as multiplication on the left by elements of $R$.
 				\end{defn}
@@ -215,7 +215,9 @@
 				\begin{defn}
 					An ideal is said to be \textbf{finitely generated} if it can be written as $\langle S\rangle$ for a finite set $S$.
 				\end{defn}
-				
+			
+			\subsection{Some Important Kinds of Ideals}
+			
 				\begin{defn}
 					A \textbf{principal ideal} is one that can be generated by a single element of the ring. 
 				\end{defn}
@@ -287,30 +289,59 @@
 				
 				We can think of Noetherian-ness as a `bare minimum of good behaviour' for ideals in a ring -- non-Noetherian rings as quite `degenerate' compared with the integers. Artinian-ness, on the other hand, is `exemplary behaviour' that even the integers don't exhibit. We'll often expect a ring to be Noetherian and be sad if it isn't, whereas we'll be pleasantly surprised if it exceeds our expectations by being Artinian as well.
 				
-			\subsection{Common Kinds of Ring}
+		\section{Some Common Kinds of Ring}
+		
+			\begin{defn}
+				A \textbf{domain} is a ring that has no non-zero zero divisors, i.e. elements that are not zero but multiply together to give zero.
+			\end{defn}
 			
+			As a non-example of a domain, consider $\mathbb{Z}/12\mathbb{Z}$, where $3\times 4 = 0$.
+			
+			\begin{defn}
+				An \textbf{integral domain} is a domain where multiplication is commutative.
+			\end{defn}
+			
+			An example of a domain that is not an integral domain would be the $2\times 2$ matrices over $\mathbb{Z}$ with the usual matrix multiplication.
+						
+			\begin{defn}
+				A \textbf{principal ideal domain} (PID) is an integral domain in which every ideal is principal, i.e. can be generated by a single element.
+			\end{defn}
+			
+			The canonical example of a PID is $\mathbb{Z}$; in a PID many of the features of integer arithmetic hold (for example, a version of `prime factorization'). These features won't be our main focus on this course but PIDs are of great importance because their modules are often the most vector-space-like; many theorems are true for PIDs but not elsewhere.
+			
+			An example of an integral domain that isn't a PID is given by the polynomial ring $\mathbb{Z}[x]$ -- for example, the ideal $\langle 2, x\rangle$ is not principal.
+				
+			\section{The Field of Fractions}
+			
+				Sometimes we are working with a ring but need to turn it into a field. This transforms it rather radically but we can still find a copy of the original ring inside the transformed verson, and this is often useful. 
+				
+				One example of this might be familiar from everyday life. Many things can only be represented by integer values, which of course live in a ring. It may be convenient to represent them with rational or real values instead, in part because they form a field. An example would be population migration statistics -- numbers of people are naturally represented by integers, with immigrants counted by positive numbers and emigrants by negative ones. But for calculations we may prefer to treat these as if they were decimals. technically we pass from the integers to its field of fractions. The fractions of the form $\frac{n}{1}$ are considered equivalent to the original integers so we can `round' the calculated values at the end to get back to integers again.
+				
+				Turning a ring into a field effectively means giving it all the multiplicative inverses it's currently missing. This is only possible in this case because $\mathbb{Z}$ is an integral domain, which means that if $ab = ac$ then we must have $b = c$. This makes it possible to \emph{imagine} that multiplicative inverses could exist for integers even though they don't. Put another way, if $R$ is a ring that isn't an integral domain, there's an obstruction to carrying out this procedure and no field of fractions can be defined.			
+				
+				The field of fractions of an integral domain is defined in an exactly analogous way to the way the rational numbers are constructed from the integers:
+				\begin{itemize}
+					\item A rational number is a `fraction' made of two integers, called the `numerator' and `denominator'.
+					\item The only constraint on thsi is that zero can't be the denominator.
+					\item Two fractions $\frac{a}{b}$ and $\frac{x}{y}$ are considered equivalent if $ay = bx$. Technically a rational number is actually all the equivalent fractions gathered together.
+					\item Addition and multiplication of fractions is defined as in school arithmetic. The additive identity is $\frac{0}{1}$ and the multiplicative identity is $\frac{1}{1}$
+				\end{itemize}
+				
 				\begin{defn}
-					A \textbf{domain} is a ring that has no non-zero zero divisors, i.e. elements that are not zero but multiply together to give zero.
+					Let $R$ be any integral domain. Its \textbf{field of fractions} is the set $\{\frac{a}{b} : a, b \in R\}$ under the equivalence relation $\frac{a}{b}\cong\frac{x}{y}$ if and only if $ay = bx$ with addition and multiplication defined as for the rational numbers.
 				\end{defn}
 				
-				As a non-example of a domain, consider $\mathbb{Z}/12\mathbb{Z}$, where $3\times 4 = 0$.
+				The field of fractions of an integral domain $R$ is denoted $\text{Frac}(R)$.
 				
-				\begin{defn}
-					An \textbf{integral domain} is a domain where multiplication is commutative.
-				\end{defn}
-				
-				An example of a domain that is not an integral domain would be the $2\times 2$ matrices over $\mathbb{Z}$ with the usual matrix multiplication.
-							
-				\begin{defn}
-					A \textbf{principal ideal domain} (PID) is an integral domain in which every ideal is principal, i.e. can be generated by a single element.
-				\end{defn}
-				
-				The canonical example of a PID is $\mathbb{Z}$; in a PID many of the features of integer arithmetic hold (for example, a version of `prime factorization'). These features won't be our main focus on this course but PIDs are of great importance because their modules are often the most vector-space-like; many theorems are true for PIDs but not elsewhere.
-				
-				An example of an integral domain that isn't a PID is given by the polynomial ring $\mathbb{Z}[x]$ -- for example, the ideal $\langle 2, x\rangle$ is not principal.
+				\begin{thm}
+					If $R$ is an integral domain, $\text{Frac}(R)$ is a field.
+				\end{thm}
+			
+			\section{Graded Rings}
 
-		\section{Modules}
-			\subsection{Modules Defined}	
+	\chapter{Introduction to Modules}
+
+			\section{Modules Defined}	
 				Now, ordered lists of integers are of great importance in many applications involving algorithms, data and computer programming in general. These \emph{look} like vectors, but since the integers aren't a field, there are no `vector spaces over the integers' and we can't bring our linear algebra knowledge to bear on such objects. 
 				
 				This motivates us to try substituting rings for fields in the definition of a vector space, which reveals our main object of study:
@@ -341,7 +372,7 @@
 				
 				As you can see, an $R$-module is a `vector space over the ring $R$'. Since fields are also rings (in the way that carrots are also vegetables) we can turn this around and say a vector space is an $R$-module where $R$ is a field.
 			
-			\subsection{Left vs Right}
+			\section{Left vs Right}
 				
 				The distinction between left- and right-modules over a given ring may seem pedantic. However, it's not just a matter of notation and it has rather far-reaching consequences. Suppose that $M$ is both a left and right $R$-module and let $m$ be a module element and $r, s$ be scalars in $R$. 
 				
@@ -351,7 +382,7 @@
 				
 				It turns out that the dual of a right $R$-module is a left $R$-module and \emph{vice versa}. When $R$ is non-commutative, the dual of each of its modules is not of `the same kind' as the original. This creates wrinkles in the theory that we don't have to worry about when $R$ is commutative, as in the case of vector spaces. We'll see some consequences of this in the first half of this course but make a more systematic study of the problem in the second half, when we recast the idea of duality in terms of `opposite categories'.
 
-			\subsection{Examples of Modules}
+			\section{Examples of Modules}
 
 				We said that every ring is an abelian group equipped with the extra structure of scalar multiplication. In Introduction to Group Theory you may have learned that we have a full classification of abelian groups -- that is, we have a description that covers all of them. We will review this fact quickly here since it will furnish us with a large collection of modules. 
 				
@@ -372,7 +403,7 @@
 				
 
 	
-			\subsection{Maps of Modules}
+			\section{Maps of Modules}
 				
 				Continuing our analogy with the theory of vector spaces, we want to identify the maps between $R$-modules that `respect their structure' -- the equivalent of homomorphisms of vector spaces. Fortunately we can just lift the definition from the world of vector spaces and it works just the same:
 				
@@ -388,9 +419,9 @@
 				
 				TODO: Say something about the way hom-sets are sometimes also tensor products in \RMod just as they (always) are for vector spaces -- wikipedia has a nice clear section on this: \url{https://en.wikipedia.org/wiki/Tensor_product_of_modules#As_linear_maps}
 		
-			\subsection{Quotients and Products (TODO)}
+			\section{Quotients and Products (TODO)}
 		
-			\subsection{A Note on Duality (*)}
+			\section{A Note on Duality (*)}
 		
 				In your previous study of linear algebra the idea of the dual to a vector space played a crucial part. Indeed, the perfect duality we find in the theory of vector spaces turns out to be a big part of why it's so neat and tidy.
 				
@@ -404,7 +435,7 @@
 				
 				Although we will have to wait a while to understand this properly, for now it's worth noting that a pair of dual statements in module theory, even when both are true, may have to be understood (and proved) in very different ways. The power of duality in the world of vector spaces is greatly reduced when it comes to modules and we can't expect to find dual versions of things everywhere, nor for them to have exact mirror-image features when we do.
 
-			\subsection{Free Modules}
+			\section{Free Modules}
 				
 				Suppose you are managing some bank accounts with money in three currencies: pounds (£), dollars (\$) and yen (\yen). Each account has a balance represented by a number that can be positive or negative. We may was well use a real number to represent the balance, which enables us to represent our whole financial portfolio with a vector in $\mathbb{R}^3$ -- for example, we could write
 				\begin{align}[rcl]
@@ -458,15 +489,85 @@
 	\chapter{Exact Sequences and Resolutions}
 
 		\section{Sequences, Exact Sequences and Complexes}
-		\section{Maps of Complexes}
+		
+			\subsection{Key Definitions}
+			
+				You've seen the ideas in this section quite extensively in the context of topology -- we'll recap them here without too much elaboration as we'll see many fresh applications of them in everything that follows.
+			
+				Let $\{M_0, M_1, M_2, \ldots\}$ be an ordered set of modules over the same ring $R$. Consider the hom-sets $\hom_R(M_i, M_{i+1})$, which contain the functions from each module to the next one in the list. Choosing any one function from each hom-set allows us to construct a \textbf{sequence} of modules
+				
+				\[ 
+				\xymatrix@C+0.3em{
+					M_0 \ar[r]_{f_0} & M_1\ar[r]_{f_1} & M_1\ar[r]_{f_2} & \ldots 
+				}
+				\]
+				
+				This is a very general situation -- these homomorphisms could be absoltely anything and there's very little we can say about a sequence like this without more information. It turns out that one very restriction is the following, which states that if you go down any two consecutive arrows you always arrive at 0, no matter what module element you started with:
+				
+				\begin{defn}
+					A \textbf{chain complex} is a sequence of modules in which $f_{i+1}\circ f_i$ is the zero homomorphism for every $i$.
+				\end{defn}
+				
+				The following theorem gives an alternative, equivalent characterisation of a chain complex that's usually easier to check and that we'll find more expressive:
+				
+				\begin{thm}
+					In a chain complex, $\im(f_i)\subseteq\ker(f_{i+1})$ for all $i$.
+				\end{thm}
+				
+				Note that we only require the image of each map to be contained in the kernel of the next one; that's what's required to ensure that $f_{i+1}\circ f_i$ is the zero homomorphism. However, something special happens when the kernal and image are equal. We will have a lot more to say about why this is special in the rest of this chapter.
+				
+				\begin{defn}
+					A sequence is said to be \textbf{exact at $M_{i+1}$} if  $\im(f_i)=\ker(f_{i+1})$ for all $i$. If it is exact at every module it contains, we call it an \textbf{exact sequence}.
+				\end{defn}
+				
+				It's no exaggeration to say that homological algebra is the study of the ways in which chain complexes fail to be exact sequences. From your previous study you have already seen that this inexactness can reveal a surprising amount about structures the chain complexes arise from.
 		
 		\section{Resolutions of Modules}
 			
+			We have said that life would be very easy if only all modules were free (like vector spaces are), but they are not -- which is a good thing, really, because if they were then many interesting modules would not exist. Any module, though, can be described using a setup called a `resolution' that's made entirely of free modules. 
+			
 			Every module admits a free resolution. We will expand this to projective, injective and flat in the next chapter.
+			
+			The length of all minimal free resolutions is the same and gives us a version of dimension for modules in general (the projective dimension).
+			
+		\section{Betti Numbers}
 		
-		\section{Homological Dimension (*)}
+			We should start by pointing out that modules are a bit inscrutable and it can be hard to tell whether or not two modules are the same. One way is to find invariants -- if two modules differ in an invariant, they can't possibly be isomorphic.
 		
-			projective (dually, injective) resolutions allow us to define a version of dimension for modules. 
+			"We refer to the kernel of the differential map di?1 in the minimal free resolution of M over R as the ith syzygy module of M over R."
+		
+			Given a minimal free resolution of a module, roughly speaking all but one term "is a syzygy module that represents the relations between the generators of the previous term" and the dimensions of these modules are the Betti numbers. You don't need to compute homology for this. Maybe useful: \url{https://eloisagrifo.github.io/CASeminar/Adam2.pdf}
+		
+		\section{Maps of Complexes}
+		
+			Define these maps in the obvious way. The issue of whether exactness is preserved is the key thing to point out.
+
+		\section{Graded Modules}
+			\subsection{Definitions}
+				
+				\url{https://www.proquest.com/openview/21abf19e3503ef5e13c82a7d545c91f5/1?cbl=18750&diss=y&pq-origsite=gscholar} -- we have a PDF downloaded. useful for the next section as well
+				
+				\begin{defn}
+					graded ring
+				\end{defn}
+		
+				\begin{defn}
+					graded module
+				\end{defn}
+				
+				\begin{defn}
+					graded module homomorphism
+				\end{defn}
+
+				\begin{defn}
+					
+				\end{defn}
+				
+
+				
+			\subsection{The Hilbert Function}
+	
+				Not sure whether to do this here. See \url{https://www.math.purdue.edu/~murayama/hilbertpresentation.pdf}. 
 
 	\chapter{Hom and Tensor}
 
@@ -508,6 +609,10 @@
 				Example: $\mathbb{Q}$ as a $\mathbb{Z}$-module.
 				
 				Talk about injective resolutions
+
+		\section{Homological Dimension (*)}
+
+				projective (dually, injective) resolutions allow us to define a version of dimension for modules. 
 
 		\section{The Tensor-Hom Adjunction Revisited}
 			
@@ -615,39 +720,41 @@
 				 \]
 				 This time there are just two module elements, corresponding to the maps $f(x) = 0$ and $f(x) = x \mod 2$; as we can see, extension and co-extension yielded different $\mathbb{Z}/4\mathbb{Z}$-modules.
 
-	\chapter{Torsion}
+		\chapter{Torsion}
 		
 				
 		NB: All flat modules are torsion-free but not \emph{vice versa} unless the scalars form a PID. If they do the two notions are equivalent. 
 
 		\section{Torsion Elements}
 			
-			Let's consider the $\mathbb{Z}$-module $\mathbb{Z}_2\oplus\mathbb{Z}_3$. This consists of the following elements:
-			\begin{itemize}
-				\item $(0, 0)$, the identity element
-				\item$(1, 0)$
-				\item$(0, 1)$
-				\item$(1, 1)$
-				\item$(0, 2)$
-				\item$(1, 2)$
-			\end{itemize}
-			Remember that scalar multiplication is done modulo each factor, so for example
-			\begin{align}[rcl]
-				7(1, 2) &=& (7\times 1 \text{mod 2}, 7\times 2 \text{mod 3})
-				 &=& (7 \text{mod 2}, 14 \text{mod 3})
-				 &=& (1, 2)
-			\end{align}
-			This means that sometimes a non-zero scalar can multiply a non-zero vector and produce the zero vector, as in the following example:
-			\begin{align}[rcl]
-				6(1, 2) &=& (6\times 1 \text{mod 2}, 6\times 2 \text{mod 3})
-				 &=& (6 \text{mod 2}, 12 \text{mod 3})
-				&=& (0, 0)
-			\end{align}
-			This leads us to the following definition:
-			\begin{defn}
-				Suppose an $R$-module $M$ has an element $v$ and a non-zero scalar $k$ such that $kv$ is the zero element of $M$. Then $v$ is called a \textbf{torsion element} of the module.
-			\end{defn}
-			In $\mathbb{Z}_2\oplus\mathbb{Z}_3$ every element is a torsion element -- a module with this property is called a `torsion module' and a module with no torsion elements is said to be `torsion-free'.
+			\subsection{Basic Definitions}
+
+				Let's consider the $\mathbb{Z}$-module $\mathbb{Z}_2\oplus\mathbb{Z}_3$. This consists of the following elements:
+				\begin{itemize}
+					\item $(0, 0)$, the identity element
+					\item$(1, 0)$
+					\item$(0, 1)$
+					\item$(1, 1)$
+					\item$(0, 2)$
+					\item$(1, 2)$
+				\end{itemize}
+				Remember that scalar multiplication is done modulo each factor, so for example
+				\begin{align}[rcl]
+					7(1, 2) &=& (7\times 1 \text{mod 2}, 7\times 2 \text{mod 3})
+					 &=& (7 \text{mod 2}, 14 \text{mod 3})
+					 &=& (1, 2)
+				\end{align}
+				This means that sometimes a non-zero scalar can multiply a non-zero vector and produce the zero vector, as in the following example:
+				\begin{align}[rcl]
+					6(1, 2) &=& (6\times 1 \text{mod 2}, 6\times 2 \text{mod 3})
+					 &=& (6 \text{mod 2}, 12 \text{mod 3})
+					&=& (0, 0)
+				\end{align}
+				This leads us to the following definition:
+				\begin{defn}
+					Suppose an $R$-module $M$ has an element $v$ and a non-zero scalar $k$ such that $kv$ is the zero element of $M$. Then $v$ is called a \textbf{torsion element} of the module.
+				\end{defn}
+				In $\mathbb{Z}_2\oplus\mathbb{Z}_3$ every element is a torsion element -- a module with this property is called a `torsion module' and a module with no torsion elements is said to be `torsion-free'.
 
 		\section{The Tor Functor}
 
