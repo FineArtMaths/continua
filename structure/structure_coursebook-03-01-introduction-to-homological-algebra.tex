@@ -45,31 +45,33 @@
 	
 		In a slogan, homological algebra is a toolkit for studying objects that don't behave the way we think they ought to. Homology can detect -- and describe, to some extent -- the ways in which our object of interest `falls short' of our idealised expectations. 
 		
-		It first arose in topology, where for instance on a 2D surface we expect a closed loop to contain a region of space; if it doesn't, there must be a hole there. Homology can detect holes and tell us what kinds they are. And if we think we have a cylinder, homology can tell us when, in fact, it's twisted like a M\:obius strip. 
+		The homological viewpoint first arose in topology, where for instance on a 2D surface we expect a closed loop to contain a region of space; if it doesn't, there must be a hole there. Homology can detect holes and tell us what kinds they are by saying how the situation falls short of the way things ought to be. And if we think we have a cylinder, homology can tell us when, in fact, it's twisted like a M\:obius strip instead. 
 		
-		This course isn't about topology but the structure of the tools that began there and how they can be generalized to situations beyond topology. We primarily study sequences of objects that have certain desirable properties and develop tools to detect when those properties fail.
+		This course is about the structure of these tools and how they can be generalized to situations beyond topology. We primarily study sequences of objects that ought to have certain desirable properties and develop tools to detect when those properties fail.
 
-		The first half of this course develops homological algebra as a tool for studying modules, which are vector spaces whose scalars don't necessarily form a field. Remember that a field must obey very strict rules about both addition and multiplication that exclude some very useful number systems. Let's review the definition of a field and see a key example of a set of numbers that would like to be scalars in a vector field but aren't qualified for the job.
+		The first half of this course develops homological algebra as a tool for studying modules, which are vector spaces whose scalars don't necessarily form a field. Remember that a field must obey very strict rules about both addition and multiplication -- those rules exclude some very useful number systems. 
+		
+		Vector spaces are very tame and well-behaved; the world of modules is much larger, richer and weirder. That means that when we find ourselves working with a module, the techniques of homology will be useful for telling us what sort of strange beast we're dealing with. 
 
 		The second half of the course generalizes this study to a wide range of mathematical objects -- those that form `abelian categories' -- and look at some important example applications. We finish with some more advanced tools from the toolkit.
 		
-		This course assumes you are very familiar with the content of Introduction to Linear Algebra. If you find the material excessively abstract it may help to study Introduction to Algebraic Topology, where we introduce a specific homology theory in a very concrete setting. You could study that alongside this course if that suits you.
+		This course assumes you are familiar with the content of Introduction to Linear Algebra. If you find the material excessively abstract it may help to study Introduction to Algebraic Topology, where we introduce a specific homology theory in a very concrete setting. You could study that alongside this course if that suits you. Some very basic ideas about algebraic groups are introduced quickly on this course but more gently, and with a lot more context, on the dedicated Group Theory course. 
 	
-	\part{Linear Algebra over Rings}
+	\part{Linear Algebra over Commutative Rings}
 	
-	\chapter{Introduction to Rings}
+	\chapter{Introduction to Commutative Rings}
 
-		\section{Vector Spaces Revisited}
+		\section{General Introduction to Part 1}
 		
 			\subsection{The Theme of this Course}
 			
-				In \textbf{Introduction to Linear Algebra} we studied finite-dimensional vector spaces over a field. These in fact live within a more general class of algebraic structures called `modules'. The first half of this course will introduce modules and aims to study them in the spirit of the linear algebra you already know.
+				In \textbf{Introduction to Linear Algebra} we studied finite-dimensional vector spaces over a field. These in fact live within a more general class of algebraic structures called `modules'. The first half of this course introduces modules and aims to study them in the spirit of the linear algebra you already know.
 				
-				The problem is that the theory of modules is a lot less neat and tidy. Vector spaces have certain properties that aren't immediately obvious but that make everything about them work remarkably smoothly. These properties aren't shared by all modules. A major theme of the first half of this course is to study modules as if they were `defective' vector spaces and develop tools to notice, measure and understand their defects.
+				The problem is that the general theory of modules is a lot less neat and tidy. Vector spaces have certain properties that aren't immediately obvious but that make everything about them work remarkably smoothly. These properties aren't shared by all modules. Our approach will be to study modules as if they were `defective' vector spaces and develop tools to notice, measure and understand their defects.
 				
 				In reality, there is nothing `wrong' with modules; the defect is in our expectation that every module `ought' to behave like the vector spaces we're familiar with. This is a human perspective that helps us develop the theory and, in the process, grow beyond our naive expectations. 
 				
-				To prepare the ground, this section looks at some aspects of finite-dimensional vector spaces that were taken somewhat for granted in the previous course. These are shared by all vector spaces but not by all modules, which is an obstruction to transferring the theory of vector spaces, in all its elegance and simplicity, to this more general setting. Some of what follows is a bit imprecise and everything in this section will be restated later in more formal terms -- here the idea is just to prime our intuition.
+				To prepare the ground, this section looks at some aspects of finite-dimensional vector spaces that were taken somewhat for granted in the previous course. These are shared by all vector spaces but not by all modules, preventing us from transferring the theory of vector spaces, in all its elegance and simplicity, to this more general setting. Some of what follows is a bit imprecise and everything in this section will be restated later in more formal terms -- here the idea is just to prime our intuition.
 				
 			\subsection{Free Objects}
 	
@@ -80,9 +82,9 @@
 				\end{itemize}
 				It is a non-obvious fact that all the bases of a given vector space have the same number of elements, which is called the `dimension' of the space. We limited ourselves to finite-dimensional vector spaces on the introduction course but the same idea can be extended (with modifications) to infinite-dimensional spaces as well.
 				
-				As a philosophical aside, it's worth noting that there are vector spaces for which no basis can ever be given, but mathematicians allow themselves assumptions that imply such a basis `exists' nevertheless. An example would be if we consider the space that has the real numbers as its vectors and the rational numbers as its scalars. Whether we can claim this space has a basis depends on how strong a logic we are willing to use. We will not concern ourselves with such issues on this course.
+				As a philosophical aside, it's worth noting that there are vector spaces for which no basis can ever be given, but mathematicians allow themselves assumptions that imply such a basis `exists' nevertheless. An example would be if we consider the space that has the real numbers as its vectors and the rational numbers as its scalars. Whether we can claim this space has a basis is philosophically controversial; fortunately we will not need to concern ourselves with such issues on this course.
 	
-				In the wider context we will say that all vector spaces are `free modules', which simply means they can all be assigned a basis. The more interesting modules we meet on this course will not be free, which means we can't work `in coordinates' or `in a basis' and often have to make do with more abstract definitions. For instance, the tensor product for all modules can't be constructed from basis elements the way we did for vector spaces.
+				In the wider context we will say that all vector spaces are `free modules', which simply means they can all be assigned a basis. Many modules we meet on this course will not be free, which means we can't work `in coordinates' or `in a basis' and often have to make do with more abstract definitions. For instance, the tensor product for modules can't be constructed from basis elements the way we did for vector spaces.
 				
 				Suppose that $v$ is an element of a vector space and $k$ a scalar. It may seem obvious that if $kv$ is the zero vector, it must be that either $k = 0$ or that $v$ was already the zero vector. In the world of modules, though, it can happen that $kv = 0$ even though $k\ne 0$ and $v\ne 0$! Then $v$ is a so-called `torsion element' of the module.
 				
@@ -94,7 +96,7 @@
 			
 				Suppose that $V$ and $W$ are vector spaces. We know how to form their direct sum, $V\oplus W$. In fact, if we start with any vector space we can always decompose into a direct sum of simpler or `smaller' vector spaces, often in multiple ways. For example, $\mathbb{R}^5 = \mathbb{R}^2\oplus\mathbb{R}^3$, or alternatively $\mathbb{R}^5 = \mathbb{R}^1\oplus\mathbb{R}^4$. 
 				
-				These different ways to `split' the vector space could help us understand its structure, although they don't seem very powerful in this context because they seem completely obvious. In the world of modules, however, a decomposition like this can be very enlightening.
+				These different ways to `split' the vector space could help us understand its structure, although they don't seem very powerful in this context because they seem completely obvious. In the world of modules, however, we can't take decompositions like this for granted.
 				
 				We can look at the situation a bit differently by considering, say, $\mathbb{R}^2$ and asking how we could `extend' it using $\mathbb{R}^3$ and the direct sum. With vector spaces this only works in one way, and leads to $\mathbb{R}^5$.  What's more, using the quotient we can get back to where we started, since $\mathbb{R}^5/\mathbb{R}^3 = \mathbb{R}^2$.
 				
@@ -105,11 +107,11 @@
 				This course introduces \emph{homological} algebra assuming you've already studied homology in the context of topological spaces. It's possible to interpret the phrase `homological algebra' in two ways that are both correct:
 				
 				\begin{itemize}
-					\item The study of \textbf{algebra using homology}: here we apply homological techniques we already know to new objects. Modules (and later other objects) play the role of topological spaces and we hope that their homology will tell us useful things about them.
-					\item The study of \textbf{homology using algebra}: here the exact sequences that arise from homology are treated as objects of study that have intrinsic interest, which can be justified by how many different fields of study they crop up in.
+					\item The study of \textbf{algebra using homology}: here we apply homological techniques we already know to new objects. In Part 1, modules play the role of topological spaces and we hope that their homology will tell us useful things about them.
+					\item The study of \textbf{homology using algebra}: here the abstract structures that arise from homology are treated as objects of study that have intrinsic interest, which can be justified by how many different fields of study they crop up in.
 				\end{itemize}
 				
-				As in the context of topology our slogan will be that homology measures the gap between `ought' and `is'. In particular, here are some very high-level assumptions that we might bring with us from the world of vector spaces:
+				As in the context of topology our slogan will be that homology measures the gap between `ought' and `is'. To summarise what we just sketched out, recall that:				
 				
 				\begin{itemize}
 					\item Vector spaces are free
@@ -118,9 +120,9 @@
 					\item The tensor product is very well-behaved
 				\end{itemize}
 				
-				Perhaps we think these `ought' to be true of modules, too, but they are not. Homology is the tool that will help us deal with this, and perhaps it will even help us change our perspective so we no longer think of these things as failings of the theory of modules.
+				Perhaps we think these `ought' to be true of modules, too, but they are not. Homology is the tool that will help us deal with this. Perhaps it will even help us develop a more refined perspective, so that we no longer think of these things as shortcomings of the theory of modules.
 
-		\section{From Fields to Rings}
+		\section{From Fields to Commutative Rings}
 			
 			We'll start with a definition you may or many not have seen before -- it will be useful to us later on and will make our upcoming definitions shorter:
 			
@@ -160,8 +162,16 @@
 					\end{itemize}
 			\end{defn}
 			
-			Note that fields are also rings, they just don't happen to make use of the exceptions. 
-				
+			Note that fields are also rings, they just don't happen to make use of the exceptions. There is a special class of rings that we might think of as being `halfway to being fields', since they only make use of one of the two exceptions:
+			
+			\begin{defn}
+				A ring in which multiplication is commutative is called a \textbf{commutative ring}.
+			\end{defn}
+			
+			The study of commutative rings (and modules over them) is known as `commutative algebra' and is an important branch of mathematics. Most of homological algebra works the same whether our rings are commutative or not but including non-commutative rings in our theory at this stage adds distracting complications.
+			
+			Therefore in the rest of Part 1, we will only be concerned with extending the theory of vector spaces to scalars from commutative rings, although we will note some places where care is needed in the setting of rings in general.
+						
 		\section{Ideals of Rings}
 		
 			\subsection{Ideals are Kernels of Homomorphisms}
@@ -170,11 +180,15 @@
 				
 				The first is the subring. This is easy enough to deal with: a subring is a subset of a ring that is, itself, a ring with the same multiplication and addition operations. For example, consider the ring of polynomials over the integers $\mathbb{Z}[x]$. Clearly $\mathbb{Z}$ is a subring of $\mathbb{Z}[x]$.
 				
-				The second, and less familiar, is an ideal. We'll get to an official definition in a moment. The key example is $2\mathbb{Z}$, the set of all even integers, which is an ideal of $\mathbb{Z}$ itself. This set is closed under integer addition and also under multiplication by \emph{any} integer (not just even ones). We have all the additive inverses we need, since if $n$ is even so is $-n$ and we have the additive identity $0$, which is an even number too. However, we do not have the multiplicative identity, since 1 isn't an even number. 
+				From your previous studies of algebra you might expect the kernels of ring homomorphisms to be subrings but this is not true. Consider the map $f:\mathbb{Z}\to \mathbb{Z}$ that sends each integer to $0$ if it's even and $1$ if it's odd. The image of $f$ is indeed a subring, $\mathbb{Z}/2\mathbb{Z}$. However, its kernel is $2\mathbb{Z}$, the set of all even numbers and this is not a ring, since it doesn't contain the multiplicative identity 1, which isn't an even number. So in the world of rings, kernels of homomorphisms will be something different. This something is known as an `ideal'.
 				
-				An ideal is in a sense more than a subring, since it must be closed under multiplication by \emph{any} element of the ring (not just the ones in the ideal) but also less, since it doesn't have to contain the multiplicative identity.
+				We'll get to an official definition in a moment; first let's consider $2\mathbb{Z}$, the set of all even integers, a bit more closely as a subset of $\mathbb{Z}$. This set is closed under integer addition and also under multiplication by \emph{any} integer (not just the even ones). We have all the additive inverses we need, since if $n$ is even so is $-n$ and we have the additive identity $0$, which is an even number too. However, we do not have the multiplicative identity. 
 				
-				Now to the formal definitions. We would like to say that an ideal of a ring $R$ is a subset of $R$ that is a group under addition of its own elements and multiplication by any element of $R$. However, we have to be careful because the ring might not be commutative! So we end up with the following definitions:
+				So an ideal is, in a sense, more than a subring since it must be closed under multiplication by \emph{any} element of the ring (not just the ones in the ideal). But it's also less, since it doesn't have to contain the multiplicative identity. 
+				
+				The curious name comes from attempts to think about numbers in an `idealised' way; in a sense $2\mathbb{Z}$ is `the number 2, along with all of its possible multiples'; it turns out you can sometimes use ideals as stand-ins for numbers to help prove theorems about those numbers. But that's not how we're going to use the notion of an ideal.
+				
+				Now to the formal definitions. We would like to say that an ideal of a ring $R$ is a subset of $R$ that is a group under addition of its own elements and multiplication by any element of $R$. However, we have to be careful if the ring might not be commutative! So we end up with the following definitions:
 			 
 				\begin{defn}
 					A \textbf{left ideal} of a ring $R$ is a subset of $R$ that is a group under addition, as well as multiplication on the left by elements of $R$.
@@ -192,9 +206,9 @@
 					If $R$ is commutative, the ideas of `left ideal', `right ideal' and `two-sided ideal' are all equivalent.
 				\end{thm}
 				
-				We will often use the term `ideal' on its own to mean whichever of these concepts is appropriate in context; even when $R$ is non-commutative the distinction between left and right ideals doesn't always matter.
+				We will often use the term `ideal' on its own to mean whichever of these concepts is appropriate in context. Even when $R$ is non-commutative the distinction between left and right ideals doesn't always matter; in Part 1 of this course all of our examples will involve commutative rings so it will never be important but it's good to be aware of it for future study. 
 				
-				The following theorem tells us why ideals will be central to everything that follows:
+				The following theorem reminds us why ideals will be central to everything that follows:
 				
 				\begin{thm}
 					Let $R$ and $S$ be any rings and $f:R\to S$ be a ring homomorphism. Then the kernel of $f$ is an ideal of $R$.
@@ -301,7 +315,7 @@
 				An \textbf{integral domain} is a domain where multiplication is commutative.
 			\end{defn}
 			
-			An example of a domain that is not an integral domain would be the $2\times 2$ matrices over $\mathbb{Z}$ with the usual matrix multiplication.
+			An example of a domain that is not an integral domain would be the $2\times 2$ matrices over $\mathbb{Z}$ with the usual matrix multiplication. Since Part 1 of this course only concerns commutative rings, however, we won't meet any domains that aren't also integral domains.
 						
 			\begin{defn}
 				A \textbf{principal ideal domain} (PID) is an integral domain in which every ideal is principal, i.e. can be generated by a single element.
@@ -342,12 +356,16 @@
 	\chapter{Introduction to Modules}
 
 			\section{Modules Defined}	
-				Now, ordered lists of integers are of great importance in many applications involving algorithms, data and computer programming in general. These \emph{look} like vectors, but since the integers aren't a field, there are no `vector spaces over the integers' and we can't bring our linear algebra knowledge to bear on such objects. 
+				Ordered lists of integers like this
+				\[
+					\(4, 17, -9, 22, -34\)
+				\]
+				are of great importance in many applications involving algorithms, data and computer programming in general. These \emph{look} like vectors, but since the integers aren't a field, there are no `vector spaces over the integers' and we can't bring our linear algebra knowledge to bear on such objects. It's true that we could pretend these are real numbers (`floating point numbers' in computing parlance) but that can lead to additional compexity and even numerical errors.
 				
-				This motivates us to try substituting rings for fields in the definition of a vector space, which reveals our main object of study:
+				This motivates us to try substituting rings for fields in the definition of a vector space, which reveals our main object of study. Giving a definition that works in general for all rings involves a complication, so first we give a special version only for the commutative rings we are focusing on:
 				
 				\begin{defn}
-					A \textbf{left $R$-module} is a vector space over a ring ($R$) instead of a field. More formally, a left $R$-module is an abelian group $(S, +)$ along with a ring $R$ and an operation of `scalar multiplication on the left' that maps $R\times S\to S$ according to the following rules (here $a$ and $b$ are elements of $S$, $x$ and $y$ are elements of $R$):
+					An \textbf{$R$-module} is a vector space over a commutative ring ($R$) instead of a field. More formally, an $R$-module is an abelian group $(S, +)$ along with a commutative ring $R$ and an operation of `scalar multiplication' that maps $R\times S\to S$ according to the following rules (here $a$ and $b$ are elements of $S$, $x$ and $y$ are elements of $R$):
 					\begin{itemize}
 						\item $x(a + b) = xa + xb$ 
 						\item $(x + y)a = xa + ya$
@@ -356,31 +374,23 @@
 					\end{itemize}
 				\end{defn}
 				
-				It may look odd that we called it a `left module' and only defined scalar multiplication `on the left'. That is, $xa$ makes sense when $x$ is a scalar and $a$ is an element of $S$, but $ax$ does not. We can make the completely equivalent definition of a `right module' as follows:
+				Unfortunately it's not common to call the elements of a module `vectors' despite the strong analogy with vector spaces. 
+				
+				For a non-commutative ring there is an ambiguity about this definition since our practice of writing scalar multiplication on the left of the `vector' is just a notational convention. Suppose we want to multiply the module element $x$ by two ring elements -- first $a$, then $b$. We could write this as $b(ax) = (ba)x$, using multiplication on the right, $(xa)b = x(ab)$. However, if the ring is not commutative it could be that $ab\ne ba$ and so these could be two completely different things! 
+				
+				This leads us to make the following definitions -- specifying whether a module is a left or right module removes the ambiguity that arises from non-commutative rings:
 				
 				\begin{defn}
-					A \textbf{right $R$-module} is a vector space over a ring ($R$) instead of a field. More formally, a right $R$-module is an abelian group $(S, +)$ along with a ring $R$ and an operation of `scalar multiplication on the right' that maps $S\times R\to S$ according to the following rules (here $a$ and $b$ are elements of $S$, $x$ and $y$ are elements of $R$):
-					\begin{itemize}
-						\item $(a + b)x = ax + bx$ 
-						\item $a(x + y) = ax + ay$
-						\item $a(xy) = (ax)y$
-						\item $a1_R = a$, where $1_R$ is the multiplicative identity in the ring $R$.
-					\end{itemize}
+					A \textbf{left $R$-module} over a ring $R$ is defined in exactly the same way as an $R$-module over a commutative ring with the additional stipulation that scalar multiplication is applied on the left.
 				\end{defn}
-		
-				Usually we won't bother with this and will do all of our work with left $R$-modules but it's worth bearing in mind that a set can simultaneously have the structure of a left $R$-module and a right $T$-module for some other ring $T$ -- this won't come up very often, though. To keep things short, we'll often just say `$R$-module' instead of `left $R$-module' unless there's room for confusion.
 				
-				As you can see, an $R$-module is a `vector space over the ring $R$'. Since fields are also rings (in the way that carrots are also vegetables) we can turn this around and say a vector space is an $R$-module where $R$ is a field.
-			
-			\section{Left vs Right}
+				\begin{defn}
+					A \textbf{right $R$-module} over a ring $R$ is defined in exactly the same way as an $R$-module over a commutative ring with the additional stipulation that scalar multiplication is applied on the right.
+				\end{defn}
 				
-				The distinction between left- and right-modules over a given ring may seem pedantic. However, it's not just a matter of notation and it has rather far-reaching consequences. Suppose that $M$ is both a left and right $R$-module and let $m$ be a module element and $r, s$ be scalars in $R$. 
+				Even when working with general rings, it's common to just use left $R$-moules for convenience. However, it's worth bearing in mind that a set can simultaneously have the structure of a left $R$-module and a right $T$-module for some other ring $T$ -- this won't come up very often but it has rather far-reaching consequences.
 				
-				First looking at $M$ as a left $R$-module, we multiply $m$ by $r$ to give $rm$ and then multiply this by $s$, giving $srm$. This is equivalent to multiplying $m$ by the scalar $sr$, which is some element of $R$.
-				
-				Let's compare this with the `same' operation on $M$ considered as a right $R$-module. First we multiply $m$ by $r$, giving $mr$, then by $s$ to give $mrs$. This is the same as multiplying $m$ by the scalar $rs$. The key thing to notice is that multiplicatio in $R$ need not be commutative, so it may be that $rs$ and $sr$ are completely different scalars. 
-				
-				It turns out that the dual of a right $R$-module is a left $R$-module and \emph{vice versa}. When $R$ is non-commutative, the dual of each of its modules is not of `the same kind' as the original. This creates wrinkles in the theory that we don't have to worry about when $R$ is commutative, as in the case of vector spaces. We'll see some consequences of this in the first half of this course but make a more systematic study of the problem in the second half, when we recast the idea of duality in terms of `opposite categories'.
+				It turns out that the dual of a right $R$-module is a left $R$-module and \emph{vice versa}. When $R$ is non-commutative, the dual of each of its modules is not of `the same kind' as the original. This creates wrinkles in the theory that we don't have to worry about when $R$ is commutative, as in the case of vector spaces. We'll make a more systematic study of this phenomenon in Part 2 of this course, when we recast the idea of duality in terms of `opposite categories'.
 
 			\section{Examples of Modules}
 
@@ -396,13 +406,11 @@
 				
 				In the group of integers $\mathbb{Z}$ we can identify subsets of the form $n\mathbb{Z}$ that contain all the integers multiplied by a set integer $n$. For example, $2\mathbb{Z}$ contains all the even integers, $3\mathbb{Z}$ contains all the integer multiples of 3 and so on. Here we will take it on trust that the quotient $\mathbb{Z}/n\mathbb{Z}$ always makes sense and is an abelian group (this is something you will learn more about in Introduction to Group Theory if you haven't seen it before). It consists of the numbers $\{0, 1, 2, \ldots, n-1\}$ with addition modulo $n$.
 				
-				We can easily turn into a $\mathbb{Z}$-module in the following way:
+				We can easily turn any abelin group into a $\mathbb{Z}$-module in the following way:
 				\begin{defn}
-					By $\mathbb{Z}_n$ we mean the $\mathbb{Z}$-module formed by the abelian group $\mathbb{Z}/n\mathbb{Z}$ with scalar multiplication defined as repeated addition, following the rules for a module.
+					By $\mathbb{Z}_n$ we mean the $\mathbb{Z}$-module formed by the abelian group $\mathbb{Z}/n\mathbb{Z}$ with scalar multiplication defined as multiplication modulo $n$, following the rules for a module.
 				\end{defn}
-				
 
-	
 			\section{Maps of Modules}
 				
 				Continuing our analogy with the theory of vector spaces, we want to identify the maps between $R$-modules that `respect their structure' -- the equivalent of homomorphisms of vector spaces. Fortunately we can just lift the definition from the world of vector spaces and it works just the same:
@@ -417,7 +425,7 @@
 				
 				We've now defined a collection of objects -- the $R$-modules for a given ring $R$ -- and the structure-preserving maps between them. This is enough information to create a `category'. We will call this category \RMod. For two objects $A$ and $B$, the set of all maps $A\to B$ will be written $\hom(A, B)$ as you've seem before in relation to vector spaces. In the first part of this course we develop some rather refined techniques for probing the inner structure and behaviour of $R$-modules; in the second part we generalise those techniques to study a wide range of other mathematical objects that live in categories that are sufficiently similar to \RMod. This generalizability is what makes homological algebra so powerful outside the world of abstract algebra.
 				
-				TODO: Say something about the way hom-sets are sometimes also tensor products in \RMod just as they (always) are for vector spaces -- wikipedia has a nice clear section on this: \url{https://en.wikipedia.org/wiki/Tensor_product_of_modules#As_linear_maps}
+				In Linear Algebra we studied vector space homomorphisms $V\to W$ as elements of the space $W\otimes V^\star$ but we won't be able to do this from the start for two reasons. The first is that $R$ might not be commutative, in which case $W\otimes V^\star$ might not even make sense. The second is that we can only identify $W\otimes V^\star$ with $\hom(V, W)$ if $V$ and $W$ meet certain criteria. We'll discuss those in a later session.				
 		
 			\section{Quotients and Products (TODO)}
 		
@@ -521,6 +529,35 @@
 				\end{defn}
 				
 				It's no exaggeration to say that homological algebra is the study of the ways in which chain complexes fail to be exact sequences. From your previous study you have already seen that this inexactness can reveal a surprising amount about structures the chain complexes arise from.
+			
+			\subsection{Split Exact Sequences}
+			
+				\begin{defn}
+					Consider the following short exact sequence:
+					\[ 
+						\xymatrix@C+0.3em{
+							0 \ar[r] & A\ar[r] & B\ar[r] & C\ar[r] & 0
+						}
+					\]
+					The sequence is said to \textbf{split} if $B\cong A\oplus C$; it is then called a \textbf{split exact sequence}.					
+				\end{defn}
+				
+				\begin{thm}
+					Let $A$ and $B$ be $R$-modules and $f:A\to B$ be any $R$-module homomorphism. Then $f$ has a left inverse if and only if the following sequence splits:
+					\[ 
+						\xymatrix@C+0.3em{
+							0 \ar[r] & A\ar[r]^{f} & B\ar[r] & \text{coker}(f)\ar[r] & 0
+						}
+					\]
+					and a right inverse if and only if the following sequence splits:
+					\[ 
+						\xymatrix@C+0.3em{
+							0 \ar[r] & \ker(f)\ar[r] & A\ar[r]^{f} & B\ar[r] & 0
+						}
+					\]
+				\end{thm}
+				
+				This fact alone should be enough to convince us that short exact sequences are important -- whether a homomorphism has left and right inverses is a pretty fundamental property. In the next session we will see that there are things we can do to an entire category of $R$-modules all at once, and in fact that some of these are already long familiar to you from your previous studies in linear algebra. If one of these doesn't preserve the exactness of sequences it may be too `violent' to preserve all the structure we'd otherwise expect.
 		
 		\section{Resolutions of Modules}
 			
@@ -559,11 +596,6 @@
 					graded module homomorphism
 				\end{defn}
 
-				\begin{defn}
-					
-				\end{defn}
-				
-
 				
 			\subsection{The Hilbert Function}
 	
@@ -593,12 +625,14 @@
 		\section{Projective and Injective Modules}
 						
 			\subsection{Projective Modules}
-		
+			
+				TODO: For motivation, start with the fact that hom-sets are sometimes also tensor products in \RMod just as they (always) are for vector spaces -- wikipedia has a nice clear section on this: \url{https://en.wikipedia.org/wiki/Tensor_product_of_modules#As_linear_maps}. Essentially $V^\star\otimes W\cong \hom(V, W)$ only if $V$ and $W$ are finitely generated and projective. The fact that it's not enough for them to be finitely generated gives us some idea that projectivity will be an important property.
+
 				$\hom(P,\_)$ is exact iff $P$ is projective; equivalently, any short exact sequence with $P$ in the last position splits.
 				
 				In a PID, `projective' and `free' are equivalent. So you need something that fails to be a PID to see the difference.
 				
-				Example: $\mathbb{Z}/2\mathbb{Z}$ as a module over $\mathbb{Z}/6\mathbb{Z}$. It is projective but couldn't be a free module as it only has two elements, so it can't a a direct sum of copies of the six-element $\mathbb{Z}/6\mathbb{Z}$.
+				Example: $\mathbb{Z}/2\mathbb{Z}$ as a module over $\mathbb{Z}/6\mathbb{Z}$. It is projective but couldn't be a free module as it only has two elements, so it can't be a direct sum of copies of the six-element $\mathbb{Z}/6\mathbb{Z}$.
 				
 				Talk about projective resolutions
 			
@@ -608,7 +642,11 @@
 				
 				Example: $\mathbb{Q}$ as a $\mathbb{Z}$-module.
 				
+				Need examples of modules that are projective but not injective, \emph{vice versa}, both and neither.
+				
 				Talk about injective resolutions
+				
+				Injectivity seems `dual' to projectivity -- explain how they're related and why they're different
 
 		\section{Homological Dimension (*)}
 
@@ -690,7 +728,7 @@
 				
 			\subsection{Co-Extension of Scalars (*)}
 
-				This section is included for neatness and symmetry although we will never need this construction in practice. The idea is that just as extension of scalars is left-adjoint to restriction, there is a dual right-adjoint known as co-extension. It will probably not astonish you to learn that in place of the tensor product, co-extension uses Hom.
+				This section is included for neatness and symmetry although we won't need it for anything that follows. The idea is that just as extension of scalars is left-adjoint to restriction, there is a dual right-adjoint known as co-extension. It will probably not astonish you to learn that in place of the tensor product, co-extension uses Hom.
 				
 				We will start with an $R$-module and, once again, the desire to `enlarge' it to an $S$-module using a ring homomorphism $f:R\to S$. Note that this goes in the same direction as for extension of scalars (so we will be going `from small to big') and both are the opposite direction to restriction (which goes `from big to small').
 				
@@ -723,7 +761,7 @@
 		\chapter{Torsion}
 		
 				
-		NB: All flat modules are torsion-free but not \emph{vice versa} unless the scalars form a PID. If they do the two notions are equivalent. 
+		TODO: All flat modules are torsion-free but not \emph{vice versa} unless the scalars form a PID. If they do the two notions are equivalent. We should include an example of a torsion-free module that's not flat.
 
 		\section{Torsion Elements}
 			
@@ -783,11 +821,10 @@
 			
 				This has some nice pedagogic explanations of the basics: \url{https://www.mas.ncl.ac.uk/library/display_pdf.php?id=270}
 				
-				Specifically call out the danger of confusion with extension of modules!
+				Specifically call out the danger of confusion with extension of scalars!
 			
 			\subsection{Split Extensions}
-				Rotman p.420 -- Ext 1 detects when an extension splits. Specifically, There is an isomorphism between Ext1(B,A)
-				and the group of equivalence classes of short exact sequences that start with A and end with B.
+				Rotman p.420 -- Ext 1 detects when an extension splits. Specifically, There is an isomorphism between Ext1(B,A) and the group of equivalence classes of short exact sequences that start with A and end with B.
 		
 		\section{The Ext Functor}
 
@@ -796,6 +833,7 @@
 			\subsection{The First Ext Module}
 			
 				If you apply Hom to an exact sequence and lose exactness, Ext can be used to `repair' it (Rotman p367)
+				
 		\section{Example Calculations with Ext}
 		
 
@@ -824,7 +862,7 @@
 
 	\chapter{The Cup and Cap Products}
 
-		I think do this in the context of topology? Not sure whether it really belongs here.
+		I think do this in the context of topology? Not sure whether it really belongs here but the structural difference between them is maybe worth teasing out.
 	
 	
 \end{document}
