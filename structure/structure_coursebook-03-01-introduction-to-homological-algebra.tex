@@ -45,17 +45,17 @@
 	
 		In a slogan, homological algebra is a toolkit for studying objects that don't behave the way we think they ought to. Homology can detect -- and describe, to some extent -- the ways in which our object of interest `falls short' of our idealised expectations. 
 		
-		The homological viewpoint first arose in topology, where for instance on a 2D surface we expect a closed loop to contain a region of space; if it doesn't, there must be a hole there. Homology can detect holes and tell us what kinds they are by saying how the situation falls short of the way things ought to be. And if we think we have a cylinder, homology can tell us when, in fact, it's twisted like a M\:obius strip instead. 
+		The homological viewpoint first arose in topology, where for instance on a 2D surface we expect a closed loop to contain a region of space; if it doesn't, there must be a hole there. Homology can detect holes and tell us what kinds they are by saying how the situation falls short of the way things ought to be. And if we think we have a cylinder, homology can tell us when, in fact, it's twisted like a M\"obius strip instead. 
 		
 		This course is about the structure of these tools and how they can be generalized to situations beyond topology. We primarily study sequences of objects that ought to have certain desirable properties and develop tools to detect when those properties fail.
 
-		The first half of this course develops homological algebra as a tool for studying modules, which are vector spaces whose scalars don't necessarily form a field. Remember that a field must obey very strict rules about both addition and multiplication -- those rules exclude some very useful number systems. 
+		The first half of this course develops homological algebra as a tool for studying modules, which are vector spaces whose scalars don't necessarily form a field. Remember that a field must obey very strict rules about both addition and multiplication -- those rules exclude some very useful number systems, including the integers. 
 		
-		Vector spaces are very tame and well-behaved; the world of modules is much larger, richer and weirder. That means that when we find ourselves working with a module, the techniques of homology will be useful for telling us what sort of strange beast we're dealing with. 
+		Vector spaces are very tame and well-behaved; the world of modules is much larger, richer and weirder. That means that when we find ourselves working with a module, the techniques of homology will be useful for telling us what sort of strange beast we're dealing with. In particular it will be a guide to how the module falls short of the impeccable behaviour we observe in vector spaces.
 
 		The second half of the course generalizes this study to a wide range of mathematical objects -- those that form `abelian categories' -- and look at some important example applications. We finish with some more advanced tools from the toolkit.
 		
-		This course assumes you are familiar with the content of Introduction to Linear Algebra. If you find the material excessively abstract it may help to study Introduction to Algebraic Topology, where we introduce a specific homology theory in a very concrete setting. You could study that alongside this course if that suits you. Some very basic ideas about algebraic groups are introduced quickly on this course but more gently, and with a lot more context, on the dedicated Group Theory course. 
+		This course assumes you're familiar with the content of Introduction to Linear Algebra. If you find the material excessively abstract it may help to study Introduction to Algebraic Topology, where we introduce a specific homology theory in a very concrete setting. You could study that alongside this course if that suits you. Some very basic ideas about algebraic groups are introduced quickly on this course but more gently, and with a lot more context, on the dedicated Group Theory course. 
 	
 	\part{Linear Algebra over Commutative Rings}
 	
@@ -71,7 +71,7 @@
 				
 				In reality, there is nothing `wrong' with modules; the defect is in our expectation that every module `ought' to behave like the vector spaces we're familiar with. This is a human perspective that helps us develop the theory and, in the process, grow beyond our naive expectations. 
 				
-				To prepare the ground, this section looks at some aspects of finite-dimensional vector spaces that were taken somewhat for granted in the previous course. These are shared by all vector spaces but not by all modules, preventing us from transferring the theory of vector spaces, in all its elegance and simplicity, to this more general setting. Some of what follows is a bit imprecise and everything in this section will be restated later in more formal terms -- here the idea is just to prime our intuition.
+				To prepare the ground, this section looks at some aspects of finite-dimensional vector spaces that were taken somewhat for granted in the previous course. These are shared by all vector spaces but not by all modules, blocking us from transferring all the theory we already know to this more general setting. Some of what follows is a bit imprecise and everything in this section will be restated later in more formal terms -- here the idea is just to prime our intuition.
 				
 			\subsection{Free Objects}
 	
@@ -86,35 +86,36 @@
 	
 				In the wider context we will say that all vector spaces are `free modules', which simply means they can all be assigned a basis. Many modules we meet on this course will not be free, which means we can't work `in coordinates' or `in a basis' and often have to make do with more abstract definitions. For instance, the tensor product for modules can't be constructed from basis elements the way we did for vector spaces.
 				
+		\subsection{Torsion}
 				Suppose that $v$ is an element of a vector space and $k$ a scalar. It may seem obvious that if $kv$ is the zero vector, it must be that either $k = 0$ or that $v$ was already the zero vector. In the world of modules, though, it can happen that $kv = 0$ even though $k\ne 0$ and $v\ne 0$! Then $v$ is a so-called `torsion element' of the module.
 				
-				To see why this can never happen in a vector space, think about how we would express a torsion element as a linear combination of basis elements. Then a scalar multiple of that linear combination would be the zero vector -- but that means the basis wasn't linearly independent, and so wasn't a basis after all! Thus if we want to have torsion elements in our modules, we have to give up the convenience of having bases. 
+				To see why this can never happen in a vector space, think about how we would express a torsion element as a linear combination of basis elements. Then a scalar multiple of that linear combination would be the zero vector -- but that means the basis wasn't linearly independent, and so wasn't a basis after all! Thus if we want to have torsion elements in our modules, we have to give up the convenience of our modules always being free objects. 
 				
-				What's more, it turns out that even a module without any torsion elements can fail to be a free module, i.e. we may still be unable to specify a basis. We'll see examples when we have a bit more machinery to work with.
+				What's more, it turns out that even a module without any torsion elements can still fail to be a free module for other reasons, i.e. we may still be unable to specify a basis. We'll see examples when we have a bit more machinery to work with.
 				
 			\subsection{Split Extensions}
 			
-				Suppose that $V$ and $W$ are vector spaces. We know how to form their direct sum, $V\oplus W$. In fact, if we start with any vector space we can always decompose into a direct sum of simpler or `smaller' vector spaces, often in multiple ways. For example, $\mathbb{R}^5 = \mathbb{R}^2\oplus\mathbb{R}^3$, or alternatively $\mathbb{R}^5 = \mathbb{R}^1\oplus\mathbb{R}^4$. 
+				Suppose that $V$ and $W$ are vector spaces. We know how to form their direct sum, $V\oplus W$. In fact, if we start with any vector space we can usually decompose into a direct sum of simpler or `smaller' vector spaces, often in multiple ways. For example, $\mathbb{R}^5 = \mathbb{R}^2\oplus\mathbb{R}^3$, or alternatively $\mathbb{R}^5 = \mathbb{R}^1\oplus\mathbb{R}^4$. 
 				
-				These different ways to `split' the vector space could help us understand its structure, although they don't seem very powerful in this context because they seem completely obvious. In the world of modules, however, we can't take decompositions like this for granted.
+				These different ways to `split' the vector space could help us understand its structure, although they don't seem very powerful in this context because they seem completely obvious. In the world of modules, however, we can't take this procedure.
 				
 				We can look at the situation a bit differently by considering, say, $\mathbb{R}^2$ and asking how we could `extend' it using $\mathbb{R}^3$ and the direct sum. With vector spaces this only works in one way, and leads to $\mathbb{R}^5$.  What's more, using the quotient we can get back to where we started, since $\mathbb{R}^5/\mathbb{R}^3 = \mathbb{R}^2$.
 				
-				This ability to put vector spaces together and break them apart using the direct sum is extremely convenient. It works so well because all extensions of one vector space by another are direct sums. For modules this is not true, so we need some machinery that can help us understand and enumerate all the possible extensions and in particular to know under what conditions they split like a direct sum. 
+				This ability to put vector spaces together and break them apart using the direct sum is extremely convenient. It works so well because all extensions of one vector space by another are direct sums or, to put it another way, they're all `split extensions'. For modules this is not true, so we need some machinery that can help us understand and enumerate all the possible extensions and in particular to know under what conditions they split like a direct sum. 
 	
 			\subsection{The Role of Homology}
 				
-				This course introduces \emph{homological} algebra assuming you've already studied homology in the context of topological spaces. It's possible to interpret the phrase `homological algebra' in two ways that are both correct:
+				It's possible to interpret the phrase `homological algebra' in two ways that are both correct:
 				
 				\begin{itemize}
-					\item The study of \textbf{algebra using homology}: here we apply homological techniques we already know to new objects. In Part 1, modules play the role of topological spaces and we hope that their homology will tell us useful things about them.
+					\item The study of \textbf{algebra using homology}: here we apply homological techniques we already know to objects besides the topological spaces it was originally invented for. In Part 1, modules play the role of topological spaces and we hope that their homology will tell us useful things about them.
 					\item The study of \textbf{homology using algebra}: here the abstract structures that arise from homology are treated as objects of study that have intrinsic interest, which can be justified by how many different fields of study they crop up in.
 				\end{itemize}
 				
 				As in the context of topology our slogan will be that homology measures the gap between `ought' and `is'. To summarise what we just sketched out, recall that:				
 				
 				\begin{itemize}
-					\item Vector spaces are free
+					\item Vector spaces are free and never exhibit torsion
 					\item The direct sum and quotient of vectors spaces form a nice arithmetic that works very smoothly
 					\item Extensions of vector spaces work in a straightforward way
 					\item The tensor product is very well-behaved
@@ -150,7 +151,9 @@
 				\end{itemize}
 			\end{defn}
 			
-			We're used to thinking of the scalars in a vector space as numbers, but there are some sets of numbers that don't qualify as a field. For example, consider the integers, written $\mathbb{Z}$, that consist of all the positive and negative whole numbers, along with zero. They behave well under addition but their multiplication operation is a bit of a problem: while it's associative, it has closure (you can multiply any two integers and get another integer) and it has an identity element (the number 1), it doesn't have any multiplicative inverses. For example, there's no number you can multiply 5 by to get 1.
+			We're used to thinking of the scalars in a vector space as numbers, but there are some sets of numbers that don't qualify as a field. For example, consider the integers, written $\mathbb{Z}$, that consist of all the positive and negative whole numbers, along with zero. They behave well under addition but their multiplication operation is a bit of a problem: while it's associative, it has closure (you can multiply any two integers and get another integer) and it has an identity element (the number 1), it doesn't have any multiplicative inverses. For example, there's no whole number you can multiply 5 by to get 1. (You \emph{can} multiply 5 by 0.2 to get 1, but 0.2 isn't an integer; the rational numbers, which include things like 0.2, do indeed form a field.)
+			
+			You may wonder why the choice of number system matters but often real-world problems can only be properly represented using integers or similar systems. Furthermore, in computing and related applications we can easily run into problems by assuming we have access to the rational or the real numbers. Computers can't represent calculations using these with infinite precision, which can lead to errors and messy compromises. Furthermore, commutative rings aren't just the integers and those with more exotic structure can allow for problems to be represented (and solved) in particularly simple and expressive ways. A key example from computing is modular arithmetic, which usually produces number systems that aren't fields.
 			
 			Examples like this led to the definition of a `field lite' that has most of the properties of a field but drops a couple, making it more permissive:
 		
@@ -168,9 +171,14 @@
 				A ring in which multiplication is commutative is called a \textbf{commutative ring}.
 			\end{defn}
 			
-			The study of commutative rings (and modules over them) is known as `commutative algebra' and is an important branch of mathematics. Most of homological algebra works the same whether our rings are commutative or not but including non-commutative rings in our theory at this stage adds distracting complications.
+			The study of commutative rings (and modules over them) is known as `commutative algebra' and has become one of the central branches of mathematics. Most of homological algebra works the same whether our rings are commutative or not but including non-commutative rings in our theory at this stage adds distracting complications.
 			
 			Therefore in the rest of Part 1, we will only be concerned with extending the theory of vector spaces to scalars from commutative rings, although we will note some places where care is needed in the setting of rings in general.
+			
+		\subsection{Examples (TODO)}
+			
+			List of quick examples we will see many times -- integers, modular arithmetic, polynomials (incl infinite variables).
+			
 						
 		\section{Ideals of Rings}
 		
@@ -224,7 +232,7 @@
 					We call $S$ a \textbf{generating set} of the ideal.
 				\end{defn}
 				
-				When $S$ has few elements we write them out explicitly. For example, the set of all multiples of 2 and 3 is an ideal of $\mathbb{Z}$, commonly written $\langle 2, 3\rangle$.
+				When $S$ has few elements we write them out explicitly. For example, the set of all multiples of 2 and 3 is an ideal of $\mathbb{Z}$, commonly written $\langle 2, 3\rangle$. Note that the values of the $r_i$ can be zero; for instance, $\langle 2, 3\rangle$ contains the number 15, which is $0\times 2 + 5\times 3$.
 				
 				\begin{defn}
 					An ideal is said to be \textbf{finitely generated} if it can be written as $\langle S\rangle$ for a finite set $S$.
@@ -236,7 +244,7 @@
 					A \textbf{principal ideal} is one that can be generated by a single element of the ring. 
 				\end{defn}
 				
-				Note that an ideal could be specified using two generators but still be principal if it's possible to specify it using only one. For instance, in $\mathbb{Z}$ the ideal $\langle 4, 6\rangle$ contains the element $6-4 = 2$ so it contains all multiples of 2, not just multiples of 4 and 6. That means $\langle 4, 6\rangle = \langle 2\rangle$, so it's a principal ideal even though we met it in a representation that used two generators.
+				Note that an ideal could be specified using two generators but still be principal if it's possible to specify it using only one. For instance, in $\mathbb{Z}$ the ideal $\langle 4, 6\rangle$ contains the element $6-4 = 2$ so it contains all multiples of 2, not just multiples of 4 and 6. That means $\langle 4, 6\rangle = \langle 2\rangle$, so it's a principal ideal even though we met it in a representation that used two generators. This is a bit like a spanning set of a vector space, which might have more vectors in it than a basis would.
 				
 				Technically a ring is an ideal of itself but we're not usually interested in that case. The following jargon can be useful in connection with that.
 				
@@ -248,16 +256,26 @@
 					An ideal of a ring is said to be a \textbf{maximal ideal} if it's not a subset of any other ideal of the ring (apart from the whole ring).
 				\end{defn}
 				
-				In $\mathbb{Z}$, not all principal ideals are maximal. Fr example, $\langle 6\rangle = \{0, 6, -6, 12, -12, \ldots\}$ is a subset of both $\langle 3\rangle = \{0, 3, -3, 6, -6, 9, -9, 12, -12, \ldots\}$ and $\langle 2\rangle = \{0, 2, -2, 4, -4, 6, -6, 8, -8, 10, -10, 12, -12, \ldots\}$. 
+				In $\mathbb{Z}$, not all principal ideals are maximal. For example
+				\[
+				\langle 6\rangle = \{0, 6, -6, 12, -12, \ldots\}
+				\]  is a subset of both \[
+				\langle 3\rangle = \{0, 3, -3, 6, -6, 9, -9, 12, -12, \ldots\}
+				\]
+				and 
+				\[
+				\langle 2\rangle = \{0, 2, -2, 4, -4, 6, -6, 8, -8, 10, -10, 12, -12, \ldots\}
+				\] 
+				so $\langle 6\rangle$ isn't maximal in $\mathbb{Z}$.
 				
-				On the other hand if $p$ is prime, $\langle p\rangle$
-				is maximal. To see why, first notice that we can't do the trick in the previous paragraph because a prime doesn't have any factors. Still, suppose that $p = 5$ -- what about an ideal like $\langle 5, 11\rangle$? This certainly contains all the elements of $\langle 5\rangle$ and more, so why is $\langle 5\rangle$ maximal? the answer is that the ideal generated by any pair of integers is actually all of $\mathbb{Z}$. In this case, $\langle 5, 11\rangle$ must include $11 - 2\times 5 = 1$, so it includes every integer.
+				On the other hand if $p$ is a prime number, $\langle p\rangle$
+				is always maximal. To see why, first notice that we can't do the trick in the previous paragraph because a prime doesn't have any factors. Still, suppose that $p = 5$ -- what about an ideal like $\langle 5, 11\rangle$? This certainly contains all the elements of $\langle 5\rangle$ and more, so why is $\langle 5\rangle$ maximal? the answer is that the ideal generated by any pair of integers is actually all of $\mathbb{Z}$. In this case, $\langle 5, 11\rangle$ must include $11 - 2\times 5 = 1$, so it includes every integer.
 			
 				Now, this trick relies on a theorem called B\'ezout's identity, which says that if $a$ and $b$ are integers that don't have a common divisor, we can make any integer by adding multiples of them together. B\'ezout's identity is true of the integers and of quite a few other rings but not all of them, so watch out! (That could be the slogan for the whole course.)				
 				
-			\subsection{Finiteness Conditions on Ideals}
+			\subsection{Finiteness Conditions on Ideals (*)}
 			
-				This section describes a pair of conditions that impose a limit on the ideals a ring can have -- in particular, we will define a `sequence of ideals' in a moment and these conditions ensure that such a sequence will never `run off to infinity'. If a ring is finite in one of these ways we can often say a little more about it and its modules. We won't do a lot with these but they will come up occasionally later.
+				This section describes a pair of conditions that impose a limit on the ideals a ring can have -- in particular, we will define a `sequence of ideals' in a moment and these conditions ensure that such a sequence will never `run off to infinity'. If a ring is finite in one of these ways we can often say a little more about it and its modules. We won't do a lot with these but they will come up occasionally later so if you skip this section now you may want to refer back to it when they do.
 
 				\begin{defn}
 					A sequence of ideals $J_0\subset J_1\subset J_2\subset \ldots$ such that each ideal is a strict superset of the one to its left is called an \textbf{ascending sequence of ideals}.
@@ -299,7 +317,7 @@
 				
 				If a ring is Artinian it is automatically Noetherian, but not \emph{vice versa}. This breaks the apparent symmetry of the definitions and is not completely straightforward to prove but it isn't necessarily surprising when you think that asking for `an infinite chain of things that get smaller and smaller' is quite different from one where the things get bigger and bigger.
 
-				However, not every Noetherian ring is Artinian. In fact the integers themselves do not form an Artinian ring since, for example, $\langle 2\rangle\supset \langle 4\rangle\supset \langle 8\rangle\supset \ldots$ is an infinite descending sequence of ideals. 
+				In fact the integers themselves, which are Noetherian, are not Artinian since, for example, $\langle 2\rangle\supset \langle 4\rangle\supset \langle 8\rangle\supset \ldots$ is an infinite descending sequence of ideals. 
 				
 				We can think of Noetherian-ness as a `bare minimum of good behaviour' for ideals in a ring -- non-Noetherian rings as quite `degenerate' compared with the integers. Artinian-ness, on the other hand, is `exemplary behaviour' that even the integers don't exhibit. We'll often expect a ring to be Noetherian and be sad if it isn't, whereas we'll be pleasantly surprised if it exceeds our expectations by being Artinian as well.
 				
@@ -321,15 +339,15 @@
 				A \textbf{principal ideal domain} (PID) is an integral domain in which every ideal is principal, i.e. can be generated by a single element.
 			\end{defn}
 			
-			The canonical example of a PID is $\mathbb{Z}$; in a PID many of the features of integer arithmetic hold (for example, a version of `prime factorization'). These features won't be our main focus on this course but PIDs are of great importance because their modules are often the most vector-space-like; many theorems are true for PIDs but not elsewhere.
+			The canonical example of a PID is $\mathbb{Z}$; in a PID many of the features of integer arithmetic hold (for example, a version of `prime factorization'). These features won't be our main focus on this course but PIDs are of great importance because their modules are often the most vector-space-like; many theorems are only guaranteed to be true for modules over PIDs.
 			
 			An example of an integral domain that isn't a PID is given by the polynomial ring $\mathbb{Z}[x]$ -- for example, the ideal $\langle 2, x\rangle$ is not principal.
 				
-			\section{The Field of Fractions}
+			\section{The Field of Fractions (*)}
 			
 				Sometimes we are working with a ring but need to turn it into a field. This transforms it rather radically but we can still find a copy of the original ring inside the transformed verson, and this is often useful. 
 				
-				One example of this might be familiar from everyday life. Many things can only be represented by integer values, which of course live in a ring. It may be convenient to represent them with rational or real values instead, in part because they form a field. An example would be population migration statistics -- numbers of people are naturally represented by integers, with immigrants counted by positive numbers and emigrants by negative ones. But for calculations we may prefer to treat these as if they were decimals. technically we pass from the integers to its field of fractions. The fractions of the form $\frac{n}{1}$ are considered equivalent to the original integers so we can `round' the calculated values at the end to get back to integers again.
+				One example of this might be familiar from everyday life. Many things can only be represented by integer values, which of course live in a ring. It may be convenient to represent them with rational or real values instead, in part because they form a field. An example would be population migration statistics -- numbers of people are naturally represented by integers, with immigrants counted by positive numbers and emigrants by negative ones. But for statistical calculations it's usually more convenient to treat these as if they were decimals. Technically we pass from the integers to its field of fractions. The fractions of the form $\frac{n}{1}$ are considered equivalent to the original integers so we can `round' the calculated values at the end to get back to integers again.
 				
 				Turning a ring into a field effectively means giving it all the multiplicative inverses it's currently missing. This is only possible in this case because $\mathbb{Z}$ is an integral domain, which means that if $ab = ac$ then we must have $b = c$. This makes it possible to \emph{imagine} that multiplicative inverses could exist for integers even though they don't. Put another way, if $R$ is a ring that isn't an integral domain, there's an obstruction to carrying out this procedure and no field of fractions can be defined.			
 				
@@ -351,16 +369,16 @@
 					If $R$ is an integral domain, $\text{Frac}(R)$ is a field.
 				\end{thm}
 			
-			\section{Graded Rings}
+			\section{Graded Rings (TODO)}
 
 	\chapter{Introduction to Modules}
 
 			\section{Modules Defined}	
 				Ordered lists of integers like this
 				\[
-					\(4, 17, -9, 22, -34\)
+					(4, 17, -9, 22, -34 )
 				\]
-				are of great importance in many applications involving algorithms, data and computer programming in general. These \emph{look} like vectors, but since the integers aren't a field, there are no `vector spaces over the integers' and we can't bring our linear algebra knowledge to bear on such objects. It's true that we could pretend these are real numbers (`floating point numbers' in computing parlance) but that can lead to additional compexity and even numerical errors.
+				are of great importance in many applications involving algorithms, data and computer programming in general. These \emph{look} like vectors, but since the integers aren't a field we can't bring our linear algebra knowledge to bear on such objects. It's true that we could pretend these are real numbers (`floating point numbers' in computing parlance) but that can lead to additional compexity and even numerical errors.
 				
 				This motivates us to try substituting rings for fields in the definition of a vector space, which reveals our main object of study. Giving a definition that works in general for all rings involves a complication, so first we give a special version only for the commutative rings we are focusing on:
 				
@@ -390,7 +408,7 @@
 				
 				Even when working with general rings, it's common to just use left $R$-moules for convenience. However, it's worth bearing in mind that a set can simultaneously have the structure of a left $R$-module and a right $T$-module for some other ring $T$ -- this won't come up very often but it has rather far-reaching consequences.
 				
-				It turns out that the dual of a right $R$-module is a left $R$-module and \emph{vice versa}. When $R$ is non-commutative, the dual of each of its modules is not of `the same kind' as the original. This creates wrinkles in the theory that we don't have to worry about when $R$ is commutative, as in the case of vector spaces. We'll make a more systematic study of this phenomenon in Part 2 of this course, when we recast the idea of duality in terms of `opposite categories'.
+				It turns out that the dual of a right $R$-module is a left $R$-module and \emph{vice versa}. When $R$ is non-commutative, the dual of each of its modules is not of `the same kind' as the original. This creates wrinkles in the theory that we don't have to worry about when $R$ is commutative, as in the case of vector spaces. We'll make a more systematic study of this phenomenon in Part 2 of this course, when we recast the idea of duality in terms of so-called `opposite categories'.
 
 			\section{Examples of Modules}
 
@@ -406,14 +424,14 @@
 				
 				In the group of integers $\mathbb{Z}$ we can identify subsets of the form $n\mathbb{Z}$ that contain all the integers multiplied by a set integer $n$. For example, $2\mathbb{Z}$ contains all the even integers, $3\mathbb{Z}$ contains all the integer multiples of 3 and so on. Here we will take it on trust that the quotient $\mathbb{Z}/n\mathbb{Z}$ always makes sense and is an abelian group (this is something you will learn more about in Introduction to Group Theory if you haven't seen it before). It consists of the numbers $\{0, 1, 2, \ldots, n-1\}$ with addition modulo $n$.
 				
-				We can easily turn any abelin group into a $\mathbb{Z}$-module in the following way:
+				We can easily turn any abelian group into a $\mathbb{Z}$-module in the following way:
 				\begin{defn}
 					By $\mathbb{Z}_n$ we mean the $\mathbb{Z}$-module formed by the abelian group $\mathbb{Z}/n\mathbb{Z}$ with scalar multiplication defined as multiplication modulo $n$, following the rules for a module.
 				\end{defn}
 
 			\section{Maps of Modules}
 				
-				Continuing our analogy with the theory of vector spaces, we want to identify the maps between $R$-modules that `respect their structure' -- the equivalent of homomorphisms of vector spaces. Fortunately we can just lift the definition from the world of vector spaces and it works just the same:
+				Continuing our analogy with the theory of vector spaces, we want to identify the maps between $R$-modules that `respect their structure' -- the equivalent of homomorphisms of vector spaces. Fortunately we can simply lift the definition from the world of vector spaces and it works just the same:
 				
 				\begin{defn}
 					An \textbf{$R$-module homomorphism} from $A$ to $B$ (where $A$ and $B$ are of course $R$-modules) is a map $f:A\to B$ that satisfies the following, for all $r$ in $R$, $a$ in $A$ and $b$ in $B$:
@@ -423,7 +441,7 @@
 					\end{itemize}
 				\end{defn}
 				
-				We've now defined a collection of objects -- the $R$-modules for a given ring $R$ -- and the structure-preserving maps between them. This is enough information to create a `category'. We will call this category \RMod. For two objects $A$ and $B$, the set of all maps $A\to B$ will be written $\hom(A, B)$ as you've seem before in relation to vector spaces. In the first part of this course we develop some rather refined techniques for probing the inner structure and behaviour of $R$-modules; in the second part we generalise those techniques to study a wide range of other mathematical objects that live in categories that are sufficiently similar to \RMod. This generalizability is what makes homological algebra so powerful outside the world of abstract algebra.
+				We've now defined a collection of objects -- the $R$-modules for a given ring $R$ -- and the structure-preserving maps between them. This is enough information to create a `category'. We will call this category \RMod. For two objects $A$ and $B$, the set of all maps $A\to B$ will be written $\hom(A, B)$ as you've seen before in relation to vector spaces. In the first part of this course we develop some rather refined techniques for probing the inner structure and behaviour of $R$-modules; in the second part we generalise those techniques to study a wide range of other mathematical objects that live in categories that are sufficiently similar to \RMod. This generalizability is what makes homological algebra so powerful outside the world of abstract algebra.
 				
 				In Linear Algebra we studied vector space homomorphisms $V\to W$ as elements of the space $W\otimes V^\star$ but we won't be able to do this from the start for two reasons. The first is that $R$ might not be commutative, in which case $W\otimes V^\star$ might not even make sense. The second is that we can only identify $W\otimes V^\star$ with $\hom(V, W)$ if $V$ and $W$ meet certain criteria. We'll discuss those in a later session.				
 		
@@ -435,7 +453,7 @@
 				
 				As a reminder, we observed that every finite-dimensional vector space $V$ over a given field has a dual, $V^\star$, that is isomorphic to $V$. Homomorphisms $V\to W$ can be characterised as elements of the tensor product $W\otimes V^\star$. But crucially, $W\otimes V^\star\cong V\otimes W^\star$, so each of these can also be thought of as a homomorphism between the dual spaces going in the opposite direction, i.e. $W^\star\to V^\star$. Concretely this corresponds to `applying the matrix to a (horizontal) covector on the right, instead of applying it to a (vertical) vector on the left'.
 				
-				Abstractly, we were working in the category $\kVect$ of finite-dimensional vector spaces over the field $\mathbb{k}$. This category has an opposite, which is obtained by keeping the objects the same but reversing all the morphisms; if we think of the objects as being the (isomorphic) dual spaces then the morphisms do indeed reverse direction all by themselves.
+				Abstractly, we were working in the category $\kVect$ of finite-dimensional vector spaces over the field $k$. This category has an opposite, which is obtained by keeping the objects the same but reversing all the morphisms; if we think of the objects as being the (isomorphic) dual spaces then the morphisms do indeed reverse direction all by themselves.
 				
 				What this meant for the theory is that everything in $\kVect$ has a mirror-image in the opposite category; almost any statement we make there has not only a dual statement but also a dual proof that we get `for free' by translating our original statement and proof into their mirror-image counterparts.
 				
@@ -446,7 +464,7 @@
 			\section{Free Modules}
 				
 				Suppose you are managing some bank accounts with money in three currencies: pounds (£), dollars (\$) and yen (\yen). Each account has a balance represented by a number that can be positive or negative. We may was well use a real number to represent the balance, which enables us to represent our whole financial portfolio with a vector in $\mathbb{R}^3$ -- for example, we could write
-				\begin{align}[rcl]
+				\begin{align}
 					£ &=& (1, 0, 0) \\
 					\$ &=& (0, 1, 0) \\
 					\yen &=& (0, 0, 1)
@@ -469,7 +487,7 @@
 					Let $M$ and $N$ be $R$-modules and consider a homomorphism $f:M\to N$. Then the following are all true:
 					\begin{itemize}
 						\item $\ker(f)$ is a submodule of $M$
-						\item $\im(f)$ is a submogule of $N$
+						\item $\im(f)$ is a submodule of $N$
 						\item $\im(f)\cong M/\ker(f)$
 					\end{itemize}
 				\end{thm}
@@ -500,7 +518,7 @@
 		
 			\subsection{Key Definitions}
 			
-				You've seen the ideas in this section quite extensively in the context of topology -- we'll recap them here without too much elaboration as we'll see many fresh applications of them in everything that follows.
+				You may already have seen the ideas in this section quite extensively in the context of topology. If not, this might initially seem rather arbitrary. To avoid getting bogged down, we'll breeze through the definitions here without too much elaboration as we'll see many fresh applications of them in everything that follows.
 			
 				Let $\{M_0, M_1, M_2, \ldots\}$ be an ordered set of modules over the same ring $R$. Consider the hom-sets $\hom_R(M_i, M_{i+1})$, which contain the functions from each module to the next one in the list. Choosing any one function from each hom-set allows us to construct a \textbf{sequence} of modules
 				
@@ -510,7 +528,7 @@
 				}
 				\]
 				
-				This is a very general situation -- these homomorphisms could be absoltely anything and there's very little we can say about a sequence like this without more information. It turns out that one very restriction is the following, which states that if you go down any two consecutive arrows you always arrive at 0, no matter what module element you started with:
+				This is a very general situation -- these homomorphisms could be absoltely anything and there's very little we can say about a sequence like this without more information. It turns out that one very useful restriction is the following, which states that if you go down any two consecutive arrows you always arrive at 0, no matter what module element you started with:
 				
 				\begin{defn}
 					A \textbf{chain complex} is a sequence of modules in which $f_{i+1}\circ f_i$ is the zero homomorphism for every $i$.
@@ -528,7 +546,7 @@
 					A sequence is said to be \textbf{exact at $M_{i+1}$} if  $\im(f_i)=\ker(f_{i+1})$ for all $i$. If it is exact at every module it contains, we call it an \textbf{exact sequence}.
 				\end{defn}
 				
-				It's no exaggeration to say that homological algebra is the study of the ways in which chain complexes fail to be exact sequences. From your previous study you have already seen that this inexactness can reveal a surprising amount about structures the chain complexes arise from.
+				It's no exaggeration to say that homological algebra is the study of the ways in which chain complexes fail to be exact sequences. From your previous study you have may already have seen that this inexactness can reveal a surprising amount about structures the chain complexes arise from. If not, this surprising usefulness will hopefully reveal itself in what follows.
 			
 			\subsection{Split Exact Sequences}
 			
