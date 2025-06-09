@@ -65,9 +65,11 @@
 			Recall scalar fields and curves
 			Include algebra of scalar fields. Point out there is no corresponding algebra of curves. 
 			\subsection{The Exterior Product}
+		\section{Old Wine in New Bottles}
 			\subsection{Fibre Bundles}
 			Scalar Fields, vector fields and covector fields as sections of bundles
 			\subsection{Ideals and Quotients of Rings}
+			I'd rather not have to do this here (it's currently in Homological Algebra, which is not a prerequisite) so see what we can get away with. Ideals of lattices don't look much like ideals of rings anyway.
 
 	
 	\chapter{The Microlocal Structure of $\mathbb{R}$}
@@ -239,11 +241,27 @@
 				The \textbf{power rule} states that $d[x^n]_x = d[nx^{n-1}]_x$
 			\end{thm}
 
-	\chapter{Calculus in $\mathbb{R}^n$}
+	\chapter{Exterior Calculus in $\mathbb{R}^n$}
 	
-		\section{The Directional Derivative}
+		\section{Introduction and Motivation}
 		
-		TODO: Define the tangent bundle and sections of it. Show in $\mathbb{R}^2$ how the derivative of a scalar field can be combined with a tangent vector. 
+			This chapter lays out the whole of elementary exterior calculus. We had better start by saying roughly what those words mean and what this theory can (and can't) accomplish.
+			
+			"Calculus" is the Latin word for a small stone; doctors still use it to describe things like kidney stones. Pebbles can be used as mathematical aids, especially among those who aren't traditionally numerate -- ways to keep track of the number of something you had and know, for example, how many you'd have left if you gave some away. It's said that a shepherd would have a pocket full of little stones, one for each sheep in their flock, and to make sure none were missing the stones could be transferred one by one into another pocket as the sheep passed through a gate.
+			
+			A calculus is therefore a tool to help us figure things out, usually things involving numbers. The exterior calculus is so-called because it makes heavy use of the exterior product, which you learned about in Linear Algebra. This is because the vectors in the exterior product make a very nice model for certain geometric properties. These turn out to be very useful to describing and answering questions about certain kinds of physical phenomena. They can be applied more broadly than that, of course, but we'll keep physical examples in mind wherever possible.
+			
+			The exterior calculus primarily studies `fields' of objects like the scalar and vector fields you learned about in Linear Algebra. It's natural to think of a vector field as representing a `velocity' at each point -- for example, the speed and direction of the current in a moving body of water. It's also tempting to represent forces this way: at each point, the vector represents a force that would act on a particle there. However, care is needed: when we change coordinates, forces don't transform like vectors but like covectors! 
+			
+			Since forces are so important in physics, covector fields are one of its most important tools for building models of the world. Physicists need to have a calculus for working with them, and especially for translating forces into predictions about motion; to a large extent, that's what the exterior calculus is for. Since all of this is just geometry and linear algebra, though, it has many applications beyond physics as well.
+			
+			There is something about this theory, though, that forces a choice on every instructor: the theory looks a bit different depending on what dimension you're working in and for some applications, certain dimensions are much more important than others. Our goal is to develop the theory in a way that works in all dimensions, which means we can't take some of the shortcuts that can be absolutely valid when your field of application for these techniques is known in advance. So we will end up building a big machine in order to solve problems that seem to require a much simpler one. The point is that this machine can solve many other problems too. Since this is primarily a project in pure mathematics, it's also important that the big machine ends up being structurally interesting too.
+			
+			In this chapter we will describe the exterior calculus in the `flat' spaces $\mathbb{R}^n$. Certainly in these spaces this machinery is overcomplicated -- it's like building a lathe to sharpen a pencil. But when we're done we'll have a powerful machine that we'll be able to use it to do a lot more than sharpen pencils.
+			
+		\section{The Directional Derivative}
+			
+			TODO: Define the tangent bundle and sections of it. Show in $\mathbb{R}^2$ how the derivative of a scalar field can be combined with a tangent vector. 
 		
 		\section{The Alternating Algebra of Differentials}
 		
@@ -414,6 +432,17 @@
 		\section{Smooth Manifolds}
 
 		\section{Diffeomorphisms}
+		
+			Here we (finally) work with the total derivative of a map between manifolds.
+		
+			Key thing to note: the total derivative of a map $M\to N$ at $p$ is a \emph{linear} map $T_pM\to T_{f(p)}N$, i.e. an element of $T_{f(p)}N\otimes T_pM^\star$. 
+	
+			Example from the Napkin PDF overexplained: 
+			
+			Suppose we are in $\mathbb{R}^2$ with basis $\{e_1, e_2\}$ so we can represent a vector $v$ as $xe_1 + ye_2$ for scalars $x, y$. We're looking at the map $\mathbb{R}^2\to \mathbb{R}$ f defined by $f(v) = x^2 + y^2$. 
+			
+			Since $\mathbb{R}^n$ is always flat, we have $T_p(\mathbb{R}^2) = \mathbb{R}^2$ and $T_p(\mathbb{R}) = \mathbb{R}$. So the derivative of $f$ must lie in $\mathbb{R}\otimes \mathbb{R}^2^\star$, which is isomorphic to $\mathbb{R}^2^\star$. In fact it will turn out that $Df(v) = 2xe_1^\star + 2ye_2^\star$.
+
 
 		\section{De Rham Cohomology Revisited}
 		

@@ -45,6 +45,20 @@
 	
 	When the coursebooks are complete, the notes document is no longer needed and will probably be deleted. So the fact that you're looking at this means this is a work in progress -- it is incomplete, disorganised and probably full of errors.
 	
+	\chapter*{Welcome}
+	
+	This course introduces the main building blocks of algebraic topology. It assumes you have already seen topology before and know the definitions of topological spaces, continuous maps and homeomorphisms between them, and some of the properties that homeomorphisms preserve such as number of components and compactness. We also assume you've seen the ideas of a group and a vector space before, although we'll review anything we need beyond the basics when it comes up.
+	
+	The course is divided into three parts.
+	
+	In Part One we introduce cohomology, one of the main forms of algebraic topology. We start with a very simple and concrete version of the theory, `mod 2 simplicial cohomology'. This allows us to get a feel for how the definitions work and what this kind of technique can achieve. We then expand our theory to make it more expressive, allowing us to describe more of the topological properties of a space.
+	
+	In Part Two we go deeper into cohomology, showing a number of results and constructions related to manifolds. These are a family of topological spaces that are of great importance in other areas of mathematics and in many applications. This part aims to show off how neat and unified the theory of manifolds is.
+	
+	Cohomology theories have been surprisingly applicable and you will meet them often in mathematical fields beyond topology. We will repeatedly return to the idea that cohomology theories offer tools for measuring and describing how the way things are falls short of the way we think they should be. As such, they are really ways to measure the shortcomings of our own understanding, which is the first step to fixing them. 
+
+	Part Three develops a completely different technique, homotopy. This involves quite different machinery and begins by returning to very concrete examples. Homotopy You could jump directly to this part independently of the others if you wished. 
+	
 	\part{Introduction to Algebraic Topology}
 	
 	\chapter{Mod 2 Cohomology}
@@ -77,13 +91,24 @@
  	
  	For coefficients in a general ring, the \Kunneth formula is complicated by the need to `correct' it using the Tor functor, which we won't attempt to cover here (it belongs in the Homological Algebra courses).
 	
-	\chapter{Some Further Calculations}
-	
 	\section{Cohomology of a Union of Spaces}
 	The Mayer-Vietoris Sequence of a Pair is used to calculate homology of a topological space $X$ from known homologies of two other spaces $A, B$ such that $X = A\cup B$, i.e. the two spaces cover $X$.
 
 
 	\chapter{Integral Cohomology}
+	
+	\section{Changing Coefficients}
+	
+	Show the definitions.
+	
+	The motivation is that Mod 2 cohomology is rather limited: it can only express `yes' and `no'. Integral cohomology allows us to count things and we can still represent binary values using the sign of a number (positive or negative).
+	
+	As a taste of why this is useful, consider the M\"obius strip. With integral cohomology we will be able to detect that it's non-orientable, twisted, has one two-dimensional hole and can be cut once and remain connected together. While all this is intuitively obvious for the M\"obius strip, we can use exactly the same techniques for higher-dimensional spaces with similar properties, such as the Klein bottle and projective plane.
+
+	\section{Fixed Point Problems}
+	
+	TODO: Explanation of why these are important. Examples from Munkres ss2.1 (p.116 etc)
+
 	\section{Relative Cohomology}
 	
 	Long Exact Sequence of a Pair goes here
@@ -101,6 +126,10 @@
 	As a non-trivial consequence of the excision theorem it turns out that for a topological space $X$ and its suspension $SX$, $\widetilde{H}_n(X)\cong \widetilde{H}_{n+1}(SX)$.
 
 	\section{Betti Numbers}
+	
+	The first Betti number tells you the maximum number of cuts you can make in a connected manifold before it `falls apart' into two or more components. 
+	
+	The higher Betti numbers count $n$-dimensional holes.
 	
 	\section{Torsion Coefficients}
 
@@ -135,6 +164,7 @@
 	
 	
 	\chapter{Various Topics}
+	
 	\section{The Cup Product}
 	
 	The idea of the cup product is to create a way of multiplying two cochains (of any dimension) to get another cochain (whose dimension is the sum of the two original ones). The result is that the cohomology groups become a graded ring. Wikipedia provides one motivation for this, besides basic neatness: `Cup products may be used to distinguish manifolds from wedges of spaces with identical cohomology groups' ? so the cohomology ring of a space is more discerning than the cohomology groups on their own. 
