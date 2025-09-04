@@ -183,7 +183,19 @@
 			\end{defn}
 			
 			Without it, there would be functions that do not have differentials. Such functions are frequently considered and used in traditional courses on analysis, but often they pose unnecessary problems because they are in some sense `fictional' functions that never arise in real applications. But this is not universally true; in some situations the Principle of Microaffineness does not hold. We could perhaps state it more as an aspiration: every function \emph{ought} to be differentiable at every point where it's defined. On this course the Principle of Microaffineness holds and all functions are differentiable everywhere they're defined.
-
+			
+			Consider, for example, the `step function' defined by
+			\[
+				f(x) = 1\ \text{if}\ x < 0\ \text{or}\ 0\ \text{otherwise}
+			\]
+			At the point $x = 0$, the value of the function is changing `instantaneously', without passing through the intermediate values between $0$ and $1$. We \emph{could} try to define $df_0$ in the way just described but this would not really capture what we're aiming at -- a description of how $f$ is changing at the point $x = 0$. One observation that makes sense of this is that the germ of $f$ at $0$ is not $[kx]_0$ for any scalar $k$.
+			
+			Another way to see this is to consider the very similar function
+			\[
+				g(x) = 2\ \text{if}\ x < 0\ \text{or}\ 0\ \text{otherwise}
+			\]
+			This function differs only by a constant on the left hand side and appears to share with $f$ the same `instantaneous rate of change' but they do not live in the same germ -- they have completely different differentials. The problem is that, as we've seen, $f$ and $g$ break the Principle of Microaffineness -- neither $[f]_0$ nor $[g]_0$ is equivalent to any differential. Put another way, $f$ and $g$ are not differentiable at $x = 0$. Note that at any other point $p$, both $f$ and $g$ are differentiable and their differentials are equivalent to that of the constant zero function, i.e. the germ $[kx]_p$ where $k = 0$.
+			
 			\begin{defn}
 				Let $f$ be a function defined on an open set $U\subseteq \mathbb{R}$ and suppose it is differentiable at every point in $U$. The \textbf{derivative} of $f$ is the function $df:U\to\mathbb{R}$ that assigns to each point the rate of change $k$ such that $[f]_a\equiv [kx]_a$.
 			\end{defn}
@@ -215,7 +227,7 @@
 			
 			Now we change our units of measurement to centimetres. The same spot is now $x = 300$ and the temperature function is no longer $f(x) = x^2$ but $g(x) = x^2/10000$. It turns out that the derivative $dg(x) = 2x/10000$, which is a rate of $dg(300) = 0.06$ Celsius per centimetre at the point of interest. Of course this is exactly the same as the 6 Celsius per metre we arrived at earlier, which is just as well because we're trying to describe a physical phenomenon that doesn't care which units of measurement we use!
 			
-			Notice that when we converted from metres to centimetres, the unit vector shrank (by a factor of 100) and the differential also shrank (by the same factor squared, which isn't too surprising). Since they varied in the same direction, we conclude they are covariant and so
+			Notice that when we converted from metres to centimetres, the unit vector shrank (by a factor of 100) and the differential also shrank (by the same factor squared, which isn't too surprising). Since they varied in the same direction, we conclude they are covariant, which leads to the following:
 			
 			\begin{thm}
 				Differentials in $\mathbb{R}$ are elements of $\mathbb{R}^\star$. A function defines a differential at each point in its domain, which is a covector field that describes how the function is changing throughout its domain.
@@ -326,12 +338,18 @@
 		\section{Differential Forms}
 		
 			\begin{defn}
-				A \textbf{differential 0-form} on $\mathbb{R}^n$ is a section of the vector bundle $(\mathbb{R}^n, \mathbb{R}^n\times \mathbb{R}, p)$, i.e. a scalar field.
-			\end{defn}
-
-			\begin{defn}
 				A \textbf{differential $k$-form} (where $k > 0$) on $\mathbb{R}^n$ is a section of the cotangent bundle $(\mathbb{R}^n, \mathbb{R}^n\times \Omega^k(\mathbb{R}^n), p)$.
 			\end{defn}
+			
+			There is a special case to be aware of when $k = 0$.
+	 		\begin{defn}
+				By definition, $\Omega^0(\mathbb{R}^n)\cong \mathbb{R}$.
+			\end{defn}
+			This actually follows from the abstract definition of the alternating product but that's not obvious from our more concrete approach on this course. This allows us to give a simple interpretation to the idea of a $0$-form:
+
+			\begin{thm}
+				A \textbf{differential 0-form} on $\mathbb{R}^n$ is isomorphic to a section of the vector bundle $(\mathbb{R}^n, \mathbb{R}^n\times \mathbb{R}, p)$, i.e. a scalar field.
+			\end{thm}
 			
 			We've already seen that a differential 1-form arises as the derivative of a 0-form -- at each point, the covector indicates the gradient of the scalar field. The same pattern continues: a differential 2-form is the derivative of a 1-form and so on. The problem this presents, though, is that differential $k$-forms can be difficult to picture in arbitrary dimensions. If we choose three dimensions as a comfortable place for forming intuitive pictures, we get the wrong pictures because in each dimension the $k$-forms behave a bit differently. This is because $k$-forms only exist up to $k=n$ and their dimensions vary according to both $k$ and $n$, a fact you've previously encountered in the context of linear algebra:
 			
@@ -441,7 +459,7 @@
 			
 			Suppose we are in $\mathbb{R}^2$ with basis $\{e_1, e_2\}$ so we can represent a vector $v$ as $xe_1 + ye_2$ for scalars $x, y$. We're looking at the map $\mathbb{R}^2\to \mathbb{R}$ f defined by $f(v) = x^2 + y^2$. 
 			
-			Since $\mathbb{R}^n$ is always flat, we have $T_p(\mathbb{R}^2) = \mathbb{R}^2$ and $T_p(\mathbb{R}) = \mathbb{R}$. So the derivative of $f$ must lie in $\mathbb{R}\otimes \mathbb{R}^2^\star$, which is isomorphic to $\mathbb{R}^2^\star$. In fact it will turn out that $Df(v) = 2xe_1^\star + 2ye_2^\star$.
+			Since $\mathbb{R}^n$ is always flat, we have $T_p(\mathbb{R}^2) = \mathbb{R}^2$ and $T_p(\mathbb{R}) = \mathbb{R}$. So the derivative of $f$ must lie in $\mathbb{R}\otimes \mathbb{R}^{2\star}$, which is isomorphic to $\mathbb{R}^{2\star}$. In fact it will turn out that $Df(v) = 2xe_1^\star + 2ye_2^\star$.
 
 
 		\section{De Rham Cohomology Revisited}

@@ -1,0 +1,62 @@
+\documentclass[oneside,english]{amsbook} 
+\usepackage[T1]{fontenc} 
+\usepackage[latin9]{inputenc} 
+\usepackage{amsmath} 
+\usepackage{amstext} 
+\usepackage{amsthm} 
+\usepackage{amssymb}
+\usepackage{mathrsfs} 
+\usepackage{hyperref}
+\usepackage{url}
+
+\makeatletter 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands. 
+\numberwithin{section}{chapter} 
+\theoremstyle{plain} 
+\newtheorem{thm}{\protect\theoremname}   
+\theoremstyle{definition}   
+\newtheorem{defn}[thm]{\protect\definitionname}
+
+\makeatother
+
+\usepackage{babel}   
+\providecommand{\definitionname}{Definition} 
+\providecommand{\theoremname}{Theorem}
+
+\begin{document}
+	\title{Continua Project: Notes on the Background Philosophy}
+	\author{Rich Cochrane}
+	\maketitle
+	
+	\chapter*{Remark}
+	
+	This document aims to collect some pedagogical reflections informing the Continua project. Since this project is at an early stage, I think it would be a mistake to get locked into a specific structure or sequence for the whole thing, so these are likely to change a lot over time.
+	
+	\chapter{Notes}
+	
+	\section{Modularity and Dependencies}
+	
+		It's desirable for a self-study resource to be modular to enable students to follow just the parts that interest them, avoid repeating things they've already studied and make the whole thing less daunting. Modularity also allows a student to chart their own path through the material.
+		
+		On the other hand, a defined path enables us to introduce topics in a minimal way and avoid repetition. For example, almost all the courses will need at some point to use some very basic ideas about groups. It's not great to repeat the same section in each module, but it's also no good to ask the student to put down what they're doing and study the beginning of a special group theory course instead.
+		
+		There are other advantages to a fixed path, especially the ability to show off cross-references between the different fields. These are part of the appeal of studying maths at a higher level and it would be a shame to miss them, but it's clunky to introduce them if you don't know what the student has previously seen.
+		
+		It probably makes sense to write rough first drafts of the coursebooks as if they were modular but without worrying too much about which extraneous topics will need to be introduced. It's more important initially to get the overall thrust of each module right and figure out the main expository challenges. +
+		
+		For the `final form' of this project we might want something more prescriptive, but also smoother, than the veyr purely modular design. Readers with some experience would still be able to dip into what they're interested in of course but the intended experience would be a spine with optional offshoots -- a main story with side-quests, as it were.
+		
+	\section{Thinking of it as a `degree programme'}
+	
+		Although this wouldn't function as a degree, it may help to think of it in terms of the pace of a UK-style degree programme, especially the more old-fashioned kind that has a sturdy spine of mandatory courses with some additional variability. What would be the spine of the Continua project if it were a programme like this?
+	
+		I could see the beginning of this being a fairly sophisticated treatment of linear algebra and a fairly introductory version of topology, which meet in homology. The topology might be preceded by some gentle introductory ideas about space and motion, some basic group theory and perhaps the beginnings of categories. This could be thought of as a `first year'. I don't see any of this being optional.
+		
+		The real options come in the `second and third years', where I think the main spine is Smooth Manifolds, Lie Algebras and Measure Theory. The other planned modules would then be optional. Differential Topology and Riemannian Geometry would look like `third year options' to be taken after the smooth manifolds material but otherwise there's not many dependencies.
+		
+		An approach like this would allow for a substantial foundation to be designed in a linear fashion while leaving a lot of freedom in module selection later. 
+		
+		The downside is that the proposed foundation would be very non-standard, so students with some mathematical training might have significant gaps. Making this foundation appealing in its own right might be the way around this problem -- students who've studied linear algebra and topology before might enjoy the alternative point of view.
+	
+\end{document}
+
