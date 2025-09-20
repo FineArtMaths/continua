@@ -491,8 +491,67 @@
 				We've now defined a collection of objects -- the $R$-modules for a given ring $R$ -- and the structure-preserving maps between them. This is enough information to create a `category'. We will call this category \RMod. For two objects $A$ and $B$, the set of all maps $A\to B$ will be written $\hom(A, B)$ as you've seen before in relation to vector spaces. In the first part of this course we develop some rather refined techniques for probing the inner structure and behaviour of $R$-modules; in the second part we generalise those techniques to study a wide range of other mathematical objects that live in categories that are sufficiently similar to \RMod. This generalizability is what makes homological algebra so powerful outside the world of abstract algebra.
 				
 				In Linear Algebra we studied vector space homomorphisms $V\to W$ as elements of the space $W\otimes V^\star$ but we won't be able to do this from the start for two reasons. The first is that $R$ might not be commutative, in which case $W\otimes V^\star$ might not even make sense. The second is that we can only identify $W\otimes V^\star$ with $\hom(V, W)$ if $V$ and $W$ meet certain criteria. We'll discuss those in a later session.				
-		
-			\section{Quotients and Products (TODO)}
+			
+			\section{Submodules}
+				
+				A module may contain smaller modules within it that are `compatible with its structure' in a sense that should be familiar from your other studies -- these are th equivalent of vector subspaces. Unlike the case with rings, we have a very simple situation:
+				
+				\begin{defn}
+					Let $M$ be an $R$-module. Then for every homomorphism $f:M\to N$, where $N$ is any other $R$-module, its kernel $\ker{f}$ is an $R$-module with addition and scalar multiplication defined exactly as they are in $M$. This is called a \textbf{submodule} of $M$ and is a \textbf{proper submodule} if it's not equal to $M$.
+				\end{defn}
+				
+				We will look at quotients in the next section but you probably expect from your previous studies that we can always choose $f:M\to M/N$ to find a homomorphism with $\ker(f)\cong N$ -- the same idea transfers over to modules.
+				
+				We saw in the last session that a certain notion of finiteness can be defined for rings where descending or ascending chains of ideals never get infinitely long. The same ideas -- with chains of submodules -- apply to modules, too.
+				
+				\begin{defn}
+					A module $M$ is said to be \textbf{Artinian} if there is no infinitely long chain of submodules $M_0 \supset M_1 \supset M_2 \supset M_3  \supset \ldots$. It is said to be \textbf{Noetherian} if there is no infinitely long chain  $M_0 \subset M_1 \subset M_2 \subset M_3  \subset \ldots$.
+				\end{defn}
+				
+				In the world of vector spaces, the length of the longest possible chain of subspaces is equal to its dimension plus 1. Another way to say this is to count the number of inclusions (rather than vector spaces) in the chain. For example,
+				\[
+					\mathbb{R}^3 \subset \mathbb{R}^2 \subset \mathbb{R}^1 \subset \mathbb{R}^0
+				\]
+				is the longest chain we can make in $\mathbb{R}^3$. It contains four vector spaces but only three includions (the `$\subset$' symbol), which agrees with the fact that $\mathbb{R}^3$ is 3-dimensional.
+				
+				With modules the situation is less concrete but the length is still useful and gives us an rough idea of a module having a dimension even though, as we'll see, we can't derive its dimension from a basis as we did with vector spaces:
+				
+				\begin{defn}
+					The \textbf{length} of a module $M$ is equal to the number of inclusions in the longest chain of submodules in $M$.
+				\end{defn}
+			
+			\section{Direct Sums and Quotients}
+				
+				Much of what we know about these operations from the world of vector spaces carries over to modules, with the proviso that we can't assume a basis exists in the expanded context.
+				
+				\begin{defn}
+					Let $(A, +_A)$ and $(B, +_B)$ be modules over the same ring $R$. Then the module $(A\oplus B, +_{A\oplus B})$ consists of all ordered pairs $(a, b)$ with $a\in A$ and $b\in B$ and with addition and scalar multiplication defined componentwise as was the case for vectors, i.e.
+					\begin{itemize}
+						\item $(a_1, b_1) +_{A\oplus B} (a_2, b_2) = (a_1 +_A a_2, b_1 +_B b_1)$
+						\item $r(a, b) = (ra, rb)$
+					\end{itemize}
+				\end{defn}
+				
+				A useful geometric direct sum arises as follows. Suppose we are working in the two-dimensional real vector space $\mathbb{R}^2$ and need to represent non-linear vector fields on this space. Let $\mathbb{R}[x, y]$ be the module of polynomials in two variables over the real numbers. The direct sum $\mathbb{R}[x, y]\oplus \mathbb{R}[x, y]$ contains pairs of polynomials $(f, g)$. We can apply this at each point $(x, y)$ in $\mathbb{R}^2$ to assign a vector $(f(x, y), g(x, y))$ there. A wide variety of vector fields can be defined in this way -- these and their generalizations are studied as a part of calculus.
+				
+				The quotient operation is also just the same as in vector spaces. Since every module is an abelian group, this quotient operation will also be familiar to you if you've studied any group theory:
+				
+				\begin{defn}
+					Let $A$ be a module over a ring $R$ and let $B$ be a submodule of $A$. Then the quotient module $A/B$ has elements that are cosets of $B$ in $A$, that is sets of the form
+					\[
+						xB = \{x + b : b\in B\}
+					\]
+					The cosets are added and scalar multiplied in the obvious ways, i.e.
+					\begin{itemize}
+						\item $xB +_{A/B} yB = (x +_A y)B$
+						\item $r(xB) = (rx)B$
+					\end{itemize}
+					forming the $R$-module $A/B$
+				\end{defn}
+				
+				So far, everything has been as it was in the world of vector spaces. However, there is a wrinkle. Suppose we have vector spaces $V$ and $W$ and we form the direct sum $S = V\oplus W$. We always have $S/V\cong W$ and $S/W\cong V$. This doesn't always happen in the world of modules, a fact that will have surprisingly far-reaching consequences. For now, let's satisfy ourselves of this fact by way of an example.
+				
+				Consider the modules $A = \mathbb{Z}/2\mathbb{Z}$ and $B = \mathbb{Z}/4\mathbb{Z}$. 
 		
 			\section{A Note on Duality (*)}
 		
@@ -520,14 +579,15 @@
 				
 				Notice that we do not need to say what it means to `add a dollar to a yen' -- we simply interpret `\$1 + \yen 1' as `a dollar and a yen'. Indeed, this is one of the things the direct sum does for us; it allows us to form linear combinations of things that have no natural algebraic relationship. The fact that every vector space can be expressed at a direct sum of basis elements in this way is very useful.
 				
-				As you may have come to expect by now, not every module can do this. On the upside, though, vector spaces are not the only ones that can. We can form the direct sum of multiple copies of a ring just as we can with a field, which leads to the following definition:				
+				As you may have come to expect by now, not every module can do this. On the upside, though, vector spaces are not the only ones that can. Since a ring can be considered as a module over itself, we can form the direct sum of multiple copies of a ring to make `$n$-dimensional spaces', which leads to the following definition:				
 				\begin{defn}
 					Let $M$ be and $R$-module. Then $M$ is a \textbf{free module} is there if a set $S$ such that
 					\[
 						M \cong \bigoplus_{x\in S} R
 					\]
 				\end{defn}
-	
+				The length of a free module is equal to the number of copies of $R$ that were direct-summed to make it, which further cements the idea that length is a sort of proxy for dimension.
+				
 				Free modules perform a universal role in module theory that is important but far from obvious, so as well as stating it we'll offer a proof. To do the proof we'll need the following intermediate result (such results are often called `lemmas'):
 				
 				\begin{thm}
@@ -688,18 +748,89 @@
 
 		\section{The Tensor Product Revisited}
 		
-			\subsection{Multilinear and Linear Maps}
-		
-				In Introduction to Linear Algebra we defined the tensor product very explicitly in terms of basis vectors of the two spaces. This was possible because we were working in the category of finite-dimensional vector spaces over $\mathbb{R}$. With modules, however, there is often no basis and we must define tensor products more abstractly.
+			\subsection{Tensor Product for Modules}
+			
+				We can carry over the tensor product construction from the world of vector spaces if we do one preparatory step first. This construction works for all modules including vector spaces. Our goal is still to make a bigger space than we need and then `impose criteria' to turn it into the tensor product, but since we have to be a bit more careful here (and this is a more advanced course!) we'll step through what it means, from an algebraic standpoint, to impose criteria in this way.
 				
-				The definition given in this chapter is certainly less concrete than the one we gave for vector spaces, but it's equivalent to it; think of it as a more sophisticated perspective on the same idea that allows it to be applied to all modules, not just vector spaces.
+				Remembering that $M$ and $N$ must be $R$-modules, the first step is to form the free $R$-module on the Cartesian product set $M\times N$. If we're to construct the tensor product, the result must of course be an $R$-module of some kind and for general modules it turns out the direct sum might already have the wrong kind of structure due to the structures of $M$ and $N$ individually.
+				
+				The free module, on the other hand, treats the pairs of elements in $M$ and $N$ as if they had no structure at all and literally leaves us `free' to build the one we need. This consists of all finite linear combination of elements of the product, i.e. each element of the free module is a formal sum
+				\[
+					\sum_{m\in M, n\in N} k_i(m, n)
+				\]
+				for some sequence of integers $k_i$. Note that the `$+$' symbol here is addition in the free module, not in $M$ or $N$, and is defined as simply `formal summation'. That means that if $(m_1, n_1)$ and $(m_2, n_2)$ are elements of $R[M\times N]$ their sum is simply the element $(m_1, n_1) + (m_2, n_2)$. This is what makes the free module `free' -- the elements of $m$ and $n$ don't interact with each other, which allows us to define extra criteria that will control their interaction precisely.
+				
+				We do this by introducing the rules for the tensor product, which are just the same as for vector spaces (here we use 1$+_M$ and $+_N$ to mean addition in $M$ and $N$ respectively, where as the plain `$+$' is addition in the free module):
+				\begin{itemize}
+					\item $(m_1 +_M m_2, n) = (m_1, n) + (m_2, n)$
+					\item $(m, n_1 +_N n_2) = (m, n_1) + (m, n_2)$
+					\item $(km, n) = k(m, n) = (m, kn)$
+				\end{itemize}
+				In Introduction to Linear Algebra we said these are just the rules for the tensor product but we can turn them into an algebraic construction; while this isn't essential to understand for what follows it's probably a worthwhile review of some key ideas.
+				
+				First notice that, by simple school arithmetic, we can rewrite the rules as follows:
+				\begin{itemize}
+					\item $(m_1 +_M m_2, n) - (m_1, n) - (m_2, n) = 0$
+					\item $(m, n_1 +_N n_2) - (m, n_1) - (m, n_2) = 0$
+					\item $(km, n) - k(m, n) = 0$
+					\item $(m, kn) - k(m, n) = 0$
+				\end{itemize}
+				In higher algebra, when we `set things equal to zero' we should always think about a quotient, which chooses the appropriate subset of things and `quotients them out'. It's easy to check that the set of all elements of the free module that the rules above would set equal to zero really do form a submodule of $R[M\times N]$ (to do this, simply confirm it meets the criteria in the definition of a module one by one). We'll designate this as $T$ for `tensor relations'. Then we can make a definition:
+				\begin{defn}
+					Let $M$ and $N$ be $R$-modules. Then the \textbf{tensor product} of $M$ and $N$, written $M\otimes N$, is defined as
+					\[
+						M\otimes N = R[M\times N] / T
+					\]
+					where $T$ is the submodule of tensor relations described above. 
+				\end{defn}
+				Occasionally we will be concerned with multiple different rings that can act as the scalars for $M$ and $N$; in the case of ambiguity we will write $M\otimes_R N$ to mean the tensor product with respect to $R$. Notice that we really do need to state this as we need to know which ring we're using when we form the free module. Most of the time the ring either won't matter (i.e. it could be any ring) or will be obvious from the context and in those cases we'll keep the notation simple.
+				
+				
+				
+			\subsection{Bilinear Maps}
 
-			\subsection{Solving the Universal Problem}
+				We begin by defining a way to `pair up' modules that's very similar to the direct sum except it `forgets' the module structure:
+				
+				\begin{defn}
+					Let $M$ and $N$ be $R$-modules. Their \textbf{Cartesian product}, written $M\times N$, is the set of all ordered pairs containing an element of $M$ and an element of $N$. It is therefore the same set as $M\oplus N$ but without any module structure of its own.
+				\end{defn}
+				
+				It doesn't ake sense to ask whether a map $M\times N\to P$ is linear, since $M\times N$ isn't a module. However, there is an obvious map $\phi: M\oplus N\to M\times N$ that `forgets' the module structure on  $M\oplus N$ but leaves its elements unchanged. Now we can turn any map $f: M\times N\to P$ into $f\circ \phi$ and ask whether that's linear or not.
+				
+				Often it won't be, which effectively means the category of $R$-modules doesn't really know anything about it. This is annoying since many important maps fall into that category. One you're already familiar with is the inner product; in fact all inner products are non-linear as a consequence of their definition. It isn't possible in general to `translate' non-linear maps into linear ones but there's a class of them, which includes inner products, where we can. The gadget that does this translation will turn out to be the tensor product.
+				
+				Let $M$, $N$ and $P$ be $R$-modules and let $f: M\times N\to P$ be any map. Now choose an element $m\in M$ and `fix' it; this creates a new map $f_{M|m}:N\to P$ in which only the element of $N$ varies. We can think of this as a kind of `projection' of $f$ onto its second variable, with the first variable `collapsing to a point'. This is now a map between $R$-modules, so we can ask whether it's linear or not. Naturally we can do the same in reverse, `freezing' an element of $N$ and allowing only $M$ to vary. This technique leads to the following important idea:
+				
+				\begin{defn}
+					Let $M$, $N$ and $P$ be $R$-modules. A map $f: M\times N\to P$ is \textbf{bilinear} if it is linear in each of its variables individually. That is, if we keep the first variable constant and only allow the second to vary, we will have
+					\begin{itemize}
+						\item $f(m, an) = af(m, n)$
+						\item $f(m, n_1 + n_2) = f(m, n_1) + f(m, n_2)$ 
+					\end{itemize}
+					and the same with the second variable held constant while the first varies.						 
+				\end{defn}
+				
+				Inner products are multilinear, as are many other useful maps. Now, it turns out that \emph{every} multilinear map $f:M\times N\to P$ has a corresponding linear map $f:M\otimes N\to P$. This is an extraordinary fact that's also very useful in light of the desirability of working with linear maps. But before we can make sense of that we'll have some work to do, because in the context of modules we don't yet know how to characterise the tensor product. 
+				
+				Just as you can take tensor products or direct sums of several modules (not just two), so you can with Cartesian products. The only thing that needs to change is that the term `bilinear', meaning `linear in each of the two variables', changes to `multilinear', meaning `linear in each of several variables'. The definition just changes so that we hold \emph{all} variables static except one when we carry out the check, projecting onto one axis at a time as it were. 
+
+				The reason for discussing bilinear maps here is that the tensor product has an intimate relationship with them -- so intimate, in fact, that in some settings it's taken as the \emph{definition} of the tensor product. We won't need to go that far for the moment but when we expand our horizons in Part Two it will be useful to have a more abstract definition at our disposal.
+				
+				TODO: Finish this section				
+				
+				\begin{defn}
+					Let $M$ and $N$ be $R$-modules. The \textbf{tensor product} of $M$ and $N$, written $M\otimes N$, is the unique $R$-module such that, for every bilinear map $f:M\times N\to P$, there is a unique linear map $f^t: M\otimes N\to P$ such that $f(a, b) = f^t(a\otimes b)$. 
+				\end{defn}
+				
+				That is, $\hom(M\otimes N, P) \cong \text{Bil}(M\times N, P)$ where $\text{Bil}(X, Y)$ is the module of bilinear maps from $X$ to $Y$.
+					
 		
 
 			\subsection{Explicit Calculations of Small Tensor Products}
 			
-				Include as many `tricks' as we can -- e.g. any pure tensor that involves the additive identity in either module will collapse down to $0\otimes 0$.
+				Do we need this?
+				
+				If so, include as many `tricks' as we can -- e.g. any pure tensor that involves the additive identity in either module will collapse down to $0\otimes 0$.
 
 		\section{Hom and Tensor as Functors}
 		
@@ -730,10 +861,6 @@
 				Talk about injective resolutions
 				
 				Injectivity seems `dual' to projectivity -- explain how they're related and why they're different
-
-		\section{Homological Dimension (*)}
-
-				projective (dually, injective) resolutions allow us to define a version of dimension for modules. 
 
 		\section{The Tensor-Hom Adjunction Revisited}
 			
